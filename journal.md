@@ -18,6 +18,35 @@ appended. This is not the session log (that's `session-log.md`, for times/comman
 
 ---
 
+## 2026-08-04 — The night I stopped planning and bought the server
+
+**Mood:** impulsive, then giddy, then afraid it would break
+
+**Did:** signed up for the OVH VPS (VPS-1 2027, Debian 13), paid with my credit card,
+set the root password, created the project plan and its PDF, installed the Infisical CLI,
+created my machine identity and the time tracker.
+
+**Story:** I'd been planning this project for so long the plan had become the excuse —
+always one more spreadsheet, one more consideration, never a server. And then tonight,
+sometime after midnight, I just did it. Grabbed the card, typed the number, and boom —
+fourteen seconds of OVH processing later I had a machine in Canada East that was entirely
+mine. I remember the small panic when the root password email came in and I thought the
+whole thing would fall apart before I even SSH'd in. It didn't. The first `apt update`
+run felt like signing a lease on my own future. The plan PDF exists now too — a real,
+printable, four-phase roadmap, not just vague intentions. I'm tired but wired. I think
+this is what "starting" feels like.
+
+**What I learned:** momentum beats planning when planning stops producing decisions.
+Committing money made the project real in a way no notebook ever could. And that
+fourteen seconds is all it takes to change what you're going to be doing for the next
+year.
+
+**Feelings / notes:** A little embarrassed it took impulsive spending to start something
+I wanted for so long. Also weirdly proud. Tomorrow (well, later today) I begin Phase 1:
+the foundation, the hardening, the first of the boring-but-important work.
+
+---
+
 ## 2026-08-05 — The day it started feeling real
 
 **Mood:** excited, a little proud
