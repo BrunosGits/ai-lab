@@ -16,7 +16,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] apt update + upgrade (Debian 13)
 - [x] TZ America/Sao_Paulo · hostname ai-lab · timesync
 
-> Rescue: OVH dashboard → VPS → Reboot into rescue mode (netboot) → connect via SSH to rescue IP w/ password → mount /dev/sda1 (or vg) → recover. Never lose root/debian password while it's stored in Infisical.
+> Rescue: OVH dashboard → VPS → Reboot into rescue mode (netboot) → connect via SSH to rescue IP w/ password → mount /dev/sda1 (or vg) → recover. Recovery credentials: debian password (`VPS_SECRET` in Infisical) or OVH root-password reset. TODO: test rescue mode once before Phase 2.
 
 ### Commands learned — Phase 0
 
@@ -50,7 +50,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] sshd hardened: root+password OFF (sshd -t → reload)
 - [x] passwd -l root (OVH email password dead)
 - [x] Fail2Ban SSH jail
-- [ ] UFW 22/80/443 + DOCKER-USER default-drop (Phase 2)
+- [x] UFW 22/80/443 active
+- [ ] DOCKER-USER default-drop (Phase 2)
 
 ### Commands learned — Phase 1
 
@@ -80,7 +81,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 1.5 — Systemd-first (learn Linux before Docker)
 
-- [x] PostgreSQL via apt installed
+- [x] PostgreSQL via apt installed (→ single PG 17 container in Phase 3, apt cluster dropped)
 - [x] FastAPI "hello" as systemd unit + gunicorn
 - [x] journalctl / systemctl mastered
 - [ ] app containerized in Phase 3 (same app)
@@ -109,15 +110,17 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 2 — Docker
 
+- [ ] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
 - [ ] Docker Engine (official repo) + Compose plugin
 - [ ] bruno added to docker group
-- [ ] daemon.json log rotation (10m × 3)
-- [ ] DOCKER-USER default-drop persisted (survives reboot)
+- [ ] daemon.json: log rotation (10m × 3) · live-restore · builder GC
+- [ ] DOCKER-USER default-drop persisted via netfilter-persistent (survives reboot)
 - [ ] hello-world test passed
 
 ### Phase 3 — Slim Stack (only what's studied now)
 
-- [ ] PostgreSQL 16 container (healthcheck · mem_limit)
+- [ ] DNS plan: sslip.io/nip.io for tests → custom ~$10/yr domain before going public
+- [ ] PostgreSQL 17 container (matching apt version — apt cluster dropped)
 - [ ] Caddy reverse proxy (only 80/443 published)
 - [ ] pinned image tags · restart: unless-stopped
 - [ ] internal-only network (nothing else exposed)
@@ -126,10 +129,10 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 4 — Backup & Resume
 
-- [ ] scripts/backup.sh: pg_dump + volume tar (age/gpg)
-- [ ] cron nightly (user bruno)
-- [ ] rclone → Backblaze B2 / OVH Object Storage
-- [ ] Monthly restore drill (OVH mount option)
+- [ ] scripts/backup.sh: pg_dump -Fc + volume tar (age)
+- [ ] systemd timer nightly (user bruno) — not cron
+- [ ] rclone → Backblaze B2 (primary, 10 GB free tier) · OVH Object Storage as alt
+- [ ] Monthly restore drill (OVH mount option) + one full-rebuild drill
 - [ ] Pause/resume runbook in README (recreate in minutes)
 
 ---
@@ -158,10 +161,10 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Month 3 — AI Integration
 
-- **Study:** OpenRouter · Evaluation (BLEU · ROUGE · BERTScore · LLM-as-Judge)
+- **Study:** OpenCode Zen (multi-model) · Evaluation (BLEU · ROUGE · BERTScore · LLM-as-Judge)
 - **Build:** LLM Evaluation Lab (FastAPI on VPS)
 - **Publish:** eval UI Space + repo + dataset (results/prompts)
-- [ ] Models via OpenRouter + HF (multiple providers)
+- [ ] Models via Zen + HF (multiple providers)
 - [ ] Metrics implemented + stored in PostgreSQL
 - [ ] Eval dataset published on HF
 - [ ] Dashboard/UI for comparing models, cost, latency
@@ -205,7 +208,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 |---|---|---|
 | **Code** | GitHub | compose · Caddyfile · scripts · migrations |
 | **Config** | Infisical (cloud) | secrets — never on server, never committed |
-| **Data** | Backblaze B2 / OVH Object Storage | encrypted (dumps + volumes) |
+| **Data** | Backblaze B2 (primary, 10 GB free) | encrypted (dumps + volumes) |
 
 **Secrets (Infisical):** API keys and passwords live in Infisical Cloud, injected at runtime with `infisical run`. No `.env` files on the server or in Git — removes the top secret-leak risk and simplifies restore (no secrets to back up).
 
