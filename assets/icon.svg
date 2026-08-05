@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0" stop-color="#C4B5FD" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#C4B5FD" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34D399"/>
+      <stop offset="1" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#E2E8F0" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="32" y="32" width="960" height="960" rx="216" fill="url(#bg)"/>
+  <rect x="32" y="32" width="960" height="960" rx="216" fill="url(#glow)"/>
+
+  <g id="beaker">
+    <path id="liquid"
+      d="M337 745 a42 42 0 0 0 42 42 h266 a42 42 0 0 0 42 -42
+         v-205 c0 -12 -10 -22 -22 -22 h-40
+         c-6 0 -11 -4 -13 -10 c-4 -13 -16 -22 -30 -22
+         c-14 0 -26 9 -30 22 c-2 6 -7 10 -13 10 h-220
+         c-6 0 -11 -4 -13 -10 c-4 -13 -16 -22 -30 -22
+         c-14 0 -26 9 -30 22 c-2 6 -7 10 -13 10 h-40
+         a22 22 0 0 0 -22 22 z" fill="url(#liquid)"/>
+
+    <path id="body"
+      d="M340 366 l-30 -38 a18 18 0 0 1 13 -29 h96
+         c8 0 15 5 18 13 l22 54
+         h238 l22 -54 c3 -8 10 -13 18 -13 h96
+         a18 18 0 0 1 13 29 l-30 38
+         v382 a40 40 0 0 1 -40 40
+         h-386 a40 40 0 0 1 -40 -40 z"
+      fill="none" stroke="url(#glass)" stroke-width="30" stroke-linejoin="round"/>
+
+    <rect x="356" y="430" width="26" height="318" rx="13" fill="#FFFFFF" opacity="0.30"/>
+
+    <g stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.38">
+      <line x1="384" y1="612" x2="434" y2="612"/>
+      <line x1="384" y1="680" x2="446" y2="680"/>
+    </g>
+
+    <g fill="#FFFFFF">
+      <circle cx="560" cy="548" r="26" opacity="0.92"/>
+      <circle cx="624" cy="626" r="15" opacity="0.75"/>
+      <circle cx="506" cy="622" r="10" opacity="0.6"/>
+    </g>
+    <circle cx="560" cy="548" r="26" fill="none" stroke="#FFFFFF" stroke-width="5" opacity="0.5"/>
+  </g>
+</svg>
