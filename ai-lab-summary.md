@@ -16,7 +16,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] apt update + upgrade (Debian 13)
 - [x] TZ America/Sao_Paulo · hostname ai-lab · timesync
 
-> Rescue: OVH dashboard → VPS → Reboot into rescue mode (netboot) → connect via SSH to rescue IP w/ password → mount /dev/sda1 (or vg) → recover. Recovery credentials: debian password (`VPS_SECRET` in Infisical) or OVH root-password reset. TODO: test rescue mode once before Phase 2.
+> Rescue: OVH dashboard → VPS → Reboot into rescue mode (netboot) → connect via SSH to rescue IP w/ password → mount /dev/sda1 (or vg) → recover. Recovery credentials: debian password (`VPS_SECRET` in Infisical) or OVH root-password reset. Step-by-step runbook: `rescue-drill.md`.
 
 ### Commands learned — Phase 0
 
@@ -110,6 +110,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 2 — Docker
 
+- [ ] Rescue mode drill (runbook: `rescue-drill.md`)
 - [ ] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
 - [ ] Docker Engine (official repo) + Compose plugin
 - [ ] bruno added to docker group
