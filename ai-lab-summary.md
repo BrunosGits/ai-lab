@@ -245,3 +245,11 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **Region** | Canada East (Beauharnois) — good latency from Brazil |
 | **IPv4** | Included |
 | **SSH** | `debian@51.79.71.160` (key auth) |
+
+## 💰 Project Costs
+
+| Item | Cost |
+|---|---|
+| OVH VPS-1 | 4.49 €/month (with coupon) |
+| Plan printing service (4 pages) | R$ 4,00 |
+| **Total so far** | 4.49 €/month + R$ 4,00 |
