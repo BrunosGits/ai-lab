@@ -31,6 +31,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `git push` — send your local commits to GitHub (sync local → remote)
 - `git pull` — bring remote changes down (sync remote → local)
 - Both together (fetch → merge/rebase) is usually just called "sync"
+- **Commit** — a saved snapshot of the project at one point in time. Holds the diff, author, timestamp and a message. Chained into history, each one knows its parent. `git add` stages (selects) the files, `git commit` saves the snapshot locally.
+- **Push vs commit** — commit saves locally, push uploads to GitHub. Edit → add → commit → push. Work is only visible on GitHub after a push.
 
 **Infisical**
 - `infisical login status` — check auth
