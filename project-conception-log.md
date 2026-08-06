@@ -92,14 +92,9 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 - Rejected: the wins are future value (needs ~30+ notes to matter), plus costs: another app, GUI, git-conflict risk with the commit flow.
 - Revisit when: corpus reaches ~30+ notes, or when phone capture is wanted. Zero migration since it reads raw markdown.
 
-**Decision: install the Humanizer skill globally.**
-- Chosen: `npx skills add blader/humanizer --global` → `~/.agents/skills/humanizer`, plus a `/humanize` command in `~/.config/opencode/command/`.
-- Personal rule added: no semicolons (user never uses them). Hard rule, like the em-dash ban.
-- Applied to all project docs.
-
-**Decision: commit identity = [redacted-email].**
-- Considered: keeping [redacted-email]
-- Chosen: switched repo git email to the GitHub-verified gmail so commits count on the contribution graph. Past commits keep the old email (not rewritten).
+**Decision: commit identity = GitHub-verified gmail.**
+- Considered: keeping the proton.me email
+- Chosen: switched repo git email to the GitHub-verified address so commits count on the contribution graph. Past commits keep the old email (not rewritten).
 
 **Decision: `.md` files open in VS Code by default.**
 - Chosen: `duti -s com.microsoft.VSCode md all` (was Notion). Installed duti via Homebrew to make it stick.
@@ -114,4 +109,3 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 - **PDF is final**: never regenerate `ai-lab-summary.pdf`.
 - **Slim stack**: only what's being studied now. Only ports 80/443 published.
 - **Security first**: key-only SSH, root locked, UFW + edge firewall allowlist, Fail2Ban, no secrets in git history.
-- **Humanizer style for all docs**: no semicolons, no prose em dashes, no fabricated facts.
