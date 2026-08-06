@@ -1,6 +1,6 @@
 # 🧪 AI Lab VPS
 
-*Learning · Building · Publishing (GitHub + HF)*
+*Learning · Building · Publishing (GitHub + HF)* · Started 2026-08-04
 
 This document is the master plan for a personal AI engineering laboratory hosted on an OVHcloud VPS. The goal is to learn Linux administration, Docker, backend development and agentic AI by building real projects, publishing each one publicly on GitHub and Hugging Face as a portfolio. The infrastructure is built in phases (0–4), while a 5-month roadmap guides the studies. Every month ends with a published demo, a journal entry and an updated roadmap.
 
