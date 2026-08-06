@@ -52,13 +52,13 @@ the hardening, the first of the boring but important work.
 **Did:** wrapped up Phase 1.5 (PostgreSQL, systemd FastAPI), ran a security audit, and
 built the rescue-mode runbook.
 
-**Story:** Today I went through OVH rescue mode end to end. Booted the VPS into rescue,
-mounted the data disk read-only, chroot'd back into the system to prove I could recover
-even with zero login access. I keep coming back to the moment the marker file showed up on
-the mounted disk. That was the first time the whole "this is a real machine, I'm the admin"
-thing stopped being abstract. Then there are the fail2ban numbers: 3,882 failed SSH
-passwords in 24 hours, and the server just shrugs them off. It's quietly defending itself
-while I sleep.
+**Story:** I wrote the rescue-mode runbook today, step by step: boot into rescue from the
+OVH dashboard, mount the disk read-only, verify the marker file, chroot back in, then
+reboot from disk. I haven't run it yet, but just writing it made me feel safer. Rescue mode
+was a wall of unknown before; now it's a checklist. Even the moment I'm dreading, the one
+where the machine goes dark in the dashboard and I wait for the email with the rescue IP,
+has its own step. Then there are the fail2ban numbers: 3,882 failed SSH passwords in 24
+hours, and the server just shrugs them off. It's quietly defending itself while I sleep.
 
 **What I learned:** A safe procedure is still worth doing once on purpose. Rescue mode was
 a lot less scary after I'd run it for real. And since the printed plan is the source of
