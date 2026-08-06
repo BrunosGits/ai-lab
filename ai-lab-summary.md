@@ -27,6 +27,11 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `ssh-keygen` — generate `~/.ssh/id_ed25519`
 - `scp -o BatchMode=yes <file> <user>@...:~/path` — copy file to server
 
+**Git**
+- `git push` — send your local commits to GitHub (sync local → remote)
+- `git pull` — bring remote changes down (sync remote → local)
+- Both together (fetch → merge/rebase) is usually just called "sync"
+
 **Infisical**
 - `infisical login status` — check auth
 - `infisical secrets --projectId <id> --env prod` — list secrets
