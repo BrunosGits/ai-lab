@@ -41,8 +41,9 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `infisical secrets delete KEY --projectId <id> --env prod --path /folder --type shared` — delete
 - `infisical run -- <cmd>` — inject secrets at runtime (Phase 3 pattern)
 
-**Time tracker (local)**
-- `python3 scripts/time-tracker.py start|close|status|summary`
+**Time tracker (local, Rust)**
+- `cargo run --release --manifest-path scripts/time-tracker/Cargo.toml -- start|close|status|summary`
+- Rust rewrite of the original Python; `scripts/time-tracker.py` kept as reference
 
 **RDP tunnel (GUI)**
 - `ssh -f -N -L 3389:localhost:3389 <user>@<vps-ip>` — background tunnel, reconnect to 127.0.0.1:3389

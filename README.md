@@ -13,7 +13,7 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 - `ai-lab-summary.md` — master plan: infrastructure Phases 0–4, a 5-month learning roadmap, backup strategy and a services/access matrix
 - `assets/` — project beaker icon (SVG + PNG exports, favicon)
 - `hello/` — FastAPI "hello" app, first run as a systemd unit (Phase 1.5), to be containerized in Phase 3
-- `scripts/` — time tracker
+- `scripts/` — tools: Rust time tracker (`time-tracker/`, Rust rewrite of the original Python) and the original Python reference (`time-tracker.py`)
 - `print.css` + `ai-lab-summary.pdf` — printable PDF of the plan
 - `session-log.md` — session journal
 

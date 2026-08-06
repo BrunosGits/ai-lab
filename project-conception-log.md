@@ -109,6 +109,11 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 - Scrub before publish: VPS public IP and SSH usernames replaced with `<vps-ip>` / `<user>` placeholders in `ai-lab-summary.md`, `rescue-drill.md`, `session-log.md`. Privacy over convenience.
 - Verified: no IP/usernames/secrets/emails in any tracked file; `.infisical.json` stays gitignored; PDF predates the IP so it is already clean.
 
+**Decision: introduce Rust into the project.**
+- Chosen: rewrite the time tracker in Rust as a cargo binary (`scripts/time-tracker/`), keep the Python version as reference, then later rewrite the hello service in Rust (axum) once comfortable.
+- Why: learning Rust needs a real, used tool — small scope (CLI, JSON, file I/O, error handling), zero server risk, and the existing `time-tracker.json` format is reused unchanged so history is untouched.
+- Verify: `status`/`summary` output byte-identical to Python; `start`/`close` round-trip tested against a backup of the real JSON.
+
 ---
 
 ## Standing decisions (apply always)

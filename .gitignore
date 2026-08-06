@@ -6,6 +6,9 @@ __pycache__/
 *.py[cod]
 .venv/
 
+# Rust
+scripts/time-tracker/target/
+
 # Secrets (never commit)
 .env
 .env.*
