@@ -3,7 +3,7 @@
 **Goal:** prove we can reboot into OVH rescue mode, mount the data disk, verify access,
 and get back to a normal boot before it's ever actually needed. **No data loss, no reinstall.**
 
-- Server: `51.79.71.160` (OVH VPS-1 2027, Debian 13, local disk)
+- Server: `<vps-ip>` (OVH VPS-1 2027, Debian 13, local disk)
 - When: once, before Phase 2 (Docker). Budget ~30 min.
 - Risk: LOW (this is a safe reboot. Rescue leaves the disk untouched until you mount it read-only first)
 
@@ -14,7 +14,7 @@ and get back to a normal boot before it's ever actually needed. **No data loss, 
 Save the current state so we can compare after the drill:
 
 ```sh
-ssh bruno@51.79.71.160 'echo "--- disk"; lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT; \
+ssh <user>@<vps-ip> 'echo "--- disk"; lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT; \
 echo "--- fstab"; cat /etc/fstab; \
 echo "--- services"; for s in ssh postgresql hello fail2ban; do printf "%s=%s\n" "$s" "$(systemctl is-active $s)"; done; \
 echo "--- ufw"; sudo ufw status verbose; \
@@ -24,12 +24,12 @@ echo "--- uptime"; uptime' > /tmp/pre-drill-state.txt
 Save a marker file (so rescue has something unique to look for):
 
 ```sh
-echo "rescue-drill-$(date -u +%F)" | ssh bruno@51.79.71.160 'cat > /home/bruno/drill-marker.txt; sudo sh -c "cat > /root/drill-marker.txt"'
+echo "rescue-drill-$(date -u +%F)" | ssh <user>@<vps-ip> 'cat > /home/<user>/drill-marker.txt; sudo sh -c "cat > /root/drill-marker.txt"'
 ```
 
 Have credentials handy (both needed later):
 - Rescue password → arrives **by email** from OVH when rescue is activated
-- Debian password = `VPS_SECRET` in Infisical (fallback: `debian@` user)
+- Debian password = `VPS_SECRET` in Infisical (fallback: `<user>` account)
 
 ---
 
@@ -39,7 +39,7 @@ Have credentials handy (both needed later):
 2. **Boot mode** → `Rescue` → choose **rescue-customer** (Debian 12, cloud-init available)
 3. Save, then **Restart**
 4. Wait for status `DONE` (2–5 min). OVH emails you the **rescue IP + password**
-5. Take note of the rescue IP (different from `51.79.71.160`!)
+5. Take note of the rescue IP (different from `<vps-ip>`!)
 
 > The rescue environment runs in RAM. Your disk (`/dev/sda`) is *not* mounted yet.
 > Nothing is modified until we mount it ourselves.
@@ -55,8 +55,8 @@ ssh root@<RESCUE_IP>
 
 lsblk                      # confirm /dev/sda with sda1 (ext4 root)
 mount -o ro /dev/sda1 /mnt
-grep -c rescue-drill /mnt/home/bruno/drill-marker.txt   # expect 1
-cat /mnt/home/bruno/drill-marker.txt
+grep -c rescue-drill /mnt/home/<user>/drill-marker.txt   # expect 1
+cat /mnt/home/<user>/drill-marker.txt
 umount /mnt
 
 # extra check: confirm the data partition would mount rw if needed
@@ -78,7 +78,7 @@ mount --bind /proc /mnt/proc
 mount --bind /sys /mnt/sys
 chroot /mnt /bin/bash
 # inside chroot:
-cat /etc/shadow | grep bruno     # hash present (no need to log in)
+cat /etc/shadow | grep <user>     # hash present (no need to log in)
 exit
 # clean up
 umount /mnt/dev /mnt/proc /mnt/sys
@@ -96,7 +96,7 @@ This demonstrates: even with zero login access, we can enter the system from res
 3. Wait ~2 min, then:
 
 ```sh
-ssh bruno@51.79.71.160 'uptime; lsblk; systemctl is-active ssh postgresql hello fail2ban'
+ssh <user>@<vps-ip> 'uptime; lsblk; systemctl is-active ssh postgresql hello fail2ban'
 sudo ufw status verbose   # should show 22/80/443 ACTIVE
 ```
 
@@ -106,7 +106,7 @@ Compare with `/tmp/pre-drill-state.txt` (disk, fstab, services must match).
 
 ## Step 5 — Close out
 
-- [ ] Remove marker files: `rm /home/bruno/drill-marker.txt /root/drill-marker.txt`
+- [ ] Remove marker files: `rm /home/<user>/drill-marker.txt /root/drill-marker.txt`
 - [ ] Record the drill in `session-log.md` (timing, what worked, what surprised)
 - [ ] Check the printed plan blockquote note gets ticked / noted
 

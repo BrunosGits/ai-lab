@@ -102,6 +102,15 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 
 ---
 
+## 2026-08-06 — Going public
+
+**Decision: repo published to GitHub.**
+- Chosen: keep `journal.md` public as-is (honest, human, part of the story).
+- Scrub before publish: VPS public IP and SSH usernames replaced with `<vps-ip>` / `<user>` placeholders in `ai-lab-summary.md`, `rescue-drill.md`, `session-log.md`. Privacy over convenience.
+- Verified: no IP/usernames/secrets/emails in any tracked file; `.infisical.json` stays gitignored; PDF predates the IP so it is already clean.
+
+---
+
 ## Standing decisions (apply always)
 
 - **Publish everything**: code → GitHub, demos → Hugging Face, config → Infisical, data → encrypted backups (B2).

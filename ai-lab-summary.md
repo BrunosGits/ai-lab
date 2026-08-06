@@ -16,12 +16,12 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] apt update + upgrade (Debian 13)
 - [x] TZ America/Sao_Paulo · hostname ai-lab · timesync
 
-> Rescue: OVH dashboard → VPS → Reboot into rescue mode (netboot) → connect via SSH to rescue IP w/ password → mount /dev/sda1 (or vg) → recover. Recovery credentials: debian password (`VPS_SECRET` in Infisical) or OVH root-password reset. Step-by-step runbook: `rescue-drill.md`.
+> Rescue: OVH dashboard → VPS → Reboot into rescue mode (netboot) → connect via SSH to rescue IP w/ password → mount /dev/sda1 (or vg) → recover. Recovery credentials: user password (`VPS_SECRET` in Infisical) or OVH root-password reset. Step-by-step runbook: `rescue-drill.md`.
 
 ### Commands learned — Phase 0
 
 **SSH**
-- `ssh debian@51.79.71.160` — connect via key auth
+- `ssh <user>@<vps-ip>` — connect via key auth
 - `ssh -o BatchMode=yes <user>@...` — non-interactive (never prompts)
 - `ssh -o PreferredAuthentications=none <user>@...` — probe which auth methods the server offers
 - `ssh-keygen` — generate `~/.ssh/id_ed25519`
@@ -45,14 +45,14 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `python3 scripts/time-tracker.py start|close|status|summary`
 
 **RDP tunnel (GUI)**
-- `ssh -f -N -L 3389:localhost:3389 debian@51.79.71.160` — background tunnel, reconnect to 127.0.0.1:3389
+- `ssh -f -N -L 3389:localhost:3389 <user>@<vps-ip>` — background tunnel, reconnect to 127.0.0.1:3389
 
 ### Phase 1 — Server Foundation
 
 - [x] qemu-guest-agent installed (consistent OVH snapshots)
 - [x] swapfile 2 GB + swappiness=10
 - [x] unattended-upgrades (security only)
-- [x] user bruno (sudo) created
+- [x] user <user> (sudo) created
 - [x] SSH key copied + login verified (2nd session)
 - [x] sshd hardened: root+password OFF (sshd -t → reload)
 - [x] passwd -l root (OVH email password dead)
@@ -120,7 +120,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] Rescue mode drill (runbook: `rescue-drill.md`)
 - [ ] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
 - [ ] Docker Engine (official repo) + Compose plugin
-- [ ] bruno added to docker group
+- [ ] <user> added to docker group
 - [ ] daemon.json: log rotation (10m × 3) · live-restore · builder GC
 - [ ] DOCKER-USER default-drop persisted via netfilter-persistent (survives reboot)
 - [ ] hello-world test passed
@@ -138,7 +138,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 ### Phase 4 — Backup & Resume
 
 - [ ] scripts/backup.sh: pg_dump -Fc + volume tar (age)
-- [ ] systemd timer nightly (user bruno) — not cron
+- [ ] systemd timer nightly (user) — not cron
 - [ ] rclone → Backblaze B2 (primary, 10 GB free tier) · OVH Object Storage as alt
 - [ ] Monthly restore drill (OVH mount option) + one full-rebuild drill
 - [ ] Pause/resume runbook in README (recreate in minutes)
@@ -228,7 +228,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 |---|---|---|---|
 | **OVH** | VPS-1 | Direct login (web) — dashboard + emailed root password | — (root password removed from Infisical) |
 | **Infisical** | mac-cli machine identity | Universal-auth (client-id + secret) → `INFISICAL_TOKEN` in `~/.zshrc` | Infisical itself |
-| **VPS (SSH)** | `bruno` / `debian` | Key auth (`~/.ssh/id_ed25519`) · passwordless sudo | key on Mac + server |
+| **VPS (SSH)** | `<user>` | Key auth (`~/.ssh/id_ed25519`) · passwordless sudo | key on Mac + server |
 | **GitHub** | `BrunosGits` | Classic PAT used for `git push` (token-in-URL, scrubbed after) · web login direct | `/github/GITHUB_TOKEN` in Infisical |
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
@@ -251,7 +251,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **Billing** | Monthly — 4.49 €/month (with coupon) |
 | **Region** | Canada East (Beauharnois) — good latency from Brazil |
 | **IPv4** | Included |
-| **SSH** | `debian@51.79.71.160` (key auth) |
+| **SSH** | `<user>@<vps-ip>` (key auth) |
 
 ## 💰 Project Costs
 
