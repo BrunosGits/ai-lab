@@ -15,7 +15,6 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 - `hello/` — FastAPI "hello" app, first run as a systemd unit (Phase 1.5), to be containerized in Phase 3
 - `scripts/` — tools: Rust time tracker (`time-tracker/`, Rust rewrite of the original Python) and the original Python reference (`time-tracker.py`)
 - `print.css` + `ai-lab-summary.pdf` — printable PDF of the plan
-- `session-log.md` — session journal
 
 ## Infrastructure status
 

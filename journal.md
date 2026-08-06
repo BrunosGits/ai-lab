@@ -1,7 +1,7 @@
 # Journal
 
 Personal diary of the AI Lab project: memories, feelings, stories. One entry per day,
-appended. This is not the session log (that's `session-log.md`, for times/commands/verdicts).
+appended. This is not the session log (that's the private session log, kept local, for times/commands/verdicts).
 
 ---
 

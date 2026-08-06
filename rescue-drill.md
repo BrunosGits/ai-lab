@@ -107,7 +107,7 @@ Compare with `/tmp/pre-drill-state.txt` (disk, fstab, services must match).
 ## Step 5 — Close out
 
 - [ ] Remove marker files: `rm /home/<user>/drill-marker.txt /root/drill-marker.txt`
-- [ ] Record the drill in `session-log.md` (timing, what worked, what surprised)
+- [ ] Record the drill in the private session log (local `session-log.md`, timing, what worked, what surprised)
 - [ ] Check the printed plan blockquote note gets ticked / noted
 
 ---

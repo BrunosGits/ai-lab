@@ -1,7 +1,7 @@
 # Project Conception Log
 
 Timeline of decisions behind the AI Lab VPS project. Every idea considered, chosen or
-rejected, and why. This complements `session-log.md` (what was done) and `journal.md`
+rejected, and why. This complements the private session log (what was done, kept local) and `journal.md`
 (how it felt). Updated whenever a decision is made.
 
 ---
@@ -113,6 +113,10 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 - Chosen: rewrite the time tracker in Rust as a cargo binary (`scripts/time-tracker/`), keep the Python version as reference, then later rewrite the hello service in Rust (axum) once comfortable.
 - Why: learning Rust needs a real, used tool — small scope (CLI, JSON, file I/O, error handling), zero server risk, and the existing `time-tracker.json` format is reused unchanged so history is untouched.
 - Verify: `status`/`summary` output byte-identical to Python; `start`/`close` round-trip tested against a backup of the real JSON.
+
+**Decision: session data kept private (tool stays public).**
+- Chosen: `time-tracker.json` and `session-log.md` removed from the repo and scrubbed from git history (`git filter-repo --invert-paths`), force-pushed. Files live on locally only, hidden via `.git/info/exclude`. The Rust tracker keeps writing to `time-tracker.json` as before.
+- Why: the tool is a portfolio piece; the session log and raw timings are personal.
 
 ---
 
