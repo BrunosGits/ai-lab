@@ -95,6 +95,7 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 **Decision: commit identity = GitHub-verified gmail.**
 - Considered: keeping the proton.me email
 - Chosen: switched repo git email to the GitHub-verified address so commits count on the contribution graph. Past commits keep the old email (not rewritten).
+- Privacy: emails scrubbed from all past commits (replaced with `[redacted-email]`), repo rewritten and force-pushed.
 
 **Decision: `.md` files open in VS Code by default.**
 - Chosen: `duti -s com.microsoft.VSCode md all` (was Notion). Installed duti via Homebrew to make it stick.
@@ -109,3 +110,4 @@ rejected, and why. This complements `session-log.md` (what was done) and `journa
 - **PDF is final**: never regenerate `ai-lab-summary.pdf`.
 - **Slim stack**: only what's being studied now. Only ports 80/443 published.
 - **Security first**: key-only SSH, root locked, UFW + edge firewall allowlist, Fail2Ban, no secrets in git history.
+- **Privacy**: never write emails or other personal information in docs or commits. If one leaks in, scrub it from past history and force-push.
