@@ -6,7 +6,7 @@
 
 **Learning · Building · Publishing (GitHub + HF)**
 
-A personal AI engineering laboratory on an OVHcloud VPS — the sandbox where I learn Linux administration, Docker, backend development and agentic AI by building real projects, each one published publicly as a portfolio.
+A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I learn Linux administration, Docker, backend development and agentic AI by building real projects. Each one gets published publicly as a portfolio.
 
 ## What's here
 

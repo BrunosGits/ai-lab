@@ -2,7 +2,7 @@
 
 *Learning · Building · Publishing (GitHub + HF)*
 
-This document is the master plan for a personal AI engineering laboratory hosted on an OVHcloud VPS. The goal is to learn Linux administration, Docker, backend development and agentic AI by building real projects — publishing each one publicly on GitHub and Hugging Face as a portfolio. The infrastructure is built in phases (0–4), while a 5-month roadmap guides the studies; every month ends with a published demo, a journal entry and an updated roadmap.
+This document is the master plan for a personal AI engineering laboratory hosted on an OVHcloud VPS. The goal is to learn Linux administration, Docker, backend development and agentic AI by building real projects, publishing each one publicly on GitHub and Hugging Face as a portfolio. The infrastructure is built in phases (0–4), while a 5-month roadmap guides the studies. Every month ends with a published demo, a journal entry and an updated roadmap.
 
 ---
 
@@ -68,8 +68,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `sudo usermod -aG adm,systemd-journal <user>` — extra groups
 - `sudo passwd -l <user>` / `sudo passwd -S <user>` — lock / show status
 - `visudo -cf <file>` — validate sudoers before applying
-- `sudo sshd -t` — validate sshd config; `sudo sshd -T` — show effective runtime config
-- Note: OpenSSH uses **first-value-wins** — a drop-in like `sshd_config.d/60-hardening.conf` does NOT override an earlier `50-cloud-init.conf`; edit the first file instead.
+- `sudo sshd -t` — validate sshd config, `sudo sshd -T` — show effective runtime config
+- Note: OpenSSH uses **first-value-wins**. A drop-in like `sshd_config.d/60-hardening.conf` does NOT override an earlier `50-cloud-init.conf`, edit the first file instead.
 
 **Firewall**
 - `sudo ufw allow <port>/tcp` · `sudo ufw --force enable` · `sudo ufw status verbose`
@@ -121,7 +121,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 ### Phase 3 — Slim Stack (only what's studied now)
 
 - [ ] DNS plan: sslip.io/nip.io for tests → custom ~$10/yr domain before going public
-- [ ] PostgreSQL 17 container (matching apt version — apt cluster dropped)
+- [ ] PostgreSQL 17 container (matching apt version, apt cluster dropped)
 - [ ] Caddy reverse proxy (only 80/443 published)
 - [ ] pinned image tags · restart: unless-stopped
 - [ ] internal-only network (nothing else exposed)
@@ -211,7 +211,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **Config** | Infisical (cloud) | secrets — never on server, never committed |
 | **Data** | Backblaze B2 (primary, 10 GB free) | encrypted (dumps + volumes) |
 
-**Secrets (Infisical):** API keys and passwords live in Infisical Cloud, injected at runtime with `infisical run`. No `.env` files on the server or in Git — removes the top secret-leak risk and simplifies restore (no secrets to back up).
+**Secrets (Infisical):** API keys and passwords live in Infisical Cloud, injected at runtime with `infisical run`. No `.env` files on the server or in Git, which removes the top secret-leak risk and simplifies restore (no secrets to back up).
 
 ---
 

@@ -61,7 +61,7 @@ has its own step. Then there are the fail2ban numbers: 3,882 failed SSH password
 hours, and the server just shrugs them off. It's quietly defending itself while I sleep.
 
 **What I learned:** A safe procedure is still worth doing once on purpose. Rescue mode was
-a wall of unknown until I wrote down every step; actually running it is still ahead of me.
+a wall of unknown until I wrote down every step. Actually running it is still ahead of me.
 And since the printed plan is the source of truth, every fix becomes a commit, and the repo
 is quietly recording the project's history on its own.
 

@@ -1,11 +1,11 @@
 # Rescue Mode Drill — Runbook
 
 **Goal:** prove we can reboot into OVH rescue mode, mount the data disk, verify access,
-and get back to a normal boot — before it's ever actually needed. **No data loss, no reinstall.**
+and get back to a normal boot before it's ever actually needed. **No data loss, no reinstall.**
 
 - Server: `51.79.71.160` (OVH VPS-1 2027, Debian 13, local disk)
 - When: once, before Phase 2 (Docker). Budget ~30 min.
-- Risk: LOW (this is a safe reboot; rescue leaves the disk untouched until you mount it read-only first)
+- Risk: LOW (this is a safe reboot. Rescue leaves the disk untouched until you mount it read-only first)
 
 ---
 
@@ -41,8 +41,8 @@ Have credentials handy (both needed later):
 4. Wait for status `DONE` (2–5 min). OVH emails you the **rescue IP + password**
 5. Take note of the rescue IP (different from `51.79.71.160`!)
 
-> The rescue environment runs in RAM. Your disk (`/dev/sda`) is *not* mounted yet —
-> nothing is modified until we mount it ourselves.
+> The rescue environment runs in RAM. Your disk (`/dev/sda`) is *not* mounted yet.
+> Nothing is modified until we mount it ourselves.
 
 ---
 
@@ -100,7 +100,7 @@ ssh bruno@51.79.71.160 'uptime; lsblk; systemctl is-active ssh postgresql hello 
 sudo ufw status verbose   # should show 22/80/443 ACTIVE
 ```
 
-Compare with `/tmp/pre-drill-state.txt` — disk, fstab, services must match.
+Compare with `/tmp/pre-drill-state.txt` (disk, fstab, services must match).
 
 ---
 
@@ -114,9 +114,9 @@ Compare with `/tmp/pre-drill-state.txt` — disk, fstab, services must match.
 
 ## Notes & gotchas
 
-- **Keyboard layout** in rescue: the on-screen/SSH console can map symbols oddly — type passwords carefully.
-- **Rescue password** arrives by email only; check spam. One password per activation.
-- **Do NOT reboot from the SSH shell** — always use the OVH dashboard so we control the boot mode.
+- **Keyboard layout** in rescue: the on-screen/SSH console can map symbols oddly. Type passwords carefully.
+- **Rescue password** arrives by email only. Check spam. One password per activation.
+- **Do NOT reboot from the SSH shell.** Always use the OVH dashboard so we control the boot mode.
 - The disk is **local SSD** (not LVM, no RAID) → `/dev/sda1` directly, no volume groups to activate.
-- UFW check is `ufw status` (the `systemctl is-active ufw` trick shows inactive because the unit is a no-op at runtime; the firewall still applied at boot).
-- If anything looks wrong after reboot: reselect **Boot from disk** and restart again — the rescue flag was still set.
+- UFW check is `ufw status` (the `systemctl is-active ufw` trick shows inactive because the unit is a no-op at runtime. The firewall still applies at boot).
+- If anything looks wrong after reboot: reselect **Boot from disk** and restart again. The rescue flag was still set.
