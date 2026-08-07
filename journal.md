@@ -5,19 +5,6 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ---
 
-## Template
-
-```md
-## YYYY-MM-DD: Short title
-**Mood:** ...
-**Did:** ...
-**Story:** ...
-**What I learned:** ...
-**Feelings / notes:** ...
-```
-
----
-
 ## 2026-08-07: Why Docker (the conversation before the install)
 
 **Mood:** curious, getting concrete
