@@ -117,7 +117,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 2 — Docker
 
-- [ ] Rescue mode drill (runbook: `rescue-drill.md`)
+- [x] Rescue mode drill (runbook: `rescue-drill.md`)
 - [x] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
 - [ ] Docker Engine (official repo) + Compose plugin
 - [ ] <user> added to docker group
