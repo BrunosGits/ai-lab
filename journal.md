@@ -25,13 +25,13 @@ Then the machine refused to boot from its own disk, still spinning in rescue mod
 
 **Mood:** relieved, proud, productive
 
-**Story:** The dashboard kept throwing a cryptic "invalid or empty URL" error whenever i
-tried to flip the rescue toggle, so i had to find another way. The OVH docs were not clear
-about it and a couple of links 404'd, but after some poking around i found the panel that
+**Story:** The dashboard kept throwing a cryptic "invalid or empty URL" error whenever I
+tried to flip the rescue toggle, so I had to find another way. The OVH docs were not clear
+about it and a couple of links 404'd, but after some poking around I found the panel that
 generates an API key for remote control, built a small script around it, and got the
 machine to reboot into rescue. Not one, not two, but three attempts before the boot took.
-I'm glad i tested this before i actually needed it, because the process was far from
-simple to set up. The moment the SSH host key changed, i knew the rescue environment was
+I'm glad I tested this before I actually needed it, because the process was far from
+simple to set up. The moment the SSH host key changed, I knew the rescue environment was
 really there. That's the whole point of the drill: prove we can get back in before we ever
 have to.
 
@@ -42,7 +42,7 @@ remembering, the order matters: set the boot mode while the machine is stopped, 
 it. I only found that by failing forward.
 
 **Feelings / notes:** A quiet confidence, like the first piece of the foundation is sealed.
-Rescue mode went from a wall of unknown to something i've actually done. Now Phase 2 and
+Rescue mode went from a wall of unknown to something I've actually done. Now Phase 2 and
 that first public push. What a productive morning.
 
 **Did:** ran the rescue-mode drill end to end, but through the OVH API instead of the
