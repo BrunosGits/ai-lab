@@ -18,7 +18,19 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ---
 
-## 2026-08-06 — The day the rescue test finally passed
+## 2026-08-07 — The day I pulled the GUI out by the roots
+
+**Mood:** decisive, relieved, a little ruthless
+
+**Did:** brought the VPS back from a stuck rescue boot, enabled headless boot, then removed the desktop GUI entirely — Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop — and freed about a gig and a half of disk and most of the RAM.
+
+**Story:** The morning started with the machine refusing to boot from its own disk, still spinning in rescue mode from yesterday's drill. A small panic, a fix to the OVH API script, and a stop → netboot→local → start later it was back. With the GUI off (multi-user target), the RAM reading dropped from ~2.8 GB used to 457 MB. Then the RDP session kept dropping me mid-work, and I made the call: no more band-aids. If I'm going to run Docker on 4 GB, the desktop is dead weight. I purged every package that paints pixels on that box and didn't look back. The final `dpkg` check was clean enough — just a few orphaned Xfce libraries left to sweep.
+
+**What I learned:** Some decisions are easier to make a second time. The plan already said "remove the GUI first in Phase 2" — I was just executing it early, when the memory pressure was in my face instead of a checkbox. Going headless forces me to treat the server like a server: every interaction is SSH, every app is a service, nothing sits on it that doesn't earn its RAM. The Mac stays the place where pixels live.
+
+**Feelings / notes:** The server finally feels like a proper machine. A bit sad the cozy desktop experiment is over, but it was always a learning scaffold, not the goal. Next: Docker, with real breathing room.
+
+---
 
 **Mood:** relieved, proud, productive
 

@@ -40,7 +40,7 @@ rejected, and why. This complements the private session log (what was done, kept
 **Decision: desktop GUI stays for now, removed before Docker.**
 - Chosen: Xfce + xrdp + Chrome + OpenCode Desktop stay during Phase 1.5 for learning, then get removed first in Phase 2.
 - Why: a GUI idles at ~2.5–4.5 GB RAM on a 4 GB VPS. It must go before Docker needs the memory.
-- Status: scheduled, not yet done.
+- Status: DONE — removed 2026-08-07 (see below).
 
 **Decision: systemd-first (Phase 1.5) before Docker.**
 - Chosen: PostgreSQL via apt + FastAPI behind a systemd unit + gunicorn first.
@@ -117,6 +117,18 @@ rejected, and why. This complements the private session log (what was done, kept
 **Decision: session data kept private (tool stays public).**
 - Chosen: `time-tracker.json` and `session-log.md` removed from the repo and scrubbed from git history (`git filter-repo --invert-paths`), force-pushed. Files live on locally only, hidden via `.git/info/exclude`. The Rust tracker keeps writing to `time-tracker.json` as before.
 - Why: the tool is a portfolio piece; the session log and raw timings are personal.
+
+---
+
+## 2026-08-07 — GUI removed, VPS goes permanently headless
+
+**Decision: remove the desktop GUI entirely, not just disable it.**
+- Chosen: purge everything — `lightdm`, `lightdm-gtk-greeter`, `light-locker`, `xrdp`, `xorgxrdp`, `xfce4`, `xfce4-goodies`, `google-chrome-stable`, `opencode` (OpenCode Desktop) — plus `apt autoremove --purge` (343 orphaned packages). Only harmless library leftovers remain.
+- Why: the plan already called for removing the GUI first in Phase 2 to free RAM for Docker; a live RDP session kept disconnecting, and the user chose to go all-in now rather than keep a half-working GUI. RAM dropped to ~457 MB used, ~1.5 GB freed.
+- Decided against: keeping Xfce "just in case" or re-adding RDP. Any future GUI task happens on the Mac.
+
+**Decision: RDP is obsolete.**
+- The loopback xrdp + SSH tunnel + Windows App setup was deliberately destroyed with the purge. Do not re-propose it. Remote GUI work, if ever needed, runs on the Mac (VS Code remote, opencode TUI/web).
 
 ---
 

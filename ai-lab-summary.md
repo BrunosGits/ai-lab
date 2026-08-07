@@ -45,8 +45,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `cargo run --release --manifest-path scripts/time-tracker/Cargo.toml -- start|close|status|summary`
 - Rust rewrite of the original Python; `scripts/time-tracker.py` kept as reference
 
-**RDP tunnel (GUI)**
-- `ssh -f -N -L 3389:localhost:3389 <user>@<vps-ip>` — background tunnel, reconnect to 127.0.0.1:3389
+**RDP tunnel (GUI)** — removed 2026-08-07 with the desktop GUI (xrdp purged). The VPS is headless from now on; GUI tooling stays on the Mac.
 
 ### Phase 1 — Server Foundation
 
@@ -119,7 +118,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 ### Phase 2 — Docker
 
 - [ ] Rescue mode drill (runbook: `rescue-drill.md`)
-- [ ] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
+- [x] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
 - [ ] Docker Engine (official repo) + Compose plugin
 - [ ] <user> added to docker group
 - [ ] daemon.json: log rotation (10m × 3) · live-restore · builder GC
@@ -234,7 +233,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
 | **OpenCode Zen** | — | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
-| **OpenCode Desktop** (VPS GUI) | local app | Direct login with Zen key (not Infisical-managed) | app config on VPS |
+| ~~OpenCode Desktop~~ (VPS GUI) | removed 2026-08-07 with the GUI | — (VPS is headless) | — |
 
 ---
 
