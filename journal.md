@@ -15,9 +15,9 @@ Then the machine refused to boot from its own disk, still spinning in rescue mod
 
 **What I learned:** Containers are processes, not machines. Images and containers are different, and images are layered, which makes them shareable. The industry adopted containers for reproducible delivery, isolation and fast startup. My rule going in: understand the why before you install the thing. And some decisions are easier to make a second time. The plan already said "remove the GUI first in Phase 2." I was just executing it early, when the memory pressure was in my face instead of a checkbox. Going headless forces me to treat the server like a server: every interaction is SSH, every app is a service, nothing sits on it that doesn't earn its RAM. The Mac stays the place where pixels live.
 
-**Did:** spent the morning session on a Docker Q&A about what containers actually are, why they exist, and how the industry uses them, before installing a single package. Then brought the VPS back from a stuck rescue boot, enabled headless boot, and removed the desktop GUI entirely: Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop. That freed about a gig and a half of disk and most of the RAM.
-
 **Feelings / notes:** The morning's Q&A and the night's GUI purge feel like two halves of the same move. Both were about clearing the box to make room for the thing it's actually for. The server finally feels like a proper machine. A bit sad the cozy desktop experiment is over, but it was always a learning scaffold, not the goal. Next: Docker, with real breathing room.
+
+**Did:** spent the morning session on a Docker Q&A about what containers actually are, why they exist, and how the industry uses them, before installing a single package. Then brought the VPS back from a stuck rescue boot, enabled headless boot, and removed the desktop GUI entirely: Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop. That freed about a gig and a half of disk and most of the RAM.
 
 ---
 
@@ -41,13 +41,13 @@ has a task system that tells you exactly what's happening under the hood. Also w
 remembering, the order matters: set the boot mode while the machine is stopped, then start
 it. I only found that by failing forward.
 
-**Did:** ran the rescue-mode drill end to end, but through the OVH API instead of the
-dashboard, and closed out the infrastructure foundation. Next up is Phase 2 and the first
-public push to GitHub.
-
 **Feelings / notes:** A quiet confidence, like the first piece of the foundation is sealed.
 Rescue mode went from a wall of unknown to something i've actually done. Now Phase 2 and
 that first public push. What a productive morning.
+
+**Did:** ran the rescue-mode drill end to end, but through the OVH API instead of the
+dashboard, and closed out the infrastructure foundation. Next up is Phase 2 and the first
+public push to GitHub.
 
 ---
 
@@ -68,12 +68,12 @@ a wall of unknown until I wrote down every step. Actually running it is still ah
 And since the printed plan is the source of truth, every fix becomes a commit, and the repo
 is quietly recording the project's history on its own.
 
-**Did:** wrapped up Phase 1.5 (PostgreSQL, systemd FastAPI), ran a security audit, and
-built the rescue-mode runbook.
-
 **Feelings / notes:** Started a proper journal so I don't lose the why behind the commands.
 Noticed I enjoy the security and hardening part more than I expected. Tomorrow: the rescue
 drill itself, then Docker.
+
+**Did:** wrapped up Phase 1.5 (PostgreSQL, systemd FastAPI), ran a security audit, and
+built the rescue-mode runbook.
 
 ---
 
@@ -94,10 +94,10 @@ vague intentions. I'm tired but wired. I think this is what starting feels like.
 money on it, which no notebook ever did. And it took fourteen seconds. That's all it took
 to change what I'll be doing for the next year.
 
-**Did:** signed up for the OVH VPS (VPS-1 2027, Debian 13), paid with my credit card,
-set the root password, created the project plan and its PDF, installed the Infisical CLI,
-created my machine identity and the time tracker.
-
 **Feelings / notes:** A little embarrassed that an impulsive credit card purchase is what
 finally got me started. Also weirdly proud. Later today I begin Phase 1: the foundation,
 the hardening, the first of the boring but important work.
+
+**Did:** signed up for the OVH VPS (VPS-1 2027, Debian 13), paid with my credit card,
+set the root password, created the project plan and its PDF, installed the Infisical CLI,
+created my machine identity and the time tracker.
