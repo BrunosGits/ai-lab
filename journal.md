@@ -33,6 +33,8 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ---
 
+## 2026-08-06: The day the rescue test finally passed
+
 **Mood:** relieved, proud, productive
 
 **Did:** ran the rescue-mode drill end to end, but through the OVH API instead of the
@@ -61,7 +63,7 @@ that first public push. What a productive morning.
 
 ---
 
-## 2026-08-04 — The night I stopped planning and bought the server
+## 2026-08-04: The night I stopped planning and bought the server
 
 **Mood:** impulsive, then giddy, then afraid it would break
 
@@ -88,7 +90,7 @@ the hardening, the first of the boring but important work.
 
 ---
 
-## 2026-08-05 — The day it started feeling real
+## 2026-08-05: The day it started feeling real
 
 **Mood:** excited, a little proud
 
