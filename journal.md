@@ -8,7 +8,7 @@ appended. This is not the session log (that's the private session log, kept loca
 ## Template
 
 ```md
-## YYYY-MM-DD — Short title
+## YYYY-MM-DD: Short title
 **Mood:** ...
 **Did:** ...
 **Story:** ...
@@ -18,29 +18,29 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ---
 
-## 2026-08-07 — Why Docker (the conversation before the install)
+## 2026-08-07: Why Docker (the conversation before the install)
 
 **Mood:** curious, getting concrete
 
-**Did:** spent the morning session on a Docker Q&A — what containers actually are, why they exist, and how the industry uses them — before installing a single package.
+**Did:** spent the morning session on a Docker Q&A about what containers actually are, why they exist, and how the industry uses them, before installing a single package.
 
-**Story:** Before running any `apt install docker`, I wanted to understand what I was about to run. So we walked through the fundamentals: a container is not a mini-VM, it's an ordinary process that sees its own isolated view of the filesystem, network and users. An image is a read-only stack of layers with a writable layer on top, and a Dockerfile is just a recipe for building those layers. Then the industry picture: Docker/OCI containers killed the "works on my machine" problem, made delivery reproducible, and the image-registry pattern now underpins nearly every cloud-native stack. That's the real reason the plan puts Docker as the backbone for everything from here on — it's not a tool, it's how software ships in 2026.
+**Story:** Before running any `apt install docker`, I wanted to understand what I was about to run. We walked through the fundamentals: a container is not a mini-VM, it's an ordinary process that sees its own isolated view of the filesystem, network and users. An image is a read-only stack of layers with a writable layer on top, and a Dockerfile is just the recipe for building those layers. Then the industry picture: Docker and OCI containers killed the "works on my machine" problem, and the same image registry pattern now sits under almost every cloud-native stack. The plan treats Docker as the backbone from here on, because that's how software ships in 2026.
 
-**What I learned:** Containers are processes, not machines; images vs. containers; why images are layered and shareable; and the industry rationale (reproducible delivery, isolation, fast startup). And the rule I'm taking into the install: understand the why before you install the thing.
+**What I learned:** Containers are processes, not machines. Images and containers are different, and images are layered, which makes them shareable. The industry adopted containers for reproducible delivery, isolation and fast startup. And the rule I'm taking into the install: understand the why before you install the thing.
 
-**Feelings / notes:** This morning's Q&A and tonight's GUI purge feel like two halves of the same move — clearing the box to make room for the thing it's actually for.
+**Feelings / notes:** This morning's Q&A and tonight's GUI purge feel like two halves of the same move. Both were about clearing the box to make room for the thing it's actually for.
 
 ---
 
-## 2026-08-07 — The day I pulled the GUI out by the roots
+## 2026-08-07: The day I pulled the GUI out by the roots
 
 **Mood:** decisive, relieved, a little ruthless
 
-**Did:** brought the VPS back from a stuck rescue boot, enabled headless boot, then removed the desktop GUI entirely — Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop — and freed about a gig and a half of disk and most of the RAM.
+**Did:** brought the VPS back from a stuck rescue boot, enabled headless boot, then removed the desktop GUI entirely: Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop. That freed about a gig and a half of disk and most of the RAM.
 
-**Story:** The morning started with the machine refusing to boot from its own disk, still spinning in rescue mode from yesterday's drill. A small panic, a fix to the OVH API script, and a stop → netboot→local → start later it was back. With the GUI off (multi-user target), the RAM reading dropped from ~2.8 GB used to 457 MB. Then the RDP session kept dropping me mid-work, and I made the call: no more band-aids. If I'm going to run Docker on 4 GB, the desktop is dead weight. I purged every package that paints pixels on that box and didn't look back. The final `dpkg` check was clean enough — just a few orphaned Xfce libraries left to sweep.
+**Story:** The morning started with the machine refusing to boot from its own disk, still spinning in rescue mode from yesterday's drill. A small panic, a fix to the OVH API script, and a stop → netboot→local → start later it was back. With the GUI off (multi-user target), the RAM reading dropped from ~2.8 GB used to 457 MB. Then the RDP session kept dropping me mid-work, and I made the call: no more band-aids. If I'm going to run Docker on 4 GB, the desktop is dead weight. I purged every package that paints pixels on that box and didn't look back. The final `dpkg` check was clean enough, aside from a few orphaned Xfce libraries left to sweep.
 
-**What I learned:** Some decisions are easier to make a second time. The plan already said "remove the GUI first in Phase 2" — I was just executing it early, when the memory pressure was in my face instead of a checkbox. Going headless forces me to treat the server like a server: every interaction is SSH, every app is a service, nothing sits on it that doesn't earn its RAM. The Mac stays the place where pixels live.
+**What I learned:** Some decisions are easier to make a second time. The plan already said "remove the GUI first in Phase 2." I was just executing it early, when the memory pressure was in my face instead of a checkbox. Going headless forces me to treat the server like a server: every interaction is SSH, every app is a service, nothing sits on it that doesn't earn its RAM. The Mac stays the place where pixels live.
 
 **Feelings / notes:** The server finally feels like a proper machine. A bit sad the cozy desktop experiment is over, but it was always a learning scaffold, not the goal. Next: Docker, with real breathing room.
 
