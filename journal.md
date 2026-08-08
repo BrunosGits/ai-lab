@@ -3,6 +3,8 @@
 Personal diary of the AI Lab project: memories, feelings, stories. One entry per day,
 appended. This is not the session log (that's the private session log, kept local, for times/commands/verdicts).
 
+<p align="right"><b>Total time on the project: 9h 14m</b></p>
+
 ---
 
 ## 2026-08-07: Docker questions, then the great GUI purge
