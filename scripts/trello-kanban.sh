@@ -48,13 +48,18 @@ api_request() {
   local url="https://api.trello.com/1${endpoint}"
   local sep="?"
   [[ "$url" == *\?* ]] && sep="&"
-  local tries=0 code tmp
+  local tries=0 code tmp part args
   while true; do
     tmp="$(mktemp -t trello.XXXXXX)"
     if [[ "$method" == "GET" ]]; then
       code="$(curl -sS -o "$tmp" -w '%{http_code}' "$url${sep}key=$TRELLO_API_KEY&token=$TRELLO_TOKEN")"
     else
-      code="$(curl -sS -o "$tmp" -w '%{http_code}' -X "$method" -d "$data" "$url${sep}key=$TRELLO_API_KEY&token=$TRELLO_TOKEN")"
+      args=()
+      IFS='&' read -ra parts <<<"$data"
+      for part in "${parts[@]}"; do
+        args+=(--data-urlencode "$part")
+      done
+      code="$(curl -sS -o "$tmp" -w '%{http_code}' -X "$method" "${args[@]}" "$url${sep}key=$TRELLO_API_KEY&token=$TRELLO_TOKEN")"
     fi
     if [[ "$code" == "429" ]]; then
       rm -f "$tmp"
@@ -82,23 +87,23 @@ api_request() {
 
 jfind_id_by_name() {
   # stdin: JSON array of {name,id} objects, args: needle, prints the id
-  python3 - "$1" <<'PY'
+  python3 -c '
 import json, sys
 needle = sys.argv[1]
 for item in json.load(sys.stdin):
     if item.get("name") == needle:
         print(item["id"])
         break
-PY
+' "$1"
 }
 
 jhas_name() {
   # stdin: JSON array of {name} objects, args: needle, prints yes or no
-  python3 - "$1" <<'PY'
+  python3 -c '
 import json, sys
 needle = sys.argv[1]
 print("yes" if any(i.get("name") == needle for i in json.load(sys.stdin)) else "no")
-PY
+' "$1"
 }
 
 jget_id() {
@@ -158,7 +163,7 @@ seed_ai_lab() {
     exit 1
   fi
   while IFS= read -r line; do
-    task="${line#*- [ ] }"
+    task="$(printf '%s' "$line" | sed -E 's/^\s*- \[ \] //')"
     [[ -z "$task" ]] && continue
     card="[$CARD_PREFIX] $task"
     [[ "$(printf '%s' "$cards" | jhas_name "$card")" == "yes" ]] && continue
