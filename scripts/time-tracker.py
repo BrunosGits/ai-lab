@@ -73,6 +73,35 @@ def cmd_close(data):
     print(f"  started  {start}")
     print(f"  ended    {end}")
     print(f"  totals   {data['total_sessions']} sessions | {hours_hm(data['total_hours'])} | {data['total_hours']:.2f}h")
+    cmd_journal(data)
+
+
+def cmd_journal(data):
+    journal = os.path.join(SCRIPT_DIR, "..", "journal.md")
+    if not os.path.exists(journal):
+        print(f"journal.md not found at {journal}, skipping")
+        return
+    with open(journal) as f:
+        lines = f.read().splitlines()
+    header = f'<p align="right"><b>Total time on the project: {hours_hm(data["total_hours"])}</b></p>'
+    marker = "Total time on the project:"
+    replaced = False
+    for i, line in enumerate(lines):
+        if marker in line:
+            lines[i] = header
+            replaced = True
+            break
+    if not replaced:
+        insert_at = len(lines)
+        for i, line in enumerate(lines):
+            if line.strip() == "---":
+                insert_at = i
+                break
+        lines.insert(insert_at, header)
+        lines.insert(insert_at + 1, "")
+    with open(journal, "w") as f:
+        f.write("\n".join(lines) + "\n")
+    print(f'journal.md: total time set to {hours_hm(data["total_hours"])}')
 
 
 def cmd_status(data):
@@ -106,6 +135,8 @@ def main():
         cmd_status(data)
     elif cmd == "summary":
         cmd_summary(data)
+    elif cmd == "journal":
+        cmd_journal(data)
     else:
         print(__doc__)
         sys.exit(1)

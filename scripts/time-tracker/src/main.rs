@@ -38,6 +38,48 @@ fn tracker_path() -> PathBuf {
         .join("time-tracker.json")
 }
 
+fn journal_path() -> PathBuf {
+    PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .join("..")
+        .join("..")
+        .join("journal.md")
+}
+
+fn cmd_journal(data: &Tracker) {
+    let path = journal_path();
+    let content = match fs::read_to_string(&path) {
+        Ok(c) => c,
+        Err(_) => {
+            println!("journal.md not found at {}, skipping", path.display());
+            return;
+        }
+    };
+    let total = hours_hm(data.total_hours);
+    let header = format!(
+        "<p align=\"right\"><b>Total time on the project: {}</b></p>",
+        total
+    );
+    let marker = "Total time on the project:";
+    let mut updated: Vec<&str> = content.lines().collect();
+    if let Some(i) = updated.iter().position(|l| l.contains(marker)) {
+        updated[i] = header.as_str();
+    } else {
+        let insert_at = match updated.iter().position(|l| l.trim() == "---") {
+            Some(p) => p,
+            None => updated.len(),
+        };
+        updated.insert(insert_at, header.as_str());
+        updated.insert(insert_at + 1, "");
+    }
+    let mut out = updated.join("\n");
+    out.push('\n');
+    fs::write(&path, out).unwrap_or_else(|e| {
+        eprintln!("Error writing {}: {}", path.display(), e);
+        process::exit(1);
+    });
+    println!("journal.md: total time set to {}", total);
+}
+
 fn load() -> Tracker {
     let path = tracker_path();
     if !path.exists() {
@@ -135,6 +177,7 @@ fn cmd_close(data: &mut Tracker) {
         hours_hm(data.total_hours),
         data.total_hours
     );
+    cmd_journal(data);
 }
 
 fn cmd_status(data: &Tracker) {
@@ -185,6 +228,7 @@ fn print_help() {
     println!("  time-tracker close    # mark end, compute hours, append session");
     println!("  time-tracker status   # show open session / totals");
     println!("  time-tracker summary  # show totals");
+    println!("  time-tracker journal  # refresh the total time in journal.md");
     println!();
     println!("State is stored in time-tracker.json at the repo root.");
 }
@@ -201,6 +245,7 @@ fn main() {
         "close" => cmd_close(&mut data),
         "status" => cmd_status(&data),
         "summary" => cmd_summary(&data),
+        "journal" => cmd_journal(&data),
         _ => {
             print_help();
             process::exit(1);
