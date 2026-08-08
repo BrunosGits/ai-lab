@@ -9,17 +9,60 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ## 2026-08-07: Docker questions, then the great GUI purge
 
-**Mood:** curious, then decisive, a little ruthless
+**Mood:** curious, then decisive, a little ruthless, then generous, then thorough
 
 **Story:** Before running any `apt install docker`, I wanted to understand what I was about to run. We walked through the fundamentals: a container is not a mini-VM, it's an ordinary process that sees its own isolated view of the filesystem, network and users. An image is a read-only stack of layers with a writable layer on top, and a Dockerfile is just the recipe for building those layers. Then the industry picture: Docker and OCI containers killed the "works on my machine" problem, and the same image registry pattern now sits under almost every cloud-native stack. The plan treats Docker as the backbone from here on, because that's how software ships in 2026.
 
 Then the machine refused to boot from its own disk, still spinning in rescue mode from yesterday's drill. A small panic, a fix to the OVH API script, and a stop → netboot→local → start later it was back. With the GUI off (multi-user target), the RAM reading dropped from ~2.8 GB used to 457 MB. Then the RDP session kept dropping me mid-work, and I made the call: no more band-aids. If I'm going to run Docker on 4 GB, the desktop is dead weight. I purged every package that paints pixels on that box and didn't look back. The final `dpkg` check was clean enough, aside from a few orphaned Xfce libraries left to sweep.
 
+Later the same box changed jobs. The espanso+ fork needed a real Linux build machine, and this
+server turned out to be exactly that. I installed the full toolchain the CI job uses, doubled
+the swap so the final link step could not run out of memory, and cloned the fork read-only.
+  The first release build came back green in 5 minutes and 36 seconds. After all those libraries
+  went in, I checked the boot target. Still multi-user, still no display manager. The purge held.
+
+Then I went back to the espanso+ search feature to see what still stood between it and done.
+The code turned out to be fully wired: the config option parses with a default of false, the
+daemon hands it to the search window, and the Linux positioning logic lives in search.cpp.
+The fork's CI came back green on all four platforms, and I almost called it finished. Then I
+asked what that green actually proves. It proves the feature compiles everywhere, not that it
+ever opened. The cursor positioning had never run on Linux or Windows. So I updated the
+roadmap: a real test on the VPS with a virtual display, moving the cursor and reading the
+window position back, plus a manual pass on a Windows machine. The README still claims Linux
+and Windows are untested, and the option is missing from the config template, so both get
+fixed before the feature counts as done.
+
 **What I learned:** Containers are processes, not machines. Images and containers are different, and images are layered, which makes them shareable. The industry adopted containers for reproducible delivery, isolation and fast startup. My rule going in: understand the why before you install the thing. And some decisions are easier to make a second time. The plan already said "remove the GUI first in Phase 2." I was just executing it early, when the memory pressure was in my face instead of a checkbox. Going headless forces me to treat the server like a server: every interaction is SSH, every app is a service, nothing sits on it that doesn't earn its RAM. Pixels live on my own machine now.
+
+A build machine is not a GUI machine. Installing every library a compile needs does not
+install a desktop, the boot target is the real gatekeeper. And I finally built the closing
+habit I had been putting off: the journal header now carries the total time, the tracker
+  refreshes it, and one command closes the day by writing the journal, the decisions and the
+  achievements.
+
+Green CI means a feature compiles on every platform, not that it works on any of them. The
+search window passed all four jobs and had never been drawn on two of them. A headless server
+can still test a GUI, it just paints it on a virtual display instead of a real screen.
 
 **Feelings / notes:** The morning's Q&A and the night's GUI purge feel like two halves of the same move. Both were about clearing the box to make room for the thing it's actually for. The server finally feels like a proper machine. A bit sad the cozy desktop experiment is over, but it was always a learning scaffold, not the goal. Next: Docker, with real breathing room.
 
-**Did:** spent the morning session on a Docker Q&A about what containers actually are, why they exist, and how the industry uses them, before installing a single package. Then brought the VPS back from a stuck rescue boot, enabled headless boot, and removed the desktop GUI entirely: Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop. That freed about a gig and a half of disk and most of the RAM.
+Giving this box a second job felt right. It went from a burden I nearly fought to a tool that
+serves two projects. And my first GitHub achievement landed today, Quickdraw, for a pull
+request opened five minutes after the commit that resolved it. A small badge, but the first
+  one. It feels like the start of a habit.
+
+Almost ticked the feature as done on green builds alone. Catching the gap between compiles and
+works before calling it finished felt right. Two more test items on the list that belong there.
+
+**Did:** spent the morning session on a Docker Q&A about what containers actually are, why they exist, and how the industry uses them, before installing a single package. Then brought the VPS back from a stuck rescue boot, enabled headless boot, and removed the desktop GUI entirely: Xfce, the login manager, xrdp, Chrome, even OpenCode Desktop. That freed about a gig and a half of disk and most of the RAM. Then I set up the VPS as the
+espanso+ Linux build box: 4G swap, toolchain installed, first release build green in 5m 36s,
+box still headless. Added the total project time to the journal header, refreshed
+automatically by the tracker. Built the end-session command and the achievements log, and
+  logged today's Quickdraw.
+
+In the evening I audited the search feature end to end, confirmed the fork CI green on all four
+platforms, ticked that roadmap item, and added real Linux and Windows tests because CI only
+compiles the feature. Logged the decision to test it for real before calling it finished.
 
 ---
 

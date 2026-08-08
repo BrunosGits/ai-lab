@@ -6,6 +6,16 @@ rejected, and why. This complements the private session log (what was done, kept
 
 ---
 
+## 2026-08-07 - Search feature tested for real
+
+**Decision: test the search feature on real systems, CI green is not a substitute for use.**
+- Considered: treating the all-green fork CI as proof the feature works
+- Chosen: a real Linux test on the VPS with a virtual display (xdotool moves the cursor, xwininfo reads the window position back) plus a manual test on a Windows machine, before declaring the feature done
+- Why: CI compiles the feature on all four platforms but never opens the search window, so the cursor positioning logic had still never run on Linux or Windows
+- Status: roadmap updated with both test items, Linux test planned for the next session
+
+---
+
 ## 2026-08-04 — Day one
 
 **Decision: buy the VPS now, stop planning.**
@@ -117,6 +127,26 @@ rejected, and why. This complements the private session log (what was done, kept
 **Decision: session data kept private (tool stays public).**
 - Chosen: `time-tracker.json` and `session-log.md` removed from the repo and scrubbed from git history (`git filter-repo --invert-paths`), force-pushed. Files live on locally only, hidden via `.git/info/exclude`. The Rust tracker keeps writing to `time-tracker.json` as before.
 - Why: the tool is a portfolio piece; the session log and raw timings are personal.
+
+---
+
+## 2026-08-07 - The box gains a second job
+
+**Decision: the VPS doubles as the espanso+ Linux build box.**
+- Considered: keeping espanso+ builds on GitHub CI only
+- Chosen: full linux-x11 toolchain on the server, swap doubled to 4G, read-only clone at `~/espanso-plus`
+- Why: a real Debian 13 box matching the CI job, heavy builds and tests run there for free, and the fork gains a second copy of its code
+- Status: first release build green in 5m 36s. The box stayed headless, no display manager came back with the libraries
+
+**Decision: track GitHub achievements in this repo.**
+- Chosen: `achievements.md` plus `scripts/check-achievements.sh`, run by `/end-session`
+- Why: the first achievement (Quickdraw) landed today, a running record keeps the habit honest
+- Status: Quickdraw logged under 2026-08-07
+
+**Decision: one command ends the working day.**
+- Chosen: `/end-session` closes the tracker, writes or merges the journal, logs decisions and achievements, refreshes the total time line, then commits
+- Considered: keeping each closing step manual
+- Why: the journal now shows total project time at the top and the tracker refreshes it automatically, the closing habit needed a single entry point
 
 ---
 
