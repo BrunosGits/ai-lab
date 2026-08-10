@@ -231,7 +231,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **OVH** | VPS-1 | Direct login (web) — dashboard + emailed root password | — (root password removed from Infisical) |
 | **Infisical** | mac-cli machine identity | Universal-auth (client-id + secret) → `INFISICAL_TOKEN` in `~/.zshrc` | Infisical itself |
 | **VPS (SSH)** | `<user>` | Key auth (`~/.ssh/id_ed25519`) · passwordless sudo | key on computer + server |
-| **GitHub** | `BrunosGits` | Classic PAT used for `git push` (token-in-URL, scrubbed after) · web login direct | `/github/GITHUB_TOKEN` in Infisical |
+| **GitHub** | `BrunosGits` | SSH key auth for `git push` (`~/.ssh/id_ed25519_github`, via `~/.ssh/config`) · `gh` CLI (keyring) | key on computer, public key on GitHub |
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
 | **OpenCode Zen** | Big Pickle model LLM | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
