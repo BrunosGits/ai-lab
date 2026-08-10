@@ -234,9 +234,8 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **GitHub** | `BrunosGits` | Classic PAT used for `git push` (token-in-URL, scrubbed after) · web login direct | `/github/GITHUB_TOKEN` in Infisical |
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
-| **OpenCode Zen** | — | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
-
-**LLMs in use:** OpenCode Zen (API key above) is the main model behind the agents in this project, including this sandbox. Llama 3.2 runs locally on the Mac via Ollama (`opencode.json` provider, `localhost:11434`) as a free, private fallback for experiments.
+| **OpenCode Zen** | Big Pickle model LLM | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
+| **Llama 3.2 (local)** | — | Ollama on the Mac (`localhost:11434`, free fallback) | — (runs locally) |
 
 ---
 
