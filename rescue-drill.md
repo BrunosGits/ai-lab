@@ -17,7 +17,7 @@ Save the current state so we can compare after the drill:
 ssh <user>@<vps-ip> 'echo "--- disk"; lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT; \
 echo "--- fstab"; cat /etc/fstab; \
 echo "--- services"; for s in ssh postgresql hello fail2ban; do printf "%s=%s\n" "$s" "$(systemctl is-active $s)"; done; \
-echo "--- ufw"; sudo ufw status verbose; \
+echo "--- ufw-iptables"; sudo iptables -S INPUT | head; sudo iptables -L DOCKER-USER -n; \
 echo "--- uptime"; uptime' > /tmp/pre-drill-state.txt
 ```
 
@@ -96,8 +96,8 @@ This demonstrates: even with zero login access, we can enter the system from res
 3. Wait ~2 min, then:
 
 ```sh
-ssh <user>@<vps-ip> 'uptime; lsblk; systemctl is-active ssh postgresql hello fail2ban'
-sudo ufw status verbose   # should show 22/80/443 ACTIVE
+ssh <user>@<vps-ip> 'uptime; lsblk; systemctl is-active ssh postgresql hello fail2ban docker'
+sudo iptables -S INPUT   # should show 22/80/443 ACCEPT + DROP policy
 ```
 
 Compare with `/tmp/pre-drill-state.txt` (disk, fstab, services must match).
@@ -118,5 +118,5 @@ Compare with `/tmp/pre-drill-state.txt` (disk, fstab, services must match).
 - **Rescue password** arrives by email only. Check spam. One password per activation.
 - **Do NOT reboot from the SSH shell.** Always use the OVH dashboard so we control the boot mode.
 - The disk is **local SSD** (not LVM, no RAID) → `/dev/sda1` directly, no volume groups to activate.
-- UFW check is `ufw status` (the `systemctl is-active ufw` trick shows inactive because the unit is a no-op at runtime. The firewall still applies at boot).
+- Firewall is pure iptables (ufw removed when netfilter-persistent was installed for the DOCKER-USER chain). Verify with `iptables -S INPUT` (DROP policy + 22/80/443 ACCEPT) and `iptables -L DOCKER-USER -n` (default-drop). Rules persist in `/etc/iptables/rules.v4` and `rules.v6` via `netfilter-persistent save`.
 - If anything looks wrong after reboot: reselect **Boot from disk** and restart again. The rescue flag was still set.

@@ -58,7 +58,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] passwd -l root (OVH email password dead)
 - [x] Fail2Ban SSH jail
 - [x] UFW 22/80/443 active
-- [ ] DOCKER-USER default-drop (Phase 2)
+- [x] DOCKER-USER default-drop (Phase 2)
 
 ### Commands learned — Phase 1
 
@@ -79,7 +79,9 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - Note: OpenSSH uses **first-value-wins**. A drop-in like `sshd_config.d/60-hardening.conf` does NOT override an earlier `50-cloud-init.conf`, edit the first file instead.
 
 **Firewall**
-- `sudo ufw allow <port>/tcp` · `sudo ufw --force enable` · `sudo ufw status verbose`
+- `sudo iptables -S INPUT` / `sudo ip6tables -S INPUT` — show host firewall rules
+- `sudo iptables -L DOCKER-USER -n -v` — container forward rules
+- `sudo netfilter-persistent save` — persist iptables rules (replaces ufw)
 - `sudo fail2ban-client status sshd` — banned IPs per jail
 
 **Networking / processes**
@@ -119,11 +121,11 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 - [x] Rescue mode drill (runbook: `rescue-drill.md`)
 - [x] remove desktop GUI (Xfce/xrdp/Chrome/OpenCode Desktop) — free RAM for Docker
-- [ ] Docker Engine (official repo) + Compose plugin
-- [ ] <user> added to docker group
-- [ ] daemon.json: log rotation (10m × 3) · live-restore · builder GC
-- [ ] DOCKER-USER default-drop persisted via netfilter-persistent (survives reboot)
-- [ ] hello-world test passed
+- [x] Docker Engine (official repo) + Compose plugin
+- [x] <user> added to docker group
+- [x] daemon.json: log rotation (10m × 3) · live-restore · builder GC
+- [x] DOCKER-USER default-drop persisted via netfilter-persistent (survives reboot)
+- [x] hello-world test passed
 
 ### Phase 3 — Slim Stack (only what's studied now)
 

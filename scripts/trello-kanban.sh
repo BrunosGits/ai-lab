@@ -5,9 +5,9 @@
 # ~/.config/ai-lab/trello.conf.
 #
 # Commands:
-#   sync  ensure the board, lists and labels, then seed cards from the docs
+#   sync  ensure the board, lists and labels, then seed task cards
 #   init  ensure the board, lists and labels only
-#   seed  push new cards only, the board must already exist
+#   seed  push new task cards to the project list, the board must exist
 #
 # Idempotent, safe to rerun. Trello limits each key to 300 requests per 10s,
 # a 429 response is retried with backoff.
@@ -19,7 +19,7 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 CONF_FILE="${TRELLO_CONF:-$HOME/.config/ai-lab/trello.conf}"
 
 BOARD_NAME="Personal Kanban"
-LIST_NAMES=(Backlog Doing Done)
+LIST_NAMES=("[ai-lab]")
 LABEL_PROJECTS=(ai-lab espanso-plus opensearch)
 LABEL_COLORS=(blue green orange)
 CARD_PREFIX="ai-lab"
@@ -152,14 +152,14 @@ ensure_labels() {
 
 seed_ai_lab() {
   local doc="$REPO_ROOT/ai-lab-summary.md"
-  local lists labels cards backlog ai_label line task card
+  local lists labels cards list_id ai_label card task line
   lists="$(api_request GET "/boards/$BOARD_ID/lists?fields=name,id")"
   labels="$(api_request GET "/boards/$BOARD_ID/labels?fields=name,id")"
   cards="$(api_request GET "/boards/$BOARD_ID/cards?fields=name")"
-  backlog="$(printf '%s' "$lists" | jfind_id_by_name "Backlog")"
+  list_id="$(printf '%s' "$lists" | jfind_id_by_name "[ai-lab]")"
   ai_label="$(printf '%s' "$labels" | jfind_id_by_name "ai-lab")"
-  if [[ -z "$backlog" || -z "$ai_label" ]]; then
-    echo "Backlog list or ai-lab label missing. Run init first." >&2
+  if [[ -z "$list_id" || -z "$ai_label" ]]; then
+    echo "ai-lab list or label missing. Run init first." >&2
     exit 1
   fi
   while IFS= read -r line; do
@@ -167,7 +167,7 @@ seed_ai_lab() {
     [[ -z "$task" ]] && continue
     card="[$CARD_PREFIX] $task"
     [[ "$(printf '%s' "$cards" | jhas_name "$card")" == "yes" ]] && continue
-    api_request POST "/cards" "idList=$backlog&name=$card&idLabels=$ai_label" >/dev/null
+    api_request POST "/cards" "idList=$list_id&name=$card&idLabels=$ai_label" >/dev/null
     log "seeded $card"
   done < <(grep -E '^\s*- \[ \] ' "$doc" || true)
 }
