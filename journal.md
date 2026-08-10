@@ -9,41 +9,31 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ## 2026-08-10: Docker is finally in
 
-**Mood:** accomplished, a little smug, then humbled by a package conflict
+**Mood:** accomplished, then humbled by a package conflict
 
-**Story:** Phase 2 had been waiting on the checklist for a while, and today it stopped waiting. I added the official Docker repo, installed the engine and the Compose plugin, put bruno in the docker group, hardened the daemon config, and wired a DOCKER-USER chain that drops everything a container tries to reach unless it is another container. Then I rebooted the server and watched it all come back on its own. The rules persisted. That part felt great.
+**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, added myself to the docker group, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. The rules persisted. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself. I rebuilt the firewall by hand in iptables, same policy as before, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
 
-Then the package manager reminded me nothing is free. Installing netfilter-persistent silently removed ufw, the firewall I had trusted since day one. The host was suddenly wide open and I had to notice it by reading the rules myself. I rebuilt the firewall by hand in iptables: drop everything, allow only 22, 80 and 443, both address families. Same policy as before, just a different tool, and now it survives reboots the same way.
+**What I learned:** Tools remove their rivals quietly, nothing in the install output said ufw was going. A reboot is the only honest test of persistence, and separate keys per service mean a revoke on one never touches the other.
 
-The other tidy bit was git. Pushing used to carry a token in the URL, which I never loved. I made a dedicated SSH key just for GitHub, so the key that opens the server stays a different key from the one that pushes code. If one is ever revoked, the other is untouched.
+**Feelings / notes:** Docker was the reason the GUI had to go, so today closed a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten.
 
-**What I learned:** Tools remove their rivals quietly. Nothing in the netfilter-persistent install output said ufw was going, I only found out by checking the firewall afterward. A reboot is the only honest test of persistence, and the uptime resetting to zero minutes is a small adrenaline shot every time. Separate keys per service are worth the tiny config cost. And the tracker gained backdated start and close arguments, which came in handy for logging today's work retroactively.
-
-**Feelings / notes:** Docker was the reason the GUI had to go, so today felt like closing a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten. I also got to say goodbye to the token in the URL for good, which feels like grown-up git.
-
-**Did:** installed Docker CE 29.7.2 with the Compose plugin from the official repo, added bruno to the docker group, hardened the daemon (log rotation, live-restore, builder GC), set up DOCKER-USER default-drop and persisted it with netfilter-persistent, then rebooted to verify. Rebuilt the host firewall as pure iptables after netfilter-persistent removed ufw, allowing only 22/80/443 in both IPv4 and IPv6. Switched GitHub auth to a dedicated SSH key. Updated the summary docs and replaced every mention of the computer's platform with the word computer. Added today's 44 minutes to the tracker.
+**Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
 
 ---
 
 ## 2026-08-07: Docker questions, then the great GUI purge
 
-**Mood:** curious, decisive, a little ruthless, then generous, then thorough
+**Mood:** curious, then decisive, then generous, then thorough
 
-**Story:** Before running any `apt install docker`, I wanted to understand what I was about to run. We walked through the fundamentals: a container is not a mini-VM, it's an ordinary process that sees its own isolated view of the filesystem, network and users. An image is a read-only stack of layers with a writable layer on top, and a Dockerfile is just the recipe for building those layers. That's how software ships in 2026.
-
-Then the machine refused to boot from its own disk, still spinning in rescue mode from yesterday's drill. A fix to the OVH API script, a stop, a netboot→local, a start, and it was back. The RDP session kept dropping me mid-work, and I made the call: no more band-aids. If I'm going to run Docker on 4 GB, the desktop is dead weight. I purged every package that paints pixels and didn't look back. RAM dropped to 457 MB.
+**Story:** Before installing anything I wanted to understand what I was about to run. We walked through the fundamentals: a container is not a mini-VM, it's an ordinary process with its own isolated view of the filesystem, network and users. An image is a read-only stack of layers, and a Dockerfile is just the recipe. Then the machine refused to boot from its own disk, still stuck in yesterday's rescue mode. A fix to the OVH API script, a stop, a netboot, a start, and it was back. The RDP session kept dropping me mid-work, and I made the call: no more band-aids. If Docker needs the RAM, the desktop is dead weight, so I purged every package that paints pixels and didn't look back. RAM dropped to 457 MB.
 
 The same box changed jobs that evening. The espanso+ fork needed a real Linux build machine, so I installed the CI toolchain, doubled the swap, cloned the fork, and the first release build came back green in 5m 36s. Still headless. Then I audited the search feature and nearly called it finished. CI was green on all four platforms, but green only means it compiles everywhere, not that it ever opened. The cursor positioning had never run on Linux or Windows, so I added real tests instead of ticking it done.
 
-**What I learned:** Containers are processes, not machines. My rule going in: understand the why before you install the thing. And the GUI removal was easier the second time, the plan already said it, I was just executing it early. Headless means every interaction is SSH and every app is a service. A build machine is not a GUI machine, the boot target is the real gatekeeper.
+**What I learned:** Containers are processes, not machines. Understand the why before you install the thing. The GUI removal was easier the second time, the plan already said it, I was just executing it early. And green CI means it compiles everywhere, not that it works on any platform.
 
-Green CI means a feature compiles on every platform, not that it works on any of them. The search window passed all four jobs and had never been drawn on two of them.
+**Feelings / notes:** The Q&A and the purge are two halves of the same move, clearing the box for what it's actually for. A bit sad the cozy desktop experiment is over, but it was always a scaffold. And my first GitHub achievement landed today, Quickdraw, for a pull request opened five minutes after the commit that resolved it.
 
-**Feelings / notes:** The morning's Q&A and the night's GUI purge feel like two halves of the same move, clearing the box for the thing it's actually for. A bit sad the cozy desktop experiment is over, but it was always a learning scaffold, not the goal. The server finally feels like a proper machine.
-
-Giving this box a second job felt right. And my first GitHub achievement landed today, Quickdraw, for a pull request opened five minutes after the commit that resolved it. A small badge, but the first one.
-
-**Did:** spent the morning on a Docker Q&A, brought the VPS back from a stuck rescue boot, and removed the desktop GUI entirely to free RAM for Docker. Set up the VPS as the espanso+ build box, first release build green in 5m 36s. Audited the search feature and added real Linux and Windows tests because CI only compiles it. Built the end-session command and the achievements log, and logged today's Quickdraw.
+**Did:** spent the morning on a Docker Q&A, brought the VPS back from a stuck rescue boot, removed the desktop GUI entirely to free RAM for Docker, set up the VPS as the espanso+ build box, and added real Linux and Windows tests for the search feature because CI only compiles it.
 
 ---
 
