@@ -27,13 +27,11 @@ appended. This is not the session log (that's the private session log, kept loca
 
 **Story:** Before installing anything I wanted to understand what I was about to run. We walked through the fundamentals: a container is not a mini-VM, it's an ordinary process with its own isolated view of the filesystem, network and users, and an image is a read-only stack of layers. Then the machine refused to boot from its own disk, still stuck in yesterday's rescue mode. A fix to the OVH API script, a stop, a netboot, a start, and it was back. The RDP session kept dropping me mid-work, and I made the call: no more band-aids. If Docker needs the RAM, the desktop is dead weight, so I purged every package that paints pixels. RAM dropped to 457 MB.
 
-That evening the box changed jobs. The espanso+ fork needed a real Linux build machine, so I installed the CI toolchain, doubled the swap, cloned the fork, and the first release build came back green in 5m 36s. Then I audited the search feature and nearly called it finished. CI was green on all four platforms, but green only means it compiles everywhere, not that it ever opened. The cursor positioning had never run on Linux or Windows, so I added real tests instead of ticking it done.
+**What I learned:** Containers are processes, not machines. Understand the why before you install the thing. The GUI removal was easier the second time, the plan already said it, I was just executing it early.
 
-**What I learned:** Containers are processes, not machines. Understand the why before you install the thing. The GUI removal was easier the second time, the plan already said it, I was just executing it early. And green CI means it compiles everywhere, not that it works on any platform.
+**Feelings / notes:** The Q&A and the purge are two halves of the same move, clearing the box for what it's actually for. A bit sad the cozy desktop experiment is over, but it was always a scaffold.
 
-**Feelings / notes:** The Q&A and the purge are two halves of the same move, clearing the box for what it's actually for. A bit sad the cozy desktop experiment is over, but it was always a scaffold. And my first GitHub achievement landed today, Quickdraw, for a pull request opened five minutes after the commit that resolved it.
-
-**Did:** Docker Q&A, fixed the stuck rescue boot, purged the desktop GUI, set up the espanso+ build box, and added real tests for the search feature because CI only compiles it.
+**Did:** Docker Q&A, fixed the stuck rescue boot, purged the desktop GUI.
 
 ---
 
