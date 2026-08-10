@@ -127,12 +127,15 @@ fn hours_hm(hours: f64) -> String {
     format!("{}h {:02}m", h, m)
 }
 
-fn cmd_start(data: &mut Tracker) {
+fn cmd_start(data: &mut Tracker, start_arg: Option<&str>) {
     if let Some(start) = &data.current_start {
         println!("Tracker already open since {}", start);
         process::exit(1);
     }
-    data.current_start = Some(now_iso());
+    data.current_start = Some(match start_arg {
+        Some(s) => s.to_string(),
+        None => now_iso(),
+    });
     save(data);
     println!("Tracker started at {}", data.current_start.as_ref().unwrap());
 }
@@ -227,7 +230,7 @@ fn print_help() {
     println!("AI Lab project time tracker.");
     println!();
     println!("Usage:");
-    println!("  time-tracker start    # mark the start timestamp");
+    println!("  time-tracker start [START]  # mark start (default now), open session");
     println!("  time-tracker close [END]  # mark end (default now), compute hours");
     println!("  time-tracker status   # show open session / totals");
     println!("  time-tracker summary  # show totals");
@@ -244,7 +247,7 @@ fn main() {
     }
     let mut data = load();
     match args[1].as_str() {
-        "start" => cmd_start(&mut data),
+        "start" => cmd_start(&mut data, args.get(2).map(String::as_str)),
         "close" => cmd_close(&mut data, args.get(2).map(String::as_str)),
         "status" => cmd_status(&data),
         "summary" => cmd_summary(&data),

@@ -127,6 +127,35 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] DOCKER-USER default-drop persisted via netfilter-persistent (survives reboot)
 - [x] hello-world test passed
 
+### Commands learned — Phase 2
+
+**Docker repo + install**
+- `sudo install -m 0755 -d /etc/apt/keyrings` — prep apt keyring dir
+- `sudo curl -fsSL <gpg-url> -o /etc/apt/keyrings/docker.asc` — fetch Docker GPG key
+- `echo 'deb [arch=amd64 signed-by=...] https://download.docker.com/linux/debian trixie stable' | sudo tee /etc/apt/sources.list.d/docker.list` — add official repo
+- `sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin` — install engine + plugins
+- `sudo usermod -aG docker <user>` — let user run docker without sudo
+
+**Docker basics**
+- `sudo systemctl is-active docker` · `sudo systemctl restart docker` — daemon control
+- `docker version --format "{{.Server.Version}}"` — server version
+- `sudo docker run --rm hello-world` — smoke test
+- `docker ps` · `docker ps -a` — running / all containers
+
+**daemon.json (hardening)** — `/etc/docker/daemon.json`
+- log driver `json-file` with `max-size: 10m` · `max-file: 3` — cap log growth
+- `"live-restore": true` — keep containers up during daemon restarts
+- `"builder": { "gc": { "enabled": true, "defaultKeepStorage": "10GB" } }` — clean build cache
+
+**Firewall (iptables, replaces ufw)**
+- `sudo iptables -S` · `sudo ip6tables -S` — dump rules (v4 / v6)
+- `sudo iptables -P INPUT DROP` + allow 22/80/443 — host default-deny
+- `sudo iptables -L DOCKER-USER -n -v` — container forward chain
+- `sudo iptables -A DOCKER-USER -i docker0 -j RETURN` · `-i br-+` — allow internal container traffic
+- `sudo iptables -A DOCKER-USER -p tcp -j DROP` · `-p udp -j DROP` · `-j DROP` — drop the rest
+- `sudo netfilter-persistent save` — persist rules to `/etc/iptables/rules.v4|v6`
+- Note: installing `netfilter-persistent` **removed ufw**. Firewall is now pure iptables.
+
 ### Phase 3 — Slim Stack (only what's studied now)
 
 - [ ] DNS plan: sslip.io/nip.io for tests → custom ~$10/yr domain before going public
