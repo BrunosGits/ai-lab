@@ -6,6 +6,21 @@ rejected, and why. This complements the private session log (what was done, kept
 
 ---
 
+## 2026-08-10 — Docker in, UFW out, git over SSH
+
+**Decision: host firewall moves from ufw to pure iptables.**
+- Why: installing `netfilter-persistent` (needed to persist the DOCKER-USER chain) silently removed ufw
+- Chosen: rebuilt the host rules by hand in iptables, same policy as before (INPUT DROP + 22/80/443 only, IPv4 + IPv6), persisted to `/etc/iptables/rules.v4|v6`
+- Status: verified after a reboot, both host rules and DOCKER-USER survived
+
+**Decision: git push switches from PAT-in-URL to a dedicated SSH key.**
+- Considered: reusing the existing server key, or `gh` alone
+- Chosen: separate key `~/.ssh/id_ed25519_github`, added to GitHub as an authentication key, `~/.ssh/config` host block for github.com, remote switched to `git@github.com:...`
+- Why: no token in the git path at all, and a GitHub-side revoke never touches server access
+- Status: DONE, `git push` verified over SSH
+
+---
+
 ## 2026-08-07 - Search feature tested for real
 
 **Decision: test the search feature on real systems, CI green is not a substitute for use.**

@@ -7,6 +7,24 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ---
 
+## 2026-08-10: Docker is finally in
+
+**Mood:** accomplished, a little smug, then humbled by a package conflict
+
+**Story:** Phase 2 had been waiting on the checklist for a while, and today it stopped waiting. I added the official Docker repo, installed the engine and the Compose plugin, put bruno in the docker group, hardened the daemon config, and wired a DOCKER-USER chain that drops everything a container tries to reach unless it is another container. Then I rebooted the server and watched it all come back on its own. The rules persisted. That part felt great.
+
+Then the package manager reminded me nothing is free. Installing netfilter-persistent silently removed ufw, the firewall I had trusted since day one. The host was suddenly wide open and I had to notice it by reading the rules myself. I rebuilt the firewall by hand in iptables: drop everything, allow only 22, 80 and 443, both address families. Same policy as before, just a different tool, and now it survives reboots the same way.
+
+The other tidy bit was git. Pushing used to carry a token in the URL, which I never loved. I made a dedicated SSH key just for GitHub, so the key that opens the server stays a different key from the one that pushes code. If one is ever revoked, the other is untouched.
+
+**What I learned:** Tools remove their rivals quietly. Nothing in the netfilter-persistent install output said ufw was going, I only found out by checking the firewall afterward. A reboot is the only honest test of persistence, and the uptime resetting to zero minutes is a small adrenaline shot every time. Separate keys per service are worth the tiny config cost. And the tracker gained backdated start and close arguments, which came in handy for logging today's work retroactively.
+
+**Feelings / notes:** Docker was the reason the GUI had to go, so today felt like closing a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten. I also got to say goodbye to the token in the URL for good, which feels like grown-up git.
+
+**Did:** installed Docker CE 29.7.2 with the Compose plugin from the official repo, added bruno to the docker group, hardened the daemon (log rotation, live-restore, builder GC), set up DOCKER-USER default-drop and persisted it with netfilter-persistent, then rebooted to verify. Rebuilt the host firewall as pure iptables after netfilter-persistent removed ufw, allowing only 22/80/443 in both IPv4 and IPv6. Switched GitHub auth to a dedicated SSH key. Updated the summary docs and replaced every mention of the computer's platform with the word computer. Added today's 44 minutes to the tracker.
+
+---
+
 ## 2026-08-07: Docker questions, then the great GUI purge
 
 **Mood:** curious, decisive, a little ruthless, then generous, then thorough
