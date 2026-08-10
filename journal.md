@@ -11,7 +11,7 @@ appended. This is not the session log (that's the private session log, kept loca
 
 **Mood:** accomplished, then humbled by a package conflict
 
-**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, added myself to the docker group, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. The rules persisted. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself. I rebuilt the firewall by hand in iptables, same policy as before, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
+**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself, so I rebuilt the firewall by hand in iptables, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
 
 **What I learned:** Tools remove their rivals quietly, nothing in the install output said ufw was going. A reboot is the only honest test of persistence, and separate keys per service mean a revoke on one never touches the other.
 
@@ -44,14 +44,11 @@ tried to flip the rescue toggle, so I had to find another way. The OVH docs were
 about it and a couple of links 404'd, but after some poking around I found the panel that
 generates an API key for remote control, built a small script around it, and got the
 machine to reboot into rescue. Not one, not two, but three attempts before the boot took.
-I'm glad I tested this before I actually needed it, because the process was far from
-simple to set up. The moment the SSH host key changed, I knew the rescue environment was
-really there. That's the whole point of the drill: prove we can get back in before we ever
-have to.
+The moment the SSH host key changed, I knew the rescue environment was really there. That's
+the whole point of the drill: prove we can get back in before we ever have to.
 
 **What I learned:** The "obvious" path in the dashboard can be a dead end, and the docs
-won't always cover what you hit. When the UI fails, the API is still there, and the API
-has a task system that tells you exactly what's happening under the hood. Also worth
+won't always cover what you hit. When the UI fails, the API is still there. Also worth
 remembering, the order matters: set the boot mode while the machine is stopped, then start
 it. I only found that by failing forward.
 
@@ -75,7 +72,7 @@ reboot from disk. I haven't run it yet, but just writing it made me feel safer. 
 was a wall of unknown before, now it's a checklist. Even the moment I'm dreading, the one
 where the machine goes dark in the dashboard and I wait for the email with the rescue IP,
 has its own step. Then there are the fail2ban numbers: 3,882 failed SSH passwords in 24
-hours, and the server just shrugs them off. It's quietly defending itself while I sleep.
+hours, and the server just shrugs them off.
 
 **What I learned:** A safe procedure is still worth doing once on purpose. Rescue mode was
 a wall of unknown until I wrote down every step. Actually running it is still ahead of me.
