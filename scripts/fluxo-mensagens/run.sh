@@ -4,12 +4,15 @@ set -euo pipefail
 # Converts a Miro-style flowchart PDF (tiny fonts, spatial layout only) into:
 #   1. an interactive HTML (overview + per-flow map + reading view)
 #   2. a multi-page reading PDF
+#   3. a faithful poster PDF (each flow split into a grid of A4 landscape
+#      pages, same rectangle structure, real arrows, mini-map per page)
 #
 # Usage:
 #   ./run.sh <input.pdf> [output-prefix]
 # Example:
 #   ./run.sh "Fluxo de Mensagens Receptivas.pdf" fluxo
-#     -> fluxo.html, fluxo-leitura.html, fluxo-leitura.pdf
+#     -> fluxo.html, fluxo-leitura.html, fluxo-leitura.pdf,
+#        fluxo-poster.html, fluxo-poster.pdf
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -48,7 +51,13 @@ echo "3/4 rendering interactive HTML (with arrows)…"
 echo "4/4 rendering reading PDF…"
 "$PYTHON" "${HERE}/render_pdf.py" "${PREFIX}.html" "${PREFIX}-leitura.html" --pdf "${PREFIX}-leitura.pdf"
 
+echo "5/5 rendering faithful poster PDF (grid of landscape pages)…"
+TMP_TREE_PDF="${TMPDIR:-/tmp}/fluxo-tree.json"
+"$PYTHON" "${HERE}/render_poster.py" "${PREFIX}.html" "$TMP_TREE" "${PREFIX}-poster.html" --pdf "${PREFIX}-poster.pdf" --scale 30
+
 echo "done:"
 echo "  ${PREFIX}.html"
 echo "  ${PREFIX}-leitura.html"
 echo "  ${PREFIX}-leitura.pdf"
+echo "  ${PREFIX}-poster.html"
+echo "  ${PREFIX}-poster.pdf"

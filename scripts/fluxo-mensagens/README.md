@@ -11,6 +11,11 @@ Outputs:
   with zoom, a verbatim reading view, search and a detail panel.
 - **Reading PDF** — A4, one section per flow, every box as a card with its
   text and the "Opção X →" destinations.
+- **Poster PDF** — the same rectangle structure as the original diagram, split
+  into a regular grid of A4 landscape pages. Each page keeps the boxes, the
+  real arrows and the labels at their exact relative positions (scaled by
+  `--scale`) and shows a mini-map highlighting which tile of the grid it
+  covers, so the whole flow reads as a cut-out poster.
 
 ## Usage
 
@@ -28,7 +33,13 @@ python extract_graph.py <input.pdf> <graph.json>          # PDF → data
 python extract_tree.py  <input.pdf> <tree.json>           # PDF → directed edges
 python render_html.py  <graph.json> <out.html> --tree tree.json
 python render_pdf.py   <out.html> <print.html> --pdf out.pdf
+python render_poster.py <out.html> <tree.json> poster.html --pdf poster.pdf --scale 30
 ```
+
+`render_poster.py` tiles each flow into a faithful grid of A4 landscape pages
+at the given `--scale` (default 30). `--text-mult` scales only the box text if
+it needs to be bigger than the strict geometry, and `--flows` limits which
+flows are rendered.
 
 `render_html.py` splits the diagram into flows by default on X bands and a set
 of entry node ids (matching the original diagram). Point `--bands` and
