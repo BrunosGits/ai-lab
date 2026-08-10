@@ -235,7 +235,6 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
 | **OpenCode Zen** | — | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
-| ~~OpenCode Desktop~~ (VPS GUI) | removed 2026-08-07 with the GUI | — (VPS is headless) | — |
 
 **LLMs in use:** OpenCode Zen (API key above) is the main model behind the agents in this project, including this sandbox. Llama 3.2 runs locally on the Mac via Ollama (`opencode.json` provider, `localhost:11434`) as a free, private fallback for experiments.
 
