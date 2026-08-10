@@ -9,7 +9,7 @@ and get back to a normal boot before it's ever actually needed. **No data loss, 
 
 ---
 
-## Step 0 — Before you start (on your Mac)
+## Step 0 — Before you start (on your computer)
 
 Save the current state so we can compare after the drill:
 
@@ -49,7 +49,7 @@ Have credentials handy (both needed later):
 ## Step 2 — Mount the disk read-only (verify data)
 
 ```sh
-# from your Mac, using the rescue IP from the email
+# from your computer, using the rescue IP from the email
 ssh root@<RESCUE_IP>
 # password from the email (the keyboard layout quirk: "$" etc. can differ — paste carefully)
 

@@ -11,7 +11,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 ### Phase 0 — Prep
 
 - [x] OVH edge firewall: allow 22/80/443 only
-- [x] SSH from Mac (id_ed25519)
+- [x] SSH from computer (id_ed25519)
 - [x] Rescue mode instructions noted
 - [x] apt update + upgrade (Debian 13)
 - [x] TZ America/Sao_Paulo · hostname ai-lab · timesync
@@ -45,7 +45,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `cargo run --release --manifest-path scripts/time-tracker/Cargo.toml -- start|close|status|summary`
 - Rust rewrite of the original Python; `scripts/time-tracker.py` kept as reference
 
-**RDP tunnel (GUI)** — removed 2026-08-07 with the desktop GUI (xrdp purged). The VPS is headless from now on; GUI tooling stays on the Mac.
+**RDP tunnel (GUI)** — removed 2026-08-07 with the desktop GUI (xrdp purged). The VPS is headless from now on; GUI tooling stays on the computer.
 
 ### Phase 1 — Server Foundation
 
@@ -230,12 +230,12 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 |---|---|---|---|
 | **OVH** | VPS-1 | Direct login (web) — dashboard + emailed root password | — (root password removed from Infisical) |
 | **Infisical** | mac-cli machine identity | Universal-auth (client-id + secret) → `INFISICAL_TOKEN` in `~/.zshrc` | Infisical itself |
-| **VPS (SSH)** | `<user>` | Key auth (`~/.ssh/id_ed25519`) · passwordless sudo | key on Mac + server |
+| **VPS (SSH)** | `<user>` | Key auth (`~/.ssh/id_ed25519`) · passwordless sudo | key on computer + server |
 | **GitHub** | `BrunosGits` | Classic PAT used for `git push` (token-in-URL, scrubbed after) · web login direct | `/github/GITHUB_TOKEN` in Infisical |
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
 | **OpenCode Zen** | Big Pickle model LLM | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
-| **Llama 3.2 (local)** | — | Ollama on the Mac (`localhost:11434`, free fallback) | — (runs locally) |
+| **Llama 3.2 (local)** | — | Ollama on the computer (`localhost:11434`, free fallback) | — (runs locally) |
 
 ---
 

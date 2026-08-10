@@ -155,10 +155,10 @@ rejected, and why. This complements the private session log (what was done, kept
 **Decision: remove the desktop GUI entirely, not just disable it.**
 - Chosen: purge everything — `lightdm`, `lightdm-gtk-greeter`, `light-locker`, `xrdp`, `xorgxrdp`, `xfce4`, `xfce4-goodies`, `google-chrome-stable`, `opencode` (OpenCode Desktop) — plus `apt autoremove --purge` (343 orphaned packages). Only harmless library leftovers remain.
 - Why: the plan already called for removing the GUI first in Phase 2 to free RAM for Docker; a live RDP session kept disconnecting, and the user chose to go all-in now rather than keep a half-working GUI. RAM dropped to ~457 MB used, ~1.5 GB freed.
-- Decided against: keeping Xfce "just in case" or re-adding RDP. Any future GUI task happens on the Mac.
+- Decided against: keeping Xfce "just in case" or re-adding RDP. Any future GUI task happens on the computer.
 
 **Decision: RDP is obsolete.**
-- The loopback xrdp + SSH tunnel + Windows App setup was deliberately destroyed with the purge. Do not re-propose it. Remote GUI work, if ever needed, runs on the Mac (VS Code remote, opencode TUI/web).
+- The loopback xrdp + SSH tunnel + Windows App setup was deliberately destroyed with the purge. Do not re-propose it. Remote GUI work, if ever needed, runs on the computer (VS Code remote, opencode TUI/web).
 
 ---
 
