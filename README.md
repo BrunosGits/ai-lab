@@ -17,7 +17,7 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 - `rescue-drill.md` — rescue-mode runbook (tested 2026-08-06)
 - `assets/` — project beaker icon (SVG + PNG exports, favicon)
 - `hello/` — FastAPI "hello" app, first run as a systemd unit (Phase 1.5), to be containerized in Phase 3
-- `scripts/` — tools: Rust time tracker (`time-tracker/`, Rust rewrite of the original Python) and the original Python reference (`time-tracker.py`)
+- `scripts/` — tools: Rust time tracker (`time-tracker/`, Rust rewrite of the original Python), the original Python reference (`time-tracker.py`), and `fluxo-mensagens/` (converts an unreadable Miro-export flowchart PDF into a readable interactive HTML and multi-page PDF)
 - `.opencode/` — opencode config, including the `/end-session` command
 - `print.css` + `ai-lab-summary.pdf` — printable PDF of the plan
 
