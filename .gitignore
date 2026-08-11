@@ -1,6 +1,11 @@
 # macOS
 .DS_Store
 
+# opencode (local only, never published)
+.opencode/
+opencode.json
+AGENTS.md
+
 # Python
 __pycache__/
 *.py[cod]
