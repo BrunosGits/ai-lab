@@ -147,9 +147,9 @@ rejected, and why. This complements the private session log (what was done, kept
 
 ## 2026-08-07 - The box gains a second job
 
-**Decision: the VPS doubles as the espanso+ Linux build box.**
-- Considered: keeping espanso+ builds on GitHub CI only
-- Chosen: full linux-x11 toolchain on the server, swap doubled to 4G, read-only clone at `~/espanso-plus`
+**Decision: the VPS doubles as the expandir Linux build box.**
+- Considered: keeping expandir builds on GitHub CI only
+- Chosen: full linux-x11 toolchain on the server, swap doubled to 4G, read-only clone at `~/espanso-plus` (the folder kept the old name after the fork rebranded from espanso-plus to expandir)
 - Why: a real Debian 13 box matching the CI job, heavy builds and tests run there for free, and the fork gains a second copy of its code
 - Status: first release build green in 5m 36s. The box stayed headless, no display manager came back with the libraries
 

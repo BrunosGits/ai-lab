@@ -20,7 +20,7 @@ CONF_FILE="${TRELLO_CONF:-$HOME/.config/ai-lab/trello.conf}"
 
 BOARD_NAME="Personal Kanban"
 LIST_NAMES=("[ai-lab]")
-LABEL_PROJECTS=(ai-lab espanso-plus opensearch)
+LABEL_PROJECTS=(ai-lab expandir opensearch)
 LABEL_COLORS=(blue green orange)
 CARD_PREFIX="ai-lab"
 

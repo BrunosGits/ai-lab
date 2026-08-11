@@ -8,7 +8,7 @@ Logged the day they are earned, usually by the `/end-session` command.
 ## 2026-08-07: Quickdraw
 
 **Earned:** opened a pull request within 5 minutes of the commit that resolved it
-(PR #1 on the espanso+ fork, the search window feature).
+(PR #1 on the expandir fork, the search window feature, back when the fork was still named espanso-plus).
 
 **Mood:** fast out of the gate on the very first day.
 
