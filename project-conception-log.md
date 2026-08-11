@@ -6,6 +6,21 @@ rejected, and why. This complements the private session log (what was done, kept
 
 ---
 
+## 2026-08-11 - OpenSearch issue 6323 reproduction
+
+**Decision: reproduce issue 6323 on the VPS with two OpenSearch versions before writing any fix.**
+- Why: the reporter and the maintainers asked for a minimal reproduction first, and the issue is two years old with no repro on record
+- Chosen: two single-node OpenSearch containers from the official image, 2.3.0 (the reported version) and 2.19.6 (current), running side by side on the VPS
+- Status: done, both clusters came up green and the environment stays up for a follow-up
+
+**Decision: publish the negative result and ask for the original script, rather than guess a fix.**
+- Considered: keep digging indefinitely, or post the finding and pivot to another issue right away
+- Chosen: an exhaustive sweep first (storage, local reindex, ingest pipeline, special characters, multibyte around the 2000 byte mark, remote reindex, plus a code scan for truncation limits), then a public comment with the evidence and a request for the reporter's exact script
+- Why: the truncation does not reproduce anywhere, and the reported error message only fires when a long string is used as a field name, which points at the reporter's pipeline rather than at the server
+- Status: comment posted on issue 6323, awaiting the reporter's script
+
+---
+
 ## 2026-08-10 - The fork rebrands to expandir
 
 **Decision: the fork drops the name espanso+ and becomes expandir.**

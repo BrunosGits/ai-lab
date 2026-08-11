@@ -7,6 +7,20 @@ appended. This is not the session log (that's the private session log, kept loca
 
 ---
 
+## 2026-08-11: The bug that refused to reproduce
+
+**Mood:** methodical, then satisfied when the evidence added up
+
+**Story:** The reported OpenSearch bug said strings longer than 2000 chars get cut off, and before writing any fix I wanted to reproduce it, which is what I promised in the issue thread. Docker was already on the server, so I ran two OpenSearch versions side by side, 2.3.0 which is the version in the report and 2.19.6 which is current. Then I threw everything I could at the reindex API. Strings from 1980 to 20000 chars, plain copies, scripts that rebuild the whole source, an ingest pipeline with a script step, strings stuffed with quotes and backslashes, multibyte characters right at the 2000 mark, even a reindex from one version to the other. Every single value came back identical. Then I read the mapper source and found the exact error the reporter saw, it fires when a field name has dotted segments that leave an empty part. I reproduced that message verbatim by putting a long string into a key position. The cutoff does not exist in vanilla OpenSearch. What happens is a long string landing where a field name should be, and the dots in it get read as object separators.
+
+**What I learned:** A bug report can be honest and still not reproduce. The stored value was never truncated, the reporter's own script read back all 4396 chars. I got furthest by reading the code that throws the error instead of guessing at the data. A negative result, written up carefully, is still progress for the issue thread.
+
+**Feelings / notes:** It was deflating to sweep 20000 characters across two versions and find nothing. Then it became quiet satisfaction when the code told me exactly where the error comes from. I posted the findings and asked for the original script, because the trigger is probably in the reporter's pipeline, not in the server.
+
+**Did:** verified the server can run OpenSearch, ran 2.3.0 and 2.19.6 as containers, reproduced nothing across storage, reindex, pipelines and remote reindex, pinned the error to field-name validation, posted the evidence on issue 6323 and asked for the original script, updated the contribution plan and the Trello board.
+
+---
+
 ## 2026-08-10: Docker is finally in
 
 **Mood:** accomplished, then humbled by a package conflict
