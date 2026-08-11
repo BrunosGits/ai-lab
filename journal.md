@@ -3,7 +3,7 @@
 Personal diary of the AI Lab project: memories, feelings, stories. One entry per day,
 appended. This is not the session log (that's the private session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on the project: 11h 06m</b></p>
+<p align="right"><b>Total time on the project: 11h 47m</b></p>
 
 ---
 
@@ -18,6 +18,35 @@ appended. This is not the session log (that's the private session log, kept loca
 **Feelings / notes:** Docker was the reason the GUI had to go, so today closed a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten.
 
 **Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
+
+---
+
+## 2026-08-10: The fork got a name
+
+**Mood:** settled, quietly proud
+
+**Story:** For three days my fork was called espanso+, a name I borrowed without thinking.
+Today I released the first build under that name, and only then stopped to ask what the plus
+meant. It read like an official premium edition, a thing the espanso team might be selling.
+I wanted none of that, so the fork became expandir, the Portuguese verb for to expand, a
+name that says what the tool does and belongs to no one else's brand. The rename went all
+the way through: the repo, the binary, the config folder, the docs, and every reference to
+the fork in this project. A release workflow went out first under the old name, then a
+fresh tag carried the new one. The best part was watching all my triggers load into the
+renamed app without losing a single one.
+
+**What I learned:** GPL gives you the code, but never the name, and borrowing a brand makes
+a side project read like a product. Renaming a running tool is survivable when the data and
+the code move together and the docs follow in the same pass.
+
+**Feelings / notes:** It stopped being a fork in the abstract and became a thing I maintain.
+There is a small joy in watching my own list load into a program that carries a name I
+chose. Two entries share today, the Docker one and this one, and both feel like progress.
+
+**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config path and
+docs, published a release workflow with a first tag under the old name followed by a fresh
+expandir tag, kept every match and trigger intact, updated this project's build box
+references and the achievements note, and closed the tracker with the extra minutes.
 
 ---
 

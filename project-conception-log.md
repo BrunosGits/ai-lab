@@ -6,6 +6,18 @@ rejected, and why. This complements the private session log (what was done, kept
 
 ---
 
+## 2026-08-10 - The fork rebrands to expandir
+
+**Decision: the fork drops the name espanso+ and becomes expandir.**
+- Why: espanso+ sounded like an official premium or paid edition of espanso, and it is neither. GPL grants no trademark rights, so the borrowed brand had to go.
+- Chosen: GitHub repo renamed `espanso-plus` to `expandir`, binary renamed, config path moved to a new folder, docs and references updated everywhere. Rust crate names stay `espanso-*` so upstream merges stay easy.
+- Status: applied. All matches and triggers carried over intact. A release workflow now publishes binaries from tags, the first tag went out as `v0.1.0-espanso-plus` before the rename, a fresh `v0.1.0-expandir` tag followed.
+
+**Decision: this repo's expandir references follow the rename.**
+- Chosen: the Trello project label and list migrate from `[espanso-plus]` to `[expandir]` on the next sync, the achievements note and conception log text updated, and the VPS build box stays in service under the new name with the `~/espanso-plus` folder keeping its old path.
+
+---
+
 ## 2026-08-10 — Docker in, UFW out, git over SSH
 
 **Decision: host firewall moves from ufw to pure iptables.**
