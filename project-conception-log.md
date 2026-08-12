@@ -21,6 +21,17 @@ rejected, and why. This complements the private session log (what was done, kept
 
 ---
 
+## 2026-08-11 - First contribution target: CorsixTH
+
+**Decision: the next open-source contribution is a bugfix PR to CorsixTH, the open-source Theme Hospital reimplementation.**
+- Why: the game logic is mostly Lua with a C++ engine, the project has an open "Good First Issue" list, and the game data requirement is satisfiable with the free, legal Theme Hospital demo, so no game purchase is needed
+- Chosen setup: two machines with split jobs. The Mac owns playing, reproducing visual/gameplay bugs and verifying fixes. The VPS owns the developer loop: clone, build, tests, static analysis, git operations, CI-like testing
+- Demo: the official demo at `https://th.corsix.org/Demo.zip`, hosted by the CorsixTH project (freely distributed demo of the 1997 Bullfrog game, not abandonware piracy)
+- Planned path: demo on Mac -> CorsixTH installed (Homebrew) -> game running with demo data -> fork CorsixTH -> pick a small open bug -> reproduce with the demo -> investigate the Lua/C++ code -> write fix -> build and test on the VPS -> verify in game on the Mac -> open PR
+- Status: in progress, first target is getting the demo running on the Mac
+
+---
+
 ## 2026-08-10 - The fork rebrands to expandir
 
 **Decision: the fork drops the name espanso+ and becomes expandir.**
