@@ -293,7 +293,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **OpenCode Zen** | Big Pickle model LLM | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
 | **OpenRouter** | Qwen 3.8 model | API key (dashboard → Keys) | `/openrouter/mac key` in Infisical |
 | **Trello** | — | API key + secret + token (Power-Ups → API) | `/trello/*` in Infisical |
-| **NVIDIA Nemotron 3 Ultra** | NVIDIA Build/NVIDIA API | `nvapi-*` API key | `/nvidia/API key` in Infisical |
+| **NVIDIA** | Nemotron 3 Ultra model | `nvapi-*` API key | `/nvidia/API key` in Infisical |
 
 ---
 
