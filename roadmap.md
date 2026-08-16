@@ -93,7 +93,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] PostgreSQL via apt installed (→ single PG 17 container in Phase 3, apt cluster dropped)
 - [x] FastAPI "hello" as systemd unit + gunicorn
 - [x] journalctl / systemctl mastered
-- [ ] app containerized in Phase 3 (same app)
+- [x] app containerized in Phase 3 (same app)
 
 ### Commands learned — Phase 1.5
 
@@ -158,13 +158,40 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 3 — Slim Stack (only what's studied now)
 
-- [ ] DNS plan: sslip.io/nip.io for tests → custom ~$10/yr domain before going public
-- [ ] PostgreSQL 17 container (matching apt version, apt cluster dropped)
-- [ ] Caddy reverse proxy (only 80/443 published)
-- [ ] pinned image tags · restart: unless-stopped
-- [ ] internal-only network (nothing else exposed)
-- [ ] Systemd FastAPI moved into container
-- [ ] Secrets via Infisical: `infisical run -- docker compose up -d` (no .env on server)
+- [x] DNS plan: sslip.io test domain live (`<vps-ip>.sslip.io`) · custom ~$10/yr domain later, before going public
+- [x] PostgreSQL 17 container (`postgres:17.11`, matching apt version, apt cluster dropped)
+- [x] Caddy reverse proxy (`:80` over HTTP, reverse_proxy → hello:8000)
+- [x] pinned image tags (`caddy:2.11.4` · `postgres:17.11` · `hello:0.1.0`) · restart: unless-stopped
+- [x] internal-only network (`backend` internal: true, nothing else exposed)
+- [x] Systemd FastAPI moved into container
+- [x] Secrets via Infisical: `infisical run -- docker compose up -d` (no .env on server)
+
+> **Done 2026-08-16.** The stack runs as `ai-lab-caddy`, `ai-lab-hello`, `ai-lab-postgres` (healthy, internal-only).
+> Caddyfile serves `{$CADDY_DOMAIN}` and reverse-proxies to `hello:8000`. Secrets for `/caddy` and `/postgres`
+> live in Infisical, injected with a machine-identity token. The DOCKER-USER chain now accepts NEW inbound
+> tcp 80/443, which is what makes published ports reachable from outside. The OVH edge firewall was already
+> correct, the real blocker was the FORWARD path in DOCKER-USER. Verified externally: `http://<vps-ip>.sslip.io/`
+> → `{"message":"hello from docker compose"}`, port 5432 stays closed, SSH intact.
+
+### Commands learned — Phase 3
+
+**Infisical at runtime**
+- `infisical secrets set KEY=value --projectId <id> --env prod --path /caddy --type shared` — store a secret (used for CADDY_DOMAIN, POSTGRES_USER/PASSWORD/DB)
+- `infisical run --projectId <id> --env prod --path /caddy --path /postgres -- docker compose up -d` — inject secrets, then bring up the stack, no .env on disk
+- Machine identity: Universal-auth client-id + secret → `INFISICAL_TOKEN`. Scope must be `prod:/**` (a `prod:/`-only token reads nothing)
+
+**Compose**
+- `docker compose up -d --build` · `docker compose ps` · `docker compose logs -f <svc>` · `docker compose down`
+- network `backend` is `internal: true` → postgres has no host access and is unreachable from outside
+- healthcheck: `pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB`
+
+**Firewall (DOCKER-USER)**
+- `sudo iptables -L DOCKER-USER -n -v` — inspect the chain
+- `sudo iptables -A DOCKER-USER -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN` — allow return traffic
+- `sudo iptables -A DOCKER-USER -p tcp --dport 80 -j ACCEPT` (and 443) — accept NEW inbound to published ports
+- keep `-i docker0 -j RETURN` and `-i br-+ -j RETURN` for container egress, drop everything else
+- `sudo netfilter-persistent save` — persist across reboots
+- Lesson: published ports travel the FORWARD path (DOCKER-USER), so host INPUT rules never see them
 
 ### Phase 4 — Backup & Resume
 
