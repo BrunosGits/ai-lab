@@ -284,13 +284,15 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 
 | Service | Account | Login method | Where the key lives |
 |---|---|---|---|
-| **OVH** | VPS-1 | Direct login (web) — dashboard + emailed root password | — (root password removed from Infisical) |
-| **Infisical** | mac-cli machine identity | Universal-auth (client-id + secret) → `INFISICAL_TOKEN` in `~/.zshrc` | Infisical itself |
+| **OVH** | VPS-1 | Direct login (web) — dashboard + emailed root password | `/vps/New secret` (root) in Infisical |
+| **Infisical** | mac-cli machine identity | Universal-auth (client-id + secret) → `INFISICAL_TOKEN` in `~/.profile` | Infisical itself |
 | **VPS (SSH)** | `<user>` | Key auth (`~/.ssh/id_ed25519`) · passwordless sudo | key on computer + server |
 | **GitHub** | `BrunosGits` | SSH key auth for `git push` (`~/.ssh/id_ed25519_github`, via `~/.ssh/config`) · `gh` CLI (keyring) | key on computer, public key on GitHub |
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
 | **OpenCode Zen** | Big Pickle model LLM | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
+| **OpenRouter** | — | API key (dashboard → Keys) | `/openrouter/mac key` in Infisical |
+| **Trello** | — | API key + secret + token (Power-Ups → API) | `/trello/*` in Infisical |
 | **NVIDIA Nemotron 3 Ultra** | NVIDIA Build/NVIDIA API | `nvapi-*` API key | `/nvidia/API key` in Infisical |
 
 ---
