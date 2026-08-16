@@ -75,6 +75,16 @@ This document is the master plan for contributing to [OpenSearch](https://github
 ### #21323 — Lucene stderr warnings (watching) 👀
 - PR #21359 stalled in review — monitor only, do not duplicate
 
+### #22676 — LATE_MATERIALIZATION profile metrics (analytics engine) 🟡
+- [ ] PR #22676: emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`
+- [ ] Root cause: LM stage fetch-by-row-ids path missing metrics extraction
+- [ ] Rust: clone physical plan, attach to `QueryStreamHandle`
+- [ ] Java: add `profile` flag to `FetchByRowIdsRequest`, extract metrics on stream complete, per-shard storage in `StageTask`
+- [ ] Integration test `LateMaterializationProfileIT` added (asserts LM tasks return both fields)
+- [ ] sandbox-check failing: test `testLateMaterializationProfileReturnsPhysicalPlan` gets CANCELLED (shared-cluster flake suspected)
+- [ ] codecov 80% (passes 71.43% gate), 1 partial on `||` operand
+- [ ] Next: diagnose sandbox-check (isolate test / harden assertion), request maintainer review
+
 ---
 
 ## 🧩 Follow-ups discovered
@@ -92,19 +102,6 @@ Find → Claim → Reproduce → Root-cause → Fix → Test → Comment → PR 
 ```
 
 Small issues get claimed within days. Claim fast and be ready to reproduce fast. Always check for an existing PR before commenting.
-
----
-
-## 🕐 Sessions
-
-| Date | Start | End | Hours | Work |
-|---|---|---|---|---|
-| 2026-08-07 | 22:14 | 23:02 | 0.81 | Project start, issue hunt, claimed #6323 + #17561 |
-| 2026-08-11 | 09:34 | 10:11 | 0.62 | #6323 sweep on 2.3.0 + 2.19.6 |
-| 2026-08-13 | 09:22 | 10:08 | 0.78 | #22654 codecov gap, WLM tests |
-| 2026-08-13 | 20:30 | 23:58 | 3.47 | #6323 repro posted, #17561 fix + e2e, #22494 mapped |
-
-**Total:** 4 sessions · 5h 40m
 
 ---
 
