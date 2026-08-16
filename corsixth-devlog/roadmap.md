@@ -63,13 +63,29 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [ ] PR #3501 maintainer review
 - [ ] Appveyor check — may need to pin the owner if it stays stuck
 
+### #3372 — Properly destroy entities on pickup again 🚧
+- [x] Root cause: #3304 stopped destroying on pickup (object made invisible + kept in `world.entities`), which leaked duplicates → save corruption #3376, patched by band-aid #3370 (`table_contains` guards)
+- [x] Approach selected: snapshot-and-destroy with tile reservation
+  - Capture move snapshot (`object_type`, `tile_x`, `tile_y`, `direction`, `room_ref`, slave, machine/plant state) at pickup, then `destroyEntity` (safe via #1467 deferred machinery)
+  - Reserve source footprint tiles during the place window; release on place/cancel/sell/close
+  - Recreate from snapshot on place or Esc-cancel; refund on sell
+  - Unify corridor + room-edit paths (room-edit already destroys today)
+  - Remove both `table_contains` band-aids after confirming no other dependency
+- [ ] Implement commit 1: object move snapshot/restore helpers
+- [ ] Implement commit 2: destroy on pickup with tile reservation
+- [ ] Implement commit 3: unify corridor and room-edit pickup paths
+- [ ] Implement commit 4: remove `table_contains` duplicate band-aids
+- [ ] Implement commit 5: pickup/place/cancel/sell/save tests + negative control
+- [ ] Verification matrix green (place · Esc-cancel · sell · save-mid-window · negative control)
+- [ ] PR + CI green
+
 ### #2469 — Right mouse panning causes object placement glitches ⏭️
 - [ ] Reproduce headless
 - [ ] Root-cause the pan/placement interaction
 - [ ] Fix + tests + PR
 
 ### #1738 — Handymen do not water plants in the middle of benches (backlog) 🕳️
-- [ ] Claim only after #1467 lands
+- [ ] Claim after #3372 lands
 
 ---
 
