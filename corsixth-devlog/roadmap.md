@@ -116,20 +116,6 @@ Each issue ends with a published PR, a journal entry and a roadmap update. Old i
 
 ---
 
-## 🕐 Sessions
-
-| Date | Start | End | Hours | Work |
-|---|---|---|---|---|
-| 2026-08-11 | 22:03 | 22:26 | 0.38 | VPS setup, fork, build chain |
-| 2026-08-11 | 22:26 | 23:14 | 0.80 | Build SDL3, headless boot, tests |
-| 2026-08-12 | 20:53 | 22:52 | 1.98 | #1793 docs fix + PR #3494, #1467 fix + tests |
-| 2026-08-13 | 20:37 | 23:30 | 2.89 | #1467 negative control, smoke tests, full-data move |
-| 2026-08-16 | 10:00 | 12:00 | 2.00 | Full-data matrix, CI fix, green run |
-
-**Total:** 5 sessions · 8h 03m
-
----
-
 ## 📈 Skills to build along the way
 
 - Reading Lua game logic and the Lua/C++ boundary
