@@ -125,14 +125,3 @@ Each issue ends with a published PR, a journal entry and a roadmap update. Old i
 
 ---
 
-## 💻 Project Facts
-
-| | |
-|---|---|
-| **Project** | CorsixTH — open source reimplementation of Theme Hospital (1997 Bullfrog) |
-| **Game logic** | Lua on a C++ engine (SDL3) |
-| **Started** | 2026-08-11 |
-| **Fork** | `BrunosGits/CorsixTH-1` |
-| **PRs** | #3494 merged · #3501 open |
-| **Dev box** | VPS (Debian 13) — shared with AI Lab |
-| **Demo data** | Legal Theme Hospital demo, on the VPS only |

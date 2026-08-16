@@ -114,13 +114,3 @@ Small issues get claimed within days. Claim fast and be ready to reproduce fast.
 
 ---
 
-## 💻 Project Facts
-
-| | |
-|---|---|
-| **Project** | OpenSearch — open source search engine (Java) |
-| **Started** | 2026-08-07 |
-| **Fork** | `BrunosGits/opensearch-fork` |
-| **Dev box** | VPS (Debian 13) — shared with AI Lab |
-| **Repro** | Docker on the VPS, installed on demand |
-| **Plan B** | #22494 regex automaton cache, author actively working |
