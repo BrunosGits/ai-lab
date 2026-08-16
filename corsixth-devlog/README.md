@@ -13,12 +13,16 @@ open source project actually works.
 The personal journal, per-project time tracker summary and the story of the
 project live in the unified journal at the repo root (`journal.md`).
 
-## Status
+## Progress
 
-- #1793 (broken Lua docs links): fixed, PR #3494 merged by the maintainers
-- #1467 (entities table modified inside an `ipairs` loop): fixed and validated on
-  full game data, PR #3501 open with CI green, awaiting maintainer review
-- Next: #2469 once #1467 lands
+- **#1793** (broken Lua docs links): fixed, PR #3494 merged by the maintainers
+- **#1467** (entities table modified inside an `ipairs` loop): fixed and validated
+  on full game data, PR #3501 open with CI green, awaiting maintainer review
+- **#3372** (properly destroy entities on pickup again): active. Snapshot-and-destroy
+  with tile reservation is designed; reuses the #1467 deferred-destruction machinery.
+  Implementation in progress, nothing pushed yet
+- **#2469** (right-mouse panning glitches) and **#1738** (handymen watering plants
+  in benches): queued after #3372
 
 ## Environment
 
