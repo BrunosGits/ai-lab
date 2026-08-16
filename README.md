@@ -10,7 +10,7 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 
 ## What's here
 
-- `ai-lab-summary.md` — master plan: infrastructure Phases 0–4, a 5-month learning roadmap, backup strategy and a services/access matrix
+-`roadmap.md` — master plan: infrastructure Phases 0–4, a 5-month learning roadmap, backup strategy and a services/access matrix
 - `journal.md` — personal journal, one entry per day
 - `project-conception-log.md` — timeline of every decision, chosen or rejected, and why
 - `achievements.md` — running record of GitHub achievements earned by this account
