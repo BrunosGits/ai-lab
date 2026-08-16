@@ -1,53 +1,136 @@
-# CorsixTH contributions
+# 🎮 CorsixTH Contributions
 
 *First contribution merged · learning a large open source game project* · Started 2026-08-11
 
-Master plan for contributing to [CorsixTH](https://github.com/CorsixTH/CorsixTH).
-The goal is to land real fixes through the issue-first, fork-based workflow and learn how a
-game with Lua game logic on a C++ engine actually works. Every change ships through a fork,
-a PR and maintainer review.
+This document is the master plan for contributing to [CorsixTH](https://github.com/CorsixTH/CorsixTH), the open source reimplementation of the 1997 Bullfrog game Theme Hospital. The goal is to learn how a game with Lua game logic on a C++ engine actually works by doing the work: read the code, reproduce a real issue, fix it, open a PR, respond to maintainer review. Every change ships through a fork, a PR and maintainer review, and each contribution lands a journal entry and a roadmap update.
 
 ---
 
-## Current track
+## 🖥️ Environment & Setup
 
-- [x] Set up the fork and the headless dev box
-  - Built SDL3 3.4.14 + SDL3_mixer 3.2.4 from source into `/opt/SDL3` (Debian 13 ships an SDL2-era mixer)
-  - Game compiles clean, boots headless with the Theme Hospital demo data
-- [x] Fix #1793 (broken Lua docs links)
-  - Root cause: LDocGen never generated a page per source file, only class and index pages
-  - Extended LDocGen to write one page per file; rebuilt docs: 503 pages, 20465 local links, zero broken
-  - PR #3494 merged by the maintainers, closes #1793
-- [x] Fix #1467 (entities table modified inside an `ipairs` loop)
-  - Root cause: `destroyEntity` mid-loop shifts the table, skipping whatever lands in the visited slot
-  - Fix defers destruction until after the loop (`_flushDestroyedEntities`)
-  - Headless repro with three dummies; negative control confirms the guard catches the bug
-  - Old-savegame compat (lazy `entities_to_destroy`) and plant end-of-day branch holes fixed
-  - Validated on full game data: offscreen 3/3, xvfb 3/3, demo control 2/2
-  - 86/86 unit tests green, luacheck clean (297 files)
-  - CI green on LuaJIT, Lua 5.1, Lua 5.5 and Windows
-  - PR #3501 open, waiting for maintainer review
-- [ ] #2469 — right mouse panning causes object placement glitches
-- [ ] #1738 — handymen do not water plants in the middle of benches (backlog)
+- [x] Fork `BrunosGits/CorsixTH-1` (upstream-linked, holds all fix commits)
+- [x] VPS dev box: Debian 13, CMake + Ninja
+- [x] SDL3 3.4.14 + SDL3_mixer 3.2.4 built from source into `/opt/SDL3`
+  - Debian 13 ships an SDL2-era mixer, master moved to SDL3
+- [x] Game compiles clean from master
+- [x] Lua unit tests (busted) green
+- [x] Lint (luacheck) clean
+- [x] Theme Hospital demo data copied to the VPS
+- [x] Dev build boots headless with the demo data
 
----
+### Commands learned — Setup
 
-## Completed
+**Build (SDL3 from source)**
+- `cmake -S . -B build -DCMAKE_INSTALL_PREFIX=/opt/SDL3` — configure SDL3 for `/opt/SDL3`
+- `cmake --build build -j` — build
+- `cmake --install build` — install to prefix
+- `cmake -S . -B build -DCMAKE_PREFIX_PATH=/opt/SDL3` — point the game build at the local SDL3
+- `cmake --build build` — incremental game build
 
-- [x] Fork `BrunosGits/CorsixTH-1` and devlog scaffold
-- [x] VPS dev box: SDL3 built from source, CMake + Ninja build
-- [x] Lua unit tests (busted) and lint (luacheck) green
-- [x] Headless boot with the demo data
-- [x] #1793 root-caused, fixed, PR #3494 merged
-- [x] #1467 root-caused, fixed and validated on full game data
-- [x] smoketest hardened (heartbeat telemetry, intro-movie stop, auto-difficulty, load-only mode)
-- [x] #1467 CI green across all GitHub jobs
+**Tests & lint**
+- `busted` — run the Lua unit test suite (CorsixTH style)
+- `luacheck CorsixTH/Lua` — static analysis, 297 files clean
+- `python3 scripts/check_whitespace.py` — CI whitespace gate (a stray trailing space fails the PR)
+
+**Headless smoke**
+- `SDL_VIDEODRIVER=offscreen ./build/CorsixTH` — render-less video driver
+- `xvfb-run -a ./build/CorsixTH` — virtual display when SDL needs a device
+- `smoketest.lua` env vars: `SMOKE_HEARTBEAT` (JSONL progress telemetry), `SMOKE_LOAD_ONLY` (skip gameplay, probe load)
+- `TheApp.moviePlayer:stop()` — the intro movie blocks `World:onTick`; stop it in tests
 
 ---
 
-## On hold / watching
+## 🐛 Issue Tracks
 
-- PR #3501 (#1467) — maintainer review
-- Appveyor check on PR #3501 — may need to pin the owner if it stays stuck
-- #2469 — next candidate once #1467 lands
-- #1738 — backlog
+### #1793 — Broken Lua docs links on GitHub Pages ✅
+- [x] Root cause: LDocGen generated class and index pages only, never a page per source file, while file-tree links pointed at pages that never existed
+- [x] First theory (GitHub Pages swallowing files) tested and dropped
+- [x] Fix: LDocGen writes one page per file, listing classes and functions, with directory entries as plain text
+- [x] Verified: 503 pages, 20465 local links, zero broken
+- [x] PR #3494 merged by the maintainers — closes #1793
+
+### #1467 — Entities table modified inside an `ipairs` loop 🔄
+- [x] Root cause: `destroyEntity` mid-loop shifts the table, skipping whoever lands in the already-visited slot
+- [x] Fix: defer destruction until after the loop (`to_destroy` + `_flushDestroyedEntities`, `current_tick_entity` marker)
+- [x] Old-savegame compat: `entities_to_destroy` created lazily (deserialiser never re-runs constructors)
+- [x] Plant branch hole: end-of-day loop never set the iterating marker for plants
+- [x] Headless repro: three dummies, the middle destroys the first mid-tick; fails if the third is skipped
+- [x] Negative control: fix disabled → `SMOKE FAIL: dummy C was skipped (the #1467 bug)`
+- [x] Full game data matrix: offscreen 3/3 · xvfb 3/3 · demo control 2/2
+- [x] 86/86 unit tests green, luacheck clean
+- [x] CI green: LuaJIT, Lua 5.1, Lua 5.5, Windows
+- [x] smoketest hardened (heartbeat, intro-movie stop, auto-difficulty, load-only)
+- [ ] PR #3501 maintainer review
+- [ ] Appveyor check — may need to pin the owner if it stays stuck
+
+### #2469 — Right mouse panning causes object placement glitches ⏭️
+- [ ] Reproduce headless
+- [ ] Root-cause the pan/placement interaction
+- [ ] Fix + tests + PR
+
+### #1738 — Handymen do not water plants in the middle of benches (backlog) 🕳️
+- [ ] Claim only after #1467 lands
+
+---
+
+## 🧪 Testing & Validation
+
+| Check | Result |
+|---|---|
+| Unit tests (busted) | 86/86 green |
+| Lint (luacheck) | 297 files, 0 warnings |
+| Demo smoke | 3/3 green |
+| Offscreen (SDL_VIDEODRIVER) | 3/3 green |
+| xvfb | 3/3 green |
+| Demo control | 2/2 green |
+| Negative control (guard disabled) | RED with exact bug message |
+| Headless (no video device) | RED — SDL requires a video device, expected |
+
+**Lesson:** a timeout with no output is usually pipe buffering, not a hang. Add heartbeats, and always check the tick loop is actually running — intro movies, paused states and menu loops silently skip it.
+
+---
+
+## 🔄 Contribution Loop (the habit)
+
+```
+Fork → Reproduce → Root-cause → Fix → Test (+ negative control) → PR → CI green → Journal → Update ROADMAP
+```
+
+Each issue ends with a published PR, a journal entry and a roadmap update. Old issues are worth claiming fast; the ones left are the deep ones.
+
+---
+
+## 🕐 Sessions
+
+| Date | Start | End | Hours | Work |
+|---|---|---|---|---|
+| 2026-08-11 | 22:03 | 22:26 | 0.38 | VPS setup, fork, build chain |
+| 2026-08-11 | 22:26 | 23:14 | 0.80 | Build SDL3, headless boot, tests |
+| 2026-08-12 | 20:53 | 22:52 | 1.98 | #1793 docs fix + PR #3494, #1467 fix + tests |
+| 2026-08-13 | 20:37 | 23:30 | 2.89 | #1467 negative control, smoke tests, full-data move |
+| 2026-08-16 | 10:00 | 12:00 | 2.00 | Full-data matrix, CI fix, green run |
+
+**Total:** 5 sessions · 8h 03m
+
+---
+
+## 📈 Skills to build along the way
+
+- Reading Lua game logic and the Lua/C++ boundary
+- Writing Lua unit tests in the busted style used by CorsixTH
+- Running a CI-like loop on a headless server (heartbeat + negative control)
+- Shipping a real open source contribution through maintainer review
+
+---
+
+## 💻 Project Facts
+
+| | |
+|---|---|
+| **Project** | CorsixTH — open source reimplementation of Theme Hospital (1997 Bullfrog) |
+| **Game logic** | Lua on a C++ engine (SDL3) |
+| **Started** | 2026-08-11 |
+| **Fork** | `BrunosGits/CorsixTH-1` |
+| **PRs** | #3494 merged · #3501 open |
+| **Dev box** | VPS (Debian 13) — shared with AI Lab |
+| **Demo data** | Legal Theme Hospital demo, on the VPS only |

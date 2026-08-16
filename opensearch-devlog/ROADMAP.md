@@ -1,56 +1,129 @@
-# OpenSearch contributions
+# 🔍 OpenSearch Contributions
 
-*First PR · learning a large open source project* · Started 2026-08-07
+*Learning a large open source project* · Started 2026-08-07
 
-Master plan for contributing to [OpenSearch](https://github.com/opensearch-project/OpenSearch).
-The goal is to land real fixes through the issue-first, fork-based workflow and learn how a large
-open source project actually works. Every change ships through a fork, a PR and maintainer review.
+This document is the master plan for contributing to [OpenSearch](https://github.com/opensearch-project/OpenSearch), the open source search engine. The goal is to learn how a large open source project actually works by doing the work: read the code, reproduce a real issue, send a real patch. Every change ships through a fork, a PR and maintainer review, and each contribution lands a journal entry and a roadmap update.
 
 ---
 
-## Current track
-
-- [x] Install Docker on the VPS for reproduction
-- [x] Reproduce #6323 (strings over 2000 chars) on a recent OpenSearch
-  - No truncation found on 2.3.0 or 2.19.6, swept 1980 to 20000 chars, all layers intact
-  - Exact error message reproduced only via long string in a key position (dot expansion)
-  - Findings posted in #6323, waiting on the reporter's original reindex script
-- [x] Fix #17561 (inaccurate  error message)
-  - Commit c135dc26 on fork branch fix/17561-codec-error-message
-  - Unit tests green, e2e verified, pushed to BrunosGits/opensearch-fork
-  - Waiting for maintainer review
-- [ ] Fix #6323 (if maintainer confirms the field-name theory)
-- [ ] Help #22654 (monitor mode workload group rejections)
-  - Codecov gap identified: missing isPresent() == false test
-  - Exact test code posted in PR comment
-  - Waiting for author to apply and codecov to go green
-  - Then request maintainer review
-- [ ] Fallback to #22494 (cache compiled regex automatons) if #6323 and #17561 both fall through
-  - Author pinged with questions, PoC exists, monitoring
-  - Independent code path analysis complete
-- [ ] Document WLM MONITOR mode (zero user-facing docs found)
-- [ ] Fix local scroll bypass in TransportSearchScrollAction (MONITOR guard gap)
-
----
-
-## Completed
+## 🖥️ Environment & Setup
 
 - [x] Project scaffold (repo, journal, time tracker, project log, roadmap)
-- [x] Docker on VPS for reproduction
-- [x] #6323 minimal reproduction posted
-- [x] #17561 fix implemented, tested, pushed
-- [x] #22701 identified as duplicate of merged #22610, commented
-- [x] #22654 codecov gap root-caused, test fix designed and posted
-- [x] #22494 author pinged, code paths mapped
-- [x] WLM integration test gaps documented
-- [x] Local scroll bypass identified
+- [x] Docker on the VPS for reproduction
+- [x] JDK 21 + Gradle build working
+- [x] VPS checkout of `opensearch-fork` kept clean (restore after each session)
+
+### Commands learned — Setup
+
+**Reproduction (Docker)**
+- `docker run` / `docker compose` — OpenSearch containers for issue reproduction
+- Sweep multiple versions: 2.3.0 and 2.19.6, strings 1980 to 20000 chars
+
+**Tests & coverage (Gradle + JDK 21)**
+- `./gradlew :server:test --tests "<FQCN>"` — run a single test class (e.g. `EngineConfigTests`)
+- `./gradlew :test:framework:test --tests "<FQCN>"` — WLM tests, 83 pass
+- `jacoco` report — coverage proof; a `pc` (partially covered) on a `||` line means operand short-circuit, not a real bug
+- Codecov patch target is auto-derived from the project baseline (71.43%), not a fixed 80%
+
+**Git history hygiene**
+- `git filter-repo` — rewrite author identities (the PublishProject cleanup)
+- `git push --force` — update history after the rewrite
+- Lesson: a stale global git identity misattributes commits for weeks
+
+**GitHub coordination**
+- `gh issue comment <n> --body <msg>` — post findings/repros
+- `gh pr comment <n>` — post code suggestions for contributors
+- `gh run watch <id>` — watch CI
 
 ---
 
-## On hold / watching
+## 🐛 Issue Tracks
 
-- #21323 (Lucene stderr warnings) - PR #21359 stalled in review
-- #22494 author PR (monitor and coordinate)
-- #22654 author response (waiting for test fix application)
-- #6323 maintainer response (waiting for confirmation)
-- #17561 maintainer review
+### #6323 — Long strings cut at 2000 characters (2023 bug) 🔄
+- [x] Reproduced on 2.3.0 and 2.19.6 — no truncation exists in vanilla OpenSearch
+- [x] Swept 1980 to 20000 chars, pipelines, remote reindex — all layers intact
+- [x] Exact error message reproduced only via a long string in a key position (dot expansion)
+- [x] Minimal reproduction posted using the reporter's exact string
+- [ ] Maintainer confirmation of the field-name theory
+- [ ] Fix once confirmed
+
+### #17561 — Inaccurate codec error message 🟡
+- [x] Root cause: error message lists hardcoded codecs, not the accepted list
+- [x] Fix: error message derived from the same list validation accepts (built-ins + registered Lucene codecs + aliases, deduped + sorted)
+- [x] Two tests cover it
+- [x] `EngineConfigTests` green on the VPS (JDK 21)
+- [x] e2e verified: `not_a_codec` returns the full list, `best_compression` still works
+- [x] Commit `c135dc26` pushed to `BrunosGits/opensearch-fork`
+- [ ] Maintainer review
+
+### #22654 — MONITOR mode workload group rejections (helping) 🟡
+- [x] PR #22701 confirmed duplicate of merged #22610, commented, closed
+- [x] PR #22654 root-caused: fix correct, codecov/patch at 60% (target auto 71.43%)
+- [x] Coverage gap: missing `isPresent() == false` branch in `rejectIfNeeded`
+- [x] Minimal test designed, 83 WLM tests green on VPS
+- [x] jacoco report proves line 274 fully covered (80%)
+- [x] Humanized comment posted with the exact test code
+- [ ] Author applies the test, codecov goes green
+- [ ] Request maintainer review
+
+### #22494 — Cache compiled regex automatons (plan B) 🕳️
+- [x] Author ZiwenWan pinged — production-tested PoC exists, strong latency numbers
+- [x] Code paths mapped: `RegexpQuery`, `AutomatonQuery`, `KeywordFieldMapper` + cache API
+- [x] Strategy: monitor and coordinate, do not duplicate
+- [ ] Author opens PR, review/help as needed
+
+### #21323 — Lucene stderr warnings (watching) 👀
+- PR #21359 stalled in review — monitor only, do not duplicate
+
+---
+
+## 🧩 Follow-ups discovered
+
+- [ ] WLM MONITOR mode has zero user-facing docs — two confusing monitor concepts (`WlmMode.MONITOR_ONLY` vs `ResiliencyMode.MONITOR`)
+- [ ] Local scroll requests bypass the transport interceptor and listener — MONITOR guard not hit there
+- [ ] Integration test gaps for the MONITOR behavior documented
+
+---
+
+## 🔄 Contribution Loop (the habit)
+
+```
+Find → Claim → Reproduce → Root-cause → Fix → Test → Comment → PR → Journal → Update ROADMAP
+```
+
+Small issues get claimed within days. Claim fast and be ready to reproduce fast. Always check for an existing PR before commenting.
+
+---
+
+## 🕐 Sessions
+
+| Date | Start | End | Hours | Work |
+|---|---|---|---|---|
+| 2026-08-07 | 22:14 | 23:02 | 0.81 | Project start, issue hunt, claimed #6323 + #17561 |
+| 2026-08-11 | 09:34 | 10:11 | 0.62 | #6323 sweep on 2.3.0 + 2.19.6 |
+| 2026-08-13 | 09:22 | 10:08 | 0.78 | #22654 codecov gap, WLM tests |
+| 2026-08-13 | 20:30 | 23:58 | 3.47 | #6323 repro posted, #17561 fix + e2e, #22494 mapped |
+
+**Total:** 4 sessions · 5h 40m
+
+---
+
+## 📈 Skills to build along the way
+
+- Reading a large Java codebase (server, plugins, test framework)
+- Reproducing issues across versions with Docker
+- Writing coverage-proof unit tests and reading jacoco/codecov
+- Coordinating with third-party contributors and maintainers
+
+---
+
+## 💻 Project Facts
+
+| | |
+|---|---|
+| **Project** | OpenSearch — open source search engine (Java) |
+| **Started** | 2026-08-07 |
+| **Fork** | `BrunosGits/opensearch-fork` |
+| **Dev box** | VPS (Debian 13) — shared with AI Lab |
+| **Repro** | Docker on the VPS, installed on demand |
+| **Plan B** | #22494 regex automaton cache, author actively working |
