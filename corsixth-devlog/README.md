@@ -1,30 +1,31 @@
-# CorsixTH Contribution Devlog
+# CorsixTH Contributions
 
-The working notes of a first open source contribution. Target: CorsixTH, the
-open source reimplementation of the 1997 Bullfrog game Theme Hospital. The game
-logic is mostly Lua on a C++ engine, which makes it a good place to learn both.
-
-This folder lives inside the CorsixTH fork (`BrunosGits/CorsixTH`) so the code
-and the story of writing it stay together. It keeps the journal, decision log, plan and a time tracker all in one place.
-
-## Machine split
-
-- **The VPS** is the workspace. It holds the fork, the build, the tests and the
-  legal Theme Hospital demo data. Everything that needs a terminal happens here.
-- **The computer** only ever SSHes into the VPS. It no longer runs the game,
-  the demo or any CorsixTH install.
+A record of my journey contributing to CorsixTH, the open source reimplementation
+of the 1997 Bullfrog game Theme Hospital: understanding a codebase with Lua game
+logic on a C++ engine, finding issues, sending patches and learning how a large
+open source project actually works.
 
 ## What's here
 
-- `journal.md` — personal journal, one entry per day
-- `project-conception-log.md` — every decision, chosen or rejected, and why
-- `roadmap.md` — the roadmap for the first contribution
-- `scripts/time-tracker/` — the Rust time tracker used for this project
+- `roadmap.md`: master plan of open tasks
+- `README.md`: this file
 
-`time-tracker.json` and `session-log.md` are private and stay off git.
+The personal journal, per-project time tracker summary and the story of the
+project live in the unified journal at the repo root (`journal.md`).
 
 ## Status
 
-- Setup is done: fork created, VPS build environment working, demo data in
-  place, dev build boots headless, unit tests green.
-- Next: pick a small open bug, reproduce it, fix it, open a PR.
+- #1793 (broken Lua docs links): fixed, PR #3494 merged by the maintainers
+- #1467 (entities table modified inside an `ipairs` loop): fixed and validated on
+  full game data, PR #3501 open with CI green, awaiting maintainer review
+- Next: #2469 once #1467 lands
+
+## Environment
+
+Building, unit tests and smoke runs happen on the VPS with the legal Theme
+Hospital demo data. The VPS address, login name and key are private and never
+appear in this repo.
+
+## License
+
+MIT
