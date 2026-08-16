@@ -1,41 +1,210 @@
 # Journal
 
-Personal diary of the AI Lab project: memories, feelings, stories. One entry per day,
-appended. This is not the session log (that's the private session log, kept local, for times/commands/verdicts).
+Personal diary of the AI Lab projects: memories, feelings, stories.
+One entry per day, newest first. This is not the session log (that's the private
+session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on the project: 12h 35m</b></p>
-
----
-
-## 2026-08-11: The bug that refused to reproduce
-
-**Mood:** methodical, then satisfied when the evidence added up
-
-**Story:** The reported OpenSearch bug said strings longer than 2000 chars get cut off, and before writing any fix I wanted to reproduce it, which is what I promised in the issue thread. Docker was already on the server, so I ran two OpenSearch versions side by side, 2.3.0 which is the version in the report and 2.19.6 which is current. Then I threw everything I could at the reindex API. Strings from 1980 to 20000 chars, plain copies, scripts that rebuild the whole source, an ingest pipeline with a script step, strings stuffed with quotes and backslashes, multibyte characters right at the 2000 mark, even a reindex from one version to the other. Every single value came back identical. Then I read the mapper source and found the exact error the reporter saw, it fires when a field name has dotted segments that leave an empty part. I reproduced that message verbatim by putting a long string into a key position. The cutoff does not exist in vanilla OpenSearch. What happens is a long string landing where a field name should be, and the dots in it get read as object separators.
-
-**What I learned:** A bug report can be honest and still not reproduce. The stored value was never truncated, the reporter's own script read back all 4396 chars. I got furthest by reading the code that throws the error instead of guessing at the data. A negative result, written up carefully, is still progress for the issue thread.
-
-**Feelings / notes:** It was deflating to sweep 20000 characters across two versions and find nothing. Then it became quiet satisfaction when the code told me exactly where the error comes from. I posted the findings and asked for the original script, because the trigger is probably in the reporter's pipeline, not in the server.
-
-**Did:** verified the server can run OpenSearch, ran 2.3.0 and 2.19.6 as containers, reproduced nothing across storage, reindex, pipelines and remote reindex, pinned the error to field-name validation, posted the evidence on issue 6323 and asked for the original script, updated the contribution plan and the Trello board.
+<p align="right"><b>Total time on all projects: 26h 29m</b></p>
 
 ---
 
-## 2026-08-10: Docker is finally in
+## Time Tracker Summary
 
-**Mood:** accomplished, then humbled by a package conflict
-
-**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself, so I rebuilt the firewall by hand in iptables, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
-
-**What I learned:** Tools remove their rivals quietly, nothing in the install output said ufw was going. A reboot is the only honest test of persistence, and separate keys per service mean a revoke on one never touches the other.
-
-**Feelings / notes:** Docker was the reason the GUI had to go, so today closed a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten.
-
-**Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
+| Project | Sessions | Total Hours |
+|---------|----------|-------------|
+| AI Lab | 7 | 12.58h |
+| CorsixTH | 5 | 8.05h |
+| OpenSearch | 4 | 5.66h |
+| **Total** | **16** | **26.29h** |
 
 ---
 
-## 2026-08-10: The fork got a name
+## Time Tracker Details by Project
+
+### [AI Lab] Time Tracker
+| Date | Start | End | Hours | Project |
+|------|-------|-----|-------|---------|
+| 2026-08-04 | 22:03:19 | 22:25:58 | 0.38 | AI Lab |
+| 2026-08-04 | 22:25:58 | 23:13:58 | 0.80 | AI Lab |
+| 2026-08-05 | 22:03:19 | 22:25:58 | 0.38 | AI Lab |
+| 2026-08-05 | 22:25:58 | 23:13:58 | 0.80 | AI Lab |
+| 2026-08-06 | 20:53:00 | 22:52:02 | 1.98 | AI Lab |
+| 2026-08-07 | 22:13:39 | 23:02:01 | 0.81 | OpenSearch |
+| 2026-08-11 | 09:33:54 | 10:10:48 | 0.62 | OpenSearch |
+| 2026-08-11 | 22:03:19 | 22:25:58 | 0.38 | CorsixTH |
+| 2026-08-11 | 22:25:58 | 23:13:58 | 0.80 | CorsixTH |
+| 2026-08-11 | 20:53:00 | 22:52:02 | 1.98 | AI Lab |
+| 2026-08-12 | 20:53:00 | 22:52:02 | 1.98 | CorsixTH |
+| 2026-08-13 | 09:21:35 | 10:08:07 | 0.78 | OpenSearch |
+| 2026-08-13 | 20:30:00 | 23:58:00 | 3.47 | OpenSearch |
+| 2026-08-13 | 20:36:53 | 23:30:00 | 2.89 | CorsixTH |
+| 2026-08-16 | 10:00:00 | 12:00:00 | 2.00 | CorsixTH |
+
+---
+
+## Journal Entries
+
+---
+
+### [CorsixTH] 2026-08-16: The fix that held, and the movie that blocked the test
+
+**Mood:** quiet satisfaction, with a side of of course it was the intro movie
+
+**Story:** The deferred-destruction fix for #1467 was solid, negative control failed exactly as expected when the guard was disabled, but the full-game smoke test timed out at 500s with zero output. Pipe buffering hid all progress. The real culprit: full game data autoplays the intro movie (moviePlayer.playing=true), which blocks World:onTick entirely. A one-line TheApp.moviePlayer:stop() in the smoketest unblocked everything.
+
+Full matrix: offscreen (3/3), xvfb (3/3), demo control (2/2) all green. luacheck clean (297 files). 86/86 unit tests pass. The fix is complete and validated on full game data.
+
+**What I learned:** A timeout with no output is usually pipe buffering, not a hang. Add heartbeats. And always check whether the game is actually running its tick loop — intro movies, paused states, and menu loops will silently skip it.
+
+**Feelings:** The negative control failing on cue (dummy C was skipped) is still the best confirmation a fix works.
+
+**Did:** validated the #1467 deferred-destruction fix on full game data (offscreen, xvfb, demo), fixed smoketest intro-movie blocker, added JSONL heartbeat telemetry, full matrix pass, luacheck + 86 unit tests green, negative control confirmed.
+
+---
+
+### [OpenSearch] 2026-08-13 (session 1)
+
+**Mood:** Productive. Good rhythm between investigation and collaboration.
+
+**Story:** Worked on the opensearch contribution project. First, investigated PR #22701 (read block auto-release) — found it's a duplicate of already-merged #22610, posted a comment explaining this, and closed that path.
+
+Then moved to PR #22654 (monitor mode workload group rejections). The PR fixes a bug where MONITOR mode workload groups were incorrectly rejecting requests with 429. The fix was correct but codecov/patch failed at 60% (target 80%).
+
+Investigated deeply with subagents: confirmed the coverage gap (one missing branch isPresent() == false in rejectIfNeeded), designed a minimal test to cover it, ran 83 WLM tests on the VPS (all pass), generated a jacoco report proving the test flips line 274 to fully covered (80%, clearing the 71.43% auto target), and posted a humanized comment with the exact test code for the author.
+
+Also discovered a bypass: local scroll requests skip both the transport interceptor and the listener, so MONITOR guard isn't hit there. And WLM has zero user-facing docs (two confusing monitor concepts). Filed those as follow-ups.
+
+Waited for author response on the test fix.
+
+**What I learned:** Codecov patch target is auto-derived from project baseline (71.43% here), not a fixed 80%. Jacoco pc (partially covered) on a line with || means operand short-circuit, not a real bug. The WLM monitor terminology is overloaded: WlmMode.MONITOR_ONLY (cluster default) vs ResiliencyMode.MONITOR (group setting) — users can't discover this without docs. Subagent parallel investigation is powerful for covering multiple angles fast.
+
+**Feelings / notes:** Good session. The investigation-to-action loop worked: find gap, design fix, verify locally, comment with exact code. The author (SaiManas2106) has been responsive on their other PRs, so likely they'll apply the test and get green.
+
+**Did:** Analyzed PR #22701, confirmed duplicate of #22610, posted comment. Analyzed PR #22654, root-caused codecov 60% gap. Ran 83 WLM unit tests on VPS (all pass). Generated jacoco coverage report, verified 4/5 lines = 80%. Drafted and posted humanized PR comment with exact test fix. Investigated integration test gaps, interceptor bypass, cancellation consistency, doc gaps, related issues. Restored VPS checkout to clean state.
+
+---
+
+### [OpenSearch] 2026-08-13 (session 2): Issue updates and fixes committed
+
+**Mood:** focused, satisfied with the double progress
+
+**Story:** Today two tracked issues moved forward. For #6323 I posted a minimal reproduction using the reporter's exact string: the 138-char dotted key fails identically via direct PUT and painless reindex promotion, and short keys like .start and a..b fail the same way — confirming the error is structural (dot expansion), not value truncation at ~2000 chars. For #17561 I committed the fix to the fork and built a distribution node that now lists the full accepted codec set (lucene_default + all registered Lucene codecs + built-ins) instead of the old hardcoded [default, lz4, best_compression, zlib]. The end-to-end test confirmed not_a_codec returns the full list and best_compression still succeeds. Both issues have comment threads on GitHub.
+
+On the planning side I mapped the code paths and competitive landscape for #22494 (cache compiled regex automatons). The author ZiwenWan has a production-tested PoC with strong latency numbers and is happy to contribute a PR, so the approach is to monitor and coordinate rather than duplicate effort. The code analysis showed the exact call sites (RegexpQuery, AutomatonQuery, KeywordFieldMapper) and the cache infrastructure API to use.
+
+**What I learned:** Two issues can advance in parallel when one is a field-name theory and the other a setting-derivation fix. And a working PoC from a third party changes the calculus on a fallback issue — the plan shifts from implement independently to monitor and coordinate.
+
+**Feelings / notes:** Good to close out the session with concrete progress on the two main tracks and a clear path on the third.
+
+**Did:** closed the time tracker, posted the #6323 minimal-reproduction comment, posted the #17561 update comment, committed and pushed the #17561 fix to BrunosGits/opensearch-fork, mapped the #22494 code paths and competitive landscape, and planned the next session.
+
+---
+
+### [OpenSearch] 2026-08-11: The fix that ran green
+
+**Mood:** methodical, then proud of the first green run
+
+**Story:** Morning, the #6323 reproduction. Two OpenSearch versions, 2.3.0 and 2.19.6, everything I could throw at the reindex API, strings from 1980 to 20000 chars, pipelines, remote reindex. Every value came back identical. The error the reporter saw comes from field-name validation, I reproduced it verbatim by putting a long string where a field name goes, the dots get read as object separators. The cutoff does not exist in vanilla OpenSearch.
+
+Evening, the #17561 fix. The codec error message now comes from the same list the validation accepts, the five built-ins, every registered Lucene codec and the CodecAliases aliases, deduped and sorted. Two tests cover it. I ran EngineConfigTests on the VPS with JDK 21, six tests, zero failures, and posted the results asking for the green light.
+
+Then a cleanup. The Mac's git identity was set to PublishProject, so three commits here and one on the expandir fork were attributed to that account. I rewrote the authorship to BrunosGits with git-filter-repo, force-pushed both and fixed the Mac identity.
+
+**What I learned:** A negative result, written up carefully, is still progress. A fix only earns its place once it runs against the real codebase. A stale global git identity can misattribute commits for weeks.
+
+**Feelings / notes:** The first green run on the real code was worth the ten minutes the 2-core build took. I have now made an OpenSearch change that compiles and passes.
+
+**Did:** swept 2.3.0 and 2.19.6 for the #6323 cutoff, found nothing, pinned the error to field-name validation and posted the evidence. Implemented the #17561 fix with two tests, ran them green on the VPS and posted the results. Rewrote the PublishProject commits on this repo and the expandir fork, force-pushed both, fixed the Mac git identity.
+
+---
+
+### [OpenSearch] 2026-08-07: The project begins
+
+**Mood:** eager, ready, humbled
+
+**Story:** First day of a new project, this one about contributing to OpenSearch. The goal is to
+learn how a large open source project actually works by doing the work: reading the code, finding
+a real issue, sending a real patch.
+
+The day had three parts. First the hunt for an issue. Almost everything I liked already had a PR
+or a volunteer, which was the first lesson. I commented on #21323, the Lucene warning logs at
+startup, thinking it was open, but a PR was already on it, stalled in review. Wasted words there.
+Then I found #6323, a bug from 2023 where long strings get cut at 2000 characters, still broken,
+no one working on it. The maintainer had been asking for a minimal reproduction for months. I
+claimed it and promised the repro first.
+
+Second, the environment. To reproduce #6323 I need to run OpenSearch, and the plan is Docker on
+the VPS, installed later on demand. The VPS details stay out of this repo.
+
+Third, since one issue is a single point of failure, I claimed a second one, #17561, a small bug
+where the error message lists the wrong codec values. I also kept a third in my pocket, #22494,
+cached regex automaton compilation, without commenting on it, in case both fall through.
+
+**What I learned:** Small issues in OpenSearch get claimed within days. The ones left are deep,
+like #6323, or untriaged with no one caring. To have a real chance I need to claim fast and be
+ready to reproduce fast. I also learned to check for an existing PR before commenting, the
+expensive way.
+
+**Feelings / notes:** The humbling part is how fast things get taken. The good part is that two
+maintainers have answered, which is more attention than I expected on the first day.
+
+**Did:** set up the project scaffold for OpenSearch contributions, modeled on the AI Lab project.
+Commented on #21323, later found redundant. Claimed #6323 and #17561 with coordination comments.
+Recorded #22494 as plan B without commenting. Added check-issues for tracking.
+
+---
+
+### [CorsixTH] 2026-08-12: Squeezing the entity-loop bug until it squeaked
+
+**Mood:** first fix merged, then surprised by the old-savegame crash
+
+**Story:** The biggest news came first: the maintainers merged my docs fix, closing #1793. Issue #1467: world.entities is walked with ipairs while some handlers destroy other entities, shifting the table and skipping whoever lands in the visited slot. The fix defers removal to after the loop.
+
+A headless smoke test reproduced the skip deterministically (three dummies, the middle destroying the first mid-tick; the test fails if the third gets skipped), and a GUI variant rendered every frame. I hacked the fix back out and both failed with exactly the message they should catch.
+
+Two hidden holes surfaced. An old savegame crashed on the first tick because the deserialiser never re-runs constructors, leaving the new queue missing. And the end-of-day loop never set the iterating marker for plants. Both fixed, both tested.
+
+The day ended with a move to the full game data for reliable tests.
+
+**What I learned:** A regression test's job is to fail when the bug comes back; the negative control tells you it can. The tests that catch you are about old savegames and the code path nobody remembers.
+
+**Feelings:** The skip-repro failing on cue is the closest thing a headless server has to a high five.
+
+**Did:** merged the docs fix into CorsixTH (#1793), implemented the deferred-destruction fix (#1467), 86 unit tests green, headless and GUI smoke tests plus a negative control, fixed the old-savegame crash and the plant branch hole, moved to the full game data.
+
+---
+
+### [AI Lab] 2026-08-11: Everything moves to the VPS
+
+**Mood:** relieved and tidy
+
+**Story:** After the 6323 investigation I moved the whole working environment to the VPS. The three repos, the time trackers and their private logs, the agent skills, the opencode config and the Trello credentials all went over and were verified one by one. The time tracker builds and reports the same totals, the Trello sync runs, GitHub accepts the keys. Two surprises came out of the move, a decision-log entry about a new contribution target that was never committed and a stale clone of the espanso fork already sitting on the server. Both are safe now, the entry lives on the VPS as pending work and the stale clone is set aside. The local copies were deleted only after the server copies were confirmed intact.
+
+**What I learned:** A move like this only feels safe in stages. Verify the tracker totals and the journal totals match, then delete. Also that the key which lets this machine reach the VPS is the one thing I keep, since it is the only door left.
+
+**Feelings / notes:** The delete step was oddly satisfying, the local machine got visibly lighter. The session data stays behind until the very end, so the conversation can be carried over to the server.
+
+**Did:** moved three repos to the VPS, restored the private tracker and session files, set up opencode and the skills, copied the keys and the git identity, verified the tracker, the Trello sync and GitHub access, synced an uncommitted decision-log entry, deleted the local copies and left only the session data and the access key behind.
+
+---
+
+### [CorsixTH] 2026-08-11: A working dev box and a first pull request
+
+**Mood:** focused, quietly pleased when the game first booted headless, and then very pleased when the first issue became a real fix
+
+**Story:** The plan was to do all the real work on the VPS over SSH, so the project became a fork of CorsixTH with a devlog folder inside it. The build chain was a small saga: master moved to SDL3, Debian 13 ships one too old for the mixer, so I built SDL3 3.4.14 and SDL3_mixer 3.2.4 from source into /opt/SDL3. The game compiled clean, 63 unit tests green, luacheck clean, and the welcome screen printed headless using the demo data.
+
+Then came the first issue, #1793: dead links in the generated Lua docs. My first theory, that GitHub Pages was swallowing files, was wrong. The truth was simpler: LDocGen never generated a page per source file, only class pages and index pages, while the file tree links were built from path-based ids pointing at pages that never existed. So I made LDocGen write one page per file, listing the classes and functions there, with directory entries as plain text. Rebuilt the docs and checked every link: 503 pages, 20465 local links, zero broken. I opened the pull request and learned the labels are the maintainers to add.
+
+**What I learned:** A headless dev box turns a docs bug into a checkable claim: rebuild, script over every link, done. A wrong theory is still useful if you test it and drop it.
+
+**Feelings / notes:** The first headless boot felt like a small victory, and opening the first pull request felt like the devlog setup paying for itself. The MIDI music still will not load with no synth on the box, but that is a cosmetic gap. Now it is a waiting game for the maintainers.
+
+**Did:** set up the fork, built SDL3 and SDL3_mixer into /opt/SDL3, compiled the game, ran the Lua tests and lint, confirmed the headless boot, root-caused issue #1793, extended LDocGen to generate per-file pages, verified 20465 links, and opened pull request #3494.
+
+---
+
+### [AI Lab] 2026-08-11: The fork got a name
 
 **Mood:** settled, quietly proud
 
@@ -57,14 +226,57 @@ the code move together and the docs follow in the same pass.
 There is a small joy in watching my own list load into a program that carries a name I
 chose. Two entries share today, the Docker one and this one, and both feel like progress.
 
-**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config path and
+**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config folder and
 docs, published a release workflow with a first tag under the old name followed by a fresh
 expandir tag, kept every match and trigger intact, updated this project's build box
 references and the achievements note, and closed the tracker with the extra minutes.
 
 ---
 
-## 2026-08-07: Docker questions, then the great GUI purge
+### [AI Lab] 2026-08-10: Docker is finally in
+
+**Mood:** accomplished, then humbled by a package conflict
+
+**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself, so I rebuilt the firewall by hand in iptables, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
+
+**What I learned:** Tools remove their rivals quietly, nothing in the install output said ufw was going. A reboot is the only honest test of persistence, and separate keys per service mean a revoke on one never touches the other.
+
+**Feelings / notes:** Docker was the reason the GUI had to go, so today closed a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten.
+
+**Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
+
+---
+
+### [AI Lab] 2026-08-10: The fork got a name
+
+**Mood:** settled, quietly proud
+
+**Story:** For three days my fork was called espanso+, a name I borrowed without thinking.
+Today I released the first build under that name, and only then stopped to ask what the plus
+meant. It read like an official premium edition, a thing the espanso team might be selling.
+I wanted none of that, so the fork became expandir, the Portuguese verb for to expand, a
+name that says what the tool does and belongs to no one else's brand. The rename went all
+the way through: the repo, the binary, the config folder, the docs, and every reference to
+the fork in this project. A release workflow went out first under the old name, then a
+fresh tag carried the new one. The best part was watching all my triggers load into the
+renamed app without losing a single one.
+
+**What I learned:** GPL gives you the code, but never the name, and borrowing a brand makes
+a side project read like a product. Renaming a running tool is survivable when the data and
+the code move together and the docs follow in the same pass.
+
+**Feelings / notes:** It stopped being a fork in the abstract and became a thing I maintain.
+There is a small joy in watching my own list load into a program that carries a name I
+chose. Two entries share today, the Docker one and this one, and both feel like progress.
+
+**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config folder and
+docs, published a release workflow with a first tag under the old name followed by a fresh
+expandir tag, kept every match and trigger intact, updated this project's build box
+references and the achievements note, and closed the tracker with the extra minutes.
+
+---
+
+### [AI Lab] 2026-08-07: Docker questions, then the great GUI purge
 
 **Mood:** curious, then decisive, then generous, then thorough
 
@@ -78,7 +290,7 @@ references and the achievements note, and closed the tracker with the extra minu
 
 ---
 
-## 2026-08-06: The day the rescue test finally passed
+### [AI Lab] 2026-08-06: The day the rescue test finally passed
 
 **Mood:** relieved, proud, productive
 
@@ -100,12 +312,12 @@ Rescue mode went from a wall of unknown to something I've actually done. Now Pha
 that first public push. What a productive morning.
 
 **Did:** ran the rescue-mode drill end to end, but through the OVH API instead of the
-dashboard, and closed out the infrastructure foundation. Next up is Phase 2 and the first
-public push to GitHub.
+dashboard, and closed out the infrastructure foundation. Next up is Phase 2 and
+that first public push to GitHub.
 
 ---
 
-## 2026-08-05: The day it started feeling real
+### [AI Lab] 2026-08-05: The day it started feeling real
 
 **Mood:** excited, a little proud
 
@@ -131,7 +343,7 @@ built the rescue-mode runbook.
 
 ---
 
-## 2026-08-04: The night I stopped planning and bought the server
+### [AI Lab] 2026-08-04: The night I stopped planning and bought the server
 
 **Mood:** impulsive, then giddy, then afraid it would break
 
@@ -156,14 +368,5 @@ the hardening, the first of the boring but important work.
 set the root password, created the project plan and its PDF, installed the Infisical CLI,
 created my machine identity and the time tracker.
 
-## 2026-08-11: Everything moves to the VPS
+---
 
-**Mood:** relieved and tidy
-
-**Story:** After the 6323 investigation I moved the whole working environment to the VPS. The three repos, the time trackers and their private logs, the agent skills, the opencode config and the Trello credentials all went over and were verified one by one. The time tracker builds and reports the same totals, the Trello sync runs, GitHub accepts the keys. Two surprises came out of the move, a decision-log entry about a new contribution target that was never committed and a stale clone of the espanso fork already sitting on the server. Both are safe now, the entry lives on the VPS as pending work and the stale clone is set aside. The local copies were deleted only after the server copies were confirmed intact.
-
-**What I learned:** A move like this only feels safe in stages. Verify the tracker totals and the journal totals match, then delete. Also that the key which lets this machine reach the VPS is the one thing I keep, since it is the only door left.
-
-**Feelings / notes:** The delete step was oddly satisfying, the local machine got visibly lighter. The session data stays behind until the very end, so the conversation can be carried over to the server.
-
-**Did:** moved three repos to the VPS, restored the private tracker and session files, set up opencode and the skills, copied the keys and the git identity, verified the tracker, the Trello sync and GitHub access, synced an uncommitted decision-log entry, deleted the local copies and left only the session data and the access key behind.
