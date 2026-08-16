@@ -4,11 +4,6 @@ A record of my journey contributing to OpenSearch: understanding the codebase,
 finding issues, sending patches and learning how a large open source project
 actually works.
 
-## What's here
-
-- `journal.md`: personal journal, one entry per day
-- `ROADMAP.md`: master plan of open tasks, seeded to the Trello kanban
-
 ## Progress so far
 
 Active contribution tracks, newest first:
