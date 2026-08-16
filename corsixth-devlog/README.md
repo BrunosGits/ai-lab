@@ -18,7 +18,7 @@ and the story of writing it stay together. It keeps the journal, decision log, p
 
 - `journal.md` — personal journal, one entry per day
 - `project-conception-log.md` — every decision, chosen or rejected, and why
-- `plan.md` — the roadmap for the first contribution
+- `roadmap.md` — the roadmap for the first contribution
 - `scripts/time-tracker/` — the Rust time tracker used for this project
 
 `time-tracker.json` and `session-log.md` are private and stay off git.
