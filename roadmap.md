@@ -291,7 +291,7 @@ Study → Build → Publish → Journal → Update ROADMAP → Flip repo public
 | **Hugging Face** | — | Access token (HF dashboard → Access Tokens) | `/huggingface/Access Token` in Infisical |
 | **Langfuse Cloud** | us.cloud.langfuse.com | Public/Secret keys (MCP basic-auth header pre-made) | `/langfuse/*` in Infisical |
 | **OpenCode Zen** | Big Pickle model LLM | Zen API key | `/opencode-zen/OpenCodeAPI` in Infisical |
-| **Llama 3.2 (local)** | — | Ollama on the computer (`localhost:11434`, free fallback) | — (runs locally) |
+| **NVIDIA Nemotron 3 Ultra** | NVIDIA Build/NVIDIA API | `nvapi-*` API key | `/nvidia/API key` in Infisical |
 
 ---
 
