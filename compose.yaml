@@ -1,0 +1,55 @@
+name: ai-lab
+
+services:
+  caddy:
+    image: caddy:2.11.4
+    container_name: ai-lab-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    environment:
+      CADDY_DOMAIN: ${CADDY_DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - frontend
+
+  hello:
+    build:
+      context: ./hello
+    image: hello:0.1.0
+    container_name: ai-lab-hello
+    restart: unless-stopped
+    networks:
+      - frontend
+      - backend
+
+  postgres:
+    image: postgres:17.11
+    container_name: ai-lab-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+    internal: true
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

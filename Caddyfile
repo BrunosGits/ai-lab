@@ -1,0 +1,3 @@
+http://{$CADDY_DOMAIN} {
+    reverse_proxy hello:8000
+}
