@@ -4,7 +4,7 @@ Personal diary of the AI Lab projects: memories, feelings, stories.
 One entry per day, newest first. This is not the session log (that's the private
 session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on all projects: 26h 29m</b></p>
+<p align="right"><b>Total time on all projects: 27h 02m</b></p>
 
 ---
 
@@ -12,14 +12,28 @@ session log, kept local, for times/commands/verdicts).
 
 | Project | Sessions | Total Hours |
 |---------|----------|-------------|
-| AI Lab | 7 | 12.58h |
+| AI Lab | 12 | 13.33h |
 | CorsixTH | 5 | 8.05h |
 | OpenSearch | 4 | 5.66h |
-| **Total** | **16** | **26.29h** |
+| **Total** | **21** | **27.04h** |
 
 ---
 
 ## Journal Entries
+
+---
+
+### [AI Lab] 2026-08-16: Phase 3 shipped, and the firewall was mine all along
+
+**Mood:** relieved, then quietly proud of the tiny stack
+
+**Story:** Today Phase 3 went live. The slim stack came up as three containers, caddy owning the only published port, hello behind it, postgres on an internal network with the secrets injected by infisical run so no .env file exists on the server. Then the external test failed and everything pointed at OVH. The dashboard showed 80 and 443 already permitted, and the API agreed, but curl from my computer kept timing out. It turned out the blocker was my own DOCKER-USER chain. Published ports travel the FORWARD path, not INPUT, so my old rules never matched inbound SYN packets and the default drop ate them. One accept rule for tcp 80 and 443, a netfilter-persistent save, and http://<vps-ip>.sslip.io answered with hello from docker compose. Postgres stayed closed, ssh stayed up, and the whole phase got committed and pushed.
+
+**What I learned:** Published container ports cross the FORWARD chain, so host INPUT rules never see them. A rule that works from inside the box proves nothing about the outside. The OVH firewall was right all along, I was the firewall.
+
+**Feelings / notes:** Forty five minutes of confusion traced back to a chain I wrote myself. Slightly embarrassing, but now it is documented in the roadmap commands so it will not bite twice.
+
+**Did:** built the compose stack (caddy 2.11.4, hello, postgres 17.11), pinned tags, internal backend network, moved the FastAPI app into a container, dropped the apt cluster and the systemd unit, injected secrets via infisical run, fixed DOCKER-USER to accept inbound 80 and 443, persisted the rules, verified external access, committed and pushed the phase.
 
 ---
 
