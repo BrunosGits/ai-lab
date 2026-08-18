@@ -11,7 +11,7 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [x] Project scaffold (repo, journal, time tracker, project log, roadmap)
 - [x] Docker on the VPS for reproduction
 - [x] JDK 21 + Gradle build working
-- [x] VPS checkout of `opensearch-fork` kept clean (restore after each session)
+- [x] VPS checkout of `OpenSearch` kept clean (restore after each session)
 
 ### Commands learned — Setup
 
@@ -33,7 +33,10 @@ This document is the master plan for contributing to [OpenSearch](https://github
 **GitHub coordination**
 - `gh issue comment <n> --body <msg>` — post findings/repros
 - `gh pr comment <n>` — post code suggestions for contributors
+- `gh pr create --head <fork>:<branch>` — open PR from fork branch
 - `gh run watch <id>` — watch CI
+- `gh repo fork <repo> --clone=false` — create fork without cloning
+- Patch recovery: `ssh vps "cd ~/OpenSearch && git diff branch~1..branch"` → apply to clean clone
 
 ---
 
@@ -53,18 +56,19 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [x] Two tests cover it
 - [x] `EngineConfigTests` green on the VPS (JDK 21)
 - [x] e2e verified: `not_a_codec` returns the full list, `best_compression` still works
-- [x] Commit `c135dc26` pushed to `BrunosGits/opensearch-fork`
+- [x] Fix recovered from VPS, pushed to `BrunosGits/OpenSearch:fix/17561-codec-error-message`
+- [x] PR #22749 opened, DCO fixed, CI running
 - [ ] Maintainer review
 
 ### #22654 — MONITOR mode workload group rejections (helping) 🟡
-- [x] PR #22701 confirmed duplicate of merged #22610, commented, closed
+- [x] PR #22701 confirmed duplicate of merged #22610, commented, tagged triage to close
 - [x] PR #22654 root-caused: fix correct, codecov/patch at 60% (target auto 71.43%)
 - [x] Coverage gap: missing `isPresent() == false` branch in `rejectIfNeeded`
 - [x] Minimal test designed, 83 WLM tests green on VPS
 - [x] jacoco report proves line 274 fully covered (80%)
 - [x] Humanized comment posted with the exact test code
-- [ ] Author applies the test, codecov goes green
-- [ ] Request maintainer review
+- [x] Author applied the test, codecov hit 80%, CI green
+- [ ] Waiting on maintainer review
 
 ### #22494 — Cache compiled regex automatons (plan B) 🕳️
 - [x] Author ZiwenWan pinged — production-tested PoC exists, strong latency numbers
@@ -76,14 +80,18 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - PR #21359 stalled in review — monitor only, do not duplicate
 
 ### #22676 — LATE_MATERIALIZATION profile metrics (analytics engine) 🟡
-- [ ] PR #22676: emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`
-- [ ] Root cause: LM stage fetch-by-row-ids path missing metrics extraction
-- [ ] Rust: clone physical plan, attach to `QueryStreamHandle`
-- [ ] Java: add `profile` flag to `FetchByRowIdsRequest`, extract metrics on stream complete, per-shard storage in `StageTask`
-- [ ] Integration test `LateMaterializationProfileIT` added (asserts LM tasks return both fields)
-- [ ] sandbox-check failing: test `testLateMaterializationProfileReturnsPhysicalPlan` gets CANCELLED (shared-cluster flake suspected)
-- [ ] codecov 80% (passes 71.43% gate), 1 partial on `||` operand
-- [ ] Next: diagnose sandbox-check (isolate test / harden assertion), request maintainer review
+- [ ] PR #22676 (Draft): emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`
+- [x] Reviewed: posted three issues (wire BWC guard, static test provisioning flag, shard label uniqueness)
+- [ ] Author addressing feedback, CI passing at some commits, failing at others
+- [ ] Next: wait for author to address review, re-review
+
+### #22706 — Flaky AnalyticsQueryTaskCleanupIT test 🔵
+- [x] Root caused: test injects raw `TaskCancelledException` on streaming channel, but production wraps in `StreamException(StreamErrorCode.CANCELLED)` via `toWireError`
+- [x] Streaming transport doesn't propagate non-`StreamException` errors, so failure is silently swallowed
+- [x] Fix: one line change in failure injector lambda to send `StreamException` instead of raw exception
+- [x] Commented claiming the issue with root cause analysis
+- [ ] Implement the fix, run tests with original failing seed
+- [ ] Open PR
 
 ---
 

@@ -4,7 +4,7 @@ Personal diary of the AI Lab projects: memories, feelings, stories.
 One entry per day, newest first. This is not the session log (that's the private
 session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on all projects: 28h 02m</b></p>
+<p align="right"><b>Total time on all projects: 28h 51m</b></p>
 
 ---
 
@@ -14,8 +14,8 @@ session log, kept local, for times/commands/verdicts).
 |---------|----------|-------------|
 | AI Lab | 12 | 13.33h |
 | CorsixTH | 6 | 9.04h |
-| OpenSearch | 4 | 5.66h |
-| **Total** | **22** | **28.03h** |
+| OpenSearch | 5 | 6.48h |
+| **Total** | **23** | **28.85h** |
 
 ---
 
@@ -34,6 +34,24 @@ session log, kept local, for times/commands/verdicts).
 **Feelings / notes:** Satisfying to watch the old PR close and the new one open clean. The whitespace CI gate caught the trailing space — good gate.
 
 **Did:** deleted BrunosGits/CorsixTH-1 and opensearch-fork, created BrunosGits/CorsixTH fork, pushed fix-1467-clean branch (3 commits), opened PR #3504, verified CI green, updated ai-lab docs.
+
+---
+
+### [OpenSearch] 2026-08-17: Review, recover, and reopen
+
+**Mood:** busy, scattered, then satisfied the mess was cleaned up
+
+**Story:** Three PRs got attention today. Reviewed #22676 (LATE_MATERIALIZATION profile metrics) and posted a focused review with three issues: wire BWC guard (blocking), static test provisioning flag, and shard label uniqueness. Confirmed #22701 is a duplicate of merged #22610, tagged triage to close it. Confirmed #22654 is clean and waiting on maintainer review.
+
+Then investigated new issues to pick up. #21995 already has two open PRs, #19026 is assigned. #22706 (flaky AnalyticsQueryTaskCleanupIT) is open and unclaimed. Root caused the flake: the test injects a raw TaskCancelledException on the streaming channel, but production wraps it in StreamException(StreamErrorCode.CANCELLED) via toWireError. The streaming transport doesn't propagate the unwrapped exception, so the failure gets silently swallowed. Posted a comment claiming the issue.
+
+The bigger mess was #17561. I had committed the fix to a fork that I then accidentally deleted. The fork was gone, the fix was lost. But the VPS still had the old checkout with the fix branch. Pulled the patch from the VPS, recreated the fork (BrunosGits/OpenSearch), applied the patch to a clean main, pushed, fixed the DCO sign-off, and opened PR #22749.
+
+**What I learned:** A VPS backup saves you when a GitHub fork disappears. The patch workflow (git diff on VPS, apply to clean clone) is faster than rebuilding from scratch. And always check the VPS before assuming code is gone.
+
+**Feelings / notes:** The fork deletion was stressful but the recovery was smooth. The review work on #22676 felt useful even without write access.
+
+**Did:** reviewed PR #22676, confirmed #22701 duplicate, confirmed #22654 status, investigated #21995/#22706/#19026, claimed #22706 with root cause analysis, recovered #17561 fix from VPS, recreated fork, opened PR #22749, fixed DCO.
 
 ---
 
