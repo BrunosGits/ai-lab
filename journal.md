@@ -4,7 +4,7 @@ Personal diary of the AI Lab projects: memories, feelings, stories.
 One entry per day, newest first. This is not the session log (that's the private
 session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on all projects: 27h 02m</b></p>
+<p align="right"><b>Total time on all projects: 28h 02m</b></p>
 
 ---
 
@@ -13,13 +13,27 @@ session log, kept local, for times/commands/verdicts).
 | Project | Sessions | Total Hours |
 |---------|----------|-------------|
 | AI Lab | 12 | 13.33h |
-| CorsixTH | 5 | 8.05h |
+| CorsixTH | 6 | 9.04h |
 | OpenSearch | 4 | 5.66h |
-| **Total** | **21** | **27.04h** |
+| **Total** | **22** | **28.03h** |
 
 ---
 
 ## Journal Entries
+
+---
+
+### [CorsixTH] 2026-08-17: Clean fork, clean PR, CI green
+
+**Mood:** clean, satisfied the mess is gone
+
+**Story:** Deleted the polluted fork (BrunosGits/CorsixTH-1) that had 18 commits mixed with personal devlog files. Created a fresh fork BrunosGits/CorsixTH with only the 3 clean commits: core fix (world.lua + 23 unit tests), smoketest improvements, whitespace fix. PR #3504 opened with CI passing (LuaJIT, Windows, vcpkg Lua 5.5, Lua 5.1 pending). The old PR #3501 closed automatically when the fork vanished. Also cleaned up the opensearch-fork that was just a mirror with no changes.
+
+**What I learned:** A PR tied to a personal fork dies with the fork. The clean approach is: fix on a clean branch, push to a fresh fork, open PR. The maintainers see only the relevant diff. Also: deleting unused forks removes noise.
+
+**Feelings / notes:** Satisfying to watch the old PR close and the new one open clean. The whitespace CI gate caught the trailing space — good gate.
+
+**Did:** deleted BrunosGits/CorsixTH-1 and opensearch-fork, created BrunosGits/CorsixTH fork, pushed fix-1467-clean branch (3 commits), opened PR #3504, verified CI green, updated ai-lab docs.
 
 ---
 
@@ -343,7 +357,7 @@ starting. Always one more spreadsheet, one more consideration, never an actual s
 Then tonight, sometime after midnight, I just did it. Grabbed the card, typed the number,
 and about fourteen seconds later I had a machine in Canada East that was entirely mine.
 I remember the small panic when the root password email came in, because I was sure the
-whole thing would fall apart before I even SSH'd in. It didn't. That first `apt update`
+whole thing would fall apart before I even SSH'd in. It didn't. That first 
 made it official. The plan PDF is real now too: a printable four-phase roadmap instead of
 vague intentions. I'm tired but wired. I think this is what starting feels like.
 
@@ -360,4 +374,3 @@ set the root password, created the project plan and its PDF, installed the Infis
 created my machine identity and the time tracker.
 
 ---
-

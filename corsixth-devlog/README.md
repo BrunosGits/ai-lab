@@ -12,7 +12,7 @@ project live in the unified journal at the repo root (`journal.md`).
 
 - **#1793** (broken Lua docs links): fixed, PR #3494 merged by the maintainers
 - **#1467** (entities table modified inside an `ipairs` loop): fixed and validated
-  on full game data, PR #3501 open with CI green, awaiting maintainer review
+  on full game data, PR #3504 open with CI green, awaiting maintainer review
 - **#3372** (properly destroy entities on pickup again): active. Snapshot-and-destroy
   with tile reservation is designed; reuses the #1467 deferred-destruction machinery.
   Implementation in progress, nothing pushed yet
