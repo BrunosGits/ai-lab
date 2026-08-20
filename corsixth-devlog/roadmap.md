@@ -52,16 +52,15 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 ### #1467 — Entities table modified inside an `ipairs` loop 🔄
 - [x] Root cause: `destroyEntity` mid-loop shifts the table, skipping whoever lands in the already-visited slot
 - [x] Fix: defer destruction until after the loop (`to_destroy` + `_flushDestroyedEntities`, `current_tick_entity` marker)
-- [x] Old-savegame compat: `entities_to_destroy` created lazily (deserialiser never re-runs constructors)
+- [x] Old-savegame compat: `entities_to_destroy` initialized in `afterLoad` for `old < 265`
 - [x] Plant branch hole: end-of-day loop never set the iterating marker for plants
 - [x] Headless repro: three dummies, the middle destroys the first mid-tick; fails if the third is skipped
 - [x] Negative control: fix disabled → `SMOKE FAIL: dummy C was skipped (the #1467 bug)`
 - [x] Full game data matrix: offscreen 3/3 · xvfb 3/3 · demo control 2/2
-- [x] 86/86 unit tests green, luacheck clean
+- [x] 84/84 unit tests green, luacheck clean
 - [x] CI green: LuaJIT, Lua 5.1, Lua 5.5, Windows
-- [x] smoketest hardened (heartbeat, intro-movie stop, auto-difficulty, load-only)
-- [ ] PR #3501 maintainer review
-- [ ] Appveyor check — may need to pin the owner if it stays stuck
+- [x] Clean pattern: queue invariant via constructor + afterLoad (v265)
+- [ ] PR #3504 maintainer review
 
 ### #3372 — Properly destroy entities on pickup again 🚧
 - [x] Root cause: #3304 stopped destroying on pickup (object made invisible + kept in `world.entities`), which leaked duplicates → save corruption #3376, patched by band-aid #3370 (`table_contains` guards)

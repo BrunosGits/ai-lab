@@ -26,46 +26,24 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 | Project | Sessions | Total Time |
 |---------|----------|------------|
 | AI Lab | 13 | 14:43 |
-| CorsixTH | 6 | 9:02 |
+| CorsixTH | 7 | 10:02 |
 | OpenSearch | 5 | 6:29 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **25** | **32:44** |
+| **Total** | **26** | **33:44** |
 
 ---
 
-### [AI Lab] 2026-08-19: Phase 4, Backup and Resume
+### [CorsixTH] 2026-08-20: Cleaner pattern implemented, PR #3504 updated
 
-**Mood:** focused, productive, satisfied
+**Mood:** focused, satisfied with the clean architecture
 
-**Story:** Tonight was about making the lab recoverable. Phase 4 sounded simple on
-paper: backup script, systemd timer, offsite storage. But every piece had a small
-puzzle inside it. Started by installing age on the VPS and generating a keypair.
-Then built scripts/backup.sh. It fetches PostgreSQL credentials from Infisical at
-runtime, runs pg_dump -Fc, archives Docker volumes (pgdata, caddy_data, caddy_config)
-and config files, encrypts everything with age, and uploads to Backblaze B2 via rclone.
-First attempt used shred to securely delete unencrypted copies, but files created by
-the alpine container had different ownership. Switched to rm -f and moved on.
-Configured rclone with B2 credentials fetched from Infisical. Had to find the right
-machine identity. The first one did not work, the second did. Set up a nightly systemd
-user timer with loginctl enable-linger so it runs even when nobody is logged in.
-First backup completed: 7.3 MB total (4K db + 6.4M volumes + 8K config), all
-encrypted, all on B2. Age private key stored in Infisical at /backup. Committed,
-pushed, roadmap updated. The lab is now recoverable.
+**Story:** The maintainers suggested a cleaner pattern for the #1467 deferred-destruction fix: instead of lazy initialization in destroyEntity/_flushDestroyedEntities, initialize the queue in World:afterLoad for old savegames and bump SAVEGAME_VERSION. Implemented exactly that: added entities_to_destroy = {} in afterLoad for old < 265, bumped SAVEGAME_VERSION to 265, removed the lazy guards. Updated tests to match the new invariant (queue always exists). All 84 tests pass, luacheck clean, build succeeds, CI running on PR #3504.
 
-**What I learned:** The Infisical CLI needs infisical run with the token flag to fetch
-secrets with a machine identity, not infisical secrets with the token flag. Different
-code path. Shred fails on files owned by other users. Rm -f is fine for ephemeral
-copies. Systemd user timers need loginctl enable-linger to survive logout. B2 bucket
-creation is instant via rclone.
+**What I learned:** The save/load migration pattern in CorsixTH is well established — version gates in afterLoad, permanent object registration, permanent table inversion. Following it makes the fix feel native. The version bump (264→265) is the right signal for a savegame-invariant change, even though the lazy approach worked. Clean architecture pays off in review.
 
-**Feelings / notes:** This is the kind of work that does not look like much from the
-outside but changes everything underneath. Before tonight, a server failure meant
-starting over. Now it means running a restore script. That is a completely different
-feeling. Also noticed the VPS is already lean. Fifteen services, all essential, nothing
-to trim. The desktop GUI purge from Phase 2 already did that work.
+**Feelings / notes:** The maintainer feedback (lewri) was spot on. The invariant approach is cleaner and matches how object_counts, room_built, bench count etc. are handled. Satisfying to see the queue become a true invariant.
 
-**Did:** implemented Phase 4 end to end: age encryption, backup script, B2 upload,
-systemd nightly timer, Infisical secret storage, first successful backup, git push.
+**Did:** added entities_to_destroy init in afterLoad for old < 265, bumped SAVEGAME_VERSION to 265, removed lazy guards in destroyEntity and _flushDestroyedEntities, updated world_spec.lua tests (removed 2 lazy-behavior tests), pushed to fix-1467-clean branch, updated PR #3504, CI running.
 
 ---
 
@@ -73,7 +51,7 @@ systemd nightly timer, Infisical secret storage, first successful backup, git pu
 
 **Mood:** satisfied, clean ship
 
-**Story:** Built and published a portable prompt skill to remove the yellow, orange, sepia filter from AI-generated images. The skill targets the token bias where words like "cinematic", "golden hour", "premium", "appetizing" statistically co-occur with warm color casts in training data. Created 10 files covering opencode, Claude Code, Codex, Cursor, Windsurf, and VS Code Copilot adapters, plus a universal prompt template with positive, negative, and short variants. Added three real before/after examples — supermarket poster, food photography, cinematic art — with matching dimensions. Optimized images to 175-350 KB, added 10 GitHub topics, made the repo public at github.com/BrunosGits/sepia-be-gone.
+**Story:** Built and published a portable prompt skill to remove the yellow, orange, sepia filter from AI-generated images. The skill targets the token bias where words like cinematic, golden hour, premium, appetizing statistically co-occur with warm color casts in training data. Created 10 files covering opencode, Claude Code, Codex, Cursor, Windsurf, and VS Code Copilot adapters, plus a universal prompt template with positive, negative, and short variants. Added three real before/after examples — supermarket poster, food photography, cinematic art — with matching dimensions. Optimized images to 175-350 KB, added 10 GitHub topics, made the repo public at github.com/BrunosGits/sepia-be-gone.
 
 **What I learned:** A focused prompt skill beats a script for this use case. No hallucination risk. Preserves text perfectly via negative constraints. Works across any image generator. The 5600K daylight target is specific enough to override the model's warmth bias. GitHub topics, description, and real examples make a skill discoverable without README bloat.
 
@@ -377,7 +355,7 @@ references and the achievements note, and closed the tracker with the extra minu
 
 **Mood:** relieved, proud, productive
 
-**Story:** The dashboard kept throwing a cryptic "invalid or empty URL" error whenever I
+**Story:** The dashboard kept throwing a cryptic invalid or empty URL error whenever I
 tried to flip the rescue toggle, so I had to find another way. The OVH docs were not clear
 about it and a couple of links 404'd, but after some poking around I found the panel that
 generates an API key for remote control, built a small script around it, and got the
@@ -385,7 +363,7 @@ machine to reboot into rescue. Not one, not two, but three attempts before the b
 The moment the SSH host key changed, I knew the rescue environment was really there. That's
 the whole point of the drill: prove we can get back in before we ever have to.
 
-**What I learned:** The "obvious" path in the dashboard can be a dead end, and the docs
+**What I learned:** The obvious path in the dashboard can be a dead end, and the docs
 won't always cover what you hit. When the UI fails, the API is still there. Also worth
 remembering, the order matters: set the boot mode while the machine is stopped, then start
 it. I only found that by failing forward.
@@ -435,7 +413,7 @@ starting. Always one more spreadsheet, one more consideration, never an actual s
 Then tonight, sometime after midnight, I just did it. Grabbed the card, typed the number,
 and about fourteen seconds later I had a machine in Canada East that was entirely mine.
 I remember the small panic when the root password email came in, because I was sure the
-whole thing would fall apart before I even SSH'd in. It didn't. That first 
+whole thing would fall apart before I even SSH'd in. It didn't. That first apt update
 made it official. The plan PDF is real now too: a printable four-phase roadmap instead of
 vague intentions. I'm tired but wired. I think this is what starting feels like.
 
