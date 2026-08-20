@@ -1,8 +1,8 @@
 # Journal
 
-Personal diary of the AI Lab projects: memories, feelings, stories.
-One entry per day, newest first. This is not the session log (that's the private
-session log, kept local, for times/commands/verdicts).
+Public journal for the AI Lab project: progress, lessons, and decisions.
+One entry per day, newest first. No sensitive info (usernames, keys, tokens).
+Those stay in Infisical.
 
 <p align="right"><b>Total time on all projects: 32h 44m</b></p>
 
