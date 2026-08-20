@@ -12,8 +12,6 @@ Public journal for the AI Lab project: progress, lessons, and decisions. One ent
 | sepia-be-gone | 1 | 2:30 |
 | **Total** | **25** | **32:44** |
 
-<p align="right"><b>Total time on all projects: 32h 44m</b></p>
-
 ### [AI Lab] 2026-08-19: Phase 4, Backup and Resume
 
 **Mood:** focused, productive, satisfied
