@@ -1,6 +1,25 @@
-# Journal
+<!-- AI_INSTRUCTIONS
+This is a public journal for the AI Lab project. It documents progress, lessons,
+and decisions across all subprojects (AI Lab, CorsixTH, OpenSearch, sepia-be-gone).
 
-Public journal for the AI Lab project: progress, lessons, and decisions. One entry per day, newest first. No sensitive info (usernames, keys, tokens).
+VOICE: First person, casual, honest. Write like talking to a friend, not a report.
+No corporate language, no filler.
+
+PRIVACY: Never include keys, tokens, passwords, logins, usernames, IPs, or
+emails. Services can be named (e.g., Infisical, Backblaze B2, OVHcloud).
+Use generic descriptions for credentials (the backup token, the storage key).
+
+TIME TRACKER: The summary table stays at the top, below the description. Update
+session count and total time after each session. If a new project is added,
+create a new row for it. Format: [Project Name] date: topic.
+
+STRUCTURE: Newest entry first. Each entry has: Mood, Story (what happened),
+What I learned (key takeaways), Next time (what's next).
+
+NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
+-->
+
+# Journal
 
 ## Time Tracker Summary
 
