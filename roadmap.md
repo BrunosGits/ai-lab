@@ -195,9 +195,9 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Phase 4 — Backup & Resume
 
-- [ ] scripts/backup.sh: pg_dump -Fc + volume tar (age)
-- [ ] systemd timer nightly (user) — not cron
-- [ ] rclone → Backblaze B2 (primary, 10 GB free tier) · OVH Object Storage as alt
+- [x] scripts/backup.sh: pg_dump -Fc + volume tar (age)
+- [x] systemd timer nightly (user) — not cron
+- [x] rclone → Backblaze B2 (primary, 10 GB free tier) · OVH Object Storage as alt
 - [ ] Monthly restore drill (OVH mount option) + one full-rebuild drill
 - [ ] Pause/resume runbook in README (recreate in minutes)
 
