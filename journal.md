@@ -14,7 +14,7 @@ session count and total time after each session. If a new project is added,
 create a new row for it. Format: [Project Name] date: topic.
 
 STRUCTURE: Newest entry first. Each entry has: Mood, Story (what happened),
-What I learned (key takeaways), Next time (what's next).
+What I learned (key takeaways), Next time (what's next). Use the tag [project name] for the journal entries.
 
 NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 -->
@@ -69,7 +69,7 @@ systemd nightly timer, Infisical secret storage, first successful backup, git pu
 
 ---
 
-### [sepia-be-gone] 2026-08-19: Sepia Be Gone — portable prompt skill published
+### [sepia-be-gone] 2026-08-19: Sepia Be Gone: portable prompt skill published
 
 **Mood:** satisfied, clean ship
 
