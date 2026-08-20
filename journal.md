@@ -1,8 +1,6 @@
 # Journal
 
-Public journal for the AI Lab project: progress, lessons, and decisions.
-One entry per day, newest first. No sensitive info (usernames, keys, tokens).
-Those stay in Infisical.
+Public journal for the AI Lab project: progress, lessons, and decisions. One entry per day, newest first. No sensitive info (usernames, keys, tokens).
 
 <p align="right"><b>Total time on all projects: 32h 44m</b></p>
 
@@ -49,24 +47,6 @@ to trim. The desktop GUI purge from Phase 2 already did that work.
 
 **Did:** implemented Phase 4 end to end: age encryption, backup script, B2 upload,
 systemd nightly timer, Infisical secret storage, first successful backup, git push.
-
----
-
----
-
-## Time Tracker Summary
-
-| Project | Sessions | Total Time |
-|---------|----------|------------|
-| AI Lab | 12 | 13:20 |
-| CorsixTH | 6 | 9:02 |
-| OpenSearch | 5 | 6:29 |
-| sepia-be-gone | 1 | 2:30 |
-| **Total** | **24** | **31:21** |
-
----
-
-## Journal Entries
 
 ---
 
