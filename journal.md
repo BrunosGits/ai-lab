@@ -10,13 +10,13 @@ session log, kept local, for times/commands/verdicts).
 
 ## Time Tracker Summary
 
-| Project | Sessions | Total Hours |
-|---------|----------|-------------|
-| AI Lab | 12 | 13.33h |
-| CorsixTH | 6 | 9.04h |
-| OpenSearch | 5 | 6.48h |
-| sepia-be-gone | 1 | 2.50h |
-| **Total** | **24** | **31.35h** |
+| Project | Sessions | Total Time |
+|---------|----------|------------|
+| AI Lab | 12 | 13:20 |
+| CorsixTH | 6 | 9:02 |
+| OpenSearch | 5 | 6:29 |
+| sepia-be-gone | 1 | 2:30 |
+| **Total** | **24** | **31:21** |
 
 ---
 
