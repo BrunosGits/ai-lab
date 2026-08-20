@@ -1,0 +1,4 @@
+# Mark vendored code (not counted in GitHub language stats)
+corsixth-devlog/codebase/** linguist-vendored
+expandir-devlog/** linguist-vendored
+opensearch-devlog/** linguist-vendored
