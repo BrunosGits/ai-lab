@@ -42,8 +42,6 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - `infisical run -- <cmd>` — inject secrets at runtime (Phase 3 pattern)
 
 **Time tracker (local, Rust)**
-- `cargo run --release --manifest-path scripts/time-tracker/Cargo.toml -- start|close|status|summary`
-- Rust rewrite of the original Python; `scripts/time-tracker.py` kept as reference
 
 **RDP tunnel (GUI)** — removed 2026-08-07 with the desktop GUI (xrdp purged). The VPS is headless from now on; GUI tooling stays on the computer.
 

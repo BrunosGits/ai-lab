@@ -4,8 +4,77 @@ Personal diary of the AI Lab projects: memories, feelings, stories.
 One entry per day, newest first. This is not the session log (that's the private
 session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on all projects: 31h 21m</b></p>
+### [AI Lab] 2026-08-19: Phase 4 — Backup and Resume
 
+**Mood:** focused, productive, satisfied
+
+**Story:** Tonight was about making the lab recoverable. Phase 4 sounded simple on
+paper — backup script, systemd timer, offsite storage — but every piece had a small
+puzzle inside it. Started by installing age on the VPS and generating a keypair.
+Then built scripts/backup.sh: fetches PostgreSQL credentials from Infisical at
+runtime, runs pg_dump -Fc, archives Docker volumes (pgdata, caddy_data, caddy_config)
+and config files, encrypts everything with age, and uploads to Backblaze B2 via rclone.
+First attempt used shred to securely delete unencrypted copies, but files created by
+the alpine container had different ownership — switched to rm -f and moved on.
+Configured rclone with B2 credentials fetched from Infisical (had to find the right
+machine identity — Client ID a3d0a473 worked, the first one didn't). Set up a
+nightly systemd user timer with loginctl enable-linger so it runs even when nobody's
+logged in. First backup completed: 7.3 MB total (4K db + 6.4M volumes + 8K config),
+all encrypted, all on B2. Age private key stored in Infisical at /backup. Committed,
+pushed, roadmap updated. The lab is now recoverable.
+
+**What I learned:** The Infisical CLI needs infisical run with the token flag to fetch
+secrets with a machine identity, not infisical secrets with the token flag (different
+code path). shred fails on files owned by other users — rm -f is fine for ephemeral
+copies. Systemd user timers need loginctl enable-linger to survive logout. B2 bucket
+creation is instant via rclone.
+
+**Feelings / notes:** This is the kind of work that doesn't look like much from the
+outside but changes everything underneath. Before tonight, a server failure meant
+starting over. Now it means running a restore script. That's a completely different
+feeling. Also noticed the VPS is already lean — 15 services, all essential, nothing
+to trim. The desktop GUI purge from Phase 2 already did that work.
+
+**Did:** implemented Phase 4 end-to-end: age encryption, backup script, B2 upload,
+systemd nightly timer, Infisical secret storage, first successful backup, git push.
+
+---
+
+### [AI Lab] 2026-08-19: Phase 4 — Backup & Resume
+
+**Mood:** focused, productive, satisfied
+
+**Story:** Tonight was about making the lab recoverable. Phase 4 sounded simple on
+paper — backup script, systemd timer, offsite storage — but every piece had a small
+puzzle inside it. Started by installing  on the VPS and generating a keypair.
+Then built : fetches PostgreSQL credentials from Infisical at
+runtime, runs , archives Docker volumes (pgdata, caddy_data, caddy_config)
+and config files, encrypts everything with age, and uploads to Backblaze B2 via rclone.
+First attempt used  to securely delete unencrypted copies, but files created by
+the alpine container had different ownership — switched to  and moved on.
+Configured rclone with B2 credentials fetched from Infisical (had to find the right
+machine identity — Client ID  worked, the first one didn't). Set up a
+nightly systemd user timer with  so it runs even when nobody's
+logged in. First backup completed: 7.3 MB total (4K db + 6.4M volumes + 8K config),
+all encrypted, all on B2. Age private key stored in Infisical at . Committed,
+pushed, roadmap updated. The lab is now recoverable.
+
+**What I learned:** The Infisical CLI needs  to fetch secrets
+with a machine identity, not  (different code path).
+ fails on files owned by other users —  is fine for ephemeral copies.
+Systemd user timers need  to survive logout. B2 bucket creation
+is instant via rclone.
+
+**Feelings / notes:** This is the kind of work that doesn't look like much from the
+outside but changes everything underneath. Before tonight, a server failure meant
+starting over. Now it means running a restore script. That's a completely different
+feeling. Also noticed the VPS is already lean — 15 services, all essential, nothing
+to trim. The desktop GUI purge from Phase 2 already did that work.
+
+**Did:** implemented Phase 4 end-to-end: age encryption, backup script, B2 upload,
+systemd nightly timer, Infisical secret storage, first successful backup, git push.
+
+---
 ---
 
 ## Time Tracker Summary

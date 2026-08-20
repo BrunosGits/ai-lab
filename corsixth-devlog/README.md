@@ -5,7 +5,6 @@ of the 1997 Bullfrog game Theme Hospital: understanding a codebase with Lua game
 logic on a C++ engine, finding issues, sending patches and learning how a large
 open source project actually works.
 
-The personal journal, per-project time tracker summary and the story of the
 project live in the unified journal at the repo root (`journal.md`).
 
 ## Progress

@@ -8,7 +8,7 @@ This document is the master plan for contributing to [OpenSearch](https://github
 
 ## 🖥️ Environment & Setup
 
-- [x] Project scaffold (repo, journal, time tracker, project log, roadmap)
+- [x] Project scaffold (repo, journal, project log, roadmap)
 - [x] Docker on the VPS for reproduction
 - [x] JDK 21 + Gradle build working
 - [x] VPS checkout of `OpenSearch` kept clean (restore after each session)
