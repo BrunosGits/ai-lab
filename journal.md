@@ -4,7 +4,7 @@ Personal diary of the AI Lab projects: memories, feelings, stories.
 One entry per day, newest first. This is not the session log (that's the private
 session log, kept local, for times/commands/verdicts).
 
-<p align="right"><b>Total time on all projects: 28h 51m</b></p>
+<p align="right"><b>Total time on all projects: 31h 21m</b></p>
 
 ---
 
@@ -15,11 +15,26 @@ session log, kept local, for times/commands/verdicts).
 | AI Lab | 12 | 13.33h |
 | CorsixTH | 6 | 9.04h |
 | OpenSearch | 5 | 6.48h |
-| **Total** | **23** | **28.85h** |
+| sepia-be-gone | 1 | 2.50h |
+| **Total** | **24** | **31.35h** |
 
 ---
 
 ## Journal Entries
+
+---
+
+### [sepia-be-gone] 2026-08-19: Sepia Be Gone — portable prompt skill published
+
+**Mood:** satisfied, clean ship
+
+**Story:** Built and published a portable prompt skill to remove the yellow, orange, sepia filter from AI-generated images. The skill targets the token bias where words like "cinematic", "golden hour", "premium", "appetizing" statistically co-occur with warm color casts in training data. Created 10 files covering opencode, Claude Code, Codex, Cursor, Windsurf, and VS Code Copilot adapters, plus a universal prompt template with positive, negative, and short variants. Added three real before/after examples — supermarket poster, food photography, cinematic art — with matching dimensions. Optimized images to 175-350 KB, added 10 GitHub topics, made the repo public at github.com/BrunosGits/sepia-be-gone.
+
+**What I learned:** A focused prompt skill beats a script for this use case. No hallucination risk. Preserves text perfectly via negative constraints. Works across any image generator. The 5600K daylight target is specific enough to override the model's warmth bias. GitHub topics, description, and real examples make a skill discoverable without README bloat.
+
+**Feelings / notes:** The before/after examples landing inline in the README with explicit widths was the right call — immediate visual proof. Private-to-public workflow kept the initial push clean. Two and a half hours for a complete, documented, multi-tool skill feels right.
+
+**Did:** Designed skill architecture. Wrote six tool adapters (SKILL.md, AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, VSCODE.md). Created neutral_color_balance.md prompt with three variants. Processed three real image pairs. Optimized images with PIL. Wrote README with badges, tables, examples. Added topics and description. Pushed private then public.
 
 ---
 
