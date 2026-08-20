@@ -4,6 +4,20 @@ Personal diary of the AI Lab projects: memories, feelings, stories.
 One entry per day, newest first. This is not the session log (that's the private
 session log, kept local, for times/commands/verdicts).
 
+<p align="right"><b>Total time on all projects: 32h 44m</b></p>
+
+
+## Time Tracker Summary
+
+| Project | Sessions | Total Time |
+|---------|----------|------------|
+| AI Lab | 13 | 14:43 |
+| CorsixTH | 6 | 9:02 |
+| OpenSearch | 5 | 6:29 |
+| sepia-be-gone | 1 | 2:30 |
+| **Total** | **25** | **32:44** |
+
+---
 ### [AI Lab] 2026-08-19: Phase 4 — Backup and Resume
 
 **Mood:** focused, productive, satisfied
