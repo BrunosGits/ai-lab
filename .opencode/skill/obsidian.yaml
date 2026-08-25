@@ -1,0 +1,60 @@
+name: obsidian
+description: Read/write CorsixTH vault notes for agent context
+version: 1.0.0
+
+tools:
+  - name: read_vault
+    description: Read a note from the CorsixTH vault
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path relative to vault root (e.g., 01-CODEBASE/01-entity-iteration/MAP.md)
+      required: [path]
+
+  - name: write_vault
+    description: Write or update a note in the CorsixTH vault
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path relative to vault root
+        content:
+          type: string
+          description: Markdown content
+      required: [path, content]
+
+  - name: search_vault
+    description: Search vault for text or tags
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query (supports Dataview syntax)
+        limit:
+          type: integer
+          default: 10
+      required: [query]
+
+  - name: open_canvas
+    description: Open a Canvas file for editing
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: Path to .canvas file
+      required: [path]
+
+  - name: run_dataview
+    description: Execute a Dataview query and return results
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Dataview query string
+      required: [query]
