@@ -204,3 +204,10 @@ Before merging any emergency system changes:
 
 *Checklist version: 1.0*
 *Based on CorsixTH source analysis at /tmp/CorsixTH/*
+
+
+## Related Pages
+
+- [[10-emergency-system/SUMMARY]]
+- [[10-emergency-system/MAP]]
+- [[10-emergency-system/SCAFFOLD]]

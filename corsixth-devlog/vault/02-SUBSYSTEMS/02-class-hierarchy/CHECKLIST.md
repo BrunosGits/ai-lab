@@ -169,3 +169,10 @@
 ---
 
 **Remember:** The class system touches ALL game systems. A broken `__init` chain breaks entity spawning. A broken MRO breaks UI rendering. A broken `class.is` breaks type checks everywhere. **Test thoroughly.**
+
+
+## Related Pages
+
+- [[02-class-hierarchy/SUMMARY]]
+- [[02-class-hierarchy/MAP]]
+- [[02-class-hierarchy/SCAFFOLD]]

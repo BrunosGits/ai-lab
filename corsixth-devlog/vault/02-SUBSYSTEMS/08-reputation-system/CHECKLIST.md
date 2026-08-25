@@ -215,3 +215,10 @@ Before merging any reputation system changes:
 | 900 | ~64% | ~36% |
 | 1000 | ~0% (never) | **100%** (always) |
 
+
+
+## Related Pages
+
+- [[08-reputation-system/SUMMARY]]
+- [[08-reputation-system/MAP]]
+- [[08-reputation-system/SCAFFOLD]]

@@ -653,3 +653,10 @@ Current version: **212+** (see `App.savegame_version` in `app.lua`)
 ---
 
 *Document generated from CorsixTH source analysis. Covers `persistance.lua`, `app.lua:1995-2058`, `world.lua:2552-2765+`, `persist_lua.h`, `persist_lua.cpp`, and all 73 `afterLoad` implementations.*
+
+
+## Related Pages
+
+- [[12-saveload-migrations/CHECKLIST]]
+- [[12-saveload-migrations/MAP]]
+- [[12-saveload-migrations/SCAFFOLD]]

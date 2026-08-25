@@ -547,3 +547,10 @@ The emergency system integrates with:
 ---
 
 *Document generated from CorsixTH source code analysis. All file paths and line numbers refer to the analyzed codebase at /tmp/CorsixTH/*
+
+
+## Related Pages
+
+- [[10-emergency-system/CHECKLIST]]
+- [[10-emergency-system/MAP]]
+- [[10-emergency-system/SCAFFOLD]]

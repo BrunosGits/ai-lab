@@ -219,3 +219,10 @@ grep -rn "callForStaff\|callForRepair\|callForWatering\|callNurseForVaccination"
 ---
 
 *Line numbers based on calls_dispatcher.lua (567 lines) as of analysis date*
+
+
+## Related Pages
+
+- [[15-calls-dispatcher/SUMMARY]]
+- [[15-calls-dispatcher/CHECKLIST]]
+- [[15-calls-dispatcher/SCAFFOLD]]

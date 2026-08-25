@@ -435,3 +435,10 @@ Where:
 *Map Version: 1.0*
 *Generated from CorsixTH source analysis*
 *Primary files: hospital.lua, room.lua, research_department.lua, patient.lua, bank_manager.lua, annual_report.lua, epidemic.lua*
+
+
+## Related Pages
+
+- [[07-financial-system/SUMMARY]]
+- [[07-financial-system/CHECKLIST]]
+- [[07-financial-system/SCAFFOLD]]

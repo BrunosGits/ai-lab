@@ -196,3 +196,10 @@ For any PR touching graphics:
 ---
 
 *Checklist Version: 1.0 - Generated from CorsixTH source analysis*
+
+
+## Related Pages
+
+- [[19-animation-graphics/SUMMARY]]
+- [[19-animation-graphics/MAP]]
+- [[19-animation-graphics/SCAFFOLD]]

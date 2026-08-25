@@ -477,3 +477,10 @@ Cross-reference for graphics-related methods across Lua and C++ codebases.
 ---
 
 *Map Version: 1.0 - Generated from CorsixTH source analysis*
+
+
+## Related Pages
+
+- [[19-animation-graphics/SUMMARY]]
+- [[19-animation-graphics/CHECKLIST]]
+- [[19-animation-graphics/SCAFFOLD]]

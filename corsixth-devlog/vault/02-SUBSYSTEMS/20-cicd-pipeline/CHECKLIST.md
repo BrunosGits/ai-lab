@@ -169,3 +169,10 @@ git push origin feature-branch
 ---
 
 **Remember**: CI is a safety net, not a development workflow. Run checks locally first!
+
+
+## Related Pages
+
+- [[20-cicd-pipeline/SUMMARY]]
+- [[20-cicd-pipeline/MAP]]
+- [[20-cicd-pipeline/SCAFFOLD]]

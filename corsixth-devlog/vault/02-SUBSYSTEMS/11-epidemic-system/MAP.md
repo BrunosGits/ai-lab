@@ -302,3 +302,10 @@ REVEALED (revealed = true, sendInitialFax)
 | Evacuation | epidemic.lua | 533-541 |
 | Inspector | epidemic.lua | 551-561 |
 | Save/load | epidemic.lua | 754-762 |
+
+
+## Related Pages
+
+- [[11-epidemic-system/SUMMARY]]
+- [[11-epidemic-system/CHECKLIST]]
+- [[11-epidemic-system/SCAFFOLD]]

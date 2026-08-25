@@ -165,3 +165,9 @@ This checklist ensures safe changes to the UI system (`window.lua`, `ui.lua`, `g
 | Absolute | `>= 0` | Pixels from left/top |
 | Negative | `< 0` | Pixels from right/bottom |
 | Fractional | `[0, 1)` | Fraction of parent size |
+
+## Related Pages
+
+- [[17-ui-system/SUMMARY]]
+- [[17-ui-system/MAP]]
+- [[17-ui-system/SCAFFOLD]]

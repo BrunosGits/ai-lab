@@ -484,3 +484,10 @@ CorsixTH's entity iteration pattern is a **robust mark-and-sweep deferred destru
 - Cascading destruction support
 
 **When modifying entity lifecycle code:** Always use `World:destroyEntity()`. Never manipulate `self.entities` directly during iteration. The pattern is simple but must be followed exactly.
+
+
+## Related Pages
+
+- [[01-entity-iteration/CHECKLIST]]
+- [[01-entity-iteration/MAP]]
+- [[01-entity-iteration/SCAFFOLD]]

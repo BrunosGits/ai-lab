@@ -337,3 +337,10 @@ grep -rn "permanent(" Lua/
 ---
 
 *Generated from CorsixTH source tree. Line numbers may shift with edits.*
+
+
+## Related Pages
+
+- [[12-saveload-migrations/SUMMARY]]
+- [[12-saveload-migrations/CHECKLIST]]
+- [[12-saveload-migrations/SCAFFOLD]]

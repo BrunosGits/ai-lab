@@ -673,3 +673,10 @@ Hospital:determineIfContagious() ──► 1/ContRate chance
                                            Send result fax
                                            Announce end
                                            Clear epidemic
+
+
+## Related Pages
+
+- [[11-epidemic-system/CHECKLIST]]
+- [[11-epidemic-system/MAP]]
+- [[11-epidemic-system/SCAFFOLD]]

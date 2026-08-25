@@ -556,3 +556,10 @@ end
 ---
 
 *End of SUMMARY.md*
+
+
+## Related Pages
+
+- [[06-queue-management/CHECKLIST]]
+- [[06-queue-management/MAP]]
+- [[06-queue-management/SCAFFOLD]]

@@ -193,3 +193,10 @@ Run `busted Luatest/spec/world_spec.lua` — all 23 tests must pass:
 **Last Updated:** Based on CorsixTH commit analysis
 **Test File:** `/tmp/CorsixTH/CorsixTH/Luatest/spec/world_spec.lua` (23 tests)
 **Core Files:** `world.lua:971-978, 1055-1065, 1179-1186, 1844-1893`, `entity.lua:281-294`, `app.lua:1242-1248`
+
+
+## Related Pages
+
+- [[01-entity-iteration/SUMMARY]]
+- [[01-entity-iteration/MAP]]
+- [[01-entity-iteration/SCAFFOLD]]

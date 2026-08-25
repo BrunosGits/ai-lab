@@ -177,3 +177,9 @@ Window
 4. **Textbox focus loss** - Click outside should blur
 5. **Scrollbar thumb sync** - Value/range mismatch
 6. **Hotkey conflicts** - Duplicate key bindings
+
+## Related Pages
+
+- [[17-ui-system/CHECKLIST]]
+- [[17-ui-system/MAP]]
+- [[17-ui-system/SCAFFOLD]]

@@ -165,3 +165,10 @@ Before merging research changes:
 - [ ] Performance impact measured (<5ms per research tick)
 
 **Reviewer:** _______________ **Date:** _______________ **Commit:** _______________
+
+
+## Related Pages
+
+- [[09-research-tree/SUMMARY]]
+- [[09-research-tree/MAP]]
+- [[09-research-tree/SCAFFOLD]]

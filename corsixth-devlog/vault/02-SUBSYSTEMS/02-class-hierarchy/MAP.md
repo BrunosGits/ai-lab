@@ -738,3 +738,10 @@ CorsixTH/Lua/
 ---
 
 *End of MAP.md — 195 classes indexed by file:line and category*
+
+
+## Related Pages
+
+- [[02-class-hierarchy/SUMMARY]]
+- [[02-class-hierarchy/CHECKLIST]]
+- [[02-class-hierarchy/SCAFFOLD]]

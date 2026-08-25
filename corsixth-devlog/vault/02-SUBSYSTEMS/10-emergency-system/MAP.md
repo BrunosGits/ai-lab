@@ -301,3 +301,10 @@ Patient:cure() / :goHome() / :die()
 
 *Generated from CorsixTH source at /tmp/CorsixTH/*
 *Last updated: Analysis of commit HEAD*
+
+
+## Related Pages
+
+- [[10-emergency-system/SUMMARY]]
+- [[10-emergency-system/CHECKLIST]]
+- [[10-emergency-system/SCAFFOLD]]

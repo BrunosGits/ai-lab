@@ -537,3 +537,10 @@ research_policy = {
 ---
 
 *Document generated from CorsixTH source analysis. All line numbers reference the source files as of the analysis date.*
+
+
+## Related Pages
+
+- [[09-research-tree/CHECKLIST]]
+- [[09-research-tree/MAP]]
+- [[09-research-tree/SCAFFOLD]]

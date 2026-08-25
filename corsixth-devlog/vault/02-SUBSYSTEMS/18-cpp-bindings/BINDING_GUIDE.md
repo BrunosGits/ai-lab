@@ -505,3 +505,11 @@ lcb.add_metamethod(fn, "name", lua_metatable::other);    // metamethod
 lcb.set_superclass(lua_metatable::parent);                // inheritance
 lcb.add_constant("NAME", value);                          // constant
 ```
+
+
+## Related Pages
+
+- [[18-cpp-bindings/SUMMARY]]
+- [[18-cpp-bindings/CHECKLIST]]
+- [[18-cpp-bindings/MAP]]
+- [[18-cpp-bindings/SCAFFOLD]]

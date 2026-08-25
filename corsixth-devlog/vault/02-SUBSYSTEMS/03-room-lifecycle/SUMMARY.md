@@ -886,3 +886,10 @@ end
 ---
 
 *End of SUMMARY.md*
+
+
+## Related Pages
+
+- [[03-room-lifecycle/CHECKLIST]]
+- [[03-room-lifecycle/MAP]]
+- [[03-room-lifecycle/SCAFFOLD]]

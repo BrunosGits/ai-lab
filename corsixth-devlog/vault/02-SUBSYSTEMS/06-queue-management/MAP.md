@@ -357,3 +357,10 @@ class "AnnouncementQueue"
 ---
 
 *Generated from CorsixTH source analysis — Queue Management System*
+
+
+## Related Pages
+
+- [[06-queue-management/SUMMARY]]
+- [[06-queue-management/CHECKLIST]]
+- [[06-queue-management/SCAFFOLD]]

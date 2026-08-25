@@ -371,3 +371,10 @@ After changes, verify:
 **All checks passed:** ☐ Yes ☐ No
 
 **Notes:**
+
+
+## Related Pages
+
+- [[11-epidemic-system/SUMMARY]]
+- [[11-epidemic-system/MAP]]
+- [[11-epidemic-system/SCAFFOLD]]

@@ -212,3 +212,10 @@ grep -n "to_destroy" Lua/world.lua Lua/entity.lua
 
 **Generated from:** CorsixTH codebase analysis  
 **Core files:** `world.lua` (3055 lines), `entity.lua` (373 lines), `world_spec.lua` (511 lines), `app.lua` (2188 lines)
+
+
+## Related Pages
+
+- [[01-entity-iteration/SUMMARY]]
+- [[01-entity-iteration/CHECKLIST]]
+- [[01-entity-iteration/SCAFFOLD]]

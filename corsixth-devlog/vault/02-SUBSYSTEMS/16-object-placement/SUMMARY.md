@@ -637,3 +637,10 @@ The `getXYforUsePosition` returns multiple entries for table-of-tables format.
 ---
 
 *Document generated from CorsixTH source code analysis. All line numbers reference the current codebase state.*
+
+
+## Related Pages
+
+- [[16-object-placement/CHECKLIST]]
+- [[16-object-placement/MAP]]
+- [[16-object-placement/SCAFFOLD]]

@@ -280,3 +280,10 @@ grep -rn "reputation_min\|reputation_max\|unconditionalChangeReputation" Lua/
 grep -rn "computeReputationImpact\|sal_mult.*reputation\|has_impressive_reputation" Lua/
 ```
 
+
+
+## Related Pages
+
+- [[08-reputation-system/SUMMARY]]
+- [[08-reputation-system/CHECKLIST]]
+- [[08-reputation-system/SCAFFOLD]]

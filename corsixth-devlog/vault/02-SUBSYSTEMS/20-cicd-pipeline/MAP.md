@@ -295,3 +295,10 @@ jq '.["default-registry"].baseline' vcpkg-configuration.json
 # View luacheck globals
 grep -A 70 '^globals = {' .luacheckrc
 ```
+
+
+## Related Pages
+
+- [[20-cicd-pipeline/SUMMARY]]
+- [[20-cicd-pipeline/CHECKLIST]]
+- [[20-cicd-pipeline/SCAFFOLD]]

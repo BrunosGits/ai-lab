@@ -414,3 +414,10 @@ end
 6. **Reputation drives economy:** Patient spawns, treatment prices, staff wages
 7. **Room crash is catastrophic:** -50 reputation (5% of max) instant
 
+
+
+## Related Pages
+
+- [[08-reputation-system/CHECKLIST]]
+- [[08-reputation-system/MAP]]
+- [[08-reputation-system/SCAFFOLD]]

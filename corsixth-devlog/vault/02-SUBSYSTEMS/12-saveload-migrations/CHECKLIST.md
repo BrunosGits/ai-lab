@@ -237,3 +237,10 @@ lua_settable(L, -3);
 ---
 
 *Checklist version 1.0 — Update when architecture changes*
+
+
+## Related Pages
+
+- [[12-saveload-migrations/SUMMARY]]
+- [[12-saveload-migrations/MAP]]
+- [[12-saveload-migrations/SCAFFOLD]]

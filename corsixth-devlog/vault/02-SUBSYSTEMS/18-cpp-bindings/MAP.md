@@ -526,3 +526,10 @@ This document maps every `lua_register_*` function and its internal class/method
 ---
 
 *Generated from CorsixTH source code analysis - Line numbers may shift with edits*
+
+
+## Related Pages
+
+- [[18-cpp-bindings/SUMMARY]]
+- [[18-cpp-bindings/CHECKLIST]]
+- [[18-cpp-bindings/SCAFFOLD]]

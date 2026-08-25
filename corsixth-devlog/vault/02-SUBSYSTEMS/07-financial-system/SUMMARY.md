@@ -713,3 +713,10 @@ local price_distortion = patient:getPriceDistortion(casebook)
 
 *Document generated from CorsixTH source code analysis*
 *Last updated: 2026*
+
+
+## Related Pages
+
+- [[07-financial-system/CHECKLIST]]
+- [[07-financial-system/MAP]]
+- [[07-financial-system/SCAFFOLD]]

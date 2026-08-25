@@ -626,3 +626,10 @@ Lua `Graphics` cache uses `load_info` metatable to reconstruct objects on video 
 ---
 
 *End of Summary - Generated from CorsixTH source analysis*
+
+
+## Related Pages
+
+- [[19-animation-graphics/CHECKLIST]]
+- [[19-animation-graphics/MAP]]
+- [[19-animation-graphics/SCAFFOLD]]

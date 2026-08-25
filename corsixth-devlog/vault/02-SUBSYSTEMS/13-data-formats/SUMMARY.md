@@ -445,3 +445,10 @@ return object
 ## 5. Validation Checklist for New Data Files
 
 See `CHECKLIST.md` for pre-fix checklist and `SCAFFOLD.lua` for Busted test template.
+
+
+## Related Pages
+
+- [[13-data-formats/CHECKLIST]]
+- [[13-data-formats/MAP]]
+- [[13-data-formats/SCAFFOLD]]

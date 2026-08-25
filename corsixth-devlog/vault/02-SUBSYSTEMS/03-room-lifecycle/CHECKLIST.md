@@ -325,3 +325,10 @@
 ---
 
 *Checklist Version: 1.0 | Area: Room Lifecycle | Last Updated: 2026-08-25*
+
+
+## Related Pages
+
+- [[03-room-lifecycle/SUMMARY]]
+- [[03-room-lifecycle/MAP]]
+- [[03-room-lifecycle/SCAFFOLD]]

@@ -564,3 +564,10 @@ The `persistable:` prefix in callback comments indicates these functions must be
 ---
 
 *Generated from CorsixTH source analysis. Total: ~567 lines in calls_dispatcher.lua*
+
+
+## Related Pages
+
+- [[15-calls-dispatcher/CHECKLIST]]
+- [[15-calls-dispatcher/MAP]]
+- [[15-calls-dispatcher/SCAFFOLD]]

@@ -277,3 +277,10 @@ orient_mirror = {
 ---
 
 *Generated from CorsixTH source analysis. Line numbers current as of analysis date.*
+
+
+## Related Pages
+
+- [[16-object-placement/SUMMARY]]
+- [[16-object-placement/CHECKLIST]]
+- [[16-object-placement/SCAFFOLD]]

@@ -224,3 +224,10 @@ If a data change breaks the game:
 2. Check `Lua/Languages/english.lua` for orphaned strings
 3. Run full test suite: `busted SCAFFOLD.lua`
 4. Verify clean start on new game
+
+
+## Related Pages
+
+- [[13-data-formats/SUMMARY]]
+- [[13-data-formats/MAP]]
+- [[13-data-formats/SCAFFOLD]]

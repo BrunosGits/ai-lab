@@ -297,3 +297,10 @@ Category Completion
 | Autopsy | `addResearchPointsForAutopsy` |
 | Disease Discovery | `discoverDisease` |
 | Edge Cases | `afterLoad`, empty research, missing configs |
+
+
+## Related Pages
+
+- [[09-research-tree/SUMMARY]]
+- [[09-research-tree/CHECKLIST]]
+- [[09-research-tree/SCAFFOLD]]

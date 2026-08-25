@@ -312,3 +312,9 @@ grep -n "modal_window" Lua/ui.lua Lua/window.lua
 # Key handler registration
 grep -n "addKeyHandler\|key_handlers" Lua/ui.lua
 ```
+
+## Related Pages
+
+- [[17-ui-system/SUMMARY]]
+- [[17-ui-system/CHECKLIST]]
+- [[17-ui-system/SCAFFOLD]]

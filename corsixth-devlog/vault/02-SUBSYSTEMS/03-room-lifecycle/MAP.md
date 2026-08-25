@@ -413,3 +413,10 @@ grep -n "makeHumanoidLeave" Lua/rooms/*.lua
 ---
 
 *Map Version: 1.0 | Generated: 2026-08-25 | Source: CorsixTH Lua/room.lua + Lua/rooms/*
+
+
+## Related Pages
+
+- [[03-room-lifecycle/SUMMARY]]
+- [[03-room-lifecycle/CHECKLIST]]
+- [[03-room-lifecycle/SCAFFOLD]]

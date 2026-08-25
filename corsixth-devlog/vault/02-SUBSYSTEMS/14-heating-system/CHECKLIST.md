@@ -163,3 +163,10 @@ Heat Adjustment:        0.1 to 1.0 in 0.1 steps (blocked if broken)
 ---
 
 *Checklist version: 1.0 | For CorsixTH heating system modifications*
+
+
+## Related Pages
+
+- [[14-heating-system/SUMMARY]]
+- [[14-heating-system/MAP]]
+- [[14-heating-system/SCAFFOLD]]

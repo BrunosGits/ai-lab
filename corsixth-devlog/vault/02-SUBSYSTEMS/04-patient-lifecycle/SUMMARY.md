@@ -804,3 +804,10 @@ end
 ---
 
 *Document generated from CorsixTH source code analysis. All line references approximate to current codebase state.*
+
+
+## Related Pages
+
+- [[04-patient-lifecycle/CHECKLIST]]
+- [[04-patient-lifecycle/MAP]]
+- [[04-patient-lifecycle/SCAFFOLD]]

@@ -249,3 +249,10 @@ grep -n "countRadiators\|tile_object_counts\[\"radiator\"\]" Lua/hospital.lua
 ---
 
 *Map generated from CorsixTH source. Last updated: Current Git HEAD.*
+
+
+## Related Pages
+
+- [[14-heating-system/SUMMARY]]
+- [[14-heating-system/CHECKLIST]]
+- [[14-heating-system/SCAFFOLD]]

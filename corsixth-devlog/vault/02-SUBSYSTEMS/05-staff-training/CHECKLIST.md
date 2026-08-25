@@ -253,3 +253,10 @@ pre-staff-training-fix-YYYYMMDD
 *Checklist Version: 1.0*
 *Last Updated: 2026-08-25*
 *Area: area-05-staff-training*
+
+
+## Related Pages
+
+- [[05-staff-training/SUMMARY]]
+- [[05-staff-training/MAP]]
+- [[05-staff-training/SCAFFOLD]]

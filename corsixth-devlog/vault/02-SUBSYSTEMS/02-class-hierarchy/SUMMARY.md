@@ -814,3 +814,10 @@ Class.__class     -- Class (self-ref)
 ---
 
 *End of SUMMARY.md — 195 classes documented across 10 categories*
+
+
+## Related Pages
+
+- [[02-class-hierarchy/CHECKLIST]]
+- [[02-class-hierarchy/MAP]]
+- [[02-class-hierarchy/SCAFFOLD]]

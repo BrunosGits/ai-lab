@@ -189,3 +189,10 @@ Use this checklist before making any changes to patient lifecycle code to ensure
 ---
 
 *Checklist version: 1.0 | Based on CorsixTH patient.lua v1378, room.lua v1232, hospital.lua v2442*
+
+
+## Related Pages
+
+- [[04-patient-lifecycle/SUMMARY]]
+- [[04-patient-lifecycle/MAP]]
+- [[04-patient-lifecycle/SCAFFOLD]]

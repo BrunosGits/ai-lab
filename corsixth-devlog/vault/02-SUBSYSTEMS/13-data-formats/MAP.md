@@ -535,3 +535,10 @@ Object (base)
 
 *Generated: 2026-08-25*
 *Total: 34 diseases + 23 rooms + 43 objects = 100 data files indexed*
+
+
+## Related Pages
+
+- [[13-data-formats/SUMMARY]]
+- [[13-data-formats/CHECKLIST]]
+- [[13-data-formats/SCAFFOLD]]

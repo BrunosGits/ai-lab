@@ -322,3 +322,10 @@ Hospital policies (affect patient behavior):
 ---
 
 *Generated from CorsixTH source. Line numbers approximate.*
+
+
+## Related Pages
+
+- [[04-patient-lifecycle/SUMMARY]]
+- [[04-patient-lifecycle/CHECKLIST]]
+- [[04-patient-lifecycle/SCAFFOLD]]

@@ -231,3 +231,10 @@ Use this checklist before making any changes to queue-related code in CorsixTH.
 
 *Checklist Version: 1.0*
 *Last Updated: Based on CorsixTH queue.lua (384 lines), door.lua, reception_desk.lua, room.lua:549-565*
+
+
+## Related Pages
+
+- [[06-queue-management/SUMMARY]]
+- [[06-queue-management/MAP]]
+- [[06-queue-management/SCAFFOLD]]

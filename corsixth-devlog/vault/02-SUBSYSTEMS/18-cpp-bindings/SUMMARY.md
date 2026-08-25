@@ -843,3 +843,10 @@ lua_rawseti(pState->L, anim_metatable, 2);
 ---
 
 *Generated from CorsixTH source code analysis*
+
+
+## Related Pages
+
+- [[18-cpp-bindings/CHECKLIST]]
+- [[18-cpp-bindings/MAP]]
+- [[18-cpp-bindings/SCAFFOLD]]

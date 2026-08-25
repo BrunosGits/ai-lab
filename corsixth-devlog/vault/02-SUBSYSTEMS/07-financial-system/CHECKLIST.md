@@ -251,3 +251,10 @@ When making changes, document:
 *Checklist Version: 1.0*
 *Last Updated: 2026*
 *Applies to: CorsixTH Financial System (hospital.lua, room.lua, research_department.lua, patient.lua)*
+
+
+## Related Pages
+
+- [[07-financial-system/SUMMARY]]
+- [[07-financial-system/MAP]]
+- [[07-financial-system/SCAFFOLD]]

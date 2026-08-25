@@ -611,3 +611,11 @@ alias corsix-config='eval "$(luarocks --lua-version 5.1 path)" && lua5.1 scripts
 # Full validation
 alias corsix-validate='corsix-whitespace && corsix-bom && corsix-classes && ! grep -IrnP '"'"'\t'"'"' CorsixTH/Lua && corsix-luacheck && corsix-busted && corsix-cmakelint && corsix-yamllint && corsix-shellcheck && corsix-config'
 ```
+
+
+## Related Pages
+
+- [[20-cicd-pipeline/SUMMARY]]
+- [[20-cicd-pipeline/CHECKLIST]]
+- [[20-cicd-pipeline/MAP]]
+- [[20-cicd-pipeline/SCAFFOLD]]

@@ -531,3 +531,10 @@ ctest -R test_name --output-on-failure
 | `vcpkg-configuration.json` | Pinned baseline + custom registry |
 | `.luacheckrc` | Lua lint config (144 lines, extensive globals) |
 | `scripts/check_*.py` | Custom whitespace, BOM, class validators |
+
+
+## Related Pages
+
+- [[20-cicd-pipeline/CHECKLIST]]
+- [[20-cicd-pipeline/MAP]]
+- [[20-cicd-pipeline/SCAFFOLD]]

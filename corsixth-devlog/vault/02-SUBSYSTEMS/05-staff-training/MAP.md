@@ -374,3 +374,10 @@ grep -rn "prioritizeQueue\|waiting_patients\|checkin" entities/humanoids/staff/r
 *Map Version: 1.0*
 *Generated for: area-05-staff-training*
 *Source Files: 8 Lua files, ~1,900 lines total*
+
+
+## Related Pages
+
+- [[05-staff-training/SUMMARY]]
+- [[05-staff-training/CHECKLIST]]
+- [[05-staff-training/SCAFFOLD]]
