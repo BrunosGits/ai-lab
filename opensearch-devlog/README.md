@@ -8,25 +8,52 @@ actually works.
 
 Active contribution tracks, newest first:
 
-- **#22676** LATE_MATERIALIZATION profile metrics (analytics engine): reviewed the PR end to end, mapped the Rust and Java changes, built a diagnosis plan for a flaky sandbox-check test, codecov green at 80%
-- **#22654** MONITOR mode workload group rejections (helping): confirmed a duplicate PR was already merged, root-caused a 60% codecov gap to a missing branch in `rejectIfNeeded`, designed and shared a coverage test that the author applied, codecov now green at 80%, awaiting maintainer review
-- **#17561** Inaccurate codec error message: root cause is a hardcoded list in the error message, fix derives the message from the accepted codec list, two tests cover it, e2e verified, commit `c135dc26` pushed to the fork, awaiting maintainer review
-- **#6323** Long strings cut at 2000 characters: reproduced on 2.3.0 and 2.19.6, swept 1980 to 20000 chars across pipelines and remote reindex, no truncation exists, minimal repro posted, awaiting maintainer confirmation of the field-name theory
-- **#22494** Regex automaton cache: code paths mapped, coordinating with the author who has a production-tested PoC, do not duplicate
-- **#21323** Lucene stderr warnings: watching a stalled PR, monitor only
+- **#22676** LATE_MATERIALIZATION profile metrics (analytics engine): Reviewed PR #22676 (Draft) to emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`. Identified three issues: wire BWC guard violation, static test provisioning flag, and shard label uniqueness. Built diagnosis plan for flaky sandbox-check test. Verified fix via codecov (80%) and validated with Gradle test commands: `./gradlew :analytics-query:test --tests "AnalyticsQueryTaskCleanupIT"`. Author addressing feedback, CI status fluctuating.
+- **#22654** MONITOR mode workload group rejections (helping): Confirmed a duplicate PR was already merged (#22610), root-caused a 60% codecov gap to a missing branch in `rejectIfNeeded` (line 274: missing `isPresent() == false` check), designed and shared a coverage test that the author applied, codecov now green at 80%, awaiting maintainer review.
+- **#17561** Inaccurate codec error message: Root cause is a hardcoded list in the error message, fix derives the message from the accepted codec list (built-ins + registered Lucene codecs + aliases, deduped + sorted). Two tests cover it, e2e verified via `EngineConfigTests`, commit `c135dc26` pushed to the fork, awaiting maintainer review.
+- **#6323** Long strings cut at 2000 characters: Reproduced on 2.3.0 and 2.19.6, swept 1980 to 20000 chars across pipelines and remote reindex, no truncation exists, minimal repro posted, awaiting maintainer confirmation of the field-name theory.
+- **#22494** Regex automaton cache: Code paths mapped (`RegexpQuery`, `AutomatonQuery`, `KeywordFieldMapper` + cache API), coordinating with the author who has a production-tested PoC, do not duplicate.
+- **#21323** Lucene stderr warnings: Watching a stalled PR, monitor only.
 
-Full details and checklists live in `ROADMAP.md`.
+## Environment & Testing Strategy
+
+Reproduction and testing run on the VPS with Docker installed on demand. The validation strategy employs:
+
+| Test Dimension | Options/Details | Specific Approach |
+|----------------|-----------------|-------------------|
+| **Environment** | VPS + Docker on demand | Containers for isolation, host for development |
+| **Build System** | JDK 21 + Gradle | `:server:test`, `:test:framework:test` targets |
+| **Validation** | Unit tests ∥ Coverage ∥ e2e | jacoco reports, codecov (≥71.43% baseline), manual verification |
+| **Reproduction** | Docker containers ∥ Version sweep | 2.3.0 & 2.19.6, string lengths 1980-20000 chars |
+| **Git Hygiene** | filter-repo ∥ force push | Author identity cleanup, history rewriting |
+
+### Key Validation Practices
+- **Unit Testing**: `./gradlew :server:test --tests "<FQCN>"` for targeted validation (e.g., `./gradlew :test:framework:test --tests "WLMTests"`)
+- **Coverage Analysis**: jacoco reports identify `pc` (partially covered) vs true gaps; short-circuit `||` lines marked as `pc` are not real bugs
+- **Codecov**: Patch target auto-derived from project baseline (71.43%), not a fixed threshold
+- **Reproduction**: Docker containers with `docker run`/`docker compose` for issue isolation across versions
+- **Version Testing**: Sweep across 2.3.0 and 2.19.6 to validate regression ranges and fix validity
+- **Git Coordination**: `gh` CLI for issue/PR comments (`gh issue comment <n> --body <msg>`), fork creation (`gh repo fork <repo> --clone=false`), CI monitoring (`gh run watch <id>`)
+- **Smoke Testing**: Service startup/shutdown cycles, basic cluster formation and indexing validation
 
 ## How to check the tracked issues
 
 Run `/check-issues` at the start of a session to see the state, labels and
 latest comment on each tracked issue.
 
-## Environment
+Example command sequence:
+```
+# Check all tracked issues
+/check-issues
 
-Reproduction and testing run on the VPS, with Docker installed on demand.
-Docker is installed and the #6323 reproduction ran as containers. The VPS
-address, login name and key are private and never appear in this repo.
+# For specific PR investigation
+gh pr view <NUMBER> --repo <OWNER>/<REPO>
+gh issue view <NUMBER> --repo <OWNER>/<REPO>
+
+# Local validation after fix
+./gradlew :server:test --tests "<TestClass>"
+./gradlew jacocoTestReport
+```
 
 ## License
 
