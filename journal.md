@@ -25,13 +25,13 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 | Project | Sessions | Total Time |
 |---------|----------|------------|
-| AI Lab | 13 | 14:43 |
+| AI Lab | 14 | 15:10 |
 | CorsixTH | 7 | 10:02 |
 | OpenSearch | 5 | 6:29 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **26** | **33:44** |
+| **Total** | **27** | **34:11** |
 
----
+
 
 ### [CorsixTH] 2026-08-20: Cleaner pattern implemented, PR #3504 updated
 
@@ -47,6 +47,7 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 ---
 
+
 ### [sepia-be-gone] 2026-08-19: Sepia Be Gone: portable prompt skill published
 
 **Mood:** satisfied, clean ship
@@ -61,6 +62,21 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 ---
 
+
+### [AI Lab] 2026-08-24: Skills and VPS Cleanup
+
+**Mood:** productive, organized
+
+**Story:** Made it easier to access Infisical, SSH, and the journal. Documented the access steps and processes to avoid manually triggering them and running the risk of accessing them with different approaches each time. Also cleaned up the VPS. Disabled all non essential services so only the bare OS starts on boot: apparmor, cloud init, SSH, networking, firewall. Docker, containerd, PostgreSQL, Caddy, hello all disabled. The VPS now uses 330MB of 3.7GB memory on boot instead of 512MB. Had to re enable the firewall after disabling it by mistake.
+
+**What I learned:** Some things are easier to keep local than to link to the VPS. The machine identity token in Infisical expires after about 30 days. Docker containers with restart policy auto start when Docker starts, even if you only want to test.
+
+**Feelings / notes:** A little nervous about documenting access steps in a public journal, but the actual secrets stay in Infisical. Also surprised how much memory Docker eats even when idle.
+
+**Did:** created access documentation for Infisical, SSH, and journal workflow. Disabled Docker, containerd, PostgreSQL, Caddy, hello, fail2ban, lm-sensors, unattended-upgrades from auto starting. Re-enabled firewall. Reduced boot memory from 512MB to 330MB.
+
+
+
 ### [CorsixTH] 2026-08-17: Clean fork, clean PR, CI green
 
 **Mood:** clean, satisfied the mess is gone
@@ -74,6 +90,7 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 **Did:** deleted BrunosGits/CorsixTH-1 and opensearch-fork, created BrunosGits/CorsixTH fork, pushed fix-1467-clean branch (3 commits), opened PR #3504, verified CI green, updated ai-lab docs.
 
 ---
+
 
 ### [OpenSearch] 2026-08-17: Review, recover, and reopen
 
@@ -93,6 +110,7 @@ The bigger mess was #17561. I had committed the fix to a fork that I then accide
 
 ---
 
+
 ### [AI Lab] 2026-08-16: Phase 3 shipped, and the firewall was mine all along
 
 **Mood:** relieved, then quietly proud of the tiny stack
@@ -106,6 +124,7 @@ The bigger mess was #17561. I had committed the fix to a fork that I then accide
 **Did:** built the compose stack (caddy 2.11.4, hello, postgres 17.11), pinned tags, internal backend network, moved the FastAPI app into a container, dropped the apt cluster and the systemd unit, injected secrets via infisical run, fixed DOCKER-USER to accept inbound 80 and 443, persisted the rules, verified external access, committed and pushed the phase.
 
 ---
+
 
 ### [CorsixTH] 2026-08-16: The fix that held, and the movie that blocked the test
 
@@ -122,6 +141,7 @@ Full matrix: offscreen (3/3), xvfb (3/3), demo control (2/2) all green. luacheck
 **Did:** validated the #1467 deferred-destruction fix on full game data (offscreen, xvfb, demo), fixed smoketest intro-movie blocker, added JSONL heartbeat telemetry, full matrix pass, luacheck + 86 unit tests green, negative control confirmed.
 
 ---
+
 
 ### [OpenSearch] 2026-08-13 (session 1)
 
@@ -145,6 +165,7 @@ Waited for author response on the test fix.
 
 ---
 
+
 ### [OpenSearch] 2026-08-13 (session 2): Issue updates and fixes committed
 
 **Mood:** focused, satisfied with the double progress
@@ -160,6 +181,7 @@ On the planning side I mapped the code paths and competitive landscape for #2249
 **Did:** closed the time tracker, posted the #6323 minimal-reproduction comment, posted the #17561 update comment, committed and pushed the #17561 fix to BrunosGits/opensearch-fork, mapped the #22494 code paths and competitive landscape, and planned the next session.
 
 ---
+
 
 ### [OpenSearch] 2026-08-11: The fix that ran green
 
@@ -178,6 +200,7 @@ Then a cleanup. The Mac's git identity was set to PublishProject, so three commi
 **Did:** swept 2.3.0 and 2.19.6 for the #6323 cutoff, found nothing, pinned the error to field-name validation and posted the evidence. Implemented the #17561 fix with two tests, ran them green on the VPS and posted the results. Rewrote the PublishProject commits on this repo and the expandir fork, force-pushed both, fixed the Mac git identity.
 
 ---
+
 
 ### [OpenSearch] 2026-08-07: The project begins
 
@@ -215,6 +238,7 @@ Recorded #22494 as plan B without commenting. Added check-issues for tracking.
 
 ---
 
+
 ### [CorsixTH] 2026-08-12: Squeezing the entity-loop bug until it squeaked
 
 **Mood:** first fix merged, then surprised by the old-savegame crash
@@ -235,6 +259,7 @@ The day ended with a move to the full game data for reliable tests.
 
 ---
 
+
 ### [AI Lab] 2026-08-11: Everything moves to the VPS
 
 **Mood:** relieved and tidy
@@ -248,6 +273,7 @@ The day ended with a move to the full game data for reliable tests.
 **Did:** moved three repos to the VPS, restored the private tracker and session files, set up opencode and the skills, copied the keys and the git identity, verified the tracker, the Trello sync and GitHub access, synced an uncommitted decision-log entry, deleted the local copies and left only the session data and the access key behind.
 
 ---
+
 
 ### [CorsixTH] 2026-08-11: A working dev box and a first pull request
 
@@ -264,6 +290,7 @@ Then came the first issue, #1793: dead links in the generated Lua docs. My first
 **Did:** set up the fork, built SDL3 and SDL3_mixer into /opt/SDL3, compiled the game, ran the Lua tests and lint, confirmed the headless boot, root-caused issue #1793, extended LDocGen to generate per-file pages, verified 20465 links, and opened pull request #3494.
 
 ---
+
 
 ### [AI Lab] 2026-08-11: The fork got a name
 
@@ -294,6 +321,7 @@ references and the achievements note, and closed the tracker with the extra minu
 
 ---
 
+
 ### [AI Lab] 2026-08-10: Docker is finally in
 
 **Mood:** accomplished, then humbled by a package conflict
@@ -307,6 +335,7 @@ references and the achievements note, and closed the tracker with the extra minu
 **Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
 
 ---
+
 
 ### [AI Lab] 2026-08-10: The fork got a name
 
@@ -337,6 +366,7 @@ references and the achievements note, and closed the tracker with the extra minu
 
 ---
 
+
 ### [AI Lab] 2026-08-07: Docker questions, then the great GUI purge
 
 **Mood:** curious, then decisive, then generous, then thorough
@@ -350,6 +380,7 @@ references and the achievements note, and closed the tracker with the extra minu
 **Did:** Docker Q&A, fixed the stuck rescue boot, purged the desktop GUI.
 
 ---
+
 
 ### [AI Lab] 2026-08-06: The day the rescue test finally passed
 
@@ -378,6 +409,7 @@ that first public push to GitHub.
 
 ---
 
+
 ### [AI Lab] 2026-08-05: The day it started feeling real
 
 **Mood:** excited, a little proud
@@ -403,6 +435,7 @@ drill itself, then Docker.
 built the rescue-mode runbook.
 
 ---
+
 
 ### [AI Lab] 2026-08-04: The night I stopped planning and bought the server
 
