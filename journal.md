@@ -33,6 +33,19 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 
 
+
+### [AI Lab] 2026-08-24: Skills and VPS Cleanup
+
+**Mood:** productive, organized
+
+**Story:** Made it easier to access Infisical, SSH, and the journal. Documented the access steps and processes to avoid manually triggering them and running the risk of accessing them with different approaches each time. Also cleaned up the VPS. Disabled all non essential services so only the bare OS starts on boot: apparmor, cloud init, SSH, networking, firewall. Docker, containerd, PostgreSQL, Caddy, hello all disabled. The VPS now uses 330MB of 3.7GB memory on boot instead of 512MB. Had to re enable the firewall after disabling it by mistake.
+
+**What I learned:** Some things are easier to keep local than to link to the VPS. The machine identity token in Infisical expires after about 30 days. Docker containers with restart policy auto start when Docker starts, even if you only want to test.
+
+**Feelings / notes:** A little nervous about documenting access steps in a public journal, but the actual secrets stay in Infisical. Also surprised how much memory Docker eats even when idle.
+
+**Did:** created access documentation for Infisical, SSH, and journal workflow. Disabled Docker, containerd, PostgreSQL, Caddy, hello, fail2ban, lm-sensors, unattended-upgrades from auto starting. Re-enabled firewall. Reduced boot memory from 512MB to 330MB.
+
 ### [CorsixTH] 2026-08-20: Cleaner pattern implemented, PR #3504 updated
 
 **Mood:** focused, satisfied with the clean architecture
@@ -48,6 +61,7 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 ---
 
 
+
 ### [sepia-be-gone] 2026-08-19: Sepia Be Gone: portable prompt skill published
 
 **Mood:** satisfied, clean ship
@@ -61,19 +75,6 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 **Did:** Designed skill architecture. Wrote six tool adapters (SKILL.md, AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, VSCODE.md). Created neutral_color_balance.md prompt with three variants. Processed three real image pairs. Optimized images with PIL. Wrote README with badges, tables, examples. Added topics and description. Pushed private then public.
 
 ---
-
-
-### [AI Lab] 2026-08-24: Skills and VPS Cleanup
-
-**Mood:** productive, organized
-
-**Story:** Made it easier to access Infisical, SSH, and the journal. Documented the access steps and processes to avoid manually triggering them and running the risk of accessing them with different approaches each time. Also cleaned up the VPS. Disabled all non essential services so only the bare OS starts on boot: apparmor, cloud init, SSH, networking, firewall. Docker, containerd, PostgreSQL, Caddy, hello all disabled. The VPS now uses 330MB of 3.7GB memory on boot instead of 512MB. Had to re enable the firewall after disabling it by mistake.
-
-**What I learned:** Some things are easier to keep local than to link to the VPS. The machine identity token in Infisical expires after about 30 days. Docker containers with restart policy auto start when Docker starts, even if you only want to test.
-
-**Feelings / notes:** A little nervous about documenting access steps in a public journal, but the actual secrets stay in Infisical. Also surprised how much memory Docker eats even when idle.
-
-**Did:** created access documentation for Infisical, SSH, and journal workflow. Disabled Docker, containerd, PostgreSQL, Caddy, hello, fail2ban, lm-sensors, unattended-upgrades from auto starting. Re-enabled firewall. Reduced boot memory from 512MB to 330MB.
 
 
 
