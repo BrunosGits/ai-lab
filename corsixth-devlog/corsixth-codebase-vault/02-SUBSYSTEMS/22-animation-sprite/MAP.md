@@ -559,3 +559,9 @@ Animation Instance
 | `Src/th_gfx_font.h/cpp` | Font system | font, bitmap_font, freetype_font |
 | `Src/th_gfx_common.h` | Shared enums | animation_effect |
 | `Src/th_lua_gfx.cpp` | Lua ↔ C++ bindings | All userdata classes |
+
+
+## Related Pages
+
+- [[CHECKLIST]]
+- [[SUMMARY]]

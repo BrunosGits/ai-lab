@@ -191,14 +191,14 @@ Before merging any emergency system changes:
 
 | File | Purpose |
 |------|---------|
-| `Lua/hospital.lua:925-993` | Core emergency logic |
-| `Lua/hospitals/player_hospital.lua:653-718` | Fax implementation |
+| `[[Lua/hospital.lua#L925]]-993` | Core emergency logic |
+| `[[Lua/hospitals/player_hospital.lua#L653]]-718` | Fax implementation |
 | `Lua/objects/helicopter.lua` | Helicopter + patient spawning |
-| `Lua/world.lua:1080-1120, 1250-1321` | Scheduling & triggering |
+| `[[Lua/world.lua#L1080]]-1120, 1250-1321` | Scheduling & triggering |
 | `Lua/dialogs/watch.lua` | Timer UI & logic |
-| `Lua/dialogs/fullscreen/fax.lua:185-190` | Fax choice handling |
-| `Lua/dialogs/bottom_panel.lua:535-543` | Fax cancellation |
-| `Lua/entities/humanoids/patient.lua:314, 566` | Patient cure/death integration |
+| `[[Lua/dialogs/fullscreen/fax.lua#L185]]-190` | Fax choice handling |
+| `[[Lua/dialogs/bottom_panel.lua#L535]]-543` | Fax cancellation |
+| `[[Lua/entities/humanoids/patient.lua#L314]], 566` | Patient cure/death integration |
 
 ---
 

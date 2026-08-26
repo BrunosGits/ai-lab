@@ -900,3 +900,11 @@ busted --lpath=../Lua/?.lua --coverage
 4. **Use descriptive names**: Test names should explain the expected behavior
 5. **Mock external dependencies**: Use stubs for world, hospital, etc.
 6. **Test both success and failure paths**: Don't just test the happy path
+
+
+## Related Pages
+
+- [[CLASS_MAPPING]]
+- [[CODEBASE_INSIGHTS]]
+- [[CODEBASE_MAP]]
+- [[safe-fix-patterns]]

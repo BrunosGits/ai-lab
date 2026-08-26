@@ -242,3 +242,12 @@ end
 - [[world-entity-flow]] - How entity destruction integrates with save/load
 - [[entity-action-system]] - How actions interact with persistence
 - Area: [[01-CODEBASE/12-saveload-migrations]]
+
+
+## Related Pages
+
+- [[entity-action-system]]
+- [[performance]]
+- [[room-hospital-hierarchy]]
+- [[ui-dialog-hierarchy]]
+- [[world-entity-flow]]

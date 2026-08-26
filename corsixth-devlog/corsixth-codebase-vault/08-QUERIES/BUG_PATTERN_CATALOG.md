@@ -773,3 +773,12 @@ local ok, err = pcall(tickLogic); current_tick_entity = nil; flush(); if not ok 
 ---
 
 *Catalog version 1.0 | Generated from CorsixTH codebase analysis | Last updated: 2026-08-25*
+
+## Related Pages
+
+- [[code-refs]]
+- [[coverage-dashboard]]
+- [[open-issues]]
+- [[pr-status]]
+- [[regression-index]]
+- [[test-coverage]]

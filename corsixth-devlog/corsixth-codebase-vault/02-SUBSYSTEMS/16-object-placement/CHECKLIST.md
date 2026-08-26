@@ -132,13 +132,13 @@
 
 | File | Purpose |
 |------|---------|
-| `Lua/entities/object.lua:36-113` | Constructor, initOrientation |
-| `Lua/entities/object.lua:113-187` | slaveMixinClass |
-| `Lua/entities/object.lua:276-344` | Use position logic |
-| `Lua/entities/object.lua:385-393` | directionParameters |
-| `Lua/entities/object.lua:462-549` | occupyTilesByObjectFootprintAt |
-| `Lua/entities/object.lua:551-607` | deoccupyTilesByObjectFootprintAt |
-| `Lua/entities/object.lua:926-1047` | processTypeDefinition |
+| `[[Lua/entities/object.lua#L36]]-113` | Constructor, initOrientation |
+| `[[Lua/entities/object.lua#L113]]-187` | slaveMixinClass |
+| `[[Lua/entities/object.lua#L276]]-344` | Use position logic |
+| `[[Lua/entities/object.lua#L385]]-393` | directionParameters |
+| `[[Lua/entities/object.lua#L462]]-549` | occupyTilesByObjectFootprintAt |
+| `[[Lua/entities/object.lua#L551]]-607` | deoccupyTilesByObjectFootprintAt |
+| `[[Lua/entities/object.lua#L926]]-1047` | processTypeDefinition |
 | `Lua/objects/bed.lua` | Simple 2-direction example |
 | `Lua/objects/machines/operating_table.lua` | Master-slave example |
 | `Lua/objects/machines/cast_remover.lua` | Complex footprint example |

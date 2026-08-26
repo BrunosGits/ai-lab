@@ -32,3 +32,10 @@ The skip-repro failing on cue is the closest thing a headless server has to a hi
 
 ## Links
 - Related PRs: [PR-3504](https://github.com/CorsixTH/CorsixTH/pull/3504), [PR-3494](https://github.com/CorsixTH/CorsixTH/pull/3494)
+
+
+## Related Pages
+
+- [[2026-08-11-first-pr]]
+- [[2026-08-16-movie-blocker]]
+- [[2026-08-20-cleaner-pattern]]

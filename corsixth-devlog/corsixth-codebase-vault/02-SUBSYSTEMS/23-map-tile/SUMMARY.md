@@ -424,7 +424,7 @@ Separate Lua class tracking real-time entity positions (not tile data).
 
 ---
 
-## 4. World Integration (`Lua/world.lua:2293-2305`)
+## 4. World Integration (`[[Lua/world.lua#L2293]]-2305`)
 
 **`World:getObject(x, y, id, only_usable)`**
 - Gets objects at tile via `self:getObjects(x, y)`
@@ -539,3 +539,9 @@ if west_wall_exists:
 ---
 
 *Generated from source analysis of CorsixTH Map/Tile System*
+
+
+## Related Pages
+
+- [[CHECKLIST]]
+- [[MAP]]

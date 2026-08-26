@@ -50,7 +50,7 @@ Each disease defines emergency-related properties in its disease file (`Lua/dise
 
 ### 2.1 Prerequisites (Hospital:createEmergency)
 
-From `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:925-952`:
+From `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L925]]-952`:
 
 ```lua
 function Hospital:createEmergency(emergency)

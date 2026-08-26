@@ -103,3 +103,12 @@ LoadGame()
 - [[save-load-migrations]] - Migration pattern details
 - [[entity-action-system]] - How actions call destroyEntity
 - Area: [[01-CODEBASE/01-entity-iteration]]
+
+
+## Related Pages
+
+- [[entity-action-system]]
+- [[performance]]
+- [[room-hospital-hierarchy]]
+- [[save-load-migrations]]
+- [[ui-dialog-hierarchy]]

@@ -230,3 +230,9 @@ For any graphics system change, update:
 | Release Manager | | | |
 
 *Checklist version: 1.0 | Last updated: 2026-08-25*
+
+
+## Related Pages
+
+- [[MAP]]
+- [[SUMMARY]]

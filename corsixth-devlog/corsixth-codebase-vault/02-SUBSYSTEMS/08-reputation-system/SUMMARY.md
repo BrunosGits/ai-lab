@@ -8,7 +8,7 @@ The reputation system in CorsixTH is a core gameplay mechanic that tracks the ho
 
 ## 1. Reputation Changes Table
 
-Defined in `Lua/hospital.lua:1606-1615` as the `reputation_changes` table:
+Defined in `[[Lua/hospital.lua#L1606]]-1615` as the `reputation_changes` table:
 
 | Reason | Value | Description | Trigger Location |
 |--------|-------|-------------|------------------|

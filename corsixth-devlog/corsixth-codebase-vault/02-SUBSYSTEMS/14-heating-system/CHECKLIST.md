@@ -6,17 +6,17 @@ Use this checklist before making any changes to the heating system in CorsixTH.
 
 ## 🔍 Code Understanding
 
-- [ ] Read and understand `Lua/hospital.lua:107-112` (heating state initialization)
-- [ ] Read and understand `Lua/hospital.lua:647-666` (boilerBreakdown function)
-- [ ] Read and understand `Lua/hospital.lua:669-694` (_fixBoiler function)
-- [ ] Read and understand `Lua/hospital.lua:761-781` (onEndDay: repair, disasters, daily cost)
-- [ ] Read and understand `Lua/hospital.lua:796-800` (onEndMonth: monthly payment)
-- [ ] Read and understand `Lua/hospital.lua:639-643` (daysUntilNextDisaster)
-- [ ] Read and understand `Lua/hospital.lua:1508-1510` (countRadiators)
-- [ ] Read and understand `Lua/hospital.lua:1453-1462` (countStaffOfCategory)
-- [ ] Read and understand `Lua/hospitals/player_hospital.lua:456-465` (adviseBoilerBreakdown)
-- [ ] Read and understand `Lua/dialogs/fullscreen/town_map.lua:195-198, 213-218, 334-350` (UI)
-- [ ] Read and understand `Lua/hospital.lua:392-406` (save/load migration v142)
+- [ ] Read and understand `[[Lua/hospital.lua#L107]]-112` (heating state initialization)
+- [ ] Read and understand `[[Lua/hospital.lua#L647]]-666` (boilerBreakdown function)
+- [ ] Read and understand `[[Lua/hospital.lua#L669]]-694` (_fixBoiler function)
+- [ ] Read and understand `[[Lua/hospital.lua#L761]]-781` (onEndDay: repair, disasters, daily cost)
+- [ ] Read and understand `[[Lua/hospital.lua#L796]]-800` (onEndMonth: monthly payment)
+- [ ] Read and understand `[[Lua/hospital.lua#L639]]-643` (daysUntilNextDisaster)
+- [ ] Read and understand `[[Lua/hospital.lua#L1508]]-1510` (countRadiators)
+- [ ] Read and understand `[[Lua/hospital.lua#L1453]]-1462` (countStaffOfCategory)
+- [ ] Read and understand `[[Lua/hospitals/player_hospital.lua#L456]]-465` (adviseBoilerBreakdown)
+- [ ] Read and understand `[[Lua/dialogs/fullscreen/town_map.lua#L195]]-198, 213-218, 334-350` (UI)
+- [ ] Read and understand `[[Lua/hospital.lua#L392]]-406` (save/load migration v142)
 
 ---
 

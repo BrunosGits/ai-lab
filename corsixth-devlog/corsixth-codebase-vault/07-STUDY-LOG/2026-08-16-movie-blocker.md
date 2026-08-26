@@ -37,3 +37,10 @@ The negative control failing on cue (dummy C was skipped) is still the best conf
 
 ## Links
 - Related PRs: [PR-3504](https://github.com/CorsixTH/CorsixTH/pull/3504)
+
+
+## Related Pages
+
+- [[2026-08-11-first-pr]]
+- [[2026-08-12-entity-loop]]
+- [[2026-08-20-cleaner-pattern]]

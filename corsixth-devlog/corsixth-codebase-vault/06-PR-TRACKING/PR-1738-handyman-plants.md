@@ -19,3 +19,11 @@ Handymen do not water plants placed in the middle of benches.
 
 ## Status
 Backlog - claim after #3372 lands.
+
+
+## Related Pages
+
+- [[PR-2469-mouse-panning]]
+- [[PR-3372-pickup-destroy]]
+- [[PR-3494-docs-links]]
+- [[PR-3504-entity-destruction]]

@@ -42,3 +42,11 @@ All checks passing (Linux Lua 5.1, LuaJIT, vcpkg Lua 5.5, Windows, AppVeyor).
 ## Next Steps
 - [ ] Wait for lewri re-review
 - [ ] Merge on approval
+
+
+## Related Pages
+
+- [[PR-1738-handyman-plants]]
+- [[PR-2469-mouse-panning]]
+- [[PR-3372-pickup-destroy]]
+- [[PR-3494-docs-links]]

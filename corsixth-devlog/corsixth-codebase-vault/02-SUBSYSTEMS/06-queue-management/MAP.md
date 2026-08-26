@@ -224,17 +224,17 @@ Comprehensive cross-reference for all queue-related operations in CorsixTH.
 
 ## Special Room Queue Calls
 
-### `Lua/rooms/training.lua:196`
+### `[[Lua/rooms/training.lua#L196]]`
 ```lua
 self:tryAdvanceQueue()
 ```
 
-### `Lua/rooms/staff_room.lua:51`
+### `[[Lua/rooms/staff_room.lua#L51]]`
 ```lua
 self:tryAdvanceQueue()
 ```
 
-### `Lua/rooms/operating_theatre.lua:141`
+### `[[Lua/rooms/operating_theatre.lua#L141]]`
 ```lua
 self:tryAdvanceQueue()
 ```
@@ -243,7 +243,7 @@ self:tryAdvanceQueue()
 
 ## VIP Queue Interaction
 
-### `Lua/entities/humanoids/vip.lua:466`
+### `[[Lua/entities/humanoids/vip.lua#L466]]`
 ```lua
 room:tryAdvanceQueue()
 ```
@@ -277,12 +277,12 @@ room:tryAdvanceQueue()
 
 ## Door Action Queue Interactions
 
-### `Lua/humanoid_actions/knock_door.lua:85`
+### `[[Lua/humanoid_actions/knock_door.lua#L85]]`
 ```lua
 door:getRoom():tryAdvanceQueue()
 ```
 
-### `Lua/objects/doors/swing_door_right.lua:165`
+### `[[Lua/objects/doors/swing_door_right.lua#L165]]`
 ```lua
 self:getRoom():tryAdvanceQueue()
 ```
@@ -310,7 +310,7 @@ self:getRoom():tryAdvanceQueue()
 
 ## Game UI Queue Icons
 
-### `Lua/game_ui.lua:478`
+### `[[Lua/game_ui.lua#L478]]`
 ```lua
 -- Queueing icons over patients
 ```
@@ -319,7 +319,7 @@ self:getRoom():tryAdvanceQueue()
 
 ## Announcement Queue (Separate System)
 
-### `Lua/announcer.lua:45`
+### `[[Lua/announcer.lua#L45]]`
 ```lua
 class "AnnouncementQueue"
 ```
@@ -329,10 +329,10 @@ class "AnnouncementQueue"
 
 ## Language Files (Queue Window Strings)
 
-- `Lua/languages/finnish.lua:1507, 2738`
-- `Lua/languages/norwegian.lua:416, 3114`
-- `Lua/languages/danish.lua:1365, 2393`
-- `Lua/languages/hungarian.lua:1110`
+- `[[Lua/languages/finnish.lua#L1507]], 2738`
+- `[[Lua/languages/norwegian.lua#L416]], 3114`
+- `[[Lua/languages/danish.lua#L1365]], 2393`
+- `[[Lua/languages/hungarian.lua#L1110]]`
 
 ---
 

@@ -668,3 +668,9 @@ animation_manager->set_animation_alt_palette_map(anim_index, greyscale_map, thdf
 3. **Animation Effects**: `animation_effect` enum extensible for new shader-like effects
 4. **Font Fallback**: `Graphics:loadFont` automatically chooses bitmap vs FreeType based on language support
 5. **Sprite Sheet Replacement**: `animation_manager::custom_sheets` allows custom sprites in animations
+
+
+## Related Pages
+
+- [[CHECKLIST]]
+- [[MAP]]

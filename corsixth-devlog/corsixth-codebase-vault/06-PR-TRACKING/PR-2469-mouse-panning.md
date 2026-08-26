@@ -19,3 +19,11 @@ Right mouse panning causes glitches when placing objects.
 
 ## Status
 Queued after #3372. Needs reproduction and root cause analysis.
+
+
+## Related Pages
+
+- [[PR-1738-handyman-plants]]
+- [[PR-3372-pickup-destroy]]
+- [[PR-3494-docs-links]]
+- [[PR-3504-entity-destruction]]

@@ -119,3 +119,11 @@ cmake --build build
 4. **Apply minimal fix** - Change only what's necessary
 5. **Run full test suite** - Ensure no regressions
 6. **Manual test** - Verify in-game behavior
+
+
+## Related Pages
+
+- [[CLASS_MAPPING]]
+- [[CODEBASE_INSIGHTS]]
+- [[TEST_IMPLEMENTATIONS]]
+- [[safe-fix-patterns]]

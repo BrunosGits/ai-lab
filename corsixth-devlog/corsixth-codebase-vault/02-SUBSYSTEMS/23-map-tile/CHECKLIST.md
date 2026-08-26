@@ -12,7 +12,7 @@ This checklist must be completed before making any changes to the Map/Tile syste
 - [ ] Read and understand `Src/th_map.h` (620 lines) - C++ level_map class definition
 - [ ] Read and understand `Src/th_map.cpp` - C++ implementation (1500+ lines)
 - [ ] Read and understand `Lua/entity_map.lua` (218 lines) - Entity tracking on map
-- [ ] Read and understand `Lua/world.lua:2293-2305` - getObject at coordinates
+- [ ] Read and understand `[[Lua/world.lua#L2293]]-2305` - getObject at coordinates
 
 ### 1.2 Key Data Structures
 - [ ] `map_tile_flags` (th_map.h:118-179) - 22 boolean flags per tile
@@ -211,3 +211,9 @@ This checklist must be completed before making any changes to the Map/Tile syste
 - Area 18: Save/Load System
 - Area 21: UI/Map Rendering
 - Area 25: Campaign/Level Loading
+
+
+## Related Pages
+
+- [[MAP]]
+- [[SUMMARY]]

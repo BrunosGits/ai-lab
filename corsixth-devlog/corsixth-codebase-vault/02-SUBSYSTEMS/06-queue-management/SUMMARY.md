@@ -305,7 +305,7 @@ end
 
 ---
 
-## 4. Room Queue Advancement (`Lua/room.lua:549-565`)
+## 4. Room Queue Advancement (`[[Lua/room.lua#L549]]-565`)
 
 ```lua
 function Room:tryAdvanceQueue()

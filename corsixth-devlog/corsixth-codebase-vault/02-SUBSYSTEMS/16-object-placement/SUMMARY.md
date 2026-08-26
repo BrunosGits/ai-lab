@@ -10,7 +10,7 @@ This document provides a comprehensive analysis of the object placement system i
 
 ### 1.1 Constructor (`Object:Object`)
 
-**File:** `Lua/entities/object.lua:36-59`
+**File:** `[[Lua/entities/object.lua#L36]]-59`
 
 ```lua
 function Object:Object(hospital, object_type, x, y, direction, etc)
@@ -51,7 +51,7 @@ end
 
 ### 1.2 Orientation Initialization (`initOrientation`)
 
-**File:** `Lua/entities/object.lua:64-110`
+**File:** `[[Lua/entities/object.lua#L64]]-110`
 
 ```lua
 function Object:initOrientation(direction)
@@ -125,7 +125,7 @@ The system uses four cardinal directions:
 
 ### 2.2 Mirror Mapping
 
-**File:** `Lua/entities/object.lua:29-34`
+**File:** `[[Lua/entities/object.lua#L29]]-34`
 
 ```lua
 local orient_mirror = {
@@ -140,7 +140,7 @@ When an object doesn't have an animation for a specific direction, it falls back
 
 ### 2.3 Direction Parameters
 
-**File:** `Lua/entities/object.lua:385-393`
+**File:** `[[Lua/entities/object.lua#L385]]-393`
 
 ```lua
 function Object.directionParameters()
@@ -190,7 +190,7 @@ The footprint is an array of tile definitions relative to the object's origin ti
 
 ### 3.3 Example: Bed Footprint (North)
 
-**File:** `Lua/objects/bed.lua:74-80`
+**File:** `[[Lua/objects/bed.lua#L74]]-80`
 
 ```lua
 north = {
@@ -216,7 +216,7 @@ X=1   [···]     -      (only_passable - patient stands here)
 
 ### 3.4 Example: Cast Remover (Complex Footprint)
 
-**File:** `Lua/objects/machines/cast_remover.lua:120-134`
+**File:** `[[Lua/objects/machines/cast_remover.lua#L120]]-134`
 
 ```lua
 north = {
@@ -246,7 +246,7 @@ north = {
 
 ### 4.1 Position Names
 
-**File:** `Lua/entities/object.lua:320-331`
+**File:** `[[Lua/entities/object.lua#L320]]-331`
 
 ```lua
 function Object:usePositionNames()
@@ -274,7 +274,7 @@ end
 
 ### 4.3 Getting Use Positions
 
-**File:** `Lua/entities/object.lua:291-318`
+**File:** `[[Lua/entities/object.lua#L291]]-318`
 
 ```lua
 function Object:getXYforUsePosition(object_x, object_y, object_layout, usage_position_name)
@@ -303,7 +303,7 @@ end
 
 ### 4.4 Example: Operating Table Positions
 
-**File:** `Lua/objects/machines/operating_table.lua:94-121`
+**File:** `[[Lua/objects/machines/operating_table.lua#L94]]-121`
 
 ```lua
 north = {
@@ -327,7 +327,7 @@ north = {
 
 ### 5.1 Application in Footprint Occupation
 
-**File:** `Lua/entities/object.lua:462-549` (occupyTilesByObjectFootprintAt)
+**File:** `[[Lua/entities/object.lua#L462]]-549` (occupyTilesByObjectFootprintAt)
 
 Key logic for `only_side` tiles:
 ```lua
@@ -370,7 +370,7 @@ For `only_side` tiles:
 
 ### 6.1 Slave Mixin
 
-**File:** `Lua/entities/object.lua:113-187`
+**File:** `[[Lua/entities/object.lua#L113]]-187`
 
 ```lua
 function Object.slaveMixinClass(class_method_table)
@@ -445,7 +445,7 @@ return object
 
 ### 7.1 Occupy Tiles (`occupyTilesByObjectFootprintAt`)
 
-**File:** `Lua/entities/object.lua:462-549`
+**File:** `[[Lua/entities/object.lua#L462]]-549`
 
 Process:
 1. Gets direction parameters for current orientation
@@ -461,7 +461,7 @@ Process:
 
 ### 7.2 Deoccupy Tiles (`deoccupyTilesByObjectFootprintAt`)
 
-**File:** `Lua/entities/object.lua:551-607`
+**File:** `[[Lua/entities/object.lua#L551]]-607`
 
 Process:
 1. Removes from world entity map
@@ -477,7 +477,7 @@ Process:
 
 ### 8.1 `processTypeDefinition`
 
-**File:** `Lua/entities/object.lua:926-1047`
+**File:** `[[Lua/entities/object.lua#L926]]-1047`
 
 Called at load time to normalize object definitions:
 
@@ -578,7 +578,7 @@ object.orientations = {
 
 ### 10.1 Trash Bin (thob 50) Orientation Bug
 
-**File:** `Lua/entities/object.lua:468-471, 557-560`
+**File:** `[[Lua/entities/object.lua#L468]]-471, 557-560`
 
 ```lua
 -- In both occupy and deoccupy:

@@ -479,3 +479,9 @@ screen_to_world:  x = y/32 + x/64,  y = y/32 - x/64
 **EntityMap**: entity_map.lua:32
 **Persistence**: map.lua:473, th_map.cpp:1489
 **Migration**: map.lua:856
+
+
+## Related Pages
+
+- [[CHECKLIST]]
+- [[SUMMARY]]

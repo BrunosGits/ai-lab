@@ -80,3 +80,12 @@ CallsDispatcher:register(callback, call_types)
 - [[world-entity-flow]] - How actions call destroyEntity
 - [[save-load-migrations]] - Action queue persistence
 - Area: [[01-CODEBASE/01-entity-iteration]], [[01-CODEBASE/04-patient-lifecycle]], [[01-CODEBASE/05-staff-training]]
+
+
+## Related Pages
+
+- [[performance]]
+- [[room-hospital-hierarchy]]
+- [[save-load-migrations]]
+- [[ui-dialog-hierarchy]]
+- [[world-entity-flow]]

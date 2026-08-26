@@ -163,3 +163,12 @@ function Window:onClose() end
 - [[world-entity-flow]] - How UI interacts with world
 - [[entity-action-system]] - UI triggers actions
 - Area: [[01-CODEBASE/17-ui-system]], [[01-CODEBASE/18-cpp-bindings]]
+
+
+## Related Pages
+
+- [[entity-action-system]]
+- [[performance]]
+- [[room-hospital-hierarchy]]
+- [[save-load-migrations]]
+- [[world-entity-flow]]

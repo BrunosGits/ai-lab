@@ -42,3 +42,10 @@ The maintainer feedback (lewri) was spot on. The invariant approach is cleaner a
 ## Links
 - Related PRs: [PR-3504](https://github.com/CorsixTH/CorsixTH/pull/3504)
 - Code refs: `world.lua:destroyEntity`, `world.lua:_flushDestroyedEntities`, `world.lua:afterLoad`
+
+
+## Related Pages
+
+- [[2026-08-11-first-pr]]
+- [[2026-08-12-entity-loop]]
+- [[2026-08-16-movie-blocker]]

@@ -8,7 +8,7 @@ This document provides comprehensive analysis of the heating system implementati
 
 ## 1. Heating State Variables
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:107-112`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L107]]-112`
 
 ```lua
 self.heating = {
@@ -30,7 +30,7 @@ self.heating = {
 
 ### Save/Load Migration (v142)
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:392-406`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L392]]-406`
 
 ```lua
 if old < 142 then
@@ -53,7 +53,7 @@ end
 
 ## 2. Boiler Breakdown Trigger
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:647-666`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L647]]-666`
 
 ```lua
 function Hospital:boilerBreakdown(broken_heat)
@@ -94,7 +94,7 @@ end
 
 ### Disaster-Triggered Breakdowns
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:763-776`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L763]]-776`
 
 ```lua
 self.disasterless_days = self.disasterless_days - 1
@@ -118,7 +118,7 @@ end
 
 ### Days Until Next Disaster
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:639-643`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L639]]-643`
 
 ```lua
 function Hospital:daysUntilNextDisaster()
@@ -138,7 +138,7 @@ end
 
 ## 3. Repair Countdown Mechanics
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:669-694`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L669]]-694`
 
 ```lua
 function Hospital:_fixBoiler()
@@ -186,7 +186,7 @@ When `boiler_repair_count <= 0`:
 
 ### Daily Call Site
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:761`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L761]]`
 
 ```lua
 self:_fixBoiler() -- Boiler always needs work (especially if broken).
@@ -198,7 +198,7 @@ Called from `Hospital:onEndDay()` daily.
 
 ## 4. Daily Heating Cost Formula
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:778-781`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L778]]-781`
 
 ```lua
 -- Calculate heating cost daily. Divide the monthly cost by the number of days in that month
@@ -237,7 +237,7 @@ Monthly Cost = radiator_heat × 10 × num_radiators × 7.50
 
 ### UI Display (Town Map)
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/dialogs/fullscreen/town_map.lua:196-198`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/dialogs/fullscreen/town_map.lua#L196]]-198`
 
 ```lua
 local heating_costs = world.free_build_mode and 0 or
@@ -250,7 +250,7 @@ Note: UI shows **monthly** cost (not daily), rounded down.
 
 ## 5. Monthly Payment Processing
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:796-800`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L796]]-800`
 
 ```lua
 -- Pay heating costs
@@ -288,7 +288,7 @@ end
 
 ## 7. User Heat Adjustment (Town Map UI)
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/dialogs/fullscreen/town_map.lua:334-350`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/dialogs/fullscreen/town_map.lua#L334]]-350`
 
 ```lua
 function UITownMap:decreaseHeat()
@@ -319,7 +319,7 @@ end
 
 ## 8. Radiator Count Implementation
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:1508-1510`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L1508]]-1510`
 
 ```lua
 function Hospital:countRadiators()
@@ -334,7 +334,7 @@ end
 
 ## 9. Staff Counting for Handymen
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospital.lua:1453-1462`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospital.lua#L1453]]-1462`
 
 ```lua
 function Hospital:countStaffOfCategory(category, max_count)
@@ -356,7 +356,7 @@ end
 
 ## 10. Boiler Breakdown Advisor Messages
 
-**Location:** `/tmp/CorsixTH/CorsixTH/Lua/hospitals/player_hospital.lua:456-465`
+**Location:** `/tmp/CorsixTH/CorsixTH/[[Lua/hospitals/player_hospital.lua#L456]]-465`
 
 ```lua
 function PlayerHospital:adviseBoilerBreakdown(broken_heat)

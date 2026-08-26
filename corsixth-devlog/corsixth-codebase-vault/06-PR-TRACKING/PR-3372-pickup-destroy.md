@@ -34,3 +34,11 @@ Snapshot-and-destroy with tile reservation (reuses #1467 deferred-destruction ma
 
 ## Status
 Design complete, implementation pending.
+
+
+## Related Pages
+
+- [[PR-1738-handyman-plants]]
+- [[PR-2469-mouse-panning]]
+- [[PR-3494-docs-links]]
+- [[PR-3504-entity-destruction]]

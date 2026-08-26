@@ -116,3 +116,12 @@ end
 - [[entity-action-system]] - Staff/patient actions in rooms
 - [[save-load-migrations]] - Room persistence
 - Area: [[01-CODEBASE/03-room-lifecycle]], [[01-CODEBASE/07-financial-system]], [[01-CODEBASE/08-reputation-system]]
+
+
+## Related Pages
+
+- [[entity-action-system]]
+- [[performance]]
+- [[save-load-migrations]]
+- [[ui-dialog-hierarchy]]
+- [[world-entity-flow]]

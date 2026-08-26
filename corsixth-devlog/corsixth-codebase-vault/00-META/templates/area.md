@@ -60,3 +60,9 @@ LIST FROM "03-PR-TRACKING" WHERE contains(related_areas, \"{{area}}")
 ```dataview
 LIST FROM \"04-STUDY-LOGR WHER CONTAINS(related_areas, \"{{area}}")
 SORT file.name DESC
+
+## Related Pages
+
+- [[code-ref]]
+- [[daily]]
+- [[pr-log]]

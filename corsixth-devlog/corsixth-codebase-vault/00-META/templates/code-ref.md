@@ -39,3 +39,10 @@ graph TD
 
 ## Related PRs
 - [[PR-XXXX]]
+
+
+## Related Pages
+
+- [[area]]
+- [[daily]]
+- [[pr-log]]

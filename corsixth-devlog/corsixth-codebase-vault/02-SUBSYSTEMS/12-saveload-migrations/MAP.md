@@ -329,9 +329,9 @@ grep -rn "permanent(" Lua/
 
 ### Key Files to Remember
 - `Lua/persistance.lua` — Save/Load entry, permanent system
-- `Lua/app.lua:1995` — App:afterLoad (migration root)
-- `Lua/world.lua:2552` — World:afterLoad (gameplay migrations)
-- `Lua/map.lua:856` — Map:afterLoad (map data migrations)
+- `[[Lua/app.lua#L1995]]` — App:afterLoad (migration root)
+- `[[Lua/world.lua#L2552]]` — World:afterLoad (gameplay migrations)
+- `[[Lua/map.lua#L856]]` — Map:afterLoad (map data migrations)
 - `Src/persist_lua.cpp` — C++ binary serializer
 
 ---

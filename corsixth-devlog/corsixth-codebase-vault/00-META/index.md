@@ -54,3 +54,8 @@ Welcome to the CorsixTH Codebase Study Vault.
 
 ### 🎯 Kanban
 - [[07-KANBAN/corsixth-kanban.canvas]] - Visual PR board
+
+
+## Related Pages
+
+- [[tags]]

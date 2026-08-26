@@ -37,3 +37,9 @@ WHERE check
 ## Next Steps
 - [ ] 
 - [ ] 
+
+## Related Pages
+
+- [[area]]
+- [[code-ref]]
+- [[daily]]

@@ -120,70 +120,70 @@ TreeControl (extends Window)
 ## CATEGORY 1: CORE / APPLICATION (10 classes)
 
 ### 1. App
-- **File:** `CorsixTH/Lua/app.lua:33`
+- **File:** `CorsixTH/[[Lua/app.lua#L33]]`
 - **Superclass:** none (root)
 - **Key methods:** `init()`, `onTick()`, `drawFrame()`, `dispatch()`, `loadLevel()`, `loadMainMenu()`, `loadCampaign()`, `errorHandler()`, `onKeyDown()`, `onKeyUp()`, `onMouseDown()`, `onMouseUp()`, `onMouseMove()`, `onMouseWheel()`, `onMusicOver()`, `onMovieOver()`, `onWindowResized()`, `saveConfig()`, `fixConfig()`
 - **Key state fields:** `command_line`, `config`, `hotkeys`, `runtime_config`, `gfx`, `strings`, `savegame_version`, `eventHandlers`, `idle_tick`
 - **Collections:** Singleton; referenced as `TheApp`
 
 ### 2. World
-- **File:** `CorsixTH/Lua/world.lua:48`
+- **File:** `CorsixTH/[[Lua/world.lua#L48]]`
 - **Superclass:** none
 - **Key methods:** `World()`, `onTick()`, `setUI()`, `spawnPatient()`, `spawnVIP()`, `newRoom()`, `newEntity()`, `destroyEntity()`, `initLevel()`, `speedUp()`, `previousSpeed()`, `setSpeed()`, `isPaused()`, `pauseOrUnpause()`, `getLocalPlayerHospital()`, `calculateSpawnTiles()`, `markRoomAsBuilt()`, `notifyRoomRemoved()`, `date()`
 - **Key state fields:** `app`, `map`, `entities`, `objects`, `rooms`, `hospitals`, `entity_map`, `pathfinder`, `dispatcher`, `game_date`, `tick_rate`, `tick_timer`, `hours_per_tick`, `user_paused`, `available_rooms`, `floating_dollars`, `spawn_points`, `earthquake`, `next_emergency_no`, `room_built`, `idle_cache`, `delayed_map_objects`
 - **Collections:** `world.entities`, `world.objects`, `world.rooms`, `world.hospitals`
 
 ### 3. Map
-- **File:** `CorsixTH/Lua/map.lua:22`
+- **File:** `CorsixTH/[[Lua/map.lua#L22]]`
 - **Superclass:** none
 - **Key methods:** `Map()`, `getCellFlag()`, `getRoomId()`, `setCameraTile()`, `load()`, `setTemperatureDisplayMethod()`, `getDifficulty()`, `getParcelPrice()`
 - **Key state fields:** `th` (C++ THMap), `width`, `height`, `app`, `difficulty`
 - **Collections:** Singleton per game; `TheApp.map`, `World.map`
 
 ### 4. Date
-- **File:** `CorsixTH/Lua/date.lua:29`
+- **File:** `CorsixTH/[[Lua/date.lua#L29]]`
 - **Superclass:** none
 - **Key methods:** `Date()`, `year()`, `month()`, `dayOfMonth()`, `hour()`, `dayOfYear()`, `isSameMonth()`, `isLastDayOfMonth()`, `isNextDay()`, `plusDays()`, `plusHours()`, `hoursPerDay()` (static), `daysPerMonth()` (static), `equals()`
 - **Key state fields:** `_year`, `_month`, `_day`, `_hour`
 - **Collections:** `World.game_date`
 
 ### 5. Strings
-- **File:** `CorsixTH/Lua/strings.lua:25`
+- **File:** `CorsixTH/[[Lua/strings.lua#L25]]`
 - **Superclass:** none
 - **Key methods:** `Strings()`, `init()`, `setLanguage()`
 - **Key state fields:** `app`, `languages`, `language_chunks`, `language_to_chunk`
 - **Collections:** Singleton; `TheApp.strings`
 
 ### 6. Graphics
-- **File:** `CorsixTH/Lua/graphics.lua:29`
+- **File:** `CorsixTH/[[Lua/graphics.lua#L29]]`
 - **Superclass:** none
 - **Key methods:** `Graphics()`, `init()`, `loadSpriteTable()`, `loadMainCursor()`, `loadFont()`, `loadAnimation()`, `loadPalette()`, `loadBackground()`
 - **Key state fields:** `app`, `target`, `cache`, `palette_map`
 - **Collections:** Singleton; `TheApp.gfx`
 
 ### 7. AnimationManager
-- **File:** `CorsixTH/Lua/graphics.lua:858`
+- **File:** `CorsixTH/[[Lua/graphics.lua#L858]]`
 - **Superclass:** none
 - **Key methods:** `AnimationManager()`, `setAnimLength()`, `getAnimLength()`, `setPatientMarker()`, `setStaffMarker()`
 - **Key state fields:** `anim_length_cache`, `anims`
 - **Collections:** Singleton; `TheApp.animation_manager`
 
 ### 8. Audio
-- **File:** `CorsixTH/Lua/audio.lua:30`
+- **File:** `CorsixTH/[[Lua/audio.lua#L30]]`
 - **Superclass:** none
 - **Key methods:** `Audio()`, `init()`, `playSound()`, `playSoundAt()`, `playMusic()`, `playAnnouncement()`, `playEntitySounds()`, `stopBackgroundMusic()`, `clearCallbacks()`
 - **Key state fields:** `app`, `has_bg_music`, `not_loaded`, `played_sound_callbacks`, `background_playlist`, `entities_waiting_for_sound_to_be_enabled`
 - **Collections:** Singleton; `TheApp.audio`
 
 ### 9. MoviePlayer
-- **File:** `CorsixTH/Lua/movie_player.lua:26`
+- **File:** `CorsixTH/[[Lua/movie_player.lua#L26]]`
 - **Superclass:** none
 - **Key methods:** `MoviePlayer()`, `playIntro()`, `playLevelWinVideo()`, `playLevelLoseVideo()`, `playVideo()`, `onMovieOver()`, `stop()`
 - **Key state fields:** `app`, `moviePlayer`, `video_played_since_last_restart`
 - **Collections:** Singleton; `TheApp.movie_player`
 
 ### 10. FileSystem
-- **File:** `CorsixTH/Lua/filesystem.lua:34`
+- **File:** `CorsixTH/[[Lua/filesystem.lua#L34]]`
 - **Superclass:** none
 - **Key methods:** `FileSystem()`, `setPath()`, `setProvider()`, `getFileList()`, `getDirectoryList()`, `readContents()`, `isIso()`
 - **Key state fields:** `files`, `sub_dirs`, `physical_path`, `provider`
@@ -194,105 +194,105 @@ TreeControl (extends Window)
 ## CATEGORY 2: ENTITIES (15 classes)
 
 ### 11. Entity
-- **File:** `CorsixTH/Lua/entity.lua:22`
+- **File:** `CorsixTH/[[Lua/entity.lua#L22]]`
 - **Superclass:** none (root of entity hierarchy)
 - **Key methods:** `Entity()`, `tick()`, `tickDay()`, `onDestroy()`, `onPickUp()`, `setAnimation()`, `setTile()`, `setPosition()`, `setSpeed()`, `setTilePositionSpeed()`, `setLayer()`, `setTimer()`, `setMoodInfo()`, `setMood()`, `setDynamicInfo()`, `getDynamicInfo()`, `clearDynamicInfo()`, `getRoom()`, `playSound()`, `playEntitySounds()`, `afterLoad()`, `resetAnimation()`, `getDrawingLayer()`, `notifyNewObject()`, `notifyNewRoom()`
 - **Key state fields:** `world`, `th` (TH animation), `layers`, `tile_x`, `tile_y`, `animation_idx`, `animation_flags`, `ticks`, `mood_info`, `mood_marker`, `dynamic_info`, `timer_time`, `timer_function`, `slow_animation`
 - **Collections:** `world.entities`, `world.entity_map`
 
 ### 12. Humanoid (extends Entity)
-- **File:** `CorsixTH/Lua/entities/humanoid.lua:22`
+- **File:** `CorsixTH/[[Lua/entities/humanoid.lua#L22]]`
 - **Superclass:** Entity
 - **Key methods:** `Humanoid()`, `tick()`, `tickDay()`, `onClick()`, `onDestroy()`, `afterLoad()`, `setMood()`, `setNextAction()`, `queueAction()`, `finishAction()`, `startAction()`, `walkTo()`, `despawn()`, `setHospital()`, `setType()`, `isType()`, `leaveArea()`, `tire()`, `wake()`, `updateSpeed()`, `changeAttribute()`, `getCurrentAction()`, `isLeaving()`, `findObjectsInSquare()`, `notifyNewRoom()`, `registerRoomBuildCallback()`, `unregisterCallbacks()`
 - **Key state fields:** `action_queue`, `last_move_direction`, `attributes` (warmth, happiness, health, fatigue, thirst, toilet_need), `active_moods`, `speed`, `hospital`, `in_room`, `user_of`, `walk_anims`, `die_anims`, `should_knock_on_doors`, `build_callbacks`, `remove_callbacks`, `staff_change_callbacks`
 - **Collections:** `world.entities`, `room.humanoids`, `world.entity_map`
 
 ### 13. Object (extends Entity)
-- **File:** `CorsixTH/Lua/entities/object.lua:24`
+- **File:** `CorsixTH/[[Lua/entities/object.lua#L24]]`
 - **Superclass:** Entity
 - **Key methods:** `Object()`, `tick()`, `onClick()`, `onDestroy()`, `onPickUp()`, `afterLoad()`, `initOrientation()`, `setTile()`, `setUser()`, `removeUser()`, `addReservedUser()`, `removeReservedUser()`, `isReservedFor()`, `occupyTilesByObjectFootprintAt()`, `deoccupyTilesByObjectFootprintAt()`, `getWalkableTiles()`, `getRenderAttachTile()`, `getXYforUsePosition()`, `isMachine()`, `setInvisible()`, `incrementUsedCount()`, `updateDynamicInfo()`, `resetAnimation()`, `eraseObject()`, `resetUsageAndReservaton()`, `getState()`, `setState()`, `slaveMixinClass()` (static mixin)
 - **Key state fields:** `object_type`, `hospital`, `world`, `direction`, `footprint`, `user`, `reserved_for`, `times_used`, `split_anims`, `split_anim_positions`, `ticked_since`, `dynamic_info`
 - **Collections:** `world.objects`, `room.objects`, `hospital.tile_object_counts`, `world.entity_map`
 
 ### 14. SideObject (extends Object)
-- **File:** `CorsixTH/Lua/entities/object.lua:1075`
+- **File:** `CorsixTH/[[Lua/entities/object.lua#L1075]]`
 - **Superclass:** Object
 - **Key methods:** `SideObject()`, `getDrawingLayer()`
 - **Key state fields:** inherits Object fields
 - **Collections:** `world.objects`
 
 ### 15. Machine (extends Object)
-- **File:** `CorsixTH/Lua/entities/machine.lua:24`
+- **File:** `CorsixTH/[[Lua/entities/machine.lua#L24]]`
 - **Superclass:** Object
 - **Key methods:** `Machine()`, `notifyNewRoom()`, `machineUsed()`, `earthquakeImpact()`, `getRemainingUses()`, `isBreaking()`, `isMachine()`, `explodeMachine()`, `repairMachine()`, `setCrashedAnimation()`, `updateDynamicInfo()`, `setHandymanRepairPosition()`
 - **Key state fields:** `strength`, `times_used`, `total_usage`, `smokeInfo`, `waiting_for_finalize`, `mood_marker`, `repairable`
 - **Collections:** `world.objects`, `room.objects`
 
 ### 16. Patient (extends Humanoid)
-- **File:** `CorsixTH/Lua/entities/humanoids/patient.lua:22`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/patient.lua#L22]]`
 - **Superclass:** Humanoid
 - **Key methods:** `Patient()`, `tick()`, `tickDay()`, `onClick()`, `onDestroy()`, `setDisease()`, `changeDisease()`, `setDiagnosed()`, `completeDiagnosticStep()`, `treatDisease()`, `agreesToPay()`, `isTreatmentEffective()`, `hasMoreDiagnosisRoomsAvailable()`, `cure()`, `die()`, `falling()`, `vomit()`, `pee()`, `goHome()`, `despawn()`, `setToDying()`, `handleToiletNeed()`, `_dailyHealthChecks()`, `_dailyWaitChecks()`
 - **Key state fields:** `disease`, `diagnosed`, `diagnosis_progress`, `cure_rooms_visited`, `available_diagnosis_rooms`, `treatment_history`, `going_home`, `cured`, `dead`, `set_to_die`, `going_to_die`, `infected`, `vaccinated`, `is_emergency`, `pay_amount`, `reserved_for`, `needs_redirecting`, `has_passed_reception`, `going_to_toilet`, `health_history`, `action_string`, `has_fallen`, `has_vomitted`, `litter_countdown`, `insurance_company`
 - **Collections:** `world.entities`, `room.humanoids`, `hospital.patients`
 
 ### 17. Staff (extends Humanoid)
-- **File:** `CorsixTH/Lua/entities/humanoids/staff.lua:26`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/staff.lua#L26]]`
 - **Superclass:** Humanoid
 - **Key methods:** `Staff()`, `tick()`, `tickDay()`, `onClick()`, `onDestroy()`, `afterLoad()`, `setProfile()`, `fire()`, `die()`, `despawn()`, `onPickup()`, `onPlaceInCorridor()`, `setHospital()`, `goToStaffRoom()`, `checkIfNeedRest()`, `isTiring()`, `isResting()`, `isMeandering()`, `isIdle()`, `fulfillsCriterion()`, `requestRaise()`, `updateDynamicInfo()`, `setDynamicInfoText()`, `getServiceQuality()`, `isVeryTired()`, `updateSpeed()`
 - **Key state fields:** `profile` (StaffProfile), `hover_cursor`, `parcelNr`, `fired`, `pickup`, `going_to_staffroom`, `task`, `on_call`, `last_room`, `timer_until_raise`, `leave_sounds`, `leave_priority`
 - **Collections:** `world.entities`, `room.humanoids`, `hospital.staff`
 
 ### 18. Doctor (extends Staff)
-- **File:** `CorsixTH/Lua/entities/humanoids/staff/doctor.lua:28`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/staff/doctor.lua#L28]]`
 - **Superclass:** Staff
 - **Key methods:** `Doctor()`, `tick()`, `tickDay()`, `setProfile()`, `updateSkill()`, `trainSkills()`, `isResearching()`, `isLearning()`, `isLearningOnTheJob()`, `fulfillsCriterion()`, `updateStaffTitle()`
 - **Key state fields:** inherits Staff fields; `leave_sounds` = {"sack001.wav", ...}
 - **Collections:** `world.entities`, `room.humanoids`, `hospital.staff`
 
 ### 19. Nurse (extends Staff)
-- **File:** `CorsixTH/Lua/entities/humanoids/staff/nurse.lua:27`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/staff/nurse.lua#L27]]`
 - **Superclass:** Staff
 - **Key methods:** `Nurse()`, `afterLoad()`, `fulfillsCriterion()`, `adviseWrongPersonForThisRoom()`
 - **Key state fields:** inherits Staff fields; `leave_sounds` = {"sack004.wav", "sack005.wav"}
 - **Collections:** `world.entities`, `room.humanoids`, `hospital.staff`
 
 ### 20. Handyman (extends Staff)
-- **File:** `CorsixTH/Lua/entities/humanoids/staff/handyman.lua:27`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/staff/handyman.lua#L27]]`
 - **Superclass:** Staff
 - **Key methods:** `Handyman()`, `setProfile()`, `dump()`, `setPriority()`, `getPriority()`, `goToStaffRoom()`, `fulfillsCriterion()`, `onPickup()`, `searchForHandymanTask()`, `assignHandymanTask()`, `releaseHandymanFromTask()`
 - **Key state fields:** inherits Staff fields; `attributes` include `cleaning`, `watering`, `repairing` priorities; `task`, `last_room`
 - **Collections:** `world.entities`, `room.humanoids`, `hospital.staff`, `hospital.handymanTasks`
 
 ### 21. Receptionist (extends Staff)
-- **File:** `CorsixTH/Lua/entities/humanoids/staff/receptionist.lua:27`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/staff/receptionist.lua#L27]]`
 - **Superclass:** Staff
 - **Key methods:** `Receptionist()`, `tickDay()`, `isTiring()` (returns false), `isResting()` (returns false), `setProfile()`, `needsWorkStation()`, `checkIfNeedRest()`, `onPlaceInCorridor()`, `fulfillsCriterion()`, `onPickup()`, `getDrawingLayer()`
 - **Key state fields:** inherits Staff fields; no fatigue attribute
 - **Collections:** `world.entities`, `room.humanoids`, `hospital.staff`
 
 ### 22. Vip (extends Humanoid)
-- **File:** `CorsixTH/Lua/entities/humanoids/vip.lua:60`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/vip.lua#L60]]`
 - **Superclass:** Humanoid
 - **Key methods:** `Vip()`, `tickDay()`, `getNextRoom()`, `goHome()`, `evaluateRoom()`, `calculateVipRating()`, `sendVipReport()`, `onDestroy()`, `afterLoad()`
 - **Key state fields:** `vip_rating`, `cash_reward`, `rep_reward`, `enter_deaths`, `enter_visitors`, `enter_patients`, `enter_cures`, `num_vomit_noninducing`, `num_vomit_inducing`, `num_visited_rooms`, `room_eval`, `waiting`, `slow_animation`, `announced`, `going_home`
 - **Collections:** `world.entities`, `world.vip_spawn`
 
 ### 23. Inspector (extends Humanoid)
-- **File:** `CorsixTH/Lua/entities/humanoids/inspector.lua:26`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/inspector.lua#L26]]`
 - **Superclass:** Humanoid
 - **Key methods:** `Inspector()`, `updateDynamicInfo()`, `setIfHoverMoodsVisible()`, `goHome()`, `onDestroy()`, `announce()`, `afterLoad()`
 - **Key state fields:** `has_been_announced`, `last_hospital`, `going_home`
 - **Collections:** `world.entities`
 
 ### 24. GrimReaper (extends Humanoid)
-- **File:** `CorsixTH/Lua/entities/humanoids/grim_reaper.lua:21`
+- **File:** `CorsixTH/[[Lua/entities/humanoids/grim_reaper.lua#L21]]`
 - **Superclass:** Humanoid
 - **Key methods:** `GrimReaper()`, `tickDay()` (returns false), `updateDynamicInfo()`, `afterLoad()`
 - **Key state fields:** `attributes` (empty), `walk_anims` (hardcoded), `hover_cursor`
 - **Collections:** `world.entities`
 
 ### 25. Litter (extends Entity)
-- **File:** `CorsixTH/Lua/objects/litter.lua:51`
+- **File:** `CorsixTH/[[Lua/objects/litter.lua#L51]]`
 - **Superclass:** Entity (NOT Object -- direct Entity subclass)
 - **Key methods:** `Litter()`, `setTile()`, `setLitterType()`, `remove()`, `getDrawingLayer()`, `vomitInducing()`, `anyLitter()`, `getWalkableTiles()`
 - **Key state fields:** `object_type`, `hospital`, `world`, `tile_x`, `tile_y`
@@ -303,98 +303,98 @@ TreeControl (extends Window)
 ## CATEGORY 3: OBJECTS (14 classes)
 
 ### 26. Door (extends Object)
-- **File:** `CorsixTH/Lua/objects/door.lua:35`
+- **File:** `CorsixTH/[[Lua/objects/door.lua#L35]]`
 - **Superclass:** Object
 - **Key methods:** `Door()`, `setupDoor()`, `getRoom()`, `updateDynamicInfo()`, `onClick()`, `setTile()`, `getWalkableTiles()`, `getUsageTile()`, `isOccupant()`, `resetAnimation()`
 - **Key state fields:** `queue` (Queue), `room`, `hover_cursor`
 - **Collections:** `world.objects`, `room.door`
 
 ### 27. SwingDoor (extends Door)
-- **File:** `CorsixTH/Lua/objects/doors/swing_door_right.lua:33`
+- **File:** `CorsixTH/[[Lua/objects/doors/swing_door_right.lua#L33]]`
 - **Superclass:** Door
 - **Key methods:** `SwingDoor()`, `pairDoors()`, `checkPaired()`, `onClick()`, `getUsageTile()`, `getWalkableTiles()`
 - **Key state fields:** `is_master`, `slave`, `master`, `paired`, `old_anim`, `old_flags`
 - **Collections:** `world.objects`, `room.door2`
 
 ### 28. EntranceDoor (extends Object)
-- **File:** `CorsixTH/Lua/objects/doors/entrance_right_door.lua:34`
+- **File:** `CorsixTH/[[Lua/objects/doors/entrance_right_door.lua#L34]]`
 - **Superclass:** Object
 - **Key methods:** `EntranceDoor()`, `onOccupantChange()`, `tick()`, `setInvisible()`
 - **Key state fields:** `is_master`, `slave`, `master`, `occupant_count`, `is_open`, `anim_frames`, `frame_index`
 - **Collections:** `world.objects`
 
 ### 29. Bench (extends Object)
-- **File:** `CorsixTH/Lua/objects/bench.lua:146`
+- **File:** `CorsixTH/[[Lua/objects/bench.lua#L146]]`
 - **Superclass:** Object
 - **Key methods:** `Bench()`, `removeUser()`, `resetUsageAndReservaton()`, `afterLoad()`
 - **Key state fields:** inherits Object fields
 - **Collections:** `world.objects`, `room.objects`, `hospital.tile_object_counts.bench`
 
 ### 30. Chair (extends Object)
-- **File:** `CorsixTH/Lua/objects/chair.lua:156`
+- **File:** `CorsixTH/[[Lua/objects/chair.lua#L156]]`
 - **Superclass:** Object
 - **Key methods:** `Chair()`, `afterLoad()`
 - **Key state fields:** inherits Object fields
 - **Collections:** `world.objects`, `room.objects`
 
 ### 31. Plant (extends Object)
-- **File:** `CorsixTH/Lua/objects/plant.lua:91`
+- **File:** `CorsixTH/[[Lua/objects/plant.lua#L91]]`
 - **Superclass:** Object
 - **Key methods:** `Plant()`, `setNextState()`, `restoreToFullHealth()`, `tickDay()`, `isPleasingFactor()`
 - **Key state fields:** `current_state`, `base_frame`, `days_left`, `unreachable`, `unreachable_counter`, `phases`
 - **Collections:** `world.objects`, `room.objects`, `hospital.tile_object_counts.plant`
 
 ### 32. ReceptionDesk (extends Object)
-- **File:** `CorsixTH/Lua/objects/reception_desk.lua:71`
+- **File:** `CorsixTH/[[Lua/objects/reception_desk.lua#L71]]`
 - **Superclass:** Object
 - **Key methods:** `ReceptionDesk()`, `onClick()`, `tick()`, `occupy()`, `removeStaff()`, `setDynamicInfo()`
 - **Key state fields:** `queue` (Queue), `queue_advance_timer`, `hover_cursor`
 - **Collections:** `world.objects`, `hospital.reception_desks`
 
 ### 33. Rathole (extends Object)
-- **File:** `CorsixTH/Lua/objects/rathole.lua:53`
+- **File:** `CorsixTH/[[Lua/objects/rathole.lua#L53]]`
 - **Superclass:** Object
 - **Key methods:** `Rathole()`, `getDrawingLayer()`
 - **Key state fields:** inherits Object fields
 - **Collections:** `world.objects`
 
 ### 34. Helicopter (extends Object)
-- **File:** `CorsixTH/Lua/objects/helicopter.lua:41`
+- **File:** `CorsixTH/[[Lua/objects/helicopter.lua#L41]]`
 - **Superclass:** Object
 - **Key methods:** `Helicopter()`, `tick()`, `spawnPatient()`
 - **Key state fields:** `phase`, `spawned_patients`, `hospital`
 - **Collections:** `world.objects`
 
 ### 35. AtomAnalyser (extends Object)
-- **File:** `CorsixTH/Lua/objects/analyser.lua:59`
+- **File:** `CorsixTH/[[Lua/objects/analyser.lua#L59]]`
 - **Superclass:** Object
 - **Key methods:** `AtomAnalyser()`, `getDrawingLayer()`
 - **Key state fields:** inherits Object fields
 - **Collections:** `world.objects`, `room.objects`
 
 ### 36. OperatingSink (extends Object)
-- **File:** `CorsixTH/Lua/objects/op_sink1.lua:66`
+- **File:** `CorsixTH/[[Lua/objects/op_sink1.lua#L66]]`
 - **Superclass:** Object
 - **Key methods:** Uses `slaveMixinClass()` mixin
 - **Key state fields:** inherits Object fields + slave/master from mixin
 - **Collections:** `world.objects`, `room.objects`
 
 ### 37. RadiationShield (extends Object)
-- **File:** `CorsixTH/Lua/objects/radiation_shield.lua:73`
+- **File:** `CorsixTH/[[Lua/objects/radiation_shield.lua#L73]]`
 - **Superclass:** Object
 - **Key methods:** Uses `slaveMixinClass()` mixin
 - **Key state fields:** inherits Object fields + slave/master from mixin
 - **Collections:** `world.objects`, `room.objects`
 
 ### 38. SurgeonScreen (extends Object)
-- **File:** `CorsixTH/Lua/objects/surgeon_screen.lua:103`
+- **File:** `CorsixTH/[[Lua/objects/surgeon_screen.lua#L103]]`
 - **Superclass:** Object
 - **Key methods:** `SurgeonScreen()`
 - **Key state fields:** `num_green_outfits`, `num_white_outfits`
 - **Collections:** `world.objects`, `room.objects`
 
 ### 39. OperatingTable (extends Machine)
-- **File:** `CorsixTH/Lua/objects/machines/operating_table.lua:123`
+- **File:** `CorsixTH/[[Lua/objects/machines/operating_table.lua#L123]]`
 - **Superclass:** Machine
 - **Key methods:** `slaveMixinClass()` + `machineUsed()` override
 - **Key state fields:** inherits Machine fields + slave/master from mixin
@@ -405,7 +405,7 @@ TreeControl (extends Window)
 ## CATEGORY 4: ROOMS (24 classes)
 
 ### 40. Room
-- **File:** `CorsixTH/Lua/room.lua:21`
+- **File:** `CorsixTH/[[Lua/room.lua#L21]]`
 - **Superclass:** none (root of room hierarchy)
 - **Key methods:** `Room()`, `initRoom()`, `getEntranceXY()`, `createLeaveAction()`, `createEnterAction()`, `getPatients()`, `getPatient()`, `getPatientCount()`, `dealtWithPatient()`, `commandEnteringStaff()`, `commandEnteringPatient()`, `onHumanoidEnter()`, `onHumanoidLeave()`, `roomFinished()`, `crashRoom()`, `tryAdvanceQueue()`, `setStaffMember()`, `getStaffMember()`, `testStaffCriteria()`, `getRequiredStaffCriteria()`, `getMissingStaff()`, `canHumanoidEnter()`, `makeHumanoidLeave()`, `enterEditMode()`, `hasQueueDialog()`, `isRoomInDemand()`, `afterLoad()`, `setStaffMembersAttribute()`, `shouldHavePatientReenter()`
 - **Key state fields:** `id`, `world`, `hospital`, `room_info`, `x`, `y`, `width`, `height`, `door`, `door2`, `humanoids` (set), `objects` (set), `humanoids_enroute` (set), `staff_member`, `staff_member_set`, `built`, `crashed`, `is_active`, `maximum_patients`, `maximum_staff`, `sound_played`
@@ -443,21 +443,21 @@ TreeControl (extends Window)
 ## CATEGORY 5: HOSPITALS (3 classes)
 
 ### 64. Hospital
-- **File:** `CorsixTH/Lua/hospital.lua:23`
+- **File:** `CorsixTH/[[Lua/hospital.lua#L23]]`
 - **Superclass:** none
 - **Key methods:** `Hospital()`, `tick()`, `onEndDay()`, `onEndMonth()`, `onEndYear()`, `afterLoad()`, `spawnPatient()`, `addStaff()`, `addPatient()`, `humanoidDeath()`, `initStaff()`, `countStaffOfCategory()`, `countRoomOfType()`, `countPatients()`, `purchasePlot()`, `isInHospital()`, `hasReceptionDesk()`, `getObjectBuildCost()`, `spendMoney()`, `receiveMoney()`, `receiveMoneyForTreatment()`, `giveAdvice()`, `manageEpidemics()`, `determineIfContagious()`, `addToEpidemic()`, `spawnContagiousPatient()`, `resolveEmergency()`, `checkEmergencyOver()`, `createEmergency()`, `isPlayerHospital()`
 - **Key state fields:** `world`, `name`, `balance`, `loan`, `reputation`, `value`, `interest_rate`, `epidemic`, `future_epidemics_pool`, `num_visitors`, `num_deaths`, `num_cured`, `num_explosions`, `statistics`, `disease_casebook`, `research` (ResearchDepartment), `hosp_cheats` (Cheats), `handymanTasks`, `epidemics_disabled`, `heating`, `tile_object_counts`, `reception_desks`, `built`, `staff`, `patients`, `emergency`, `popularity`
 - **Collections:** `world.hospitals`
 
 ### 65. PlayerHospital (extends Hospital)
-- **File:** `CorsixTH/Lua/hospitals/player_hospital.lua:25`
+- **File:** `CorsixTH/[[Lua/hospitals/player_hospital.lua#L25]]`
 - **Superclass:** Hospital
 - **Key methods:** `PlayerHospital()`, `dailyAdviceChecks()`, `afterLoad()`
 - **Key state fields:** `adviser_data`, `win_declined`, `announce_vip`
 - **Collections:** `world.hospitals[1]` (always index 1)
 
 ### 66. AIHospital (extends Hospital)
-- **File:** `CorsixTH/Lua/hospitals/ai_hospital.lua:21`
+- **File:** `CorsixTH/[[Lua/hospitals/ai_hospital.lua#L21]]`
 - **Superclass:** Hospital
 - **Key methods:** `AIHospital()`, `spawnPatient()` (stub), `logTransaction()` (no-op), `afterLoad()`
 - **Key state fields:** `is_in_world` = false
@@ -468,56 +468,56 @@ TreeControl (extends Window)
 ## CATEGORY 6: UI / WINDOW SYSTEM (32 classes)
 
 ### 67. Window
-- **File:** `CorsixTH/Lua/window.lua:24`
+- **File:** `CorsixTH/[[Lua/window.lua#L24]]`
 - **Superclass:** none (root of UI hierarchy)
 - **Key methods:** `Window()`, `setSize()`, `setPosition()`, `draw()`, `onMouseUp()`, `onMouseDown()`, `onMouseMove()`, `onKeyDown()`, `onKeyUp()`, `addWindow()`, `removeWindow()`, `addPanel()`, `addButton()`, `addScrollbar()`, `addTextbox()`, `addHotkeybox()`, `addColourPanel()`, `addBevelPanel()`, `setDefault()`, `setTooltip()`, `hitTest()`
 - **Key state fields:** `x`, `y`, `width`, `height`, `panels`, `buttons`, `tooltip_regions`, `scrollbars`, `textboxes`, `hotkeyboxes`, `windows`, `visible`, `draggable`, `panel_sprites`, `modal_class`
 - **Collections:** `ui.windows`
 
 ### 68. Panel (in window.lua)
-- **File:** `CorsixTH/Lua/window.lua:168`
+- **File:** `CorsixTH/[[Lua/window.lua#L168]]`
 - **Superclass:** none
 - **Key methods:** `Panel()`, `draw()`
 - **Key state fields:** `x`, `y`, `w`, `h`, `colour`, `lowered`, `visible`, `sprite`, `sprite_index`
 - **Collections:** `window.panels`
 
 ### 69. Button (in window.lua)
-- **File:** `CorsixTH/Lua/window.lua:594`
+- **File:** `CorsixTH/[[Lua/window.lua#L594]]`
 - **Superclass:** none
 - **Key methods:** `Button()`, `draw()`, `onMouseUp()`, `onMouseDown()`
 - **Key state fields:** `x`, `y`, `w`, `h`, `tooltip`, `on_click`, `enable`, `sound_done`, `visible`
 - **Collections:** `window.buttons`
 
 ### 70. Scrollbar (in window.lua)
-- **File:** `CorsixTH/Lua/window.lua:834`
+- **File:** `CorsixTH/[[Lua/window.lua#L834]]`
 - **Superclass:** none
 - **Key methods:** `Scrollbar()`, `draw()`, `onMouseUp()`, `onMouseDown()`, `onMouseMove()`, `setRange()`, `setValue()`, `getValue()`
 - **Key state fields:** `x`, `y`, `range`, `value`, `thumb_x`, `thumb_y`, `pressed`
 - **Collections:** `window.scrollbars`
 
 ### 71. Textbox (in window.lua)
-- **File:** `CorsixTH/Lua/window.lua:943`
+- **File:** `CorsixTH/[[Lua/window.lua#L943]]`
 - **Superclass:** none
 - **Key methods:** `Textbox()`, `draw()`, `onKeyDown()`, `onMouseUp()`, `onMouseDown()`, `setText()`, `getText()`
 - **Key state fields:** `x`, `y`, `text`, `font`, `caret`, `focused`, `enabled`, `panel`
 - **Collections:** `window.textboxes`
 
 ### 72. HotkeyBox (in window.lua)
-- **File:** `CorsixTH/Lua/window.lua:1342`
+- **File:** `CorsixTH/[[Lua/window.lua#L1342]]`
 - **Superclass:** none
 - **Key methods:** `HotkeyBox()`, `draw()`, `onMouseUp()`, `onMouseDown()`
 - **Key state fields:** `x`, `y`, `key`, `menu_string`
 - **Collections:** `window.hotkeyboxes`
 
 ### 73. UI (extends Window)
-- **File:** `CorsixTH/Lua/ui.lua:24`
+- **File:** `CorsixTH/[[Lua/ui.lua#L24]]`
 - **Superclass:** Window
 - **Key methods:** `UI()`, `initKeyAndButtonCodes()`, `dispatch()`, `draw()`, `playSound()`, `playAnnouncement()`, `addWindow()`, `removeWindow()`, `addKeyHandler()`, `setCursorPosition()`, `getMouseXY()`, `afterLoad()`
 - **Key state fields:** `app`, `key_handlers`, `key_remaps`, `button_remaps`, `gfx`, `video`, `cursor_x`, `cursor_y`, `buttons_down`, `modal_window`, `bottom_menu_visible`, `blue_filter_active`
 - **Collections:** Singleton; `TheApp.ui`
 
 ### 74. GameUI (extends UI)
-- **File:** `CorsixTH/Lua/game_ui.lua:25`
+- **File:** `CorsixTH/[[Lua/game_ui.lua#L25]]`
 - **Superclass:** UI
 - **Key methods:** `GameUI()`, `draw()`, `onTick()`, `onMouseMove()`, `onMouseDown()`, `onMouseUp()`, `onKeyDown()`, `onKeyUp()`, `setZoom()`, `scrollMap()`, `shakeScreen()`, `playAnnouncement()`, `afterLoad()`, `togglePlayerSpeed()`, `playWatchAnnouncement()`
 - **Key state fields:** `hospital`, `tutorial`, `adviser`, `bottom_panel`, `menu_bar`, `subtitles`, `visible_diamond`, `scrolling`, `map_editor`, `announcer`, `tutorial`
@@ -644,7 +644,7 @@ TreeControl (extends Window)
 ## CATEGORY 8: HUMANOID ACTIONS (33 classes)
 
 ### 149. HumanoidAction
-- **File:** `CorsixTH/Lua/humanoid_action.lua:22`
+- **File:** `CorsixTH/[[Lua/humanoid_action.lua#L22]]`
 - **Superclass:** none (root of action hierarchy)
 - **Key methods:** `HumanoidAction()`, `setCount()`, `setMustHappen()`, `setUninterruptible()`, `setLoopCallback()`, `setAfterUse()`, `setIsLeaving()`, `setNoTruncate()`, `afterLoad()`, `setName()`
 - **Key state fields:** `name`, `count`, `must_happen`, `loop_callback`, `after_use`, `is_leaving`, `no_truncate`, `uninterruptible`
@@ -692,63 +692,63 @@ TreeControl (extends Window)
 ## CATEGORY 9: SUPPORT / MANAGEMENT (11 classes)
 
 ### 182. StaffProfile
-- **File:** `CorsixTH/Lua/staff_profile.lua:21`
+- **File:** `CorsixTH/[[Lua/staff_profile.lua#L21]]`
 - **Superclass:** none
 - **Key methods:** `StaffProfile()`, `setDoctorAbilities()`, `initDoctor()`, `init()`, `setSkill()`, `randomise()`, `randomiseOrganical()`, `parseSkillLevel()`, `getFairWage()`, `afterLoad()`
 - **Key state fields:** `world`, `humanoid_class`, `name`, `initial`, `skill`, `wage`, `layer5`, `attention_to_detail`, `profession`, `is_psychiatrist`, `is_surgeon`, `is_researcher`, `is_junior`, `is_consultant`
 - **Collections:** `Staff.profile`
 
 ### 183. Queue
-- **File:** `CorsixTH/Lua/queue.lua:31`
+- **File:** `CorsixTH/[[Lua/queue.lua#L31]]`
 - **Superclass:** none
 - **Key methods:** `Queue()`, `expect()`, `unexpect()`, `decreaseMaxSize()`, `increaseMaxSize()`, `setMaxQueue()`, `setBenchThreshold()`, `size()`, `isFull()`, `reportedSize()`, `expectedSize()`, `hasEmergencyPatient()`, `patientSize()`, `reportedHumanoid()`, `push()`, `remove()`, `dropFromQueue()`, `afterLoad()`
 - **Key state fields:** `reported_size`, `expected`, `callbacks`, `expected_count`, `visitor_count`, `max_size`, `bench_threshold`
 - **Collections:** `Door.queue`, `ReceptionDesk.queue`
 
 ### 184. EntityMap
-- **File:** `CorsixTH/Lua/entity_map.lua:21`
+- **File:** `CorsixTH/[[Lua/entity_map.lua#L21]]`
 - **Superclass:** none
 - **Key methods:** `EntityMap()`, `addEntity()`, `removeEntity()`, `getHumanoidsAtCoordinate()`, `getObjectsAtCoordinate()`
 - **Key state fields:** `width`, `height`, `entity_map` (2D array of `{humanoids={}, objects={}}`)
 - **Collections:** `World.entity_map`
 
 ### 185. Earthquake
-- **File:** `CorsixTH/Lua/earthquake.lua:22`
+- **File:** `CorsixTH/[[Lua/earthquake.lua#L22]]`
 - **Superclass:** none
 - **Key methods:** `Earthquake()`, `tick()`, `nextEarthquake()`, `afterLoad()`
 - **Key state fields:** `world`, `active`, `next_planned`, `start_month`, `start_day`, `size`, `remaining_damage`, `damage_timer`, `warning_timer`, `current_map_earthquake`, `disabled`
 - **Collections:** `World.earthquake`
 
 ### 186. Epidemic
-- **File:** `CorsixTH/Lua/epidemic.lua:25`
+- **File:** `CorsixTH/[[Lua/epidemic.lua#L25]]`
 - **Superclass:** none
 - **Key methods:** `Epidemic()`, `tick()`, `addContagiousPatient()`, `infectOtherPatients()`, `checkIfReadyToReveal()`, `markedPatientsCallForVaccination()`, `markForVaccination()`, `vaccinatePatient()`, `checkInfectedLeftHospital()`, `checkNoInfectedPatients()`, `reveal()`, `afterLoad()`
 - **Key state fields:** `hospital`, `world`, `infected_patients`, `disease`, `ready_to_reveal`, `revealed`, `declare_fine`, `reputation_hit`, `coverup_fine`, `compensation`, `will_be_evacuated`, `coverup_selected`, `timer`, `vaccination_mode_active`, `total_infections`, `attempted_infections`, `spread_factor`, `inspector`
 - **Collections:** `Hospital.epidemic`, `Hospital.future_epidemics_pool`
 
 ### 187. Cheats
-- **File:** `CorsixTH/Lua/cheats.lua:27`
+- **File:** `CorsixTH/[[Lua/cheats.lua#L27]]`
 - **Superclass:** none
 - **Key methods:** `Cheats()`, `performCheat()`, `announceCheat()`, `isCheatActive()`, `cheatMoney()`, `cheatResearch()`, `cheatEmergency()`, `cheatVip()`, etc.
 - **Key state fields:** `hospital`, `cheat_list`, `active_cheats`
 - **Collections:** `Hospital.hosp_cheats`
 
 ### 188. CallsDispatcher
-- **File:** `CorsixTH/Lua/calls_dispatcher.lua:25`
+- **File:** `CorsixTH/[[Lua/calls_dispatcher.lua#L25]]`
 - **Superclass:** none
 - **Key methods:** `CallsDispatcher()`, `onTick()`, `callForStaff()`, `callForRepair()`, `callForWatering()`, `callForCleaning()`, `dropFromQueue()`, `enqueue()`, `onChange()`, `addChangeCallback()`, `removeChangeCallback()`
 - **Key state fields:** `world`, `call_queue`, `change_callback`, `tick`
 - **Collections:** `World.dispatcher`
 
 ### 189. ResearchDepartment
-- **File:** `CorsixTH/Lua/research_department.lua:32`
+- **File:** `CorsixTH/[[Lua/research_department.lua#L32]]`
 - **Superclass:** none
 - **Key methods:** `ResearchDepartment()`, `initResearch()`, `setResearchConcentration()`, `addResearchPoints()`, `discoverObject()`, `improveObject()`, `improveDrug()`, `afterLoad()`
 - **Key state fields:** `hospital`, `world`, `research_progress`, `research_policy` (cure, diagnosis, drugs, improvements), `drain`
 - **Collections:** `Hospital.research`
 
 ### 190. EndConditions
-- **File:** `CorsixTH/Lua/endconditions.lua:44`
+- **File:** `CorsixTH/[[Lua/endconditions.lua#L44]]`
 - **Superclass:** none
 - **Key methods:** `EndConditions()`, `checkEndGame()`, `generateReportTable()`, `_loadGoals()`, `_checkWinGroup()`, `_checkLoseGroup()`
 - **Key state fields:** `win_goals`, `lose_goals`, `highest_group`
@@ -759,21 +759,21 @@ TreeControl (extends Window)
 ## CATEGORY 10: ANNOUNCER SYSTEM (3 classes)
 
 ### 191. AnnouncementQueue
-- **File:** `CorsixTH/Lua/announcer.lua:45`
+- **File:** `CorsixTH/[[Lua/announcer.lua#L45]]`
 - **Superclass:** none
 - **Key methods:** `AnnouncementQueue()`, `push()`, `pop()`, `isEmpty()`, `checkForDuplicates()`
 - **Key state fields:** `priorities` (4-level priority queues), `count`
 - **Collections:** `Announcer.entries`
 
 ### 192. AnnouncementEntry
-- **File:** `CorsixTH/Lua/announcer.lua:107`
+- **File:** `CorsixTH/[[Lua/announcer.lua#L107]]`
 - **Superclass:** none
 - **Key methods:** `AnnouncementEntry()`
 - **Key state fields:** `name`, `priority`, `created_date`, `decay_hours`, `played_callback`, `played_callback_delay`
 - **Collections:** `AnnouncementQueue.priorities`
 
 ### 193. Announcer
-- **File:** `CorsixTH/Lua/announcer.lua:127`
+- **File:** `CorsixTH/[[Lua/announcer.lua#L127]]`
 - **Superclass:** none
 - **Key methods:** `Announcer()`, `playAnnouncement()`, `onTick()`
 - **Key state fields:** `app`, `entries` (AnnouncementQueue), `playing`, `ticks_since_last_announcement`
@@ -796,3 +796,11 @@ TreeControl (extends Window)
 | Support/Management classes | 11 |
 | Announcer system | 3 |
 | **Grand Total** | **~195 classes** |
+
+
+## Related Pages
+
+- [[CODEBASE_INSIGHTS]]
+- [[CODEBASE_MAP]]
+- [[TEST_IMPLEMENTATIONS]]
+- [[safe-fix-patterns]]
