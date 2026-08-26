@@ -21,9 +21,9 @@ used as reference for implementing features in the expandir fork.
 - [[01-event-pipeline]] - Core flow: detect → match → render → inject
 - [[02-espanso-detect]] - Keyboard/input detection
 - [[03-espanso-inject]] - Keyboard injection
-- [[04-espanso-match]] - Pattern matching engine
-- [[05-espanso-config]] - Configuration parsing
-- [[06-espanso-render]] - Template rendering
+- [[04-espanso-match]] - Pattern matching engine ← COMPLETE
+- [[05-espanso-config]] - Configuration parsing ← COMPLETE
+- [[06-espanso-render]] - Template rendering ← COMPLETE
 - [[07-espanso-engine]] - Engine middleware & dispatch ← COMPLETE
 - [[08-espanso-clipboard]] - Clipboard operations
 - [[09-espanso-modulo]] - GUI components
@@ -48,7 +48,18 @@ used as reference for implementing features in the expandir fork.
 
 ## Study Progress
 
-| Subsystem | Status | Last Updated |
-|-----------|--------|-------------|
-| espanso-engine | COMPLETE | 2026-08-25 |
-| All others | SKELETON | 2026-08-25 |
+| Subsystem | Status | Files | Lines | Last Updated |
+|-----------|--------|-------|-------|-------------|
+| espanso-engine | COMPLETE | 47 | 4,672 | 2026-08-25 |
+| espanso-config | COMPLETE | 22 | 5,555 | 2026-08-25 |
+| espanso-render | COMPLETE | 15 | 3,870 | 2026-08-25 |
+| espanso-match | COMPLETE | 8 | 1,553 | 2026-08-25 |
+| espanso-detect | SKELETON | - | - | 2026-08-25 |
+| espanso-inject | SKELETON | - | - | 2026-08-25 |
+| espanso-clipboard | SKELETON | - | - | 2026-08-25 |
+| espanso-modulo | SKELETON | - | - | 2026-08-25 |
+| espanso-ui | SKELETON | - | - | 2026-08-25 |
+| espanso-package | SKELETON | - | - | 2026-08-25 |
+| cli-commands | SKELETON | - | - | 2026-08-25 |
+| match-extensions | SKELETON | - | - | 2026-08-25 |
+| event-pipeline | SKELETON | - | - | 2026-08-25 |

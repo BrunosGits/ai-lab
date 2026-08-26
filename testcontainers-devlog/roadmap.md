@@ -13,7 +13,7 @@ This document is the master plan for a personal Testcontainers contribution labo
 - [x] VPS ready: Java 21, Rust 1.85, Docker 29.7.2
 - [x] Fork testcontainers-java → `BrunosGits/testcontainers-java`
 - [x] Fork testcontainers-rs → `BrunosGits/testcontainers-rs`
-- [x] Clone forks on VPS at `/home/bruno/ai-lab/`
+- [x] Clone forks locally
 - [x] Create Obsidian vault at `testcontainers-devlog/testcontainers-vault/`
 - [x] Install formatting tools: `npm` (for Gradle spotless), `rustup nightly + rustfmt + clippy`
 
@@ -127,3 +127,43 @@ Analyze → Implement → Test (VPS) → Document (Vault) → PR → Review → 
 | **Issues** | `01-ISSUES/<repo>-<issue>/` | Analysis, implementation, test results per issue |
 | **PRs** | `02-PR-TRACKING/` | PR status, review notes, merge timeline |
 | **Sessions** | `03-SESSION-LOGS/` | Daily logs linking to issues/PRs |
+
+---
+
+## 🔐 Services & Access
+
+| Service | Account | Purpose | Key Location |
+|---|---|---|---|
+| **GitHub** | `BrunosGits` | Fork management, PR creation | `~/.ssh/id_ed25519_github` |
+| **VPS (SSH)** | `bruno` | Build, test, Docker | `~/.ssh/id_ed25519` |
+| **Docker Hub** | — | Test image pulls | Not needed (public images) |
+| **Testcontainers Slack** | `bruno.lima` | Community discussion | Browser |
+| **Infisical** | AI Lab project | Secrets (if needed) | `infisical` CLI |
+
+---
+
+## 💻 Machine Config — OVHcloud VPS-1 (shared with AI Lab)
+
+| | |
+|---|---|
+| **Provider** | OVHcloud VPS-1 2027 |
+| **Plan** | VPS Local Storage |
+| **CPU** | 2 vCPU |
+| **RAM** | 4 GB |
+| **Disk** | 40 GB SSD |
+| **OS** | Debian 13 (Trixie) |
+| **Java** | 21 (Temurin via SDKMAN or apt) |
+| **Rust** | 1.85 stable + nightly (rustup) |
+| **Docker** | 29.7.2 (official repo) |
+| **Gradle** | Wrapper (`./gradlew`) |
+
+---
+
+## 💰 Project Costs
+
+| Item | Cost |
+|---|---|
+| OVH VPS-1 (shared) | 4.49 €/month |
+| Domain (optional) | ~$10/yr |
+| **Total** | 4.49 €/month |
+
