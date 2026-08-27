@@ -193,6 +193,7 @@
 
 | Date | Topic |
 |------|-------|
+| [[2026-08-27-github-contributions-study]] | Study on GitHub contribution quality improvement practices |
 | [[2026-08-20-cleaner-pattern]] | Cleaner pattern for #1467, afterLoad init, SAVEGAME_VERSION bump |
 | [[2026-08-16-movie-blocker]] | Deferred-destruction validation, movie blocker smoketest fix |
 | [[2026-08-12-entity-loop]] | Deferred-destruction fix, old-savegame crash, plant branch hole |
