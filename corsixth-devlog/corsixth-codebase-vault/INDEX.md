@@ -27,7 +27,7 @@
 - [[CODEBASE_MAP]] — Master map of entire codebase
 - [[CODEBASE_INSIGHTS]] — Architectural patterns and insights
 - [[CLASS_MAPPING]] — 195 classes across 10 categories
-- [[world-entity-flow]] — World → Entity lifecycle
+- [[world-entity-flow]] — World → Entity lifecycle (includes flush point details)
 - [[save-load-migrations]] — Save/load architecture
 
 ### Core Concepts
@@ -42,7 +42,7 @@
 
 ## 3. Architecture
 
-- [[world-entity-flow]] — World → Entity lifecycle
+- [[world-entity-flow]] — World → Entity lifecycle (includes flush point details)
 - [[save-load-migrations]] — Save/load architecture
 - [[entity-action-system]] — Action dispatch patterns
 - [[room-hospital-hierarchy]] — Room → Hospital ownership chain
