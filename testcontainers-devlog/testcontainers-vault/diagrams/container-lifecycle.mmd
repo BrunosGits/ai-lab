@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant User
+    participant Container
+    participant DockerClient
+    participant Docker
+    participant WaitStrategy
+    participant Reaper
+
+    User->>Container: start()
+    alt Java
+        Container->>DockerClientFactory: getDockerClient()
+    else Rust
+        Container->>AsyncRunner: start()
+    else Python
+        Container->>DockerClient: create_container()
+    end
+    
+    DockerClient-->>Container: Docker Client / Container ID
+    Container->>Docker: create_container()
+    Docker-->>Container: Container ID
+    Container->>Docker: start_container()
+    
+    loop Wait Strategy
+        Container->>WaitStrategy: wait_until_ready()
+        WaitStrategy->>Docker: check readiness (logs, ports, HTTP)
+    end
+    
+    Container->>Reaper: register(container_id)
+    Reaper-->>Container: registered

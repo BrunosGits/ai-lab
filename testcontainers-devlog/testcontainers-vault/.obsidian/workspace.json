@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "34e4ebf3370c8b89",
+        "id": "dc0924b1089390a5",
         "type": "tabs",
         "children": [
           {
-            "id": "661d70337645ef93",
+            "id": "1b5814a453ec578c",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -184,10 +184,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "849bae5c5ef7cd9c",
+  "active": "1b5814a453ec578c",
   "lastOpenFiles": [
     "roadmap.md",
     "readme.md",
-    "index.md"
+    "index.md",
+    "04-STANDARDS/rust-standards.md",
+    "04-STANDARDS/python-standards.md",
+    "04-STANDARDS/java-standards.md"
   ]
 }

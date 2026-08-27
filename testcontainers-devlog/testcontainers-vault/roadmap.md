@@ -1,6 +1,6 @@
 # 🧪 Testcontainers Vault Roadmap
 
-*Issue tracking · Implementation logs · PR management* · Started 2026-08-25
+*Issue tracking · Implementation logs · PR management · Architecture Study* · Started 2026-08-25
 
 Master plan for the Testcontainers contribution vault. Mirrors the main `testcontainers-devlog/roadmap.md` but focused on vault organization and issue lifecycle.
 
@@ -39,21 +39,55 @@ Master plan for the Testcontainers contribution vault. Mirrors the main `testcon
 - [x] `test-results.md` — fmt, clippy, 85 tests pass (1 pre-existing fail)
 - [ ] `PR-rust-926.md` — PR link, review notes, merge status
 
-### Phase 2 — Template Refinement
+### Phase 2 — Architecture Study (New)
+
+#### Architecture Documentation
+
+- [x] Architecture-INDEX-java.md — Java (Gradle, 60+ modules, SLF4J, JUnit)
+- [x] Architecture-INDEX-rust.md — Rust (Cargo, tokio, bollard)
+- [x] Architecture-INDEX-python.md — Python (uv + Make, MkDocs, release-please)
+- [x] Features-INDEX.md — Cross-language feature comparison
+- [x] Modules-INDEX.md — Module catalog comparison
+- [x] Investigations-INDEX.md — Progress tracking
+
+#### Mermaid Diagrams
+
+- [x] java-architecture.mmd
+- [x] rust-architecture.mmd
+- [x] python-architecture.mmd
+- [x] container-lifecycle.mmd
+- [x] wait-strategies.mmd
+
+#### Automation Scripts
+
+- [x] generate-module-list-java.sh
+- [x] generate-module-list-rust.sh
+- [x] generate-module-list-python.sh
+- [x] update-indexes.sh
+
+#### Investigation Files
+
+- [x] Container Lifecycle — analysis.md, implementation.md, comparison.md
+- [x] Wait Strategies — analysis.md, comparison.md
+- [x] Networking — analysis.md
+- [x] Resource Reaper — analysis.md
+- [x] Reusable Containers — analysis.md
+
+### Phase 3 — Template Refinement
 
 - [ ] Add `session-log.md` template with VPS command references
 - [ ] Add cross-reference tags (issue ↔ PR ↔ session)
 - [ ] Create `04-DECISIONS/` for architectural choices
 - [ ] Add `05-REFERENCES/` for upstream docs, Slack threads, related PRs
 
-### Phase 3 — Scale to Multi-Language
+### Phase 4 — Scale to Multi-Language
 
 - [ ] Add Go issue folder template
 - [ ] Add Python issue folder template
 - [ ] Create language-specific test command references
 - [ ] Document cross-language patterns (labels, wait strategies, reusable containers)
 
-### Phase 4 — Knowledge Synthesis
+### Phase 5 — Knowledge Synthesis
 
 - [ ] Generate "Patterns Learned" document from completed issues
 - [ ] Create contribution checklist for new contributors
@@ -95,9 +129,11 @@ New Issue → Create folder → Fill analysis.md → Implement → Test on VPS
 |---|---|---|
 | `01-ISSUES/java-9876/analysis.md` | Phase 1 Java | #9876 |
 | `01-ISSUES/rust-926/analysis.md` | Phase 1 Rust | #926 |
+| `01-ISSUES/Architecture/Container-Lifecycle/analysis.md` | Phase 2 | — |
+| `01-ISSUES/Architecture/Wait-Strategies/analysis.md` | Phase 2 | — |
 | `02-PR-TRACKING/PR-java-9876.md` | Phase 1 Java | PR link |
 | `02-PR-TRACKING/PR-rust-926.md` | Phase 1 Rust | PR link |
-| `03-SSESSION-LOGS/2026-08-25-*.md` | Month 1 | — |
+| `03-SESSION-LOGS/2026-08-25-*.md` | Month 1 | — |
 
 ---
 

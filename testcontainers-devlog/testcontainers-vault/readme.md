@@ -4,7 +4,7 @@
 
 # 🧪 Testcontainers Vault
 
-**Issue Analysis · Implementation Logs · PR Tracking · Session Journal**
+**Issue Analysis · Implementation Logs · PR Tracking · Session Journal · Architecture Study**
 
 An Obsidian vault documenting every Testcontainers contribution. Each issue gets a complete trail: analysis → implementation → tests → PR → review.
 
@@ -16,10 +16,25 @@ testcontainers-vault/
 │   └── standards/       # Standards reference
 ├── 01-ISSUES/
 │   ├── java-9876-debug-logging/
-│   └── rust-926-standard-label/
+│   ├── rust-926-standard-label/
+│   └── Architecture/
+│       ├── Container-Lifecycle/
+│       ├── Wait-Strategies/
+│       ├── Networking/
+│       ├── Resource-Reaper/
+│       └── Reusable-Containers/
 ├── 02-PR-TRACKING/
 ├── 03-SESSION-LOGS/
 ├── 04-STANDARDS/        # Quick reference cards
+├── 05-ARCHITECTURE/     # Architecture deep dives (new)
+│   ├── Architecture-INDEX-java.md
+│   ├── Architecture-INDEX-rust.md
+│   ├── Architecture-INDEX-python.md
+│   ├── Features-INDEX.md
+│   ├── Modules-INDEX.md
+│   └── Investigations-INDEX.md
+├── diagrams/            # Mermaid diagrams (new)
+├── scripts/             # Automation scripts (new)
 ├── readme.md
 └── roadmap.md
 ```
@@ -54,8 +69,22 @@ Quick reference cards for each language's contribution standards:
 
 Full references and PR #11982 lessons learned in `00-META/standards/`.
 
+## Architecture Study
+
+Deep-dive architecture analysis for all three implementations:
+
+- [Architecture-INDEX-java](Architecture-INDEX-java.md) — Java (Gradle, 60+ modules)
+- [Architecture-INDEX-rust](Architecture-INDEX-rust.md) — Rust (Cargo, tokio, bollard)
+- [Architecture-INDEX-python](Architecture-INDEX-python.md) — Python (uv + Make, MkDocs)
+
+Cross-language feature analysis:
+- [Features-INDEX](Features-INDEX.md) — Container lifecycle, wait strategies, networking, etc.
+- [Modules-INDEX](Modules-INDEX.md) — Module catalog comparison
+- [Investigations-INDEX](Investigations-INDEX.md) — Investigation progress tracking
+
 ## Philosophy
 - **One issue = one folder** — complete traceability
 - **Template-driven** — consistent structure across issues
 - **VPS-verified** — all test results from actual VPS runs
 - **Cross-linked** — session logs → issues → PRs → roadmap
+- **Multi-language** — Java, Rust, Python with cross-references

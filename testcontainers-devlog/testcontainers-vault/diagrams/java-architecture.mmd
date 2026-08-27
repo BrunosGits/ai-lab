@@ -1,0 +1,33 @@
+graph TD
+    subgraph Core["testcontainers (core)"]
+        GC[GenericContainer<br/>start(), tryStart(), stop()]
+        DCF[DockerClientFactory<br/>getDockerClient(), instance()]
+        RR[ResourceReaper<br/>start(), stop(), register()]
+        WS[WaitStrategy<br/>waitUntilReady()]
+        CI[ContainerState<br/>getHost(), getMappedPort()]
+        RDI[RemoteDockerImage<br/>resolve(), pull()]
+    end
+
+    subgraph Modules["Modules (60+)"]["Modules (60+)"]
+        DB[Databases<br/>PostgreSQL, MySQL, MongoDB...]
+        MQ[Message Queues<br/>Kafka, RabbitMQ, Redis...]
+        CI_MOD[Cloud/Infra<br/>LocalStack, GCloud, Azure...]
+        SP[Specialized<br/>Toxiproxy, Selenium...]
+    end
+
+    subgraph External["External"]
+        DOCKER[Docker Engine]
+        RYUK[Ryuk Container]
+        SLF4J[SLF4J 1.7]
+    end
+
+    GC --> DCF
+    GC --> RR
+    GC --> WS
+    GC --> CI
+    GC --> Modules
+    WS -.-> GC
+    RR -.-> GC
+    GC --> DOCKER
+    RR --> RYUK
+    GC -.-> SLF4J

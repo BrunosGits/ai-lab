@@ -1,0 +1,50 @@
+graph TD
+    subgraph Interface["Wait Interface"]
+        WSI[WaitStrategy (Java)<br/>waitUntilReady()]
+        WSR[WaitFor (Rust)<br/>wait_until_ready()]
+        WSP[WaitStrategy (Python)<br/>wait_until_ready()]
+    end
+
+    subgraph Java["Java Implementations"]
+        LMS[LogMessageWaitStrategy<br/>message_on_stdout()]
+        PWS[PortWaitStrategy<br/>port()]
+        HWS[HttpWaitStrategy<br/>http()]
+        TWS[TimeoutWaitStrategy<br/>duration()]
+        EWS[ExitCodeWaitStrategy<br/>exit_code()]
+    end
+
+    subgraph Rust["Rust Variants (WaitFor enum)"]
+        RMS[message_on_stdout(msg)]
+        RST[message_on_stderr(msg)]
+        RP[port(port)]
+        RH[http(path)]
+        RC[custom(fn)]
+        RD[duration(dur)]
+        REC[exit_code(code)]
+    end
+
+    subgraph Python["Python Implementations"]
+        PMS[LogMessageWaitStrategy<br/>message_on_stdout()]
+        PPS[PortWaitStrategy<br/>port()]
+        PHS[HttpWaitStrategy<br/>http()]
+        PCS[Custom Callable<br/>predicate()]
+    end
+
+    WSI --> LMS
+    WSI --> PWS
+    WSI --> HWS
+    WSI --> TWS
+    WSI --> EWS
+
+    WSR --> RMS
+    WSR --> RST
+    WSR --> RP
+    WSR --> RH
+    WSR --> RC
+    WSR --> RD
+    WSR --> REC
+
+    WSP --> PMS
+    WSP --> PPS
+    WSP --> PHS
+    WSP --> PCS

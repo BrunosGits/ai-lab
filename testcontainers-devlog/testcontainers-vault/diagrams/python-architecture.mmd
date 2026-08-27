@@ -1,0 +1,28 @@
+graph TD
+    subgraph Core["testcontainers package"]
+        CC[Container<br/>start(), stop(), exec()<br/>get_connection_url()]
+        DC[DockerClient<br/>create_container()<br/>start(), stop(), exec_run()]
+        WS[WaitStrategy<br/>wait_until_ready()]
+        TC[testcontainers_config<br/>ryuk_docker_socket<br/>ryuk_disabled]
+    end
+
+    subgraph Modules["Modules (30+)"]["Modules (30+)"]
+        DB[Databases<br/>PostgresContainer, MySqlContainer...]
+        MQ[Message Queues<br/>KafkaContainer, RabbitMqContainer...]
+        CI[Cloud/Infra<br/>LocalStackContainer, GCloudContainer...]
+        SP[Specialized<br/>ClickHouse, Elasticsearch...]
+    end
+
+    subgraph External["External"]
+        DOCKER[Docker Engine<br/>via docker-py]
+        RYUK[Ryuk Container<br/>cleanup]
+    end
+
+    CC --> DC
+    CC --> TC
+    CC --> WS
+    CC --> Modules
+    DC --> DOCKER
+    TC -.-> DC
+    WS -.-> CC
+    DC --> RYUK

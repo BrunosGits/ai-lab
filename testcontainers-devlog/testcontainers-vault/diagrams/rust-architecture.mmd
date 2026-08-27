@@ -1,0 +1,36 @@
+graph TD
+    subgraph API["Public API"]
+        GI[GenericImage<br/>new(), with_wait_for(), start()]
+        GB[GenericBuildableImage<br/>with_dockerfile(), build()]
+    end
+
+    subgraph Builders["Builders"]
+        CR[ContainerRequest<br/>builder: with_*()]
+        AB[AsyncBuilder<br/>with_*(), start()]
+        SB[SyncBuilder<br/>with_*(), start()]
+    end
+
+    subgraph Runners["Runners"]
+        AR[AsyncRunner<br/>start() -> ContainerAsync]
+        SR[SyncRunner<br/>start() -> Container]
+    end
+
+    subgraph Core["Core Types"]
+        IM[Image trait<br/>name(), tag(), env_vars()]
+        GI2[GenericImage<br/>new(), start(), with_*()]
+        CT[ContainerAsync<br/>start(), stop(), exec(), logs()]
+        WF[WaitFor<br/>wait_until_ready()]
+        LC[LogConsumer<br/>accept()]
+        CR2[ContainerRequest<br/>builder pattern]
+    end
+
+    subgraph External["External"]
+        DOCKER[Docker API<br/>via bollard]
+        RYUK[Ryuk<br/>cleanup]
+    end
+
+    API --> Builders
+    Builders --> Runners
+    Runners --> Core
+    Core --> DOCKER
+    Core -.-> RYUK
