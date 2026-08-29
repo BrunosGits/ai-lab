@@ -124,3 +124,10 @@ Each issue ends with a published PR, a journal entry and a roadmap update. Old i
 
 ---
 
+
+### #3441 — Ultrascan footprint does not match original game (P4 Low) 🔍
+- [x] Research: save 907K, strict vs minimal masks, matrix in 16-object-placement
+- [x] Vault: TH_ORIGINAL_ULTRASCAN, VANILLA_FOOTPRINT_MATRIX, TH_ORIGINAL_TILES, vanilla-coverage 1/62
+- [x] PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md, KANBAN Research
+- [ ] Awaiting author reply on strict vs minimal
+- [ ] Code fix in next sprint
