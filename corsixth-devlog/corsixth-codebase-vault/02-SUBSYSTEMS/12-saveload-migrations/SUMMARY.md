@@ -660,3 +660,6 @@ Current version: **212+** (see `App.savegame_version` in `app.lua`)
 - [[12-saveload-migrations/CHECKLIST]]
 - [[12-saveload-migrations/MAP]]
 - [[12-saveload-migrations/SCAFFOLD]]
+
+## Ultrascan 3441
+persistable ultrascan_after_use in rooms/ultrascan.lua:64, SAVEGAME_VERSION 265. Strict footprint fix may need afterLoad gate old<new for thob 22.

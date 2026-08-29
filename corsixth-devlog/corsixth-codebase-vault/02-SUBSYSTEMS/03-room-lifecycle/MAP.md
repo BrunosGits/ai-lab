@@ -91,11 +91,8 @@
 ### 4. `ultrascan.lua` — UltrascanRoom
 | Method | Line Range | Overrides / Adds |
 |--------|------------|------------------|
-| `UltrascanRoom:new()` | 1-45 | Constructor |
-| `UltrascanRoom:roomFinished()` | 95-105 | Verify doctor, find ultrascan |
-| `UltrascanRoom:dealtWithPatient()` | 85-115 | Scan complete |
-| `UltrascanRoom:commandEnteringPatient()` | 117-135 | Patient on scanner |
-| `UltrascanRoom:commandEnteringStaff()` | 137-160 | Doctor operates |
+| `UltrascanRoom:UltrascanRoom()` | 50-52 | Constructor (calls Room) |
+| `UltrascanRoom:commandEnteringPatient()` | 54-76 | Patient on scanner, staff to secondary, MultiUse |
 
 ### 5. `blood_machine.lua` — BloodMachineRoom
 | Method | Line Range | Overrides / Adds |

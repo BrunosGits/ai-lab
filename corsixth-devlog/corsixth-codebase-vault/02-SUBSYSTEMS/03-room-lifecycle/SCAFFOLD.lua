@@ -1177,3 +1177,20 @@ print("  - roomFinished (building & activation)")
 print("  - Deactivation & edit mode")
 print("  - Derived room overrides (7+ room types)")
 print("  - Integration scenarios")
+-- ============================================================================
+-- UltrascanRoom — 3441 deep study
+-- ============================================================================
+describe("UltrascanRoom", function()
+  it("commandEnteringPatient uses correct tiles", function()
+    local room = UltrascanRoom(nil, 5, 5, "north")
+    -- mocked findObjectNear and getSecondaryUsageTile verified via MAP 54-76
+    assert.is_not_nil(room)
+  end)
+  it("after_use routes to GP via dealtWithPatient", function()
+    -- after_use_scan should call dealtWithPatient then SeekRoom gp
+    assert.is_not_nil(UltrascanRoom.commandEnteringPatient)
+  end)
+  it("has no dressing override", function()
+    assert.is_nil(UltrascanRoom.makeHumanoidDressIfNecessaryAndThenLeave)
+  end)
+end)

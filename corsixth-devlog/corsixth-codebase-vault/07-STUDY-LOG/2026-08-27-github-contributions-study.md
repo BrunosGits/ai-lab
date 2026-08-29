@@ -178,3 +178,6 @@ The GitFlow workflow defines a strict branching model designed around project re
 - [[PR-3494-docs-links]]
 - [[world-entity-flow]]
 - [[save-load-migrations]]
+
+## Opencode Resources
+- Opencode GitHub Skill: Authentication and access instructions for GitHub operations (.opencode/skill/github.md)
