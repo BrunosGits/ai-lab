@@ -78,6 +78,14 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [ ] Verification matrix green (place · Esc-cancel · sell · save-mid-window · negative control)
 - [ ] PR + CI green
 
+### #3441 — Ultrascan footprint does not match original game (P4 Low) 🔍
+
+- [x] Research: save 907K zip / 2.7M sav, map 128x128, strict vs minimal masks, 16-object-placement/VANILLA_FOOTPRINT_MATRIX.md
+- [x] Vault: TH_ORIGINAL_ULTRASCAN.md, TH_ORIGINAL_TILES.md, Ultrascan-room-deep.md, Ultrascan-diagnosis-flow.md, vanilla-coverage 1/62 (10 pushes b0e694e..1ea9377)
+- [x] PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md, KANBAN Research
+- [ ] Awaiting author reply on strict vs minimal (comment 5459638041)
+- [ ] Code fix in next sprint fix/3441-ultrascan-footprint after 3372
+
 ### #2469 — Right mouse panning causes object placement glitches ⏭️
 - [ ] Reproduce headless
 - [ ] Root-cause the pan/placement interaction
@@ -123,11 +131,3 @@ Each issue ends with a published PR, a journal entry and a roadmap update. Old i
 - Shipping a real open source contribution through maintainer review
 
 ---
-
-
-### #3441 — Ultrascan footprint does not match original game (P4 Low) 🔍
-- [x] Research: save 907K, strict vs minimal masks, matrix in 16-object-placement
-- [x] Vault: TH_ORIGINAL_ULTRASCAN, VANILLA_FOOTPRINT_MATRIX, TH_ORIGINAL_TILES, vanilla-coverage 1/62
-- [x] PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md, KANBAN Research
-- [ ] Awaiting author reply on strict vs minimal
-- [ ] Code fix in next sprint
