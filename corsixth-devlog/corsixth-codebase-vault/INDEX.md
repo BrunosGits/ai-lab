@@ -296,3 +296,10 @@ corsixth-codebase-vault/
 
 - [[tags]]
 - [[index|Back to top]]
+
+## 3a. Vanilla Behaviour
+
+- [[02-SUBSYSTEMS/16-object-placement/VANILLA_FOOTPRINT_MATRIX]] — Ultrascan 3441 strict vs minimal, footprint parity
+- [[02-SUBSYSTEMS/23-map-tile/TH_ORIGINAL_TILES]] — Block LUT and original_cells
+- [[05-DATA-FORMATS/objects/TH_ORIGINAL_ULTRASCAN]] — thob 22 masks
+- [[08-QUERIES/vanilla-coverage]] — 1/62 validated
