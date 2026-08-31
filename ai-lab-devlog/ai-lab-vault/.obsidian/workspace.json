@@ -1,0 +1,73 @@
+{
+  "main": {
+    "id": "f3587bd771f2a30d",
+    "type": "split",
+    "children": [
+      {
+        "id": "6ee4f01820f97c7f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a7c94b78c654ef44",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "234eb3594caff408",
+    "type": "split",
+    "children": [
+      {
+        "id": "0eba4829d43b25e8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "95f700381c0de340",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "right": {
+    "id": "abcd12345abcdef0",
+    "type": "split",
+    "children": [
+      {
+        "id": "abcd12345abcdef1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "abcd12345abcdef2",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "New tab"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "active": "a7c94b78c654ef44",
+  "lastOpenFiles": []
+}

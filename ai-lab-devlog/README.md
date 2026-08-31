@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/icon-512.png" width="128" alt="AI Lab beaker icon"/>
+  <img src="../assets/icon-512.png" width="128" alt="AI Lab beaker icon"/>
 </p>
 
 # 🧪 AI Lab VPS
@@ -11,15 +11,14 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 ## What's here
 
 - `roadmap.md` — master plan: infrastructure Phases 0–4, a 5-month learning roadmap, backup strategy and a services/access matrix
-- `journal.md` — personal journal, one entry per day
-- `project-conception-log.md` — timeline of every decision, chosen or rejected, and why
-- `achievements.md` — running record of GitHub achievements earned by this account
+- `../journal.md` — personal journal, one entry per day
+- `../achievements.md` — running record of GitHub achievements earned by this account
 - `rescue-drill.md` — rescue-mode runbook (tested 2026-08-06)
-- `assets/` — project beaker icon (SVG + PNG exports, favicon)
-- `hello/` — FastAPI "hello" app (containerized in Phase 3)
-- `scripts/` — `backup.sh` (age-encrypted backups to Backblaze B2, nightly via systemd timer)
-- `.opencode/` — opencode config, including the `/end-session` command
-- `print.css` + `ai-lab-summary.pdf` — printable PDF of the plan
+- `../assets/` — project beaker icon (SVG + PNG exports, favicon)
+- `../hello/` — FastAPI "hello" app (containerized in Phase 3)
+- `../scripts/` — `backup.sh` (age-encrypted backups to Backblaze B2, nightly via systemd timer)
+- `../.opencode/` — opencode config, including the `/end-session` command
+- `../print.css` + `../ai-lab-summary.pdf` — printable PDF of the plan
 
 ## Infrastructure status
 
@@ -41,4 +40,4 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 
 ## License
 
-[MIT](LICENSE) © 2026 Bruno Lima
+[MIT](../LICENSE) © 2026 Bruno Lima
