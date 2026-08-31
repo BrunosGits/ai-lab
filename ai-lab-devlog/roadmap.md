@@ -6,68 +6,6 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ---
 
-## 🎯 Goals & Metrics
-
-**Top-level goal:** AI Lab succeeds when every one of the 5 months produces at least one public, working deliverable on GitHub and Hugging Face that a stranger can open and run, each backed by a journal entry and an updated roadmap.
-
-**The done test (applies to every month):**
-1. **Public** — reachable at a URL with no login
-2. **Working** — a stranger can actually run or interact with it
-3. **Explained** — a README or journal entry says what it does and how
-
-### Month 1 — Transformers · Datasets · Spaces
-
-- **Deliverable:** a public chatbot Space (loading distilgpt2 or a model via the HF Inference API) that answers a message from outside
-- **Metrics:**
-  - [ ] Space is public, builds on HF, and answers a message (URL works, no auth)
-  - [ ] month1-spam-sample dataset linked from the Space README (already published)
-  - [ ] Source repo public with README + demo link + journal entry
-- **Quality bar:** not a copied template. The README explains pipeline, AutoTokenizer and AutoModelForCausalLM in my own words
-
-### Month 2 — Inference API · SmolAgents · Redis
-
-- **Deliverable:** an agent demo Space that visibly completes a real task (calls an API and executes code through a tool loop)
-- **Metrics:**
-  - [ ] Space runs an agent with at least one working tool that finishes a real task
-  - [ ] Model swapped through the API without a code change
-  - [ ] Redis added only if the backend actually needs it
-- **Quality bar:** the agent does something non trivial end to end, not just echo
-
-### Month 3 — Multi-model · Evaluation
-
-- **Deliverable:** an eval UI Space where you pick a model and see BLEU, ROUGE, BERTScore and LLM-as-Judge results, with a published results dataset
-- **Metrics:**
-  - [ ] At least two metrics implemented and computed on real prompts
-  - [ ] Results shown in the UI
-  - [ ] Eval dataset published on HF
-- **Quality bar:** the scores come from real prompts and real model output, not placeholders
-
-### Month 4 — Agentic AI (MCP · RAG · Qdrant)
-
-- **Deliverable:** a public agent lab Space with an MCP server (at least one tool and one resource) and a working RAG pipeline
-- **Metrics:**
-  - [ ] MCP server with at least one tool and one resource
-  - [ ] Qdrant index populated and queried
-  - [ ] RAG answers a question from my own docs
-- **Quality bar:** the RAG answer is grounded in my documents, not a hallucination
-
-### Month 5 — Professional
-
-- **Deliverable:** a portfolio page that unifies all 5 months
-- **Metrics:**
-  - [ ] All 5 project repos public with READMEs and demos
-  - [ ] Portfolio live
-  - [ ] HF profile pinned
-  - [ ] Roadmap 100 percent complete
-- **Quality bar:** a stranger can go from the portfolio to any single month demo in one click
-
-### Infra (enabler, capped)
-
-- [ ] Monthly restore drill run once, plus one full rebuild drill
-- [ ] Pause/resume runbook in the README
-
----
-
 ## 📦 Infrastructure — Phase 0–4
 
 ### Phase 0 — Prep
@@ -265,7 +203,15 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ## 📚 Learning Roadmap — every month ends with a PUBLISH step
 
+**Top-level goal:** every month ends with at least one public, working deliverable on GitHub and Hugging Face that a stranger can open and run, backed by a journal entry and an updated roadmap.
+
+**The done test for each month:** the deliverable is public (a URL, no login), working (a stranger can run it), and explained (a README or journal entry says what it does).
+
+**Infra (enabler, not a goal line):** monthly restore drill run once plus one full rebuild drill, and a pause/resume runbook in the README.
+
 ### Month 1 — Linux + Docker
+
+**Goal:** a public chatbot Space (distilgpt2 or a model via the HF Inference API) that answers a message from outside, linking the published month1-spam-sample dataset, with a source repo, README and demo link
 
 - **Study:** HF Transformers · HF Datasets · HF Spaces
 - **Build:** first chatbot Space
@@ -277,6 +223,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Month 2 — Backend
 
+**Goal:** an agent demo Space that completes a real task by calling an API and executing code through a tool loop
+
 - **Study:** HF Inference API (huggingface_hub) · SmolAgents · Redis 7
 - **Build:** agent demo (calls APIs, executes code)
 - **Publish:** Space + repo
@@ -286,6 +234,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] FastAPI REST + auth + async mastered
 
 ### Month 3 — AI Integration
+
+**Goal:** an eval UI Space where you pick a model and see BLEU, ROUGE, BERTScore and LLM-as-Judge results, with a results dataset published on HF
 
 - **Study:** OpenCode Zen (multi-model) · Evaluation (BLEU · ROUGE · BERTScore · LLM-as-Judge)
 - **Build:** LLM Evaluation Lab (FastAPI on VPS)
@@ -297,6 +247,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Month 4 — Agentic AI
 
+**Goal:** a public agent lab Space with an MCP server (at least one tool and one resource) and a RAG pipeline that answers from my own docs
+
 - **Study:** MCP · RAG · Embeddings · Qdrant
 - **Build:** MCP Playground + Agent Evaluation Lab
 - **Publish:** agent lab Space + repo
@@ -306,6 +258,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] Agent eval: planning, tool use, memory, reliability
 
 ### Month 5 — Professional
+
+**Goal:** a portfolio page that unifies all of the months, with every project repo public, READMEs, demos, pinned HF profile and roadmap 100 percent complete
 
 - **Study:** Langfuse Cloud · CI/CD · Monitoring · Portfolio
 - **Build:** portfolio (projects + demos unified)
