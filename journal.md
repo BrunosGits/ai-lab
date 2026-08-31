@@ -25,14 +25,25 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 | Project | Sessions | Total Time |
 |---------|----------|------------|
-| AI Lab | 14 | 15:10 |
+| AI Lab | 15 | 16:40 |
 | CorsixTH | 8 | 11:37 |
 | OpenSearch | 5 | 6:29 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **28** | **35:46** |
+| **Total** | **29** | **37:16** |
+
+### [AI Lab] 2026-08-30: Disk cleanup, Month 1 study, vault restructure
+
+**Mood:** productive, a little proud
+
+**Story:** Started with the server feeling cramped, so I cleared out a bunch of build artifacts. I removed a Rust target folder, the cargo cache, a duplicate clone, and a whole second OpenSearch checkout that mirrored the first one. The journal logs alone had grown past six hundred meg, so I vacuumed them and capped their size so they will not pile up again. That freed several gig and left room for the training work. On the study side, I taught the server the core Hugging Face tricks: the pipeline() easy button, the AutoTokenizer that maps words to numbers, and the AutoModelForCausalLM engine underneath. I used a small model called distilgpt2, downloaded the sms_spam dataset, filtered down to the spam messages, and published a 50 row sample to Hugging Face where anyone can find it. Then I turned to the repo. I made an ai-lab-vault inside the devlog to hold the Obsidian files for the project itself, moved the roadmap, README, and rescue drill down into ai-lab-devlog, and folded the Month 1 notes into the vault's learning section. I also fixed the four vault skills on the computer so they point at the VPS paths and treat the repo as the backup, since the old external directory instruction no longer matched how we work.
+
+**What I learned:** The Obsidian vault works better committed to the repo than as a loose external folder, because the repo is the backup. And the small model fit fine on the server without renting a bigger machine. Cleaning the disk before a big install is worth it, torch and the model need real room.
+
+**Feelings / notes:** A little relieved the training worked on the first real run. Deleting a second checkout felt oddly freeing, this machine has enough copies of OpenSearch. Quiet, satisfying close.
+
+**Did:** freed several gig on the VPS, removed Rust target and cargo cache, removed a duplicate clone and a duplicate OpenSearch checkout, vacuumed and capped the journal logs, studied pipeline(), AutoTokenizer, and AutoModelForCausalLM with distilgpt2, downloaded and filtered sms_spam, published BSLBSL/month1-spam-sample to Hugging Face, created ai-lab-devlog/ai-lab-vault, moved roadmap, README, and rescue drill into ai-lab-devlog, folded Month 1 notes into the vault, fixed the four vault skills on the computer to use the VPS paths.
 
 ---
-
 
 ### [CorsixTH] 2026-08-28: Taken issue, pivot to Ultrascan
 
