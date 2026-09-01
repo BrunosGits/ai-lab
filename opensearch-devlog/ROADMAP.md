@@ -58,7 +58,9 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [x] e2e verified: `not_a_codec` returns the full list, `best_compression` still works
 - [x] Fix recovered from VPS, pushed to `BrunosGits/OpenSearch:fix/17561-codec-error-message`
 - [x] PR #22749 opened, DCO fixed, CI running
-- [ ] Maintainer review
+- [x] Merge conflict resolved (rebase onto latest main, kept both the codec tests and upstream's new toBuilder test in `EngineConfigTests`), `EngineConfigTests` green on the VPS
+- [x] Reviewer approved; PR #22749 now `MERGEABLE`
+- [ ] gradle-check green, then merge
 
 ### #22654 — MONITOR mode workload group rejections (helping) 🟡
 - [x] PR #22701 confirmed duplicate of merged #22610, commented, tagged triage to close
@@ -84,8 +86,9 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [x] Streaming transport doesn't propagate non-`StreamException` errors, so failure is silently swallowed
 - [x] Fix: one line change in failure injector lambda to send `StreamException` instead of raw exception
 - [x] Commented claiming the issue with root cause analysis
-- [ ] Implement the fix, run tests with original failing seed
-- [ ] Open PR
+- [x] One line fix written (`StreamException` in the failure injector lambda)
+- [ ] PR #22750 currently mixes both this fix and the codec fix (#17561); split it by dropping the codec commit so #22750 carries only this fix
+- [ ] Rebase the split branch onto latest main, push via SSH, confirm #22750 turns mergeable
 
 ---
 
