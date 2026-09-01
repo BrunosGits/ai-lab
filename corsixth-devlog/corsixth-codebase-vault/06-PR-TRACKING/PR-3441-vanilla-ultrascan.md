@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Spec 3441 done 2026-08-31: busted spec/entities/ultrascanner_3441_spec.lua 2 tests 5000 ticks gate on/off PASS (65/65), gate self.footprint preserve luacheck 0/297, vault primary 16-object-placement/3441-TEST-RESULTS.md. Branch ef9705d2 hold.
+Spec 3441 done 2026-08-31: busted spec/entities/ultrascanner_3441_spec.lua 2 tests 5000 ticks gate on/off PASS (65/65), gate self.footprint preserve luacheck 0/297, vault primary 16-object-placement/3441-TEST-RESULTS.md (08-QUERIES removed). Branch bf1bf575 hold.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Spec 3441 done 2026-08-31: busted spec/entities/ultrascanner_3441_spec.lua 2 tes
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Next: await push approval; vault 14 pushes, CorsixTH spec added.
+Hold PR text and PR draft per instruction; keep only 16/3441-TEST-RESULTS.md primary, branch local bf1bf575.
