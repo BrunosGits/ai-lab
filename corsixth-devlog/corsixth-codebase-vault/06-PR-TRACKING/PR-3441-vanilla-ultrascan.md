@@ -1,7 +1,7 @@
 ---
 pr: 3441
 title: Ultrascan footprint does not match original game
-status: sprint6-matrix
+status: sprint7-migration
 branch: fix/3441-ultrascan-footprint
 base: master
 repo: CorsixTH/CorsixTH
@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Sprint 6/8 vault matrix done. VANILLA_FOOTPRINT_MATRIX marked 4 tiles FIXED, strict rows out-of-scope. Ultrascan-footprint-research updated with gate+save sha. Timebox 30m.
+Sprint 7/8 migration summary done. 12-saveload-migrations SUMMARY 265 row + current version 265, Ultrascan 3441 sprint 7 notes. Timebox 30m.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Sprint 6/8 vault matrix done. VANILLA_FOOTPRINT_MATRIX marked 4 tiles FIXED, str
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Sprint 7: vault PR tracking + migration summary.
+Sprint 8: changelog + build verify (busted, luacheck, save).

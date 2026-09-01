@@ -638,8 +638,9 @@ end
 | 187 | GBV Tired default |
 | 210 | Mood enum rename (sad→dying) |
 | 212 | Epidemic coverup field rename |
+| 265 | Ultrascan footprint 4 tiles blocked (north {-1,1},{0,1} east {0,-1},{1,-1} passable→blocked) preserve old<265 |
 
-Current version: **212+** (see `App.savegame_version` in `app.lua`)
+Current version: **265** (app.lua:31 3441) (see `App.savegame_version` in `app.lua`)
 
 ---
 
@@ -661,5 +662,8 @@ Current version: **212+** (see `App.savegame_version` in `app.lua`)
 - [[12-saveload-migrations/MAP]]
 - [[12-saveload-migrations/SCAFFOLD]]
 
-## Ultrascan 3441
-persistable ultrascan_after_use in rooms/ultrascan.lua:64, SAVEGAME_VERSION 265. Strict footprint fix may need afterLoad gate old<new for thob 22.
+## Ultrascan 3441 — Sprint 7
+- persistable ultrascan_after_use in rooms/ultrascan.lua:64
+- SAVEGAME_VERSION 265 app.lua:31, Object:afterLoad:892 old<265 preserve (no re-occupation)
+- 4 tiles blocked (north {-1,1},{0,1} east {0,-1},{1,-1}) minimal symmetric, strict out-of-scope
+- Save 3441 sha9b3f/bd381b validates no periodic crash on old<265
