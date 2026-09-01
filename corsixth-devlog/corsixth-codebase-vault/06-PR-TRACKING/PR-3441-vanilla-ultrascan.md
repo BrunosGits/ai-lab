@@ -1,7 +1,7 @@
 ---
 pr: 3441
 title: Ultrascan footprint does not match original game
-status: sprint2-save
+status: sprint3-north
 branch: fix/3441-ultrascan-footprint
 base: master
 repo: CorsixTH/CorsixTH
@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Sprint 2/8 save verified. Zip 907K (sha 9b3ffe5f) sav 2.6M (bd381b01) 2717590 bytes, 128x128, thob 22, inflated to build/saves/"3441 Ultrascan footprint.sav". Headless baseline pending build rebuild (build/ missing after sync). Timebox 30m.
+Sprint 3/8 north done. ultrascanner.lua:73-75 {-1,1} only_passable removed keep need_west_side, {0,1} only_passable removed → passable=false (blocked). Diff 1 line. East pending. Timebox 30m.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Sprint 2/8 save verified. Zip 907K (sha 9b3ffe5f) sav 2.6M (bd381b01) 2717590 by
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Sprint 3: north footprint fix {-1,1},{0,1} (ultrascanner.lua:73-75).
+Sprint 4: east footprint fix {0,-1},{1,-1} (ultrascanner.lua:83-84).
