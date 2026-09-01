@@ -8,7 +8,7 @@ actually works.
 
 Active contribution tracks, newest first:
 
-- **#22676** LATE_MATERIALIZATION profile metrics (analytics engine): Reviewed PR #22676 (Draft) to emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`. Identified three issues: wire BWC guard violation, static test provisioning flag, and shard label uniqueness. Built diagnosis plan for flaky sandbox-check test. Verified fix via codecov (80%) and validated with Gradle test commands: `./gradlew :analytics-query:test --tests "AnalyticsQueryTaskCleanupIT"`. Author addressing feedback, CI status fluctuating.
+- **✅ #22676** LATE_MATERIALIZATION profile metrics (analytics engine): **Merged 2026-08-31** — Reviewed PR, identified wire BWC guard violation, static test provisioning flag, shard label uniqueness. Merged by mch2.
 - **#22654** MONITOR mode workload group rejections (helping): Confirmed a duplicate PR was already merged (#22610), root-caused a 60% codecov gap to a missing branch in `rejectIfNeeded` (line 274: missing `isPresent() == false` check), designed and shared a coverage test that the author applied, codecov now green at 80%, awaiting maintainer review.
 - **#17561** Inaccurate codec error message: Root cause is a hardcoded list in the error message, fix derives the message from the accepted codec list (built-ins + registered Lucene codecs + aliases, deduped + sorted). Two tests cover it, e2e verified via `EngineConfigTests`, commit `c135dc26` pushed to the fork, awaiting maintainer review.
 - **#6323** Long strings cut at 2000 characters: Reproduced on 2.3.0 and 2.19.6, swept 1980 to 20000 chars across pipelines and remote reindex, no truncation exists, minimal repro posted, awaiting maintainer confirmation of the field-name theory.

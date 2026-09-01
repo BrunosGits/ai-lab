@@ -79,12 +79,6 @@ This document is the master plan for contributing to [OpenSearch](https://github
 ### #21323 — Lucene stderr warnings (watching) 👀
 - PR #21359 stalled in review — monitor only, do not duplicate
 
-### #22676 — LATE_MATERIALIZATION profile metrics (analytics engine) 🟡
-- [ ] PR #22676 (Draft): emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`
-- [x] Reviewed: posted three issues (wire BWC guard, static test provisioning flag, shard label uniqueness)
-- [ ] Author addressing feedback, CI passing at some commits, failing at others
-- [ ] Next: wait for author to address review, re-review
-
 ### #22706 — Flaky AnalyticsQueryTaskCleanupIT test 🔵
 - [x] Root caused: test injects raw `TaskCancelledException` on streaming channel, but production wraps in `StreamException(StreamErrorCode.CANCELLED)` via `toWireError`
 - [x] Streaming transport doesn't propagate non-`StreamException` errors, so failure is silently swallowed
@@ -100,6 +94,16 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [ ] WLM MONITOR mode has zero user-facing docs — two confusing monitor concepts (`WlmMode.MONITOR_ONLY` vs `ResiliencyMode.MONITOR`)
 - [ ] Local scroll requests bypass the transport interceptor and listener — MONITOR guard not hit there
 - [ ] Integration test gaps for the MONITOR behavior documented
+
+---
+
+## ✅ Completed Contributions
+
+### #22676 — LATE_MATERIALIZATION profile metrics (analytics engine) ✅
+- [x] PR #22676: emit `physical_plan` and `data_node_metrics` for LM stage when `profile=true`
+- [x] Reviewed: posted three issues (wire BWC guard, static test provisioning flag, shard label uniqueness)
+- [x] Author addressed feedback, CI green
+- [x] **Merged by mch2 on 2026-08-31**
 
 ---
 
