@@ -1,7 +1,7 @@
 ---
 pr: 3441
 title: Ultrascan footprint does not match original game
-status: sprint9-rebuild
+status: sprint10-proof
 branch: fix/3441-ultrascan-footprint
 base: master
 repo: CorsixTH/CorsixTH
@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Sprint 9/9 rebuild done. cmake 3.31.6 + SDL3 3.4.14 + mixer 3.2.4, build CorsixTH/corsix-th 649K, saves retained. Timebox 30m.
+Sprint 10 proof done. 5000 ticks gate on (preserve) 0 crashes, gate off (blocked) 0 crashes via Lua loop; vault research updated. Timebox 30m.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Sprint 9/9 rebuild done. cmake 3.31.6 + SDL3 3.4.14 + mixer 3.2.4, build CorsixT
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Sprint 10: headless 5000 ticks gate on/off maintainer pref.
+Sprint 11: fix empty branch do end maintainer pref.
