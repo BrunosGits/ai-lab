@@ -1,7 +1,7 @@
 ---
 pr: 3441
 title: Ultrascan footprint does not match original game
-status: sprint11-gate-style
+status: sprint12-hold
 branch: fix/3441-ultrascan-footprint
 base: master
 repo: CorsixTH/CorsixTH
@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Sprint 11 gate style done. Object:afterLoad:918 do end -- luacheck: ignore 541 (preserve old<265), busted 63/63 luacheck 0/297. Timebox 30m.
+Sprint 12 hold done. Branch fix/3441-ultrascan-footprint ef9705d2 stays on VPS, not pushed to origin per instruction (await push signal). Rebuild 649K + 5000 ticks + gate style done. Timebox 30m.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Sprint 11 gate style done. Object:afterLoad:918 do end -- luacheck: ignore 541 (
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Sprint 12: hold push, branch stays on VPS ef9705d2.
+Done: 12/12 sprints, vault 11 pushes to main/corsixth-devlog, CorsixTH branch local only.
