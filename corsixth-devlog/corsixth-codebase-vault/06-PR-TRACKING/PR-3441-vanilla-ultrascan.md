@@ -1,7 +1,7 @@
 ---
 pr: 3441
 title: Ultrascan footprint does not match original game
-status: tests-done
+status: spec-3441
 branch: fix/3441-ultrascan-footprint
 base: master
 repo: CorsixTH/CorsixTH
@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Tests done 2026-08-31: headless offscreen/xvfb 5000 ticks 0 crashes, placement north/east/south/west PASS, handyman REACHABLE, west/south anim PASS, busted 63/63 luacheck 0. Results in 08-QUERIES/3441-test-results.md. Branch ef9705d2 hold per instruction.
+Spec 3441 done 2026-08-31: busted spec/entities/ultrascanner_3441_spec.lua 2 tests 5000 ticks gate on/off PASS (65/65), gate self.footprint preserve luacheck 0/297, vault primary 16-object-placement/3441-TEST-RESULTS.md. Branch ef9705d2 hold.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Tests done 2026-08-31: headless offscreen/xvfb 5000 ticks 0 crashes, placement n
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Next: await push approval; branch local only, vault 13 pushes done.
+Next: await push approval; vault 14 pushes, CorsixTH spec added.

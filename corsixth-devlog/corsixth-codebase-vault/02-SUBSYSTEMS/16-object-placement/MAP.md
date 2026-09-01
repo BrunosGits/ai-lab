@@ -284,3 +284,8 @@ orient_mirror = {
 - [[16-object-placement/SUMMARY]]
 - [[16-object-placement/CHECKLIST]]
 - [[16-object-placement/SCAFFOLD]]
+
+
+## 3441 Spec
+- Busted spec: `CorsixTH/Luatest/spec/entities/ultrascanner_3441_spec.lua` (best location, mirrors 16-object-placement, 5000 ticks gate on/off)
+- Vault results: `02-SUBSYSTEMS/16-object-placement/3441-TEST-RESULTS.md` (primary, indexed), `08-QUERIES/3441-test-results.md` secondary alias
