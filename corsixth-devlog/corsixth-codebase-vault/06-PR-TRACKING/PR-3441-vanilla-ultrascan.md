@@ -1,7 +1,7 @@
 ---
 pr: 3441
 title: Ultrascan footprint does not match original game
-status: sprint5-gate
+status: sprint6-matrix
 branch: fix/3441-ultrascan-footprint
 base: master
 repo: CorsixTH/CorsixTH
@@ -18,7 +18,7 @@ related_areas: [16-object-placement, 23-map-tile, 03-room-lifecycle]
 Vault study for 3441, no code yet. Covers save dimensions, TH original masks, strict vs minimal.
 
 ## Status
-Sprint 5/8 gate done. SAVEGAME_VERSION 264→265 (app.lua:31) + Object:afterLoad:892 old<265 preserve (no re-occupation) to avoid periodic crash on old saves. Vault matrix next. Timebox 30m.
+Sprint 6/8 vault matrix done. VANILLA_FOOTPRINT_MATRIX marked 4 tiles FIXED, strict rows out-of-scope. Ultrascan-footprint-research updated with gate+save sha. Timebox 30m.
 
 ## Links
 - Issue https://github.com/CorsixTH/CorsixTH/issues/3441
@@ -26,4 +26,4 @@ Sprint 5/8 gate done. SAVEGAME_VERSION 264→265 (app.lua:31) + Object:afterLoad
 - TH_ORIGINAL_ULTRASCAN.md, VANILLA_FOOTPRINT_MATRIX.md, Ultrascan-footprint-research.md
 
 ## Next
-Sprint 6: vault matrix + research note update.
+Sprint 7: vault PR tracking + migration summary.
