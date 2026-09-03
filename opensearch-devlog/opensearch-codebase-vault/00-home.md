@@ -31,12 +31,13 @@ A study vault for understanding the OpenSearch codebase, tracking issues, and ma
 - [[22676-lm-profile]] — LATE_MATERIALIZATION profile metrics (reviewed)
 - [[22654-monitor-mode]] — MONITOR mode workload group rejections (helped)
 - [[6323-long-strings]] — long strings cut at 2000 characters (investigating)
-- [[22494-regex-cache]] — cache compiled regex automatons (monitoring)
+- [[22494-regex-cache]] — cache compiled regex automatons (PR #22907 draft, local verification done — 2 blockers found)
 
 ## Pull Requests
 
 - [[22749-codec-error-message]] — fix codec error message (CI green, awaiting review)
 - [[22750-flaky-test-fix]] — fix flaky test (CI green, awaiting review)
+- [[22907-regex-cache]] — cache compiled regex automatons (draft, all CI green, local verification done — draft comment not posted)
 
 ## Contributing
 
