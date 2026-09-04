@@ -2,7 +2,7 @@
 
 *Learning · Building · Publishing (GitHub + HF)* · Started 2026-08-04
 
-This document is the master plan for a personal AI engineering laboratory hosted on an OVHcloud VPS. The goal is to learn Linux administration, Docker, backend development and agentic AI by building real projects, publishing each one publicly on GitHub and Hugging Face as a portfolio. The infrastructure is built in phases (0–4), while a 5-month roadmap guides the studies. Every month ends with a published demo, a journal entry and an updated roadmap.
+This document is the master plan for a personal AI engineering laboratory hosted on an OVHcloud VPS. The goal is to learn Linux administration, Docker, backend development and agentic AI by building real projects, publishing each one publicly on GitHub and Hugging Face as a portfolio. The infrastructure is built in phases (0–4), while a 6-month roadmap guides the studies. Every month ends with a published demo, a journal entry and an updated roadmap.
 
 ---
 
@@ -221,7 +221,19 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] Chatbot Space duplicated + modified + public — `BSLBSL/ai-lab-m1-chatbot` (static, browser WASM `Xenova/distilgpt2` ~340MB) + VPS `https://51.79.71.160.sslip.io/chat/` (Gradio host, Lets Encrypt)
 - [x] Repo flipped public (when polished) — `https://github.com/BrunosGits/ai-lab` public + `journal.md` 2026-09-03 + vault updated
 
-### Month 2 — Backend
+### Month 2 — Code Agent (generic-code, free tier) — escalation of toy → serious
+
+**Goal:** generic prompt → write + run Python via SmolAgents CodeAgent + PythonExecutorTool → return code + stdout + latency, using free tier only (~1.7B via hf-inference)
+
+- **Study:** HF Inference API (huggingface_hub, free tier hf-inference 1.7B) · SmolAgents CodeAgent/ReAct · Redis 7 · FastAPI async
+- **Build:** month2/app.py + index.html + redis:7 + Caddy handle_path /agent* (host.docker.internal:8001)
+- **Publish:** Space BSLBSL/ai-lab-m2-agent sdk:static (free, no 402) + GitHub month2/ + journal
+- [ ] Inference API 1.7B free (toggle hf-inference ON at huggingface.co/settings/inference-providers)
+- [ ] SmolAgents CodeAgent generic-code + PythonExecutorTool + ReAct loop
+- [ ] Redis 7 added (cache/queues when app needs it)
+- [ ] FastAPI REST + auth + async mastered
+
+### Month 3 — Backend
 
 **Goal:** an agent demo Space that completes a real task by calling an API and executing code through a tool loop
 
@@ -233,7 +245,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] Redis 7 added (cache/queues when app needs it)
 - [ ] FastAPI REST + auth + async mastered
 
-### Month 3 — AI Integration
+### Month 4 — AI Integration
 
 **Goal:** an eval UI Space where you pick a model and see BLEU, ROUGE, BERTScore and LLM-as-Judge results, with a results dataset published on HF
 
@@ -245,7 +257,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] Eval dataset published on HF
 - [ ] Dashboard/UI for comparing models, cost, latency
 
-### Month 4 — Agentic AI
+### Month 5 — Agentic AI
 
 **Goal:** a public agent lab Space with an MCP server (at least one tool and one resource) and a RAG pipeline that answers from my own docs
 
@@ -257,7 +269,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] RAG pipeline end-to-end (docs → vectors → answers)
 - [ ] Agent eval: planning, tool use, memory, reliability
 
-### Month 5 — Professional
+### Month 6 — Professional
 
 **Goal:** a portfolio page that unifies all of the months, with every project repo public, READMEs, demos, pinned HF profile and roadmap 100 percent complete
 
