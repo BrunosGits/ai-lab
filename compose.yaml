@@ -7,6 +7,8 @@ services:
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
+      - "443:443/udp"
     environment:
       CADDY_DOMAIN: ${CADDY_DOMAIN}
     extra_hosts:
