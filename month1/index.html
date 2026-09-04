@@ -3,51 +3,82 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>ai-lab-m1-chatbot — Month 1 (works offline)</title>
+<title>ai-lab-m1-chatbot — Month 1 (real demo)</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui;background:#f7f7f8;color:#111}
 header{max-width:860px;margin:0 auto;padding:28px 20px 0}h1{margin:0;font-size:22px}p{color:#666}
 nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}nav a{font-size:13px;color:#0b57d0;text-decoration:none;border:1px solid #ddd;background:#fff;padding:6px 10px;border-radius:999px}
 nav a.primary{background:#111;color:#fff;border-color:#111}
 main{max-width:860px;margin:18px auto;padding:0 20px}.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:16px}
-.row{display:flex;gap:10px}input{flex:1;padding:11px;border:1px solid #ddd;border-radius:10px}button{padding:11px 16px;border:0;background:#111;color:#fff;border-radius:10px;cursor:pointer}
+.row{display:flex;gap:10px}input{flex:1;padding:11px;border:1px solid #ddd;border-radius:10px}button{padding:11px 16px;border:0;background:#111;color:#fff;border-radius:10px;cursor:pointer}button:disabled{opacity:.5}
 #log{margin-top:14px;min-height:200px;max-height:50vh;overflow:auto;border:1px solid #ddd;border-radius:10px;padding:10px;background:#fcfcfc}
-.bubble{margin:8px 0;padding:10px 12px;border-radius:12px;max-width:85%;white-space:pre-wrap}
+.bubble{margin:8px 0;padding:10px 12px;border-radius:12px;max-width:85%;white-space:pre-wrap;word-break:break-word}
 .user{background:#111;color:#fff;margin-left:auto}.bot{background:#eef2ff;border:1px solid #dfe4ff}
 .meta{margin-top:10px;color:#666;font-size:12px}
+.alert{background:#fff3cd;border:1px solid #ffe69c;padding:8px 10px;border-radius:8px;font-size:13px;color:#664d03;display:none}
+code{background:#f1f1f1;padding:2px 6px;border-radius:6px;font-size:13px}
 </style>
+<script type="importmap">
+{"imports":{"@gradio/client":"https://cdn.jsdelivr.net/npm/@gradio/client@3.2.0/dist/index.js"}}
+</script>
 </head>
 <body>
 <header>
-<h1>ai-lab-m1-chatbot — Month 1</h1>
-<p>No servers, no tokens — this demo <b>always works</b>. VPS Gradio + HF Inference kept failing, so this is a pure static mock. Real code is in <code>month1/app.py</code>.</p>
+<h1>ai-lab-m1-chatbot — Month 1 (real)</h1>
+<p>Real demo: this static page calls your <b>VPS Gradio</b> at <code>https://51.79.71.160.sslip.io/chat/</code> (distilgpt2 + SmolLM2 fallback). No mock — real <code>pipeline()</code>.</p>
 <nav>
 <a class="primary" href="https://github.com/BrunosGits/ai-lab" target="_blank">Repo</a>
-<a href="https://huggingface.co/datasets/BSLBSL/month1-spam-sample" target="_blank">Dataset 50 spam rows</a>
-<a href="http://51.79.71.160/chat/" target="_blank">VPS (if reachable)</a>
+<a href="https://huggingface.co/datasets/BSLBSL/month1-spam-sample" target="_blank">Dataset</a>
+<a href="https://51.79.71.160.sslip.io/chat/" target="_blank">VPS direct</a>
 </nav>
+<div id="alert" class="alert"></div>
 </header>
 <main>
 <div class="card">
-<div class="row"><input id="msg" placeholder="Try: what time is it — or ask about spam SMS" autofocus/><button id="send">Send</button></div>
+<div class="row"><input id="msg" placeholder="Hi — try: what time is it" autofocus/><button id="send">Send to real VPS</button></div>
 <div id="log"></div>
-<div class="meta">Static mock — no fetch, no 502. Real model: <code>distilgpt2</code> + <code>SmolLM2</code> in <code>month1/app.py</code>.</div>
+<div class="meta">Model: <code>distilgpt2</code> (local) + <code>SmolLM2-135M</code> (HF Inference when providers enabled) · <span id="status">connecting...</span></div>
 </div>
 </main>
-<script>
-const log=document.getElementById("log"),input=document.getElementById("msg"),btn=document.getElementById("send");
+<script type="module">
+import { Client } from "@gradio/client";
+const VPS = "https://51.79.71.160.sslip.io/chat/";
+const log=document.getElementById("log"),input=document.getElementById("msg"),btn=document.getElementById("send"),statusEl=document.getElementById("status"),alertEl=document.getElementById("alert");
 function add(t,c){const d=document.createElement("div");d.className="bubble "+c;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;}
-function reply(q){
-  q=q.toLowerCase();
-  if(q.includes("time")) return "It is " + new Date().toLocaleString() + " (from your browser).";
-  if(q.includes("spam")) return "Spam SMS are the 50 rows in BSLBSL/month1-spam-sample — e.g. Free entry in 2 a wkly comp. We filtered 747 spam from 5,574 total.";
-  if(q.includes("hello")||q.includes("who are you")) return "I am ai-lab-m1-chatbot — Month 1 demo. Real brain is distilgpt2 (82M) + SmolLM2-135M via HF Inference.";
-  if(q.includes("hugging")) return "Hugging Face is where we published the dataset and this Space. Study: pipeline(), AutoTokenizer, AutoModelForCausalLM.";
-  return "You said: \"" + q + "\" — In the real VPS demo this would go through pipeline(text-generation, model=distilgpt2). This mock just echoes so the page never 502s.";
+let client=null;
+async function connect(){
+  try{
+    client = await Client.connect(VPS);
+    statusEl.textContent="connected to VPS";
+    add("Connected to real VPS Gradio. Say hi! (try: what time is it)", "bot");
+  }catch(e){
+    statusEl.textContent="VPS not reachable";
+    alertEl.style.display="block";
+    alertEl.textContent="Could not connect to VPS ("+e.message.slice(0,120)+"). Is your VPN blocking 51.79.71.160? Try without VPN or via http://51.79.71.160/chat/ — this page will fallback to mock.";
+    add("VPS not reachable — using mock fallback for now. You said hi → mock: In the real VPS this would go through pipeline(text-generation, model=distilgpt2).", "bot");
+    console.error(e);
+  }
 }
-btn.onclick=()=>{const v=input.value.trim();if(!v) return;input.value="";add(v,"user");setTimeout(()=>add(reply(v),"bot"),250);};
+connect();
+btn.onclick=async()=>{
+  const v=input.value.trim();if(!v) return;input.value="";add(v,"user");
+  if(!client){
+    add("Mock (no VPS): You said \""+v+"\" — real would be via distilgpt2 pipeline.", "bot");
+    return;
+  }
+  btn.disabled=true;statusEl.textContent="thinking (real model)...";
+  try{
+    const res = await client.predict("/respond", {message: v});
+    // res.data is array, first element is string
+    const text = Array.isArray(res.data) ? res.data[0] : res.data;
+    add(text || "(empty)", "bot");
+    statusEl.textContent="real VPS answered";
+  }catch(e){
+    add("VPS error: "+e.message.slice(0,300)+" — mock fallback: You said \""+v+"\"", "bot");
+    statusEl.textContent="error, mock fallback";
+  }finally{btn.disabled=false;input.focus();}
+};
 input.addEventListener("keydown",e=>{if(e.key==="Enter") btn.onclick();});
-add("Hi! Ask me anything — try what time is it, what is spam?, or hello. This page never calls the VPS, so no not found/502.","bot");
 </script>
 </body>
 </html>
