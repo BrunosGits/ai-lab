@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ai-lab-m1-chatbot — Month 1</title>
+<style>
+:root{--bg:#f7f7f8;--fg:#111;--muted:#666;--bd:#ddd;--pri:#111}
+*{box-sizing:border-box} body{margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg)}
+header{max-width:860px;margin:0 auto;padding:28px 20px 0} header h1{margin:0;font-size:22px} header p{color:var(--muted);margin:6px 0 0}
+nav{margin:12px 0 0;display:flex;gap:10px;flex-wrap:wrap} nav a{font-size:13px;color:#0b57d0;text-decoration:none;border:1px solid var(--bd);background:#fff;padding:6px 10px;border-radius:999px}
+main{max-width:860px;margin:18px auto;padding:0 20px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:16px}
+.row{display:flex;gap:10px} input,button{font:inherit} #msg{flex:1;padding:11px 12px;border:1px solid var(--bd);border-radius:10px}
+#send{padding:11px 16px;border:0;background:var(--pri);color:#fff;border-radius:10px;cursor:pointer} #send:disabled{opacity:.5;cursor:not-allowed}
+#log{margin-top:14px;min-height:160px;max-height:46vh;overflow:auto;border:1px solid var(--bd);border-radius:10px;padding:10px;background:#fcfcfc}
+.bubble{margin:8px 0;padding:10px 12px;border-radius:12px;max-width:85%;white-space:pre-wrap;word-break:break-word}
+.user{background:#111;color:#fff;margin-left:auto} .bot{background:#eef2ff;border:1px solid #dfe4ff}
+.meta{margin-top:10px;color:var(--muted);font-size:12px}
+details{margin-top:14px} summary{cursor:pointer;color:var(--muted)}
+code{background:#f1f1f1;padding:2px 6px;border-radius:6px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+<h1>🧪 ai-lab-m1-chatbot — Month 1</h1>
+<p>HF Inference API (<code>HuggingFaceTB/SmolLM2-135M-Instruct</code>) with VPS Gradio fallback (<code>distilgpt2</code>). Private test — Phase 3, public in Phase 4.</p>
+<nav>
+<a href="https://huggingface.co/datasets/BSLBSL/month1-spam-sample" target="_blank" rel="noreferrer">Dataset BSLBSL/month1-spam-sample</a>
+<a href="https://github.com/BrunosGits/ai-lab" target="_blank" rel="noreferrer">Repo BrunosGits/ai-lab</a>
+<a id="vpsLink" href="#" target="_blank" rel="noreferrer">VPS demo /chat</a>
+</nav>
+</header>
+<main>
+<div class="card">
+<div class="row"><input id="msg" placeholder="Hello! Who are you?" autocomplete="off"/><button id="send">Send</button></div>
+<div id="log" aria-live="polite"></div>
+<div class="meta">Model: <code id="model">HuggingFaceTB/SmolLM2-135M-Instruct</code> · <span id="status">ready</span> · local <code>distilgpt2</code> fallback on error.</div>
+<details><summary>How it works</summary>
+<p>Static Space (free) + VPS Gradio. JS tries <code>router.huggingface.co/hf-inference/models/…</code> first (needs providers enabled); on failure it can fall back to VPS <code>/chat</code> or show the local fallback message. Source: <code>month1/app.py</code>, <code>month1/index.html</code>.</p>
+</details>
+</div>
+</main>
+<script>
+const MODEL = "HuggingFaceTB/SmolLM2-135M-Instruct";
+const VPS_PATH = "/chat"; // Caddy handle /chat* → chatbot:7860
+const log = document.getElementById("log");
+const msg = document.getElementById("msg");
+const btn = document.getElementById("send");
+const statusEl = document.getElementById("status");
+const vpsLink = document.getElementById("vpsLink");
+vpsLink.href = VPS_PATH;
+
+function addBubble(text, cls){
+  const d=document.createElement("div");
+  d.className="bubble "+cls;
+  d.textContent=text;
+  log.appendChild(d);
+  log.scrollTop=log.scrollHeight;
+}
+
+async function callHF(prompt){
+  // router endpoint — requires HF token via Authorization if providers need auth, but try anonymous first
+  const url = `https://router.huggingface.co/hf-inference/models/${MODEL}`;
+  const res = await fetch(url, {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({inputs: prompt, parameters:{max_new_tokens:128, temperature:0.7}, options:{wait_for_model:true}})
+  });
+  if(!res.ok){
+    const t=await res.text();
+    throw new Error(`HF ${res.status}: ${t.slice(0,400)}`);
+  }
+  const data=await res.json();
+  // HF returns [{generated_text: "..."}] or {generated_text}
+  if(Array.isArray(data) && data[0]?.generated_text) return data[0].generated_text;
+  if(data.generated_text) return data.generated_text;
+  if(data[0]?.generated_text) return data[0].generated_text;
+  return JSON.stringify(data).slice(0,1000);
+}
+
+async function callVPS(prompt){
+  // Call VPS Gradio via its API? For static, we just redirect to VPS page.
+  // If VPS exposes a simple /api endpoint, we could fetch it, but Gradio 6 API is /gradio_api.
+  // For now, static fallback suggests opening VPS link.
+  throw new Error("VPS fallback: open "+VPS_PATH+" in a new tab");
+}
+
+btn.onclick = async () => {
+  const text = msg.value.trim();
+  if(!text) return;
+  msg.value="";
+  addBubble(text, "user");
+  btn.disabled=true; statusEl.textContent="thinking…";
+  const prompt = `You are a helpful assistant. Be concise.\n\nUser: ${text}\nAssistant:`;
+  try{
+    const out = await callHF(prompt);
+    // strip prompt if echoed
+    const clean = out.startsWith(prompt) ? out.slice(prompt.length).trim() : out.trim();
+    addBubble(clean || out.trim(), "bot");
+    statusEl.textContent="HF inference";
+  }catch(e){
+    addBubble(`HF unavailable (${e.message.slice(0,300)}). Try the VPS demo at ${VPS_PATH} — it runs local distilgpt2 fallback and is always available.`, "bot");
+    statusEl.textContent="fallback: use VPS /chat";
+  }finally{ btn.disabled=false; msg.focus(); }
+};
+msg.addEventListener("keydown", e=>{ if(e.key==="Enter") btn.onclick(); });
+msg.focus();
+</script>
+</body>
+</html>

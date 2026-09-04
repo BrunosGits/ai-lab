@@ -1,35 +1,25 @@
 ---
 title: ai-lab-m1-chatbot
-sdk: gradio
-app_file: app.py
+sdk: static
 pinned: false
 tags:
   - month1
   - chatbot
+  - static
   - inference-api
-  - smollm2
 datasets:
   - BSLBSL/month1-spam-sample
 ---
 
-# ai-lab-m1-chatbot (private test — Month 1)
+# ai-lab-m1-chatbot (Month 1 — Static + VPS)
 
-> **Phase 3 private test.** Inference API chatbot (`HuggingFaceTB/SmolLM2-135M-Instruct`) via `huggingface_hub.InferenceClient` + Gradio `ChatInterface`.
-> Public dataset: [BSLBSL/month1-spam-sample](https://huggingface.co/datasets/BSLBSL/month1-spam-sample) (50 spam SMS rows). Phase 4 will flip this Space public and wire the demo link into the roadmap.
+> **Month 1 — Static Space (free) + VPS Gradio fallback.** Static page tries HF Inference API (`HuggingFaceTB/SmolLM2-135M-Instruct`) first, VPS `http://51.79.71.160.sslip.io/chat` runs Gradio with local `distilgpt2` fallback. Dataset: [BSLBSL/month1-spam-sample](https://huggingface.co/datasets/BSLBSL/month1-spam-sample).
 
-## Run locally
-```bash
-# HF token lives in Infisical at /huggingface "Access Token" (space in key)
-tok=$(infisical secrets --plain --projectId=7ea02e25-4a83-47a1-a90e-985ef82f3eb6 --env=prod --path=/huggingface 2>/dev/null | grep -i "Access Token" | cut -d= -f2-)
-HF_TOKEN="$tok" ~/ai-lab/month1/.venv/bin/python ~/ai-lab/month1/app.py
-# open http://localhost:7860
-```
+## Demos
+- **Static (this Space):** this page — client-side JS to HF Inference
+- **VPS (live):** [http://51.79.71.160.sslip.io/chat](http://51.79.71.160.sslip.io/chat) — Gradio (`month1/app.py`) via Caddy `handle_path /chat*`
 
-## Files
-- `app.py` — Gradio + Inference API
-- `requirements.txt` — Space deps
-- `study_transformers.py`, `study_datasets.py` — Month 1 study (pipeline, AutoTokenizer, AutoModelForCausalLM, datasets filter/publish)
-
-## Related
-- Vault: `ai-lab-devlog/ai-lab-vault/02-LEARNING-ROADMAP/month1-transformers-datasets.md`
-- Roadmap: `ai-lab-devlog/roadmap.md` Month 1
+## Source
+- `app.py` — Gradio + dual-mode Inference/local
+- `index.html` — static frontend
+- `study_transformers.py`, `study_datasets.py` — Month 1 study

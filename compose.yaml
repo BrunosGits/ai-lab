@@ -9,6 +9,8 @@ services:
       - "80:80"
     environment:
       CADDY_DOMAIN: ${CADDY_DOMAIN}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
@@ -25,6 +27,7 @@ services:
     networks:
       - frontend
       - backend
+
 
   postgres:
     image: postgres:17.11

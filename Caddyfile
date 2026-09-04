@@ -1,3 +1,8 @@
 http://{$CADDY_DOMAIN} {
-    reverse_proxy hello:8000
+    handle_path /chat* {
+        reverse_proxy host.docker.internal:7860
+    }
+    handle {
+        reverse_proxy hello:8000
+    }
 }
