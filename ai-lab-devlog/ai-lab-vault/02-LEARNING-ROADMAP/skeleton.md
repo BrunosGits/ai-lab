@@ -8,7 +8,7 @@
 | Month | Focus | Status |
 |-------|-------|--------|
 | 1 | Linux + Docker · first chatbot Space | 🟢 done — browser Xenova/distilgpt2 WASM public at BSLBSL/ai-lab-m1-chatbot, VPS https://51.79.71.160.sslip.io/chat/ also live |
-| 2 | Code Agent · generic-code (free tier) — escalation | 🟡 In progress |
+| 2 | Code Agent · generic-code (free tier) — escalation | 🟡 In progress — Metrics 85% (17/20) + Cost $0 |
 | 3 | Backend · agent demo | 🔴 — |
 | 4 | AI Integration · LLM eval lab | 🔴 — |
 | 5 | Agentic AI · MCP/RAG | 🔴 — |

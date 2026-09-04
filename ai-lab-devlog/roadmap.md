@@ -220,6 +220,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] Datasets: download, filter, publish one — `BSLBSL/month1-spam-sample` 50 spam rows public
 - [x] Chatbot Space duplicated + modified + public — `BSLBSL/ai-lab-m1-chatbot` (static, browser WASM `Xenova/distilgpt2` ~340MB) + VPS `https://51.79.71.160.sslip.io/chat/` (Gradio host, Lets Encrypt)
 - [x] Repo flipped public (when polished) — `https://github.com/BrunosGits/ai-lab` public + `journal.md` 2026-09-03 + vault updated
+- **Metrics:** Space availability ≥99% (curl 200 p95 <1s static `https://bslbsl-ai-lab-m1-chatbot.static.hf.space` + VPS p95 <3s `distilgpt2` 80 tokens on 2 vCPU), `pipeline()` p50 <0.8s local `month1/study_transformers.py` — see `month1/METRICS.md` 20 prompts both WASM + VPS (≥80% non-empty, 16/20)
+- **Cost:** $0 (static free, VPS 4.49€/mo already)
 
 ### Month 2 — Code Agent (generic-code, free tier) — escalation of toy → serious
 
@@ -232,6 +234,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] SmolAgents CodeAgent generic-code + PythonExecutorTool + ReAct loop
 - [ ] Redis 7 added (cache/queues when app needs it)
 - [ ] FastAPI REST + auth + async mastered
+- **Metrics:** Success ≥85% (17/20) generic-code (fibonacci, csv filter, plot sin, spam FREE count) stdout==expected, p50 <4s local 360M / <2s hf-inference 1.7B, tokens avg <400, tool calls avg 1.5-2.5
+- **Cost:** $0 on hf-inference free, ~$0.01 if 70B via together (logged)
 
 ### Month 3 — Backend
 
@@ -244,6 +248,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] SmolAgents: agent with tools + ReAct loop
 - [ ] Redis 7 added (cache/queues when app needs it)
 - [ ] FastAPI REST + auth + async mastered
+- **Metrics:** Success ≥75% (15/20) API+code tasks, Redis p95 <50ms, FastAPI p95 <300ms 200
+- **Cost:** $0 (hf-inference free)
 
 ### Month 4 — AI Integration
 
@@ -256,6 +262,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] Metrics implemented + stored in PostgreSQL
 - [ ] Eval dataset published on HF
 - [ ] Dashboard/UI for comparing models, cost, latency
+- **Metrics:** BLEU ≥0.25, ROUGE-L ≥0.30, BERTScore ≥0.85, LLM-as-Judge win ≥55% vs distilgpt2, p50 <3s
+- **Cost:** $0.01/run avg (hf-inference)
 
 ### Month 5 — Agentic AI
 
@@ -268,6 +276,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] Qdrant added: embeddings + semantic search
 - [ ] RAG pipeline end-to-end (docs → vectors → answers)
 - [ ] Agent eval: planning, tool use, memory, reliability
+- **Metrics:** Recall@5 ≥70%, Faithfulness ≥75%, MCP tool success ≥90%
+- **Cost:** $0.02/run avg
 
 ### Month 6 — Professional
 
@@ -280,6 +290,8 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [ ] CI/CD pipeline (tests + deploy on push)
 - [ ] All 5 project repos public + READMEs + demos
 - [ ] ROADMAP 100% complete · HF profile pinned · GitHub grid full
+- **Metrics:** Availability ≥99% p95 <2s, CI green 100%, portfolio 100% complete
+- **Cost:** <$0.02/run Langfuse + VPS 4.49€/mo
 
 ---
 
