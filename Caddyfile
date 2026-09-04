@@ -1,4 +1,4 @@
-http://{$CADDY_DOMAIN} {
+http://51.79.71.160, http://{$CADDY_DOMAIN} {
     handle_path /chat* {
         reverse_proxy host.docker.internal:7860
     }
