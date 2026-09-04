@@ -1,0 +1,4 @@
+gradio>=4.0
+huggingface_hub>=0.26
+transformers>=4.40
+torch

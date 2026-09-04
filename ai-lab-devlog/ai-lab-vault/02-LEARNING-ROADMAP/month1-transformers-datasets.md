@@ -8,7 +8,7 @@ model: distilgpt2
 
 > The Month 1 study block: HF **Transformers** (`pipeline`, `AutoTokenizer`,
 > `AutoModelForCausalLM`) and **Datasets** (download, filter, publish).
-> Working scripts live in `./month1/`.
+> Working scripts live in `../../month1/` (canonical `month1/` at repo root; vault copy stays in `02-LEARNING-ROADMAP/month1/`).
 
 ## Goal
 
