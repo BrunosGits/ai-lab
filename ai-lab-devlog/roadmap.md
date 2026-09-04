@@ -214,12 +214,12 @@ This document is the master plan for a personal AI engineering laboratory hosted
 **Goal:** a public chatbot Space (distilgpt2 or a model via the HF Inference API) that answers a message from outside, linking the published month1-spam-sample dataset, with a source repo, README and demo link
 
 - **Study:** HF Transformers · HF Datasets · HF Spaces
-- **Build:** first chatbot Space
+- **Build:** first chatbot Space — `month1/app.py` (Gradio dual mode) + `month1/index.html` (browser Xenova/distilgpt2 WASM)
 - **Publish:** Space (live demo) + GitHub repo + journal entry + ROADMAP update
-- [ ] Transformers: pipeline(), AutoTokenizer, AutoModelForCausalLM
-- [ ] Datasets: download, filter, publish one
-- [ ] Chatbot Space duplicated + modified + public
-- [ ] Repo flipped public (when polished)
+- [x] Transformers: pipeline(), AutoTokenizer, AutoModelForCausalLM — `month1/study_transformers.py` local `distilgpt2` 82M verified
+- [x] Datasets: download, filter, publish one — `BSLBSL/month1-spam-sample` 50 spam rows public
+- [x] Chatbot Space duplicated + modified + public — `BSLBSL/ai-lab-m1-chatbot` (static, browser WASM `Xenova/distilgpt2` ~340MB) + VPS `https://51.79.71.160.sslip.io/chat/` (Gradio host, Lets Encrypt)
+- [x] Repo flipped public (when polished) — `https://github.com/BrunosGits/ai-lab` public + `journal.md` 2026-09-03 + vault updated
 
 ### Month 2 — Backend
 
