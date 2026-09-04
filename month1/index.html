@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>ai-lab-m1-chatbot — Month 1 (real demo)</title>
+<title>ai-lab-m1-chatbot — Month 1 (browser distilgpt2)</title>
 <style>
 *{box-sizing:border-box}body{margin:0;font:16px/1.5 system-ui;background:#f7f7f8;color:#111}
 header{max-width:860px;margin:0 auto;padding:28px 20px 0}h1{margin:0;font-size:22px}p{color:#666}
@@ -15,70 +15,114 @@ main{max-width:860px;margin:18px auto;padding:0 20px}.card{background:#fff;borde
 .bubble{margin:8px 0;padding:10px 12px;border-radius:12px;max-width:85%;white-space:pre-wrap;word-break:break-word}
 .user{background:#111;color:#fff;margin-left:auto}.bot{background:#eef2ff;border:1px solid #dfe4ff}
 .meta{margin-top:10px;color:#666;font-size:12px}
-.alert{background:#fff3cd;border:1px solid #ffe69c;padding:8px 10px;border-radius:8px;font-size:13px;color:#664d03;display:none}
+.progress{height:6px;background:#eee;border-radius:999px;overflow:hidden;margin-top:10px;display:none}
+.progress div{height:100%;background:#111;width:0%;transition:width .3s}
 code{background:#f1f1f1;padding:2px 6px;border-radius:6px;font-size:13px}
 </style>
-<script type="importmap">
-{"imports":{"@gradio/client":"https://cdn.jsdelivr.net/npm/@gradio/client@3.2.0/dist/index.js"}}
-</script>
 </head>
 <body>
 <header>
-<h1>ai-lab-m1-chatbot — Month 1 (real)</h1>
-<p>Real demo: this static page calls your <b>VPS Gradio</b> at <code>https://51.79.71.160.sslip.io/chat/</code> (distilgpt2 + SmolLM2 fallback). No mock — real <code>pipeline()</code>.</p>
+<h1>ai-lab-m1-chatbot — Month 1 (browser)</h1>
+<p>Real <code>distilgpt2</code> running <b>in your browser</b> via <code>@xenova/transformers</code> WASM — no VPS, no 502, no VPN block. First load downloads ~350MB, then cached.</p>
 <nav>
 <a class="primary" href="https://github.com/BrunosGits/ai-lab" target="_blank">Repo</a>
-<a href="https://huggingface.co/datasets/BSLBSL/month1-spam-sample" target="_blank">Dataset</a>
-<a href="https://51.79.71.160.sslip.io/chat/" target="_blank">VPS direct</a>
+<a href="https://huggingface.co/datasets/BSLBSL/month1-spam-sample" target="_blank">Dataset 50 spam</a>
+<a href="https://huggingface.co/distilgpt2" target="_blank">Model distilgpt2</a>
 </nav>
-<div id="alert" class="alert"></div>
 </header>
 <main>
 <div class="card">
-<div class="row"><input id="msg" placeholder="Hi — try: what time is it" autofocus/><button id="send">Send to real VPS</button></div>
+<div class="row"><input id="msg" placeholder="Loading model... first time ~30s" disabled/><button id="send" disabled>Send</button></div>
+<div class="progress" id="prog"><div id="bar"></div></div>
 <div id="log"></div>
-<div class="meta">Model: <code>distilgpt2</code> (local) + <code>SmolLM2-135M</code> (HF Inference when providers enabled) · <span id="status">connecting...</span></div>
+<div class="meta">Model: <code>Xenova/distilgpt2</code> (82M, pipeline text-generation) · <span id="status">loading model...</span> · Study: <code>pipeline()</code> in <code>month1/study_transformers.py</code></div>
 </div>
 </main>
 <script type="module">
-import { Client } from "@gradio/client";
-const VPS = "https://51.79.71.160.sslip.io/chat/";
-const log=document.getElementById("log"),input=document.getElementById("msg"),btn=document.getElementById("send"),statusEl=document.getElementById("status"),alertEl=document.getElementById("alert");
-function add(t,c){const d=document.createElement("div");d.className="bubble "+c;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;}
-let client=null;
-async function connect(){
+import { pipeline, env } from "https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js";
+// Allow remote models, use wasm
+env.allowRemoteModels = true;
+env.allowLocalModels = false;
+
+const logEl = document.getElementById("log");
+const input = document.getElementById("msg");
+const btn = document.getElementById("send");
+const statusEl = document.getElementById("status");
+const prog = document.getElementById("prog");
+const bar = document.getElementById("bar");
+
+function add(t, cls){
+  const d = document.createElement("div");
+  d.className = "bubble " + cls;
+  d.textContent = t;
+  logEl.appendChild(d);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+let generator = null;
+let loading = true;
+
+async function load(){
   try{
-    client = await Client.connect(VPS);
-    statusEl.textContent="connected to VPS";
-    add("Connected to real VPS Gradio. Say hi! (try: what time is it)", "bot");
+    prog.style.display = "block";
+    statusEl.textContent = "downloading distilgpt2 (~350MB)...";
+    // progress callback
+    generator = await pipeline("text-generation", "Xenova/distilgpt2", {
+      progress_callback: (p) => {
+        if(p.status === "progress" && p.progress){
+          bar.style.width = Math.round(p.progress) + "%";
+        }
+        if(p.status === "done"){
+          bar.style.width = "100%";
+        }
+      }
+    });
+    prog.style.display = "none";
+    statusEl.textContent = "ready — type and send";
+    input.disabled = false;
+    btn.disabled = false;
+    input.placeholder = "Try: Hello! Who are you? — or what time is it";
+    add("Model ready! Try: Hello! Who are you? — This is the real distilgpt2 pipeline() running in your browser (no server).", "bot");
+    input.focus();
   }catch(e){
-    statusEl.textContent="VPS not reachable";
-    alertEl.style.display="block";
-    alertEl.textContent="Could not connect to VPS ("+e.message.slice(0,120)+"). Is your VPN blocking 51.79.71.160? Try without VPN or via http://51.79.71.160/chat/ — this page will fallback to mock.";
-    add("VPS not reachable — using mock fallback for now. You said hi → mock: In the real VPS this would go through pipeline(text-generation, model=distilgpt2).", "bot");
+    prog.style.display = "none";
+    statusEl.textContent = "load failed";
+    add("Load failed: " + e.message.slice(0,300) + " — try refresh. The model is Xenova/distilgpt2 from HF Hub.", "bot");
     console.error(e);
+  }finally{
+    loading = false;
   }
 }
-connect();
-btn.onclick=async()=>{
-  const v=input.value.trim();if(!v) return;input.value="";add(v,"user");
-  if(!client){
-    add("Mock (no VPS): You said \""+v+"\" — real would be via distilgpt2 pipeline.", "bot");
+load();
+
+btn.onclick = async () => {
+  const text = input.value.trim();
+  if(!text) return;
+  if(loading || !generator){
+    add("Still loading model — please wait...", "bot");
     return;
   }
-  btn.disabled=true;statusEl.textContent="thinking (real model)...";
+  input.value = "";
+  add(text, "user");
+  btn.disabled = true;
+  statusEl.textContent = "generating...";
   try{
-    const res = await client.predict("/respond", {message: v});
-    // res.data is array, first element is string
-    const text = Array.isArray(res.data) ? res.data[0] : res.data;
-    add(text || "(empty)", "bot");
-    statusEl.textContent="real VPS answered";
+    const out = await generator(text, { max_new_tokens: 50, temperature: 0.9, do_sample: true });
+    const gen = out[0]?.generated_text || "";
+    // Show only continuation
+    let reply = gen.startsWith(text) ? gen.slice(text.length).trim() : gen.trim();
+    if(!reply) reply = gen.trim();
+    add(reply || "(empty)", "bot");
+    statusEl.textContent = "ready";
   }catch(e){
-    add("VPS error: "+e.message.slice(0,300)+" — mock fallback: You said \""+v+"\"", "bot");
-    statusEl.textContent="error, mock fallback";
-  }finally{btn.disabled=false;input.focus();}
+    add("Generate error: " + e.message.slice(0,300), "bot");
+    statusEl.textContent = "error";
+  }finally{
+    btn.disabled = false;
+    input.focus();
+  }
 };
-input.addEventListener("keydown",e=>{if(e.key==="Enter") btn.onclick();});
+input.addEventListener("keydown", e => { if(e.key==="Enter") btn.onclick(); });
 </script>
 </body>
 </html>
