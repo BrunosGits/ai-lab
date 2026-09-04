@@ -98,12 +98,22 @@ sample.push_to_hub("BSLBSL/month1-spam-sample", token=HF_TOKEN)
 ## Artifacts / Published
 
 - Dataset: `BSLBSL/month1-spam-sample` (public, 50 rows)
-- Scripts: `./month1/study_transformers.py`, `./month1/study_datasets.py`
+- Scripts: `../../month1/study_transformers.py`, `../../month1/study_datasets.py`
+- Space: `BSLBSL/ai-lab-m1-chatbot` (public, sdk static, host https://bslbsl-ai-lab-m1-chatbot.static.hf.space) — browser `Xenova/distilgpt2` WASM via `@xenova/transformers` (real pipeline, no server), ~340MB first load then cached
+- VPS demo: `https://51.79.71.160.sslip.io/chat/` and `http://51.79.71.160/chat/` (Gradio `month1/app.py` host mode, distilgpt2 + SmolLM2 fallback, Caddy handle_path /chat, Lets Encrypt cert)
+- Repo: `month1/app.py`, `month1/index.html`, `month1/Dockerfile` (CPU torch), `month1/requirements.txt`
+
+## Status — 2026-09-03
+
+- Root README restored (was moved to ai-lab-devlog, GitHub showed no front page)
+- Month 1 study scripts consolidated to `../../month1/` (vault copy kept)
+- Chatbot dual mode built (HF Inference + local), hit Inference Providers not enabled (all models 400) and Gradio 402 PRO, chose hybrid static plus host
+- Fixed disk ninety seven percent (CUDA 3.25GB -> CPU 0.8GB, prune ten gig), fixed firewall INPUT ordering and Caddy handle_path plus host.docker.internal, obtained Lets Encrypt cert
+- Fixed Gradio six dict history crash, added direct IP handling for VPN, then switched static to browser WASM so it always works on phone and VPN
 
 ## Next
 
-- Build the Month 1 chatbot **Space** (the roadmap's PUBLISH step) using the
-  `transformers`/`datasets` APIs studied here.
+- Enable HF Inference Providers if you want the browser mock to call the router, or keep browser WASM as primary deliverable and mark Month 1 done in roadmap and skeleton
 
 ## Related
 

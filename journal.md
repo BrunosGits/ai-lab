@@ -25,11 +25,26 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 | Project | Sessions | Total Time |
 |---------|----------|------------|
-| AI Lab | 15 | 16:40 |
+| AI Lab | 16 | 18:08 |
 | CorsixTH | 8 | 11:37 |
 | OpenSearch | 6 | 7:39 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **30** | **38:26** |
+| **Total** | **31** | **39:54** |
+
+### [AI Lab] 2026-09-03: Month 1 chatbot, browser demo
+
+**Mood:** tired, relieved, a little frustrated then steady
+
+**Story:** We started by planning Month 1. I wanted a public chatbot Space that answers from outside and links the spam dataset. The repo had no root README anymore, it was moved into ai-lab-devlog in late August, so GitHub showed no front page. I put it back at the root with the right image path and that fixed the display. Then we consolidated the study scripts into month1 as the one true place, updated the vault pointer, and scaffolded the chatbot app with a small instruct model via the Inference API and a local distilgpt2 fallback. Local runs worked but every Inference call came back as model not supported. It turned out the account has no Inference Providers enabled, so no model is allowed. At the same time Hugging Face now wants a PRO subscription for Gradio Spaces, our create call got a 402. So we chose a hybrid. A static Space that is free plus the VPS Gradio behind Caddy. The Docker build for the chatbot pulled the full CUDA torch and filled the disk to ninety seven percent. I removed it, pruned ten gig, and rebuilt with CPU torch only. Then Caddy could not reach the host. The firewall had the allow rule after the drop, and the Caddy handle was not stripping the prefix. I fixed the iptables order, switched to handle_path, added host.docker.internal to the compose file, and got the first external curl to return hello and gradio html. Caddy then asked for a real cert and got a Lets Encrypt one for the sslip domain, so https finally worked on the phone. The next crash was Gradio six sending history as dicts instead of tuples, so the respond function blew up on every message. I rewrote it to handle both shapes and the chat started answering, but the VPN still blocked sslip DNS and the phone still showed not found. After three rounds of patching the same proxy I stopped trying to fix the proxy. We made the Space a pure browser demo with Xenova transformers. Distilgpt2 now runs in WASM right in the page, no fetch to the router, no fetch to the VPS, no 502. First load is about three hundred forty meg and then it is cached. That one finally felt solid.
+
+**What I learned:** The new Inference API needs providers enabled per account or every model is blocked, and Gradio Spaces are no longer free on the free tier. A static Space plus a host mode Gradio behind Caddy is workable but every layer adds a new firewall or path bug. Letting the model run in the browser cuts all of that away, even if the first download is big. Also that Gradio six changed the ChatInterface history shape from tuples to dicts, so old code crashes on the second message.
+
+**Feelings / notes:** It was a long loop of fix, test, fail, fix again. The disk full and the 502s were annoying, and seeing not found on the phone after the cert worked was deflating. Switching to the browser model felt like finally picking a path that cannot be blocked. Tired but glad the Space now answers hi for real without a server.
+
+**Did:** restored root README with correct assets path and verified it on GitHub, consolidated study_transformers and study_datasets into month1 and updated the vault pointer to ../../month1, scaffolded month1 app with dual mode Inference and local fallback and a Space card, diagnosed Inference 400 model_not_supported and Gradio 402 PRO requirement and chose hybrid static plus host, pruned the CUDA image and rebuilt with CPU torch to free ten gig, fixed Caddy Caddyfile to handle_path /chat and compose extra_hosts host-gateway and iptables INPUT ordering for 7860, obtained Lets Encrypt cert for the sslip domain and verified https 200, fixed Gradio six dict history unpack crash in respond, added direct IP handling for VPN, then replaced the Space with a browser Xenova distilgpt2 WASM demo that always answers and pushed it public.
+
+---
+
 
 ### [OpenSearch] 2026-08-31: Codec PR mergeable, flaky PR split
 

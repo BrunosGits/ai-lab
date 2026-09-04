@@ -7,7 +7,7 @@
 
 | Month | Focus | Status |
 |-------|-------|--------|
-| 1 | Linux + Docker · first chatbot Space | 🟡 In progress |
+| 1 | Linux + Docker · first chatbot Space | 🟡 In progress — browser distilgpt2 WASM public at BSLBSL/ai-lab-m1-chatbot, VPS https://51.79.71.160.sslip.io/chat/ also live |
 | 2 | Backend · agent demo | 🔴 — |
 | 3 | AI Integration · LLM eval lab | 🔴 — |
 | 4 | Agentic AI · MCP/RAG | 🔴 — |
