@@ -59,7 +59,7 @@
 
 ---
 
-## 4. Subsystems (26 Areas)
+## 4. Subsystems (27 Areas)
 
 ### Simulation Core
 
@@ -121,6 +121,7 @@
 | [[21-pathfinding/SUMMARY]] | Complete | A* with 4 finder types, min-heap, dirty list |
 | [[25-localization-strings/SUMMARY]] | Complete | String loading, UTF-8/CP437, CJK, FreeType |
 | [[26-config-settings/SUMMARY]] | Complete | config_finder.lua + base_config.lua |
+| [[27-debugger/SUMMARY]] | Complete | ZeroBrane, debugger.lua, Eclipse, VSCode, Live Reload |
 
 ---
 
@@ -203,7 +204,7 @@
 
 ## 10. Status Dashboard
 
-### Subsystems (26/26 Complete)
+### Subsystems (27/27 Complete)
 
 | # | Area | Status |
 |---|------|--------|
@@ -233,6 +234,7 @@
 | 24 | audio-system | Complete |
 | 25 | localization-strings | Complete |
 | 26 | config-settings | Complete |
+| 27 | debugger | Complete |
 
 ### C++ Engine (3/8 Complete)
 
@@ -288,7 +290,7 @@ corsixth-codebase-vault/
 └── 09-KANBAN/            # Visual kanban board (Obsidian canvas)
 ```
 
-**Total:** ~181 markdown files | ~50,000 lines of documentation
+**Total:** ~185 markdown files | ~50,000 lines of documentation
 
 ---
 
