@@ -1,0 +1,8 @@
+fastapi>=0.110
+uvicorn>=0.30
+pydantic>=2.0
+smolagents>=0.4
+transformers>=4.40
+datasets>=2.19
+huggingface_hub>=0.26
+redis>=5.0

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ai-lab-m2-agent — Month 2 (CodeAgent + Python + DatasetTool)</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font:14px/1.5 system-ui;background:#f7f7f8;color:#111}
+header{max-width:900px;margin:0 auto;padding:28px 20px 0}h1{margin:0;font-size:22px}p{color:#666}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}nav a{font-size:13px;color:#0b57d0;text-decoration:none;border:1px solid #ddd;background:#fff;padding:6px 10px;border-radius:999px}
+nav a.primary{background:#111;color:#fff;border-color:#111}
+main{max-width:900px;margin:18px auto;padding:0 20px}.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:16px}
+.row{display:flex;gap:10px}input{flex:1;padding:11px;border:1px solid #ddd;border-radius:10px}button{padding:11px 16px;border:0;background:#111;color:#fff;border-radius:10px;cursor:pointer}
+pre{background:#0b0e14;color:#c5d1de;padding:12px;border-radius:10px;overflow:auto;max-height:300px}code{background:#f1f1f1;padding:2px 6px;border-radius:6px}
+.meta{margin-top:10px;color:#666;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+<h1>ai-lab-m2-agent — Month 2</h1>
+<p>Generic prompt → <code>SmolAgents CodeAgent</code> + <code>PythonExecutorTool</code> + <code>DatasetTool</code> (<code>BSLBSL/month1-spam-sample</code>) → <code>{code, stdout, latency}</code>. Free tier <code>SmolLM2-1.7B</code> / local <code>360M</code>.</p>
+<nav>
+<a class="primary" href="https://github.com/BrunosGits/ai-lab" target="_blank">Repo</a>
+<a href="https://huggingface.co/datasets/BSLBSL/month1-spam-sample" target="_blank">Dataset 50 spam</a>
+<a href="/chat/">Month 1 chat</a>
+</nav>
+</header>
+<main>
+<div class="card">
+<div class="row"><input id="prompt" placeholder="Try: fibonacci 20 · count spam containing FREE · csv filter · prime 97 · plot sin"/><button id="run">Run</button></div>
+<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
+<button onclick="setP('fibonacci 20')" style="background:#eee;color:#111;border:1px solid #ddd">fibonacci 20</button>
+<button onclick="setP('count spam SMS containing FREE in BSLBSL/month1-spam-sample')" style="background:#eee;color:#111;border:1px solid #ddd">count FREE</button>
+<button onclick="setP('filter csv: a,b\\n1,2\\n3,4 where b>2')" style="background:#eee;color:#111;border:1px solid #ddd">csv filter</button>
+<button onclick="setP('is 97 prime?')" style="background:#eee;color:#111;border:1px solid #ddd">prime 97</button>
+</div>
+<div id="out" style="margin-top:14px"></div>
+<div class="meta">API: <code>POST /agent/run {prompt}</code> → <code>{code, stdout, latency_ms, model}</code> · VPS <code>:8001</code> via <code>Caddy handle_path /agent*</code> · fallback exec if no LLM</div>
+</div>
+</main>
+<script>
+const $ = id=>document.getElementById(id);
+function setP(t){$('prompt').value=t}
+$('run').onclick = async ()=>{
+  const p=$('prompt').value.trim();
+  if(!p) return;
+  $('out').innerHTML='<p>running...</p>';
+  const t0=performance.now();
+  try{
+    const r=await fetch('/agent/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})});
+    const j=await r.json();
+    const dt=Math.round(performance.now()-t0);
+    $('out').innerHTML=`<div><b>model:</b> ${j.model} · <b>latency:</b> ${j.latency_ms}ms (client ${dt}ms) · <b>success:</b> ${j.success}</div><p><b>code</b></p><pre>${esc(j.code||'')}</pre><p><b>stdout</b></p><pre>${esc(j.stdout||'')}</pre>${j.error?`<p style=color:#b00><b>error:</b> ${esc(j.error)}</p>`:''}`;
+  }catch(e){
+    $('out').innerHTML=`<p style=color:#b00>fetch failed: ${esc(e.message)} — is :8001 up? Try direct http://51.79.71.160:8001/agent/run</p>`;
+  }
+};
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+setP('fibonacci 20');
+</script>
+</body>
+</html>
