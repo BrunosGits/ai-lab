@@ -1,7 +1,7 @@
 """Month 2 — ai-lab-m2-agent (generic-code, free tier) — Python + DatasetTool
 
 Generic prompt -> CodeAgent + PythonExecutorTool + DatasetTool -> {code, stdout, latency}
-- Inference: HuggingFaceTB/SmolLM2-1.7B-Instruct via hf-inference (free, toggle ON)
+- Inference: meta-llama/Llama-3.1-8B-Instruct via hf-inference Groq (free, GROQ key added to HF)
 - Local fallback: HuggingFaceTB/SmolLM2-360M-Instruct via transformers (CPU, ~700MB)
 - DatasetTool: reads BSLBSL/month1-spam-sample (50 spam rows) for spam-aware prompts
 - Redis 7: optional cache for agent runs (disabled if no REDIS_URL)
@@ -114,15 +114,17 @@ class AgentResponse(BaseModel):
 
 def _get_model_name_and_client():
     token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN")
-    # try hf-inference 1.7B
-    if token:
-        try:
-            from smolagents import InferenceClientModel
-            model = InferenceClientModel(model_id="HuggingFaceTB/SmolLM2-1.7B-Instruct", token=token)
-            # quick check not needed — return
-            return "HuggingFaceTB/SmolLM2-1.7B-Instruct (hf-inference)", model
-        except Exception as e:
-            print(f"[model] InferenceClientModel 1.7B failed: {e}")
+    # try hf-inference via Groq free tier (user added GROQ key to HF) — test order: 8B then 70B
+    # SmolLM2 not supported by any provider; Llama via Groq is free and fast <1s
+    for model_id in ["meta-llama/Llama-3.1-8B-Instruct", "meta-llama/Llama-3.3-70B-Instruct", "deepseek-ai/DeepSeek-R1-Distill-Llama-70B"]:
+        if token:
+            try:
+                from smolagents import InferenceClientModel
+                model = InferenceClientModel(model_id=model_id, token=token)
+                return f"{model_id} (hf-inference via Groq)", model
+            except Exception as e:
+                print(f"[model] {model_id} failed: {e}")
+                continue
     # local fallback 360M
     try:
         from smolagents import TransformersModel

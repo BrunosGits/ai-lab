@@ -13,7 +13,7 @@ datasets:
 
 # ai-lab-m2-agent — Month 2 (generic-code, free tier)
 
-> Generic prompt → SmolAgents `CodeAgent` + `PythonExecutorTool` + `DatasetTool` → `{code, stdout, latency}`. Free tier only: `HuggingFaceTB/SmolLM2-1.7B-Instruct` via `hf-inference` (toggle ON) or local `SmolLM2-360M-Instruct` (~700MB CPU).
+> Generic prompt → SmolAgents `CodeAgent` + `PythonExecutorTool` + `DatasetTool` → `{code, stdout, latency}`. Free tier only: `meta-llama/Llama-3.1-8B-Instruct via Groq` via `hf-inference` (toggle ON) or local `SmolLM2-360M-Instruct` (~700MB CPU).
 
 ## Tools
 
@@ -42,4 +42,4 @@ HF_TOKEN=hf_xxx REDIS_URL=redis://localhost:6379/0 uvicorn app:app --port 8001
 
 ## Metrics
 
-Target ≥85% (17/20) generic-code stdout==expected, p50 <4s local 360M / <2s hf-inference 1.7B, tokens avg <400, tool calls avg 1.5–2.5. Cost $0. See `METRICS.md`.
+Target ≥85% (17/20) generic-code stdout==expected, p50 <4s local 360M / <1s Groq via HF, tokens avg <400, tool calls avg 1.5–2.5. Cost $0. See `METRICS.md`.

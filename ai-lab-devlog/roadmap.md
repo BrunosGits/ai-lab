@@ -225,17 +225,17 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Month 2 — Code Agent (generic-code, free tier) — escalation of toy → serious
 
-**Goal:** generic prompt → write + run Python via SmolAgents CodeAgent + PythonExecutorTool → return code + stdout + latency, using free tier only (~1.7B via hf-inference)
+**Goal:** generic prompt → write + run Python via SmolAgents CodeAgent + PythonExecutorTool → return code + stdout + latency, using free tier only (Llama-3.1-8B via Groq free routed through HF)
 
-- **Study:** HF Inference API (huggingface_hub, free tier hf-inference 1.7B) · SmolAgents CodeAgent/ReAct · Redis 7 · FastAPI async
+- **Study:** HF Inference API (huggingface_hub, Groq Llama-3.1-8B free via HF routing) · SmolAgents CodeAgent/ReAct · Redis 7 · FastAPI async
 - **Build:** month2/app.py + index.html + redis:7 + Caddy handle_path /agent* (host.docker.internal:8001)
 - **Publish:** Space BSLBSL/ai-lab-m2-agent sdk:static (free, no 402) + GitHub month2/ + journal
-- [ ] Inference API 1.7B free (toggle hf-inference ON at huggingface.co/settings/inference-providers)
+- [ ] Inference API Llama-3.1-8B free (Groq key added to HF Inference Providers, toggle hf-inference + Groq ON)
 - [ ] SmolAgents CodeAgent generic-code + PythonExecutorTool + ReAct loop
 - [ ] Redis 7 added (cache/queues when app needs it)
 - [ ] FastAPI REST + auth + async mastered
-- **Metrics:** Success ≥85% (17/20) generic-code (fibonacci, csv filter, plot sin, spam FREE count) stdout==expected, p50 <4s local 360M / <2s hf-inference 1.7B, tokens avg <400, tool calls avg 1.5-2.5
-- **Cost:** $0 on hf-inference free, ~$0.01 if 70B via together (logged)
+- **Metrics:** Success ≥85% (17/20) generic-code (fibonacci, csv filter, plot sin, spam FREE count) stdout==expected, p50 <4s local 360M / <1s Groq 8B via HF, tokens avg <400, tool calls avg 1.5-2.5
+- **Cost:** $0 on Groq free via HF (Llama-3.1-8B), ~$0.01 if 70B via together (logged)
 
 ### Month 3 — Backend
 
