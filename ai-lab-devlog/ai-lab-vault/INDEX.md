@@ -29,6 +29,7 @@ run and recover it, and where every service/credential lives.
 | Learning Roadmap | [[02-LEARNING-ROADMAP/skeleton]] | Month 1–5 studies, model tooling, published artifacts |
 | Ops / Runbooks | [[03-OPS/skeleton]] | Backup, rescue, docker, journal workflows |
 | Services & Access | [[04-SERVICES-ACCESS/skeleton]] | Service matrix (names + Infisical paths only — no secrets) |
+| Backburn | [[99-BACKBURN/skeleton]] | Tools parked for later — CubeSandbox, PDFCraft, mimic |
 
 ---
 
