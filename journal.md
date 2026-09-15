@@ -25,25 +25,25 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 | Project | Sessions | Total Time |
 |---------|----------|------------|
-| AI Lab | 17 | 20:30 |
-| CorsixTH | 8 | 11:37 |
+| AI Lab | 18 | 20:56 |
+| CorsixTH | 9 | 12:03 |
 | OpenSearch | 6 | 7:39 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **32** | **42:16** |
+| **Total** | **34** | **43:08** |
 
-### [AI Lab] 2026-09-03: Month 1 chatbot, browser demo
+### [AI Lab] 2026-09-15: Phase 2 shipped and Ultrascan merged
 
-**Mood:** tired, relieved, steady after a long loop
+**Mood:** tired and satisfied, glad to close two loops at once
 
-**Story:** We planned Month 1 as a public chatbot that links the spam dataset. The root README was gone, so GitHub had no front page, I put it back and it fixed the display. We moved the study scripts into month1 and built the app with Inference plus local distilgpt2 fallback, but every Inference call failed as model not supported. The account has no providers enabled. At the same time Hugging Face now wants PRO for Gradio Spaces, so we got a 402 and chose a hybrid static plus host. The Docker build pulled full CUDA torch and filled the disk to ninety seven percent, I pruned it and rebuilt with CPU torch. Then Caddy could not reach the host, the firewall rule was after the drop and the handle was not stripping the prefix, I fixed both and got the first external curl to work. Caddy then got a Lets Encrypt cert so https worked. Next the chat crashed because Gradio six sends history as dicts, not tuples, I fixed the handling. VPN still blocked sslip DNS, so after three rounds I stopped patching the proxy and made the Space a pure browser demo with Xenova transformers. Distilgpt2 now runs in WASM right in the page, about three hundred forty meg first load then cached, and it finally felt solid.
+**Story:** We finished the last pieces for Month 2 and then turned to CorsixTH. For the lab I added the vault note for the code agent, the one that explains how gpt oss twenty b through Groq now gives a real two hundred and how the small heuristic still carries most of the score. I also updated the roadmap and the vault index so Month 2 shows as done with the Space and the dataset live. The Space serves a static page that talks to the VPS and the dataset holds the twenty runs at ninety five percent.
 
-**What I learned:** Inference now needs providers enabled or every model is blocked, and Gradio Spaces are no longer free. A static plus host setup works but each layer adds a new firewall or path bug. Running the model in the browser cuts all of that away.
+For CorsixTH I updated the roadmap and the vault for the Ultrascan fix. Pull request thirty five twenty six had been reviewed by tobylane and approved by TheCycoONE and ARGAMX. It blocks four tiles on the table, north one one and east one zero and the mirrors, and it keeps the use position open so the animation does not shift. We had tried a preserve for old saves at version two sixty five, but it did nothing in practice so we removed it. The save from the issue now loads without a crash and the walk through gap is gone. I moved the card on the kanban from research to done and marked the issue as merged on September fourteenth.
 
-**Feelings / notes:** Long loop of fix, test, fail. The disk full and 502s were annoying, seeing not found after the cert was deflating. The browser path finally felt like a road that cannot be blocked. Tired but glad it now answers hi for real.
+**What I learned:** Groq through HF only works for three models and it needs the key icon selected, otherwise you get a four hundred even when a key is pasted. And for CorsixTH, keeping the fix small and removing the save version bump made the review much easier.
 
-**Did:** restored root README, consolidated scripts into month1, scaffolded dual mode app, diagnosed Inference 400 and Gradio 402 and chose hybrid, pruned CUDA image for CPU torch, fixed Caddy handle_path and iptables for 7860 and got the cert, fixed Gradio dict history crash, added direct IP for VPN, then pushed the browser WASM demo public.
+**Feelings / notes:** It felt good to see both trackers move together. The lab is at ninety five percent and the game fix is finally merged after a lot of back and forth on footprint tiles. I am a little tired from the pushes but it is a clean close.
 
----
+**Did:** added ai-lab-vault month2 agent note and updated the skeleton, updated ai-lab roadmap Month 2 to done, updated CorsixTH roadmap issue thirty four forty one to merged, updated the PR tracking file for thirty five twenty six with the new commits and approvals, moved the kanban card to done, verified the Space and the dataset are public
 
 ### [AI Lab] 2026-09-14: Month 2 generic-code shipped -- Groq gpt-oss-20b via HF + heuristic 95%
 
@@ -76,6 +76,20 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 **Feelings / notes:** The conflict was fiddly but the resolution felt right, both tests survive in one file. A little proud to watch #22749 flip to mergeable.
 
 **Did:** rebased fix/17561-codec-error-message onto latest main, resolved the EngineConfigTests conflict by keeping both the codec tests and the upstream toBuilder test, ran EngineConfigTests green, synced the fork main to upstream, pushed via SSH, confirmed PR #22749 is mergeable and approved, dropped the codec commit from #22750 so it carries only the #22706 flaky fix.
+
+### [AI Lab] 2026-09-03: Month 1 chatbot, browser demo
+
+**Mood:** tired, relieved, steady after a long loop
+
+**Story:** We planned Month 1 as a public chatbot that links the spam dataset. The root README was gone, so GitHub had no front page, I put it back and it fixed the display. We moved the study scripts into month1 and built the app with Inference plus local distilgpt2 fallback, but every Inference call failed as model not supported. The account has no providers enabled. At the same time Hugging Face now wants PRO for Gradio Spaces, so we got a 402 and chose a hybrid static plus host. The Docker build pulled full CUDA torch and filled the disk to ninety seven percent, I pruned it and rebuilt with CPU torch. Then Caddy could not reach the host, the firewall rule was after the drop and the handle was not stripping the prefix, I fixed both and got the first external curl to work. Caddy then got a Lets Encrypt cert so https worked. Next the chat crashed because Gradio six sends history as dicts, not tuples, I fixed the handling. VPN still blocked sslip DNS, so after three rounds I stopped patching the proxy and made the Space a pure browser demo with Xenova transformers. Distilgpt2 now runs in WASM right in the page, about three hundred forty meg first load then cached, and it finally felt solid.
+
+**What I learned:** Inference now needs providers enabled or every model is blocked, and Gradio Spaces are no longer free. A static plus host setup works but each layer adds a new firewall or path bug. Running the model in the browser cuts all of that away.
+
+**Feelings / notes:** Long loop of fix, test, fail. The disk full and 502s were annoying, seeing not found after the cert was deflating. The browser path finally felt like a road that cannot be blocked. Tired but glad it now answers hi for real.
+
+**Did:** restored root README, consolidated scripts into month1, scaffolded dual mode app, diagnosed Inference 400 and Gradio 402 and chose hybrid, pruned CUDA image for CPU torch, fixed Caddy handle_path and iptables for 7860 and got the cert, fixed Gradio dict history crash, added direct IP for VPN, then pushed the browser WASM demo public.
+
+---
 
 ---
 
