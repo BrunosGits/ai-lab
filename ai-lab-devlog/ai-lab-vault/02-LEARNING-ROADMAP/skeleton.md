@@ -17,6 +17,7 @@
 ## Notes
 
 - [[02-LEARNING-ROADMAP/month1-transformers-datasets]] — Month 1: Transformers + Datasets study
+- [[02-LEARNING-ROADMAP/month2-agent]] — Month 2: Code Agent + PythonInterpreterTool + DatasetTool (gpt-oss-20b via Groq, 95%)
 - [[99-BACKBURN/skeleton]] — Backburn: CubeSandbox, PDFCraft, mimic parked for later
 
 ## Related

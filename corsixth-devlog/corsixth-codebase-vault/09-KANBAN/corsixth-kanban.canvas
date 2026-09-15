@@ -102,9 +102,9 @@
       "id": "card-3441",
       "type": "file",
       "file": "03-PR-TRACKING/PR-3441-vanilla-ultrascan.md",
-      "x": 370,
-      "y": 150,
-      "group": "col-research"
+      "x": 1330,
+      "y": 250,
+      "group": "col-done"
     }
   ],
   "edges": []

@@ -78,13 +78,13 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [ ] Verification matrix green (place · Esc-cancel · sell · save-mid-window · negative control)
 - [ ] PR + CI green
 
-### #3441 — Ultrascan footprint does not match original game (P4 Low) 🔍
+### #3441 — Ultrascan footprint does not match original game (P4 Low) ✅ Merged PR #3526
 
-- [x] Research: save 907K zip / 2.7M sav, map 128x128, strict vs minimal masks, 16-object-placement/VANILLA_FOOTPRINT_MATRIX.md
-- [x] Vault: TH_ORIGINAL_ULTRASCAN.md, TH_ORIGINAL_TILES.md, Ultrascan-room-deep.md, Ultrascan-diagnosis-flow.md, vanilla-coverage 1/62 (10 pushes b0e694e..1ea9377)
-- [x] PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md, KANBAN Research
-- [ ] Awaiting author reply on strict vs minimal (comment 5459638041)
-- [ ] Code fix in next sprint fix/3441-ultrascan-footprint after 3372
+- [x] Research: save 907K zip / 2.7M sav, map 128x128, strict vs minimal masks, 16-object-placement/VANILLA_FOOTPRINT_MATRIX.md + TH_ORIGINAL_ULTRASCAN.md, TH_ORIGINAL_TILES.md, Ultrascan-room-deep.md, Ultrascan-diagnosis-flow.md
+- [x] PR #3526 merged Sep 14 2026 by ARGAMX → master (commit 06b70cd, branch fix/3441-ultrascan-footprint) — closes #3441 — Reviewed tobylane, Approved TheCycoONE + ARGAMX, 5/6 checks passed
+- [x] Fix: ultrascanner.lua blocked north {-1,1},{0,1} and east {1,-1},{1,0} (south copies north, west mirrors east), kept use_position {0,-1} passable to avoid shifted draw, removed 265 preserve (app.lua:31 + object.lua:920 did nothing, old saves keep old footprint via normal save data)
+- [x] Vault: PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md updated to merged, KANBAN Done, spec/entities/ultrascanner_3441_spec.lua 65/65 busted + luacheck 0/297
+- [x] Post-merge: east side shifted image fixed by moving block to south edge, second image red crosses guided final east {1,-1},{1,0} placement
 
 ### #2469 — Right mouse panning causes object placement glitches ⏭️
 - [ ] Reproduce headless
