@@ -61,22 +61,6 @@ The CodeAgent with PythonInterpreterTool still threw tool_use_failed (choice non
 
 ---
 
-
-
-### [OpenSearch] 2026-08-31: Codec PR mergeable, flaky PR split
-
-**Mood:** satisfied, a real win after the fork mess
-
-**Story:** PR #22749 is mergeable today, and that felt like the win it was. The codec error message fix, the one that got lost when the fork was deleted and then recovered off the VPS, kept colliding with the latest main because an upstream commit added a test right where ours sat. I rebased our branch onto the freshest main and hand merged the test file, keeping both our codec tests and the upstream toBuilder test in the same file. It compiled and every test passed. The reviewer had already approved, so now it only waits on the gradle check going green. After the fork fiasco, getting that one to open clean felt good.
-
-The other PR, #22750, still carried both fixes at once, the codec one now living in #22749 and the flaky test fix for #22706. I split it by dropping the codec commit from that branch, so it now holds only the flaky fix, a one line change that wraps the canceled exception in a StreamException. Rebased and pushed, so it should come out mergeable too. That leaves two clean PRs, one per fix, no more mixing.
-
-**What I learned:** Rebase beats merge when two commits land in the same test file, and dropping a redundant commit is cleaner than carrying a duplicate fix across two PRs.
-
-**Feelings / notes:** The conflict was fiddly but the resolution felt right, both tests survive in one file. A little proud to watch #22749 flip to mergeable.
-
-**Did:** rebased fix/17561-codec-error-message onto latest main, resolved the EngineConfigTests conflict by keeping both the codec tests and the upstream toBuilder test, ran EngineConfigTests green, synced the fork main to upstream, pushed via SSH, confirmed PR #22749 is mergeable and approved, dropped the codec commit from #22750 so it carries only the #22706 flaky fix.
-
 ### [AI Lab] 2026-09-03: Month 1 chatbot, browser demo
 
 **Mood:** tired, relieved, steady after a long loop
@@ -92,6 +76,20 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 ---
 
 ---
+
+### [OpenSearch] 2026-08-31: Codec PR mergeable, flaky PR split
+
+**Mood:** satisfied, a real win after the fork mess
+
+**Story:** PR #22749 is mergeable today, and that felt like the win it was. The codec error message fix, the one that got lost when the fork was deleted and then recovered off the VPS, kept colliding with the latest main because an upstream commit added a test right where ours sat. I rebased our branch onto the freshest main and hand merged the test file, keeping both our codec tests and the upstream toBuilder test in the same file. It compiled and every test passed. The reviewer had already approved, so now it only waits on the gradle check going green. After the fork fiasco, getting that one to open clean felt good.
+
+The other PR, #22750, still carried both fixes at once, the codec one now living in #22749 and the flaky test fix for #22706. I split it by dropping the codec commit from that branch, so it now holds only the flaky fix, a one line change that wraps the canceled exception in a StreamException. Rebased and pushed, so it should come out mergeable too. That leaves two clean PRs, one per fix, no more mixing.
+
+**What I learned:** Rebase beats merge when two commits land in the same test file, and dropping a redundant commit is cleaner than carrying a duplicate fix across two PRs.
+
+**Feelings / notes:** The conflict was fiddly but the resolution felt right, both tests survive in one file. A little proud to watch #22749 flip to mergeable.
+
+**Did:** rebased fix/17561-codec-error-message onto latest main, resolved the EngineConfigTests conflict by keeping both the codec tests and the upstream toBuilder test, ran EngineConfigTests green, synced the fork main to upstream, pushed via SSH, confirmed PR #22749 is mergeable and approved, dropped the codec commit from #22750 so it carries only the #22706 flaky fix.
 
 ### [AI Lab] 2026-08-30: Disk cleanup, Month 1 study, vault restructure
 
@@ -120,6 +118,7 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 **Did:** stepped back from volunteered issue after it was marked already assigned, pivoted to 3441 Ultrascan vanilla study, moved 3441 into Issue Tracks with expanded vault links, removed trailing duplicate, committed 62e2086, pushed vault/roadmap-3441-single, opened and merged PR four to main a3f2d20
 
 ---
+
 ### [AI Lab] 2026-08-24: Skills and VPS Cleanup
 
 **Mood:** productive, organized
@@ -146,8 +145,6 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 
 ---
 
-
-
 ### [sepia-be-gone] 2026-08-19: Sepia Be Gone: portable prompt skill published
 
 **Mood:** satisfied, clean ship
@@ -161,23 +158,6 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 **Did:** Designed skill architecture. Wrote six tool adapters (SKILL.md, AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, VSCODE.md). Created neutral_color_balance.md prompt with three variants. Processed three real image pairs. Optimized images with PIL. Wrote README with badges, tables, examples. Added topics and description. Pushed private then public.
 
 ---
-
-
-
-### [CorsixTH] 2026-08-17: Clean fork, clean PR, CI green
-
-**Mood:** clean, satisfied the mess is gone
-
-**Story:** Deleted the polluted fork (BrunosGits/CorsixTH-1) that had 18 commits mixed with personal devlog files. Created a fresh fork BrunosGits/CorsixTH with only the 3 clean commits: core fix (world.lua + 23 unit tests), smoketest improvements, whitespace fix. PR #3504 opened with CI passing (LuaJIT, Windows, vcpkg Lua 5.5, Lua 5.1 pending). The old PR #3501 closed automatically when the fork vanished. Also cleaned up the opensearch-fork that was just a mirror with no changes.
-
-**What I learned:** A PR tied to a personal fork dies with the fork. The clean approach is: fix on a clean branch, push to a fresh fork, open PR. The maintainers see only the relevant diff. Also: deleting unused forks removes noise.
-
-**Feelings / notes:** Satisfying to watch the old PR close and the new one open clean. The whitespace CI gate caught the trailing space -- good gate.
-
-**Did:** deleted BrunosGits/CorsixTH-1 and opensearch-fork, created BrunosGits/CorsixTH fork, pushed fix-1467-clean branch (3 commits), opened PR #3504, verified CI green, updated ai-lab docs.
-
----
-
 
 ### [OpenSearch] 2026-08-17: Review, recover, and reopen
 
@@ -197,21 +177,19 @@ The bigger mess was #17561. I had committed the fix to a fork that I then accide
 
 ---
 
+### [CorsixTH] 2026-08-17: Clean fork, clean PR, CI green
 
-### [AI Lab] 2026-08-16: Phase 3 shipped, and the firewall was mine all along
+**Mood:** clean, satisfied the mess is gone
 
-**Mood:** relieved, then quietly proud of the tiny stack
+**Story:** Deleted the polluted fork (BrunosGits/CorsixTH-1) that had 18 commits mixed with personal devlog files. Created a fresh fork BrunosGits/CorsixTH with only the 3 clean commits: core fix (world.lua + 23 unit tests), smoketest improvements, whitespace fix. PR #3504 opened with CI passing (LuaJIT, Windows, vcpkg Lua 5.5, Lua 5.1 pending). The old PR #3501 closed automatically when the fork vanished. Also cleaned up the opensearch-fork that was just a mirror with no changes.
 
-**Story:** Today Phase 3 went live. The slim stack came up as three containers, caddy owning the only published port, hello behind it, postgres on an internal network with the secrets injected by infisical run so no .env file exists on the server. Then the external test failed and everything pointed at OVH. The dashboard showed 80 and 443 already permitted, and the API agreed, but curl from my computer kept timing out. It turned out the blocker was my own DOCKER-USER chain. Published ports travel the FORWARD path, not INPUT, so my old rules never matched inbound SYN packets and the default drop ate them. One accept rule for tcp 80 and 443, a netfilter-persistent save, and http://<vps-ip>.sslip.io answered with hello from docker compose. Postgres stayed closed, ssh stayed up, and the whole phase got committed and pushed.
+**What I learned:** A PR tied to a personal fork dies with the fork. The clean approach is: fix on a clean branch, push to a fresh fork, open PR. The maintainers see only the relevant diff. Also: deleting unused forks removes noise.
 
-**What I learned:** Published container ports cross the FORWARD chain, so host INPUT rules never see them. A rule that works from inside the box proves nothing about the outside. The OVH firewall was right all along, I was the firewall.
+**Feelings / notes:** Satisfying to watch the old PR close and the new one open clean. The whitespace CI gate caught the trailing space -- good gate.
 
-**Feelings / notes:** Forty five minutes of confusion traced back to a chain I wrote myself. Slightly embarrassing, but now it is documented in the roadmap commands so it will not bite twice.
-
-**Did:** built the compose stack (caddy 2.11.4, hello, postgres 17.11), pinned tags, internal backend network, moved the FastAPI app into a container, dropped the apt cluster and the systemd unit, injected secrets via infisical run, fixed DOCKER-USER to accept inbound 80 and 443, persisted the rules, verified external access, committed and pushed the phase.
+**Did:** deleted BrunosGits/CorsixTH-1 and opensearch-fork, created BrunosGits/CorsixTH fork, pushed fix-1467-clean branch (3 commits), opened PR #3504, verified CI green, updated ai-lab docs.
 
 ---
-
 
 ### [CorsixTH] 2026-08-16: The fix that held, and the movie that blocked the test
 
@@ -229,6 +207,35 @@ Full matrix: offscreen (3/3), xvfb (3/3), demo control (2/2) all green. luacheck
 
 ---
 
+### [AI Lab] 2026-08-16: Phase 3 shipped, and the firewall was mine all along
+
+**Mood:** relieved, then quietly proud of the tiny stack
+
+**Story:** Today Phase 3 went live. The slim stack came up as three containers, caddy owning the only published port, hello behind it, postgres on an internal network with the secrets injected by infisical run so no .env file exists on the server. Then the external test failed and everything pointed at OVH. The dashboard showed 80 and 443 already permitted, and the API agreed, but curl from my computer kept timing out. It turned out the blocker was my own DOCKER-USER chain. Published ports travel the FORWARD path, not INPUT, so my old rules never matched inbound SYN packets and the default drop ate them. One accept rule for tcp 80 and 443, a netfilter-persistent save, and http://<vps-ip>.sslip.io answered with hello from docker compose. Postgres stayed closed, ssh stayed up, and the whole phase got committed and pushed.
+
+**What I learned:** Published container ports cross the FORWARD chain, so host INPUT rules never see them. A rule that works from inside the box proves nothing about the outside. The OVH firewall was right all along, I was the firewall.
+
+**Feelings / notes:** Forty five minutes of confusion traced back to a chain I wrote myself. Slightly embarrassing, but now it is documented in the roadmap commands so it will not bite twice.
+
+**Did:** built the compose stack (caddy 2.11.4, hello, postgres 17.11), pinned tags, internal backend network, moved the FastAPI app into a container, dropped the apt cluster and the systemd unit, injected secrets via infisical run, fixed DOCKER-USER to accept inbound 80 and 443, persisted the rules, verified external access, committed and pushed the phase.
+
+---
+
+### [OpenSearch] 2026-08-13 (session 2): Issue updates and fixes committed
+
+**Mood:** focused, satisfied with the double progress
+
+**Story:** Today two tracked issues moved forward. For #6323 I posted a minimal reproduction using the reporter's exact string: the 138-char dotted key fails identically via direct PUT and painless reindex promotion, and short keys like .start and a..b fail the same way -- confirming the error is structural (dot expansion), not value truncation at ~2000 chars. For #17561 I committed the fix to the fork and built a distribution node that now lists the full accepted codec set (lucene_default + all registered Lucene codecs + built-ins) instead of the old hardcoded [default, lz4, best_compression, zlib]. The end-to-end test confirmed not_a_codec returns the full list and best_compression still succeeds. Both issues have comment threads on GitHub.
+
+On the planning side I mapped the code paths and competitive landscape for #22494 (cache compiled regex automatons). The author ZiwenWan has a production-tested PoC with strong latency numbers and is happy to contribute a PR, so the approach is to monitor and coordinate rather than duplicate effort. The code analysis showed the exact call sites (RegexpQuery, AutomatonQuery, KeywordFieldMapper) and the cache infrastructure API to use.
+
+**What I learned:** Two issues can advance in parallel when one is a field-name theory and the other a setting-derivation fix. And a working PoC from a third party changes the calculus on a fallback issue -- the plan shifts from implement independently to monitor and coordinate.
+
+**Feelings / notes:** Good to close out the session with concrete progress on the two main tracks and a clear path on the third.
+
+**Did:** closed the time tracker, posted the #6323 minimal-reproduction comment, posted the #17561 update comment, committed and pushed the #17561 fix to BrunosGits/opensearch-fork, mapped the #22494 code paths and competitive landscape, and planned the next session.
+
+---
 
 ### [OpenSearch] 2026-08-13 (session 1)
 
@@ -252,23 +259,25 @@ Waited for author response on the test fix.
 
 ---
 
+### [CorsixTH] 2026-08-12: Squeezing the entity-loop bug until it squeaked
 
-### [OpenSearch] 2026-08-13 (session 2): Issue updates and fixes committed
+**Mood:** first fix merged, then surprised by the old-savegame crash
 
-**Mood:** focused, satisfied with the double progress
+**Story:** The biggest news came first: the maintainers merged my docs fix, closing #1793. Issue #1467: world.entities is walked with ipairs while some handlers destroy other entities, shifting the table and skipping whoever lands in the visited slot. The fix defers removal to after the loop.
 
-**Story:** Today two tracked issues moved forward. For #6323 I posted a minimal reproduction using the reporter's exact string: the 138-char dotted key fails identically via direct PUT and painless reindex promotion, and short keys like .start and a..b fail the same way -- confirming the error is structural (dot expansion), not value truncation at ~2000 chars. For #17561 I committed the fix to the fork and built a distribution node that now lists the full accepted codec set (lucene_default + all registered Lucene codecs + built-ins) instead of the old hardcoded [default, lz4, best_compression, zlib]. The end-to-end test confirmed not_a_codec returns the full list and best_compression still succeeds. Both issues have comment threads on GitHub.
+A headless smoke test reproduced the skip deterministically (three dummies, the middle destroying the first mid-tick; the test fails if the third gets skipped), and a GUI variant rendered every frame. I hacked the fix back out and both failed with exactly the message they should catch.
 
-On the planning side I mapped the code paths and competitive landscape for #22494 (cache compiled regex automatons). The author ZiwenWan has a production-tested PoC with strong latency numbers and is happy to contribute a PR, so the approach is to monitor and coordinate rather than duplicate effort. The code analysis showed the exact call sites (RegexpQuery, AutomatonQuery, KeywordFieldMapper) and the cache infrastructure API to use.
+Two hidden holes surfaced. An old savegame crashed on the first tick because the deserialiser never re-runs constructors, leaving the new queue missing. And the end-of-day loop never set the iterating marker for plants. Both fixed, both tested.
 
-**What I learned:** Two issues can advance in parallel when one is a field-name theory and the other a setting-derivation fix. And a working PoC from a third party changes the calculus on a fallback issue -- the plan shifts from implement independently to monitor and coordinate.
+The day ended with a move to the full game data for reliable tests.
 
-**Feelings / notes:** Good to close out the session with concrete progress on the two main tracks and a clear path on the third.
+**What I learned:** A regression test's job is to fail when the bug comes back; the negative control tells you it can. The tests that catch you are about old savegames and the code path nobody remembers.
 
-**Did:** closed the time tracker, posted the #6323 minimal-reproduction comment, posted the #17561 update comment, committed and pushed the #17561 fix to BrunosGits/opensearch-fork, mapped the #22494 code paths and competitive landscape, and planned the next session.
+**Feelings:** The skip-repro failing on cue is the closest thing a headless server has to a high five.
+
+**Did:** merged the docs fix into CorsixTH (#1793), implemented the deferred-destruction fix (#1467), 86 unit tests green, headless and GUI smoke tests plus a negative control, fixed the old-savegame crash and the plant branch hole, moved to the full game data.
 
 ---
-
 
 ### [OpenSearch] 2026-08-11: The fix that ran green
 
@@ -288,6 +297,107 @@ Then a cleanup. The Mac's git identity was set to PublishProject, so three commi
 
 ---
 
+### [CorsixTH] 2026-08-11: A working dev box and a first pull request
+
+**Mood:** focused, quietly pleased when the game first booted headless, and then very pleased when the first issue became a real fix
+
+**Story:** The plan was to do all the real work on the VPS over SSH, so the project became a fork of CorsixTH with a devlog folder inside it. The build chain was a small saga: master moved to SDL3, Debian 13 ships one too old for the mixer, so I built SDL3 3.4.14 and SDL3_mixer 3.2.4 from source into /opt/SDL3. The game compiled clean, 63 unit tests green, luacheck clean, and the welcome screen printed headless using the demo data.
+
+Then came the first issue, #1793: dead links in the generated Lua docs. My first theory, that GitHub Pages was swallowing files, was wrong. The truth was simpler: LDocGen never generated a page per source file, only class pages and index pages, while the file tree links were built from path-based ids pointing at pages that never existed. So I made LDocGen write one page per file, listing the classes and functions there, with directory entries as plain text. Rebuilt the docs and checked every link: 503 pages, 20465 local links, zero broken. I opened the pull request and learned the labels are the maintainers to add.
+
+**What I learned:** A headless dev box turns a docs bug into a checkable claim: rebuild, script over every link, done. A wrong theory is still useful if you test it and drop it.
+
+**Feelings / notes:** The first headless boot felt like a small victory, and opening the first pull request felt like the devlog setup paying for itself. The MIDI music still will not load with no synth on the box, but that is a cosmetic gap. Now it is a waiting game for the maintainers.
+
+**Did:** set up the fork, built SDL3 and SDL3_mixer into /opt/SDL3, compiled the game, ran the Lua tests and lint, confirmed the headless boot, root-caused issue #1793, extended LDocGen to generate per-file pages, verified 20465 links, and opened pull request #3494.
+
+---
+
+### [AI Lab] 2026-08-11: The fork got a name
+
+**Mood:** settled, quietly proud
+
+**Story:** For three days my fork was called espanso+, a name I borrowed without thinking.
+Today I released the first build under that name, and only then stopped to ask what the plus
+meant. It read like an official premium edition, a thing the espanso team might be selling.
+I wanted none of that, so the fork became expandir, the Portuguese verb for to expand, a
+name that says what the tool does and belongs to no one else's brand. The rename went all
+the way through: the repo, the binary, the config folder, the docs, and every reference to
+the fork in this project. A release workflow went out first under the old name, then a
+fresh tag carried the new one. The best part was watching all my triggers load into the
+renamed app without losing a single one.
+
+**What I learned:** GPL gives you the code, but never the name, and borrowing a brand makes
+a side project read like a product. Renaming a running tool is survivable when the data and
+the code move together and the docs follow in the same pass.
+
+**Feelings / notes:** It stopped being a fork in the abstract and became a thing I maintain.
+There is a small joy in watching my own list load into a program that carries a name I
+chose. Two entries share today, the Docker one and this one, and both feel like progress.
+
+**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config folder and
+docs, published a release workflow with a first tag under the old name followed by a fresh
+expandir tag, kept every match and trigger intact, updated this project's build box
+references and the achievements note, and closed the tracker with the extra minutes.
+
+---
+
+### [AI Lab] 2026-08-11: Everything moves to the VPS
+
+**Mood:** relieved and tidy
+
+**Story:** After the 6323 investigation I moved the whole working environment to the VPS. The three repos, the time trackers and their private logs, the agent skills, the opencode config and the Trello credentials all went over and were verified one by one. The time tracker builds and reports the same totals, the Trello sync runs, GitHub accepts the keys. Two surprises came out of the move, a decision-log entry about a new contribution target that was never committed and a stale clone of the espanso fork already sitting on the server. Both are safe now, the entry lives on the VPS as pending work and the stale clone is set aside. The local copies were deleted only after the server copies were confirmed intact.
+
+**What I learned:** A move like this only feels safe in stages. Verify the tracker totals and the journal totals match, then delete. Also that the key which lets this machine reach the VPS is the one thing I keep, since it is the only door left.
+
+**Feelings / notes:** The delete step was oddly satisfying, the local machine got visibly lighter. The session data stays behind until the very end, so the conversation can be carried over to the server.
+
+**Did:** moved three repos to the VPS, restored the private tracker and session files, set up opencode and the skills, copied the keys and the git identity, verified the tracker, the Trello sync and GitHub access, synced an uncommitted decision-log entry, deleted the local copies and left only the session data and the access key behind.
+
+---
+
+### [AI Lab] 2026-08-10: The fork got a name
+
+**Mood:** settled, quietly proud
+
+**Story:** For three days my fork was called espanso+, a name I borrowed without thinking.
+Today I released the first build under that name, and only then stopped to ask what the plus
+meant. It read like an official premium edition, a thing the espanso team might be selling.
+I wanted none of that, so the fork became expandir, the Portuguese verb for to expand, a
+name that says what the tool does and belongs to no one else's brand. The rename went all
+the way through: the repo, the binary, the config folder, the docs, and every reference to
+the fork in this project. A release workflow went out first under the old name, then a
+fresh tag carried the new one. The best part was watching all my triggers load into the
+renamed app without losing a single one.
+
+**What I learned:** GPL gives you the code, but never the name, and borrowing a brand makes
+a side project read like a product. Renaming a running tool is survivable when the data and
+the code move together and the docs follow in the same pass.
+
+**Feelings / notes:** It stopped being a fork in the abstract and became a thing I maintain.
+There is a small joy in watching my own list load into a program that carries a name I
+chose. Two entries share today, the Docker one and this one, and both feel like progress.
+
+**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config folder and
+docs, published a release workflow with a first tag under the old name followed by a fresh
+expandir tag, kept every match and trigger intact, updated this project's build box
+references and the achievements note, and closed the tracker with the extra minutes.
+
+---
+
+### [AI Lab] 2026-08-10: Docker is finally in
+
+**Mood:** accomplished, then humbled by a package conflict
+
+**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself, so I rebuilt the firewall by hand in iptables, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
+
+**What I learned:** Tools remove their rivals quietly, nothing in the install output said ufw was going. A reboot is the only honest test of persistence, and separate keys per service mean a revoke on one never touches the other.
+
+**Feelings / notes:** Docker was the reason the GUI had to go, so today closed a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten.
+
+**Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
+
+---
 
 ### [OpenSearch] 2026-08-07: The project begins
 
@@ -325,135 +435,6 @@ Recorded #22494 as plan B without commenting. Added check-issues for tracking.
 
 ---
 
-
-### [CorsixTH] 2026-08-12: Squeezing the entity-loop bug until it squeaked
-
-**Mood:** first fix merged, then surprised by the old-savegame crash
-
-**Story:** The biggest news came first: the maintainers merged my docs fix, closing #1793. Issue #1467: world.entities is walked with ipairs while some handlers destroy other entities, shifting the table and skipping whoever lands in the visited slot. The fix defers removal to after the loop.
-
-A headless smoke test reproduced the skip deterministically (three dummies, the middle destroying the first mid-tick; the test fails if the third gets skipped), and a GUI variant rendered every frame. I hacked the fix back out and both failed with exactly the message they should catch.
-
-Two hidden holes surfaced. An old savegame crashed on the first tick because the deserialiser never re-runs constructors, leaving the new queue missing. And the end-of-day loop never set the iterating marker for plants. Both fixed, both tested.
-
-The day ended with a move to the full game data for reliable tests.
-
-**What I learned:** A regression test's job is to fail when the bug comes back; the negative control tells you it can. The tests that catch you are about old savegames and the code path nobody remembers.
-
-**Feelings:** The skip-repro failing on cue is the closest thing a headless server has to a high five.
-
-**Did:** merged the docs fix into CorsixTH (#1793), implemented the deferred-destruction fix (#1467), 86 unit tests green, headless and GUI smoke tests plus a negative control, fixed the old-savegame crash and the plant branch hole, moved to the full game data.
-
----
-
-
-### [AI Lab] 2026-08-11: Everything moves to the VPS
-
-**Mood:** relieved and tidy
-
-**Story:** After the 6323 investigation I moved the whole working environment to the VPS. The three repos, the time trackers and their private logs, the agent skills, the opencode config and the Trello credentials all went over and were verified one by one. The time tracker builds and reports the same totals, the Trello sync runs, GitHub accepts the keys. Two surprises came out of the move, a decision-log entry about a new contribution target that was never committed and a stale clone of the espanso fork already sitting on the server. Both are safe now, the entry lives on the VPS as pending work and the stale clone is set aside. The local copies were deleted only after the server copies were confirmed intact.
-
-**What I learned:** A move like this only feels safe in stages. Verify the tracker totals and the journal totals match, then delete. Also that the key which lets this machine reach the VPS is the one thing I keep, since it is the only door left.
-
-**Feelings / notes:** The delete step was oddly satisfying, the local machine got visibly lighter. The session data stays behind until the very end, so the conversation can be carried over to the server.
-
-**Did:** moved three repos to the VPS, restored the private tracker and session files, set up opencode and the skills, copied the keys and the git identity, verified the tracker, the Trello sync and GitHub access, synced an uncommitted decision-log entry, deleted the local copies and left only the session data and the access key behind.
-
----
-
-
-### [CorsixTH] 2026-08-11: A working dev box and a first pull request
-
-**Mood:** focused, quietly pleased when the game first booted headless, and then very pleased when the first issue became a real fix
-
-**Story:** The plan was to do all the real work on the VPS over SSH, so the project became a fork of CorsixTH with a devlog folder inside it. The build chain was a small saga: master moved to SDL3, Debian 13 ships one too old for the mixer, so I built SDL3 3.4.14 and SDL3_mixer 3.2.4 from source into /opt/SDL3. The game compiled clean, 63 unit tests green, luacheck clean, and the welcome screen printed headless using the demo data.
-
-Then came the first issue, #1793: dead links in the generated Lua docs. My first theory, that GitHub Pages was swallowing files, was wrong. The truth was simpler: LDocGen never generated a page per source file, only class pages and index pages, while the file tree links were built from path-based ids pointing at pages that never existed. So I made LDocGen write one page per file, listing the classes and functions there, with directory entries as plain text. Rebuilt the docs and checked every link: 503 pages, 20465 local links, zero broken. I opened the pull request and learned the labels are the maintainers to add.
-
-**What I learned:** A headless dev box turns a docs bug into a checkable claim: rebuild, script over every link, done. A wrong theory is still useful if you test it and drop it.
-
-**Feelings / notes:** The first headless boot felt like a small victory, and opening the first pull request felt like the devlog setup paying for itself. The MIDI music still will not load with no synth on the box, but that is a cosmetic gap. Now it is a waiting game for the maintainers.
-
-**Did:** set up the fork, built SDL3 and SDL3_mixer into /opt/SDL3, compiled the game, ran the Lua tests and lint, confirmed the headless boot, root-caused issue #1793, extended LDocGen to generate per-file pages, verified 20465 links, and opened pull request #3494.
-
----
-
-
-### [AI Lab] 2026-08-11: The fork got a name
-
-**Mood:** settled, quietly proud
-
-**Story:** For three days my fork was called espanso+, a name I borrowed without thinking.
-Today I released the first build under that name, and only then stopped to ask what the plus
-meant. It read like an official premium edition, a thing the espanso team might be selling.
-I wanted none of that, so the fork became expandir, the Portuguese verb for to expand, a
-name that says what the tool does and belongs to no one else's brand. The rename went all
-the way through: the repo, the binary, the config folder, the docs, and every reference to
-the fork in this project. A release workflow went out first under the old name, then a
-fresh tag carried the new one. The best part was watching all my triggers load into the
-renamed app without losing a single one.
-
-**What I learned:** GPL gives you the code, but never the name, and borrowing a brand makes
-a side project read like a product. Renaming a running tool is survivable when the data and
-the code move together and the docs follow in the same pass.
-
-**Feelings / notes:** It stopped being a fork in the abstract and became a thing I maintain.
-There is a small joy in watching my own list load into a program that carries a name I
-chose. Two entries share today, the Docker one and this one, and both feel like progress.
-
-**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config folder and
-docs, published a release workflow with a first tag under the old name followed by a fresh
-expandir tag, kept every match and trigger intact, updated this project's build box
-references and the achievements note, and closed the tracker with the extra minutes.
-
----
-
-
-### [AI Lab] 2026-08-10: Docker is finally in
-
-**Mood:** accomplished, then humbled by a package conflict
-
-**Story:** Phase 2 had waited on the checklist long enough, so today I added the official Docker repo, installed the engine with the Compose plugin, hardened the daemon, and wired a DOCKER-USER chain that drops anything a container tries to reach unless it is another container. Then I rebooted and watched it all come back on its own. But installing netfilter-persistent silently removed ufw, and I found the host wide open only by reading the rules myself, so I rebuilt the firewall by hand in iptables, drop everything and allow only 22, 80 and 443 on both address families. Pushing git also finally dropped the token from the URL, a dedicated SSH key just for GitHub now.
-
-**What I learned:** Tools remove their rivals quietly, nothing in the install output said ufw was going. A reboot is the only honest test of persistence, and separate keys per service mean a revoke on one never touches the other.
-
-**Feelings / notes:** Docker was the reason the GUI had to go, so today closed a loop that started with the big purge. The ufw surprise was a good reminder that nothing on this box is set and forgotten.
-
-**Did:** installed Docker CE 29.7.2 + Compose, hardened the daemon, set up DOCKER-USER default-drop, rebooted to verify. Rebuilt the firewall as pure iptables after ufw vanished. Switched GitHub to a dedicated SSH key. Updated the docs and the tracker.
-
----
-
-
-### [AI Lab] 2026-08-10: The fork got a name
-
-**Mood:** settled, quietly proud
-
-**Story:** For three days my fork was called espanso+, a name I borrowed without thinking.
-Today I released the first build under that name, and only then stopped to ask what the plus
-meant. It read like an official premium edition, a thing the espanso team might be selling.
-I wanted none of that, so the fork became expandir, the Portuguese verb for to expand, a
-name that says what the tool does and belongs to no one else's brand. The rename went all
-the way through: the repo, the binary, the config folder, the docs, and every reference to
-the fork in this project. A release workflow went out first under the old name, then a
-fresh tag carried the new one. The best part was watching all my triggers load into the
-renamed app without losing a single one.
-
-**What I learned:** GPL gives you the code, but never the name, and borrowing a brand makes
-a side project read like a product. Renaming a running tool is survivable when the data and
-the code move together and the docs follow in the same pass.
-
-**Feelings / notes:** It stopped being a fork in the abstract and became a thing I maintain.
-There is a small joy in watching my own list load into a program that carries a name I
-chose. Two entries share today, the Docker one and this one, and both feel like progress.
-
-**Did:** renamed the fork from espanso+ to expandir across the repo, binary, config folder and
-docs, published a release workflow with a first tag under the old name followed by a fresh
-expandir tag, kept every match and trigger intact, updated this project's build box
-references and the achievements note, and closed the tracker with the extra minutes.
-
----
-
-
 ### [AI Lab] 2026-08-07: Docker questions, then the great GUI purge
 
 **Mood:** curious, then decisive, then generous, then thorough
@@ -467,7 +448,6 @@ references and the achievements note, and closed the tracker with the extra minu
 **Did:** Docker Q&A, fixed the stuck rescue boot, purged the desktop GUI.
 
 ---
-
 
 ### [AI Lab] 2026-08-06: The day the rescue test finally passed
 
@@ -496,7 +476,6 @@ that first public push to GitHub.
 
 ---
 
-
 ### [AI Lab] 2026-08-05: The day it started feeling real
 
 **Mood:** excited, a little proud
@@ -522,7 +501,6 @@ drill itself, then Docker.
 built the rescue-mode runbook.
 
 ---
-
 
 ### [AI Lab] 2026-08-04: The night I stopped planning and bought the server
 
