@@ -13,7 +13,7 @@ datasets:
 
 # ai-lab-m2-agent — Month 2 (generic-code, free tier)
 
-> Generic prompt → SmolAgents `CodeAgent` + `PythonExecutorTool` + `DatasetTool` → `{code, stdout, latency}`. Free tier only: `meta-llama/Llama-3.1-8B-Instruct via Groq` via `hf-inference` (toggle ON) or local `SmolLM2-360M-Instruct` (~700MB CPU).
+> Generic prompt → SmolAgents `CodeAgent` + `PythonExecutorTool` + `DatasetTool` → `{code, stdout, latency}`. Free tier only: `openai/gpt-oss-20b via Groq (3 models Inference Available)` via `hf-inference` (toggle ON) or local `SmolLM2-360M-Instruct` (~700MB CPU).
 
 ## Tools
 

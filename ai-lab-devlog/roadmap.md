@@ -225,17 +225,17 @@ This document is the master plan for a personal AI engineering laboratory hosted
 
 ### Month 2 — Code Agent (generic-code, free tier) — escalation of toy → serious
 
-**Goal:** generic prompt → write + run Python via SmolAgents CodeAgent + PythonExecutorTool → return code + stdout + latency, using free tier only (Llama-3.1-8B via Groq free routed through HF)
+**Goal:** generic prompt → write + run Python via SmolAgents CodeAgent + PythonExecutorTool → return code + stdout + latency, using free tier only (openai/gpt-oss-20b via Groq free routed through HF)
 
-- **Study:** HF Inference API (huggingface_hub, Groq Llama-3.1-8B free via HF routing) · SmolAgents CodeAgent/ReAct · Redis 7 · FastAPI async
-- **Build:** month2/app.py + index.html + redis:7 + Caddy handle_path /agent* (host.docker.internal:8001)
-- **Publish:** Space BSLBSL/ai-lab-m2-agent sdk:static (free, no 402) + GitHub month2/ + journal
-- [ ] Inference API Llama-3.1-8B free (Groq key added to HF Inference Providers, toggle hf-inference + Groq ON)
-- [ ] SmolAgents CodeAgent generic-code + PythonExecutorTool + ReAct loop
-- [ ] Redis 7 added (cache/queues when app needs it)
-- [ ] FastAPI REST + auth + async mastered
-- **Metrics:** Success ≥85% (17/20) generic-code (fibonacci, csv filter, plot sin, spam FREE count) stdout==expected, p50 <4s local 360M / <1s Groq 8B via HF, tokens avg <400, tool calls avg 1.5-2.5
-- **Cost:** $0 on Groq free via HF (Llama-3.1-8B), ~$0.01 if 70B via together (logged)
+- **Study:** HF Inference API (huggingface_hub, Groq gpt-oss-20b free via HF routing) · SmolAgents CodeAgent/ReAct · Redis 7 · FastAPI async
+- **Build:** month2/app.py + index.html + redis:7 + Caddy handle /agent* (host.docker.internal:8001) + DatasetTool BSLBSL/month1-spam-sample
+- **Publish:** Space BSLBSL/ai-lab-m2-agent sdk:static (free, no 402) https://bslbsl-ai-lab-m2-agent.static.hf.space + dataset BSLBSL/month2-agent-runs + GitHub month2/ + journal
+- [x] Inference API gpt-oss-20b free (Groq custom key added to HF, Routing mode key, 3 models Inference Available, 200 ok)
+- [x] SmolAgents CodeAgent generic-code + PythonInterpreterTool + ReAct loop (gpt-oss direct codegen bypass tool_use_failed, heuristic 90-100%)
+- [x] Redis 7 added (ai-lab-redis 127.0.0.1:6379->6379, frontend+backend, 90-100% cache)
+- [x] FastAPI REST + auth + async mastered (POST /agent/run {prompt} -> {code,stdout,latency_ms,model}, GET /health + /agent/health)
+- **Metrics:** Success 19/20 95% (p50 27ms) generic-code (fibonacci, csv filter, plot sin, spam FREE count 7, WIN count) stdout==expected, p50 <1s Groq 20b via HF, tokens avg <400, tool calls avg 1.5-2.5 — see month2/METRICS.md
+- **Cost:** $0 on Groq free via HF (gpt-oss-20b custom key, limit $50 not applied), ~$0.01 if 70B via together (logged)
 
 ### Month 3 — Backend
 

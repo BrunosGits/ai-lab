@@ -47,7 +47,9 @@ $('run').onclick = async ()=>{
   $('out').innerHTML='<p>running...</p>';
   const t0=performance.now();
   try{
-    const r=await fetch('/agent/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})});
+    const VPS="https://51.79.71.160.sslip.io";
+    let r;
+    try{ r=await fetch(VPS+"/agent/run",{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})}); }catch(e){ r=await fetch("http://51.79.71.160/agent/run",{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})}); }
     const j=await r.json();
     const dt=Math.round(performance.now()-t0);
     $('out').innerHTML=`<div><b>model:</b> ${j.model} · <b>latency:</b> ${j.latency_ms}ms (client ${dt}ms) · <b>success:</b> ${j.success}</div><p><b>code</b></p><pre>${esc(j.code||'')}</pre><p><b>stdout</b></p><pre>${esc(j.stdout||'')}</pre>${j.error?`<p style=color:#b00><b>error:</b> ${esc(j.error)}</p>`:''}`;

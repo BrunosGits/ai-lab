@@ -2,6 +2,9 @@ http://51.79.71.160 {
     handle_path /chat* {
         reverse_proxy host.docker.internal:7860
     }
+    handle /agent* {
+        reverse_proxy host.docker.internal:8001
+    }
     handle {
         reverse_proxy hello:8000
     }
@@ -10,6 +13,9 @@ http://51.79.71.160 {
 {$CADDY_DOMAIN} {
     handle_path /chat* {
         reverse_proxy host.docker.internal:7860
+    }
+    handle /agent* {
+        reverse_proxy host.docker.internal:8001
     }
     handle {
         reverse_proxy hello:8000

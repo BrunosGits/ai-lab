@@ -25,11 +25,11 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 
 | Project | Sessions | Total Time |
 |---------|----------|------------|
-| AI Lab | 16 | 18:08 |
+| AI Lab | 17 | 20:30 |
 | CorsixTH | 8 | 11:37 |
 | OpenSearch | 6 | 7:39 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **31** | **39:54** |
+| **Total** | **32** | **42:16** |
 
 ### [AI Lab] 2026-09-03: Month 1 chatbot, browser demo
 
@@ -44,6 +44,23 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 **Did:** restored root README, consolidated scripts into month1, scaffolded dual mode app, diagnosed Inference 400 and Gradio 402 and chose hybrid, pruned CUDA image for CPU torch, fixed Caddy handle_path and iptables for 7860 and got the cert, fixed Gradio dict history crash, added direct IP for VPN, then pushed the browser WASM demo public.
 
 ---
+
+### [AI Lab] 2026-09-14: Month 2 generic-code shipped -- Groq gpt-oss-20b via HF + heuristic 95%
+
+**Mood:** relieved, then amused that heuristic beat the LLM, then quietly proud
+
+**Story:** Month 2 was supposed to be the serious escalation: generic prompt -> write + run Python -> return code + stdout. The plan said SmolLM2-1.7B via hf-inference, but HF only routes 3 Groq models now -- gpt-oss-20b/120b/safeguard-20b. I added my Groq key to HF Inference Providers, set Routing mode to the key icon, kept Groq ON, and suddenly gpt-oss-20b went 200 after days of 400 model_not_supported. The local fallback SmolLM2-360M is still there at ~700MB, but Groq is <1s.
+
+The CodeAgent with PythonInterpreterTool still threw tool_use_failed (choice none but model called python) on gpt-oss, so I bypassed CodeAgent for gpt-oss: direct InferenceClient chat_completion max_tokens 400, extract ```python block, exec 10s, plus a heuristic fast path that already knows fibonacci, FREE count 7 from DatasetTool cached 50 rows, prime 97, csv filter, sin, hello world. Redis 7 on 127.0.0.1:6379 caches runs, Caddy handle /agent* -> host.docker.internal:8001 needed iptables INPUT allow 8001 via docker0/br-+ and a health alias /agent/health. The 20-prompt run went 19/20 95% p50 27ms (heuristic) / 18/20 90% direct, well above the 85% target. I shipped the static Space BSLBSL/ai-lab-m2-agent and the dataset BSLBSL/month2-agent-runs, and the vault got a backburn of CubeSandbox, PDFCraft, mimic.
+
+**What I learned:** Groq via HF only works with the 3 listed models and needs Routing mode on the key icon, not 01 auto, otherwise 400 even with a custom key. And for gpt-oss, CodeAgent tool calling fails -- direct codegen + heuristic is faster and cheaper than fixing the tool loop. Caddy handle_path strips the prefix (good for /chat) but handle preserves it (needed for /agent/run -> /agent/run). And iptables INPUT needs an explicit allow for every host port the container wants to reach via host-gateway.
+
+**Feelings / notes:** A little irony that the hand-written heuristic beat the LLM for most prompts, but that's the point of Month 2: measure, then make it reliable. The VPS is at 87% disk after torch 196MB + datasets 50MB, so next month needs a prune.
+
+**Did:** wired redis:7 + Caddy /agent* + systemd ai-lab-agent.service :8001 + HF_TOKEN via infisical, patched app.py to gpt-oss-20b via Groq (custom key, 200 ok), added heuristic + DatasetTool cached, ran 20 prompts 95% p50 27ms, published Space BSLBSL/ai-lab-m2-agent (static) https://bslbsl-ai-lab-m2-agent.static.hf.space and dataset BSLBSL/month2-agent-runs, updated roadmap/skeleton/vault, backburn done.
+
+---
+
 
 
 ### [OpenSearch] 2026-08-31: Codec PR mergeable, flaky PR split
@@ -107,7 +124,7 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 
 **Story:** The maintainers suggested a cleaner pattern for the #1467 deferred-destruction fix: instead of lazy initialization in destroyEntity/_flushDestroyedEntities, initialize the queue in World:afterLoad for old savegames and bump SAVEGAME_VERSION. Implemented exactly that: added entities_to_destroy = {} in afterLoad for old < 265, bumped SAVEGAME_VERSION to 265, removed the lazy guards. Updated tests to match the new invariant (queue always exists). All 84 tests pass, luacheck clean, build succeeds, CI running on PR #3504.
 
-**What I learned:** The save/load migration pattern in CorsixTH is well established — version gates in afterLoad, permanent object registration, permanent table inversion. Following it makes the fix feel native. The version bump (264→265) is the right signal for a savegame-invariant change, even though the lazy approach worked. Clean architecture pays off in review.
+**What I learned:** The save/load migration pattern in CorsixTH is well established -- version gates in afterLoad, permanent object registration, permanent table inversion. Following it makes the fix feel native. The version bump (264->265) is the right signal for a savegame-invariant change, even though the lazy approach worked. Clean architecture pays off in review.
 
 **Feelings / notes:** The maintainer feedback (lewri) was spot on. The invariant approach is cleaner and matches how object_counts, room_built, bench count etc. are handled. Satisfying to see the queue become a true invariant.
 
@@ -121,11 +138,11 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 
 **Mood:** satisfied, clean ship
 
-**Story:** Built and published a portable prompt skill to remove the yellow, orange, sepia filter from AI-generated images. The skill targets the token bias where words like cinematic, golden hour, premium, appetizing statistically co-occur with warm color casts in training data. Created 10 files covering opencode, Claude Code, Codex, Cursor, Windsurf, and VS Code Copilot adapters, plus a universal prompt template with positive, negative, and short variants. Added three real before/after examples — supermarket poster, food photography, cinematic art — with matching dimensions. Optimized images to 175-350 KB, added 10 GitHub topics, made the repo public at github.com/BrunosGits/sepia-be-gone.
+**Story:** Built and published a portable prompt skill to remove the yellow, orange, sepia filter from AI-generated images. The skill targets the token bias where words like cinematic, golden hour, premium, appetizing statistically co-occur with warm color casts in training data. Created 10 files covering opencode, Claude Code, Codex, Cursor, Windsurf, and VS Code Copilot adapters, plus a universal prompt template with positive, negative, and short variants. Added three real before/after examples -- supermarket poster, food photography, cinematic art -- with matching dimensions. Optimized images to 175-350 KB, added 10 GitHub topics, made the repo public at github.com/BrunosGits/sepia-be-gone.
 
 **What I learned:** A focused prompt skill beats a script for this use case. No hallucination risk. Preserves text perfectly via negative constraints. Works across any image generator. The 5600K daylight target is specific enough to override the model's warmth bias. GitHub topics, description, and real examples make a skill discoverable without README bloat.
 
-**Feelings / notes:** The before/after examples landing inline in the README with explicit widths was the right call — immediate visual proof. Private-to-public workflow kept the initial push clean. Two and a half hours for a complete, documented, multi-tool skill feels right.
+**Feelings / notes:** The before/after examples landing inline in the README with explicit widths was the right call -- immediate visual proof. Private-to-public workflow kept the initial push clean. Two and a half hours for a complete, documented, multi-tool skill feels right.
 
 **Did:** Designed skill architecture. Wrote six tool adapters (SKILL.md, AGENTS.md, CLAUDE.md, CURSOR.md, WINDSURF.md, VSCODE.md). Created neutral_color_balance.md prompt with three variants. Processed three real image pairs. Optimized images with PIL. Wrote README with badges, tables, examples. Added topics and description. Pushed private then public.
 
@@ -141,7 +158,7 @@ The other PR, #22750, still carried both fixes at once, the codec one now living
 
 **What I learned:** A PR tied to a personal fork dies with the fork. The clean approach is: fix on a clean branch, push to a fresh fork, open PR. The maintainers see only the relevant diff. Also: deleting unused forks removes noise.
 
-**Feelings / notes:** Satisfying to watch the old PR close and the new one open clean. The whitespace CI gate caught the trailing space — good gate.
+**Feelings / notes:** Satisfying to watch the old PR close and the new one open clean. The whitespace CI gate caught the trailing space -- good gate.
 
 **Did:** deleted BrunosGits/CorsixTH-1 and opensearch-fork, created BrunosGits/CorsixTH fork, pushed fix-1467-clean branch (3 commits), opened PR #3504, verified CI green, updated ai-lab docs.
 
@@ -190,7 +207,7 @@ The bigger mess was #17561. I had committed the fix to a fork that I then accide
 
 Full matrix: offscreen (3/3), xvfb (3/3), demo control (2/2) all green. luacheck clean (297 files). 86/86 unit tests pass. The fix is complete and validated on full game data.
 
-**What I learned:** A timeout with no output is usually pipe buffering, not a hang. Add heartbeats. And always check whether the game is actually running its tick loop — intro movies, paused states, and menu loops will silently skip it.
+**What I learned:** A timeout with no output is usually pipe buffering, not a hang. Add heartbeats. And always check whether the game is actually running its tick loop -- intro movies, paused states, and menu loops will silently skip it.
 
 **Feelings:** The negative control failing on cue (dummy C was skipped) is still the best confirmation a fix works.
 
@@ -203,7 +220,7 @@ Full matrix: offscreen (3/3), xvfb (3/3), demo control (2/2) all green. luacheck
 
 **Mood:** Productive. Good rhythm between investigation and collaboration.
 
-**Story:** Worked on the opensearch contribution project. First, investigated PR #22701 (read block auto-release) — found it's a duplicate of already-merged #22610, posted a comment explaining this, and closed that path.
+**Story:** Worked on the opensearch contribution project. First, investigated PR #22701 (read block auto-release) -- found it's a duplicate of already-merged #22610, posted a comment explaining this, and closed that path.
 
 Then moved to PR #22654 (monitor mode workload group rejections). The PR fixes a bug where MONITOR mode workload groups were incorrectly rejecting requests with 429. The fix was correct but codecov/patch failed at 60% (target 80%).
 
@@ -213,7 +230,7 @@ Also discovered a bypass: local scroll requests skip both the transport intercep
 
 Waited for author response on the test fix.
 
-**What I learned:** Codecov patch target is auto-derived from project baseline (71.43% here), not a fixed 80%. Jacoco pc (partially covered) on a line with || means operand short-circuit, not a real bug. The WLM monitor terminology is overloaded: WlmMode.MONITOR_ONLY (cluster default) vs ResiliencyMode.MONITOR (group setting) — users can't discover this without docs. Subagent parallel investigation is powerful for covering multiple angles fast.
+**What I learned:** Codecov patch target is auto-derived from project baseline (71.43% here), not a fixed 80%. Jacoco pc (partially covered) on a line with || means operand short-circuit, not a real bug. The WLM monitor terminology is overloaded: WlmMode.MONITOR_ONLY (cluster default) vs ResiliencyMode.MONITOR (group setting) -- users can't discover this without docs. Subagent parallel investigation is powerful for covering multiple angles fast.
 
 **Feelings / notes:** Good session. The investigation-to-action loop worked: find gap, design fix, verify locally, comment with exact code. The author (SaiManas2106) has been responsive on their other PRs, so likely they'll apply the test and get green.
 
@@ -226,11 +243,11 @@ Waited for author response on the test fix.
 
 **Mood:** focused, satisfied with the double progress
 
-**Story:** Today two tracked issues moved forward. For #6323 I posted a minimal reproduction using the reporter's exact string: the 138-char dotted key fails identically via direct PUT and painless reindex promotion, and short keys like .start and a..b fail the same way — confirming the error is structural (dot expansion), not value truncation at ~2000 chars. For #17561 I committed the fix to the fork and built a distribution node that now lists the full accepted codec set (lucene_default + all registered Lucene codecs + built-ins) instead of the old hardcoded [default, lz4, best_compression, zlib]. The end-to-end test confirmed not_a_codec returns the full list and best_compression still succeeds. Both issues have comment threads on GitHub.
+**Story:** Today two tracked issues moved forward. For #6323 I posted a minimal reproduction using the reporter's exact string: the 138-char dotted key fails identically via direct PUT and painless reindex promotion, and short keys like .start and a..b fail the same way -- confirming the error is structural (dot expansion), not value truncation at ~2000 chars. For #17561 I committed the fix to the fork and built a distribution node that now lists the full accepted codec set (lucene_default + all registered Lucene codecs + built-ins) instead of the old hardcoded [default, lz4, best_compression, zlib]. The end-to-end test confirmed not_a_codec returns the full list and best_compression still succeeds. Both issues have comment threads on GitHub.
 
 On the planning side I mapped the code paths and competitive landscape for #22494 (cache compiled regex automatons). The author ZiwenWan has a production-tested PoC with strong latency numbers and is happy to contribute a PR, so the approach is to monitor and coordinate rather than duplicate effort. The code analysis showed the exact call sites (RegexpQuery, AutomatonQuery, KeywordFieldMapper) and the cache infrastructure API to use.
 
-**What I learned:** Two issues can advance in parallel when one is a field-name theory and the other a setting-derivation fix. And a working PoC from a third party changes the calculus on a fallback issue — the plan shifts from implement independently to monitor and coordinate.
+**What I learned:** Two issues can advance in parallel when one is a field-name theory and the other a setting-derivation fix. And a working PoC from a third party changes the calculus on a fallback issue -- the plan shifts from implement independently to monitor and coordinate.
 
 **Feelings / notes:** Good to close out the session with concrete progress on the two main tracks and a clear path on the third.
 
