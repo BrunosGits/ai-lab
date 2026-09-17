@@ -3,8 +3,8 @@
 ## PR Information
 - **Issue**: #1115
 - **Repository**: testcontainers/testcontainers-python
-- **PR Link**: (not opened yet - planned S6)
-- **Status**: Implemented + tested, unpushed
+- **PR Link**: https://github.com/testcontainers/testcontainers-python/pull/1118
+- **Status**: Open (CI pending, awaiting maintainer review)
 - **Created**: 2026-09-17 (VPS date)
 - **Merged**: 
 
@@ -19,7 +19,7 @@
 - [x] ruff check + format clean
 
 ## Review Notes
-- Branch fix/1115-http-fd-leak exists only on the VPS clone; push + open PR in S6.
+- Branch fix/1115-http-fd-leak pushed (a922578); PR #1118 opened 2026-09-17.
 - Fork BrunosGits/testcontainers-python created; upstream remote configured.
 
 ## Related

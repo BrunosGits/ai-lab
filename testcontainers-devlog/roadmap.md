@@ -46,7 +46,7 @@ This document is the master plan for a personal Testcontainers contribution labo
 - [x] Find label implementation: Python (core/labels.py) and Go (internal/core/labels.go) ALREADY emit org.testcontainers=true - no PR to open
 - [x] Pivot to real bug hunt (S4): picked #1115 fd leak in HttpWaitStrategy over #1111 Trino port and stale Go #2765
 - [x] Implement + test #1115 (S5): try/finally close in _handle_http_error, 88+9 tests green, ruff clean
-- [ ] PR (S6): push fix/1115-http-fd-leak, open PR
+- [x] PR (S6): pushed fix/1115-http-fd-leak (a922578), opened [#1118](https://github.com/testcontainers/testcontainers-python/pull/1118)
 
 ### Phase 3 — Module Contributions
 
