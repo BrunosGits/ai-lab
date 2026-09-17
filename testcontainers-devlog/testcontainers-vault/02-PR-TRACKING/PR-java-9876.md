@@ -8,6 +8,7 @@
 - **Created**: 2026-08-25
 - **Merged**: 
 - **Verified**: 2026-09-17
+- **Live check 2026-09-17**: OPEN, MERGEABLE, merge blocked on review. 2 commits, 3 comments. Reviews: Codex COMMENTED, CodeRabbit COMMENTED, kiview COMMENTED. No upstream movement since 2026-08-31.
 
 ## Changes Summary
 - Modified `GenericContainer.logger()` to use constant logger name "tc.genericcontainer"

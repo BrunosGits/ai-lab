@@ -8,6 +8,7 @@
 - **Created**: 2026-08-25
 - **Merged**: 
 - **Verified**: 2026-09-17
+- **Live check 2026-09-17**: OPEN, MERGEABLE, merge blocked on review. 1 commit, 2 comments. Reviews: Codex COMMENTED, own follow-up COMMENTED. No upstream movement since 2026-08-31.
 
 ## Changes Summary
 - Added `org.testcontainers=true` label to default labels in `ContainerRequest::from()`

@@ -4,7 +4,8 @@
 - **Issue**: #1115
 - **Repository**: testcontainers/testcontainers-python
 - **PR Link**: https://github.com/testcontainers/testcontainers-python/pull/1118
-- **Status**: Open (CI pending, awaiting maintainer review)
+- **Status**: Open (mergeable, merge blocked - CI/review pending)
+- **Live check 2026-09-17**: OPEN, MERGEABLE. 1 commit, 0 comments, 0 reviews. CI workflows (ci-core/ci-lint/pr-lint) trigger on PR but no checks reported yet - re-check next session.
 - **Created**: 2026-09-17 (VPS date)
 - **Merged**: 
 
