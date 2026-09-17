@@ -27,9 +27,25 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 |---------|----------|------------|
 | AI Lab | 18 | 20:56 |
 | CorsixTH | 9 | 12:03 |
-| OpenSearch | 6 | 7:39 |
+| OpenSearch | 7 | 10:39 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **34** | **43:08** |
+| **Total** | **35** | **46:08** |
+
+### [OpenSearch] 2026-09-17: Flaky PR verified green on the VPS
+
+**Mood:** determined, then a bit relieved after the long env fight
+
+**Story:** The flaky fix PR #22750 got rebased onto the newest main so it stopped being out of date. Then gradle check failed on Jenkins, job 84880, and I could not read the log. The console text and the JSON both return a four oh three without a login, and the GitHub annotations only say process exited with code one, no test name.
+
+So I went and ran the suite myself. The analytics test lives in the sandbox which needs JDK 25 plus a flag to include the sandbox projects at all. The VPS had no JDK 25, so I downloaded Temurin and pointed gradle at it, then found the Rust native library build needs protoc too. Installing that got past compile, and then the machine ran out of memory at the final link, three point seven gig of RAM against a Rust release build is not enough. The real cause of the Jenkins failure: the box behind those logs just could not finish the link either.
+
+I freed up disk, stopped a couple of study services that were eating RAM, and rebuilt the Rust library with LTO off and one job at a time. Keep it small and it squeaks through on two cores. After that the test suite ran and passed, eight tests, zero failures. The very test that was flaky, testQtfFetchCancelTearsDownAndCleansUp, came back green. I posted the result on the PR and the issue, pinned the reporter, and pinged the maintainers that it is mergeable and just needs a fresh check.
+
+**What I learned:** A Jenkins failure you cannot read is useless, so run the test on your own box before arguing with CI. And the Rust native link on a memory capped VPS needs LTO off, otherwise it dies in the final link with no useful error at all.
+
+**Feelings / notes:** The whole detour was an environment problem, not a code problem, which took some patience to prove. Nice to watch the flaky test pass on the branch that is supposed to fix it.
+
+**Did:** rebased PR #22750 onto latest main, verified the head, tracked the Jenkins 84880 failure to a memory capped Rust link, installed JDK 25 and protoc on the VPS, freed disk and stopped study services, rebuilt the native library with LTO off, ran AnalyticsQueryTaskCleanupIT green with eight tests, posted the result on the PR and the issue, pinned the reporter and pinged the maintainers
 
 ### [AI Lab] 2026-09-15: Phase 2 shipped and Ultrascan merged
 
