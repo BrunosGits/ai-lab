@@ -3,8 +3,8 @@
 ## PR Information
 - **Issue**: #1111
 - **Repository**: testcontainers/testcontainers-python
-- **PR Link**: (not opened yet)
-- **Status**: Implemented + tested, unpushed
+- **PR Link**: https://github.com/testcontainers/testcontainers-python/pull/1119
+- **Status**: Open (CI pending, awaiting maintainer review)
 - **Created**: 2026-09-17 (VPS date)
 - **Merged**: 
 
@@ -18,7 +18,7 @@
 - [x] ruff check + format clean
 
 ## Review Notes
-- Branch fix/1111-trino-port local on VPS clone; push + PR after #1118 discussion or on next sprint call.
+- Branch fix/1111-trino-port pushed; PR #1119 opened 2026-09-17.
 
 ## Related
 - Issue: #1111
