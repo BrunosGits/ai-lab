@@ -4,9 +4,10 @@
 - **Issue**: #926
 - **Repository**: testcontainers/testcontainers-rs
 - **PR Link**: https://github.com/testcontainers/testcontainers-rs/pull/969
-- **Status**: Open
+- **Status**: Open (mergeable, awaiting maintainer review)
 - **Created**: 2026-08-25
 - **Merged**: 
+- **Verified**: 2026-09-17
 
 ## Changes Summary
 - Added `org.testcontainers=true` label to default labels in `ContainerRequest::from()`
@@ -23,6 +24,7 @@
 - Minimal change for ecosystem consistency
 - Preserves existing `org.testcontainers.managed-by=testcontainers` label
 - No breaking changes
+- 1 commit; local Cargo.toml drift (unused serde_yaml) reverted 2026-09-17 -- diff vs main is exactly the 2-file change
 
 ## Related
 - Issue: #926

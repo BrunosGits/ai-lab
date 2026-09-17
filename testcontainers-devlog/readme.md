@@ -21,8 +21,8 @@ A personal contribution laboratory for the Testcontainers ecosystem, hosted on t
 
 | Issue | Repo | Language | Status | PR |
 |---|---|---|---|---|
-| #9876 Debug logging lazy evaluation | testcontainers-java | Java | ✅ Implementation complete | Pending |
-| #926 Add org.testcontainers=true label | testcontainers-rs | Rust | ✅ Implementation complete | Pending |
+| #9876 Debug logging lazy evaluation | testcontainers-java | Java | ✅ Implementation complete | Open |
+| #926 Add org.testcontainers=true label | testcontainers-rs | Rust | ✅ Implementation complete | Open |
 
 ## Philosophy
 

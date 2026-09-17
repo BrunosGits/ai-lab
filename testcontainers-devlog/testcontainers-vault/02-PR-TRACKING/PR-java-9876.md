@@ -4,9 +4,10 @@
 - **Issue**: #9876
 - **Repository**: testcontainers/testcontainers-java
 - **PR Link**: https://github.com/testcontainers/testcontainers-java/pull/11982
-- **Status**: Open
+- **Status**: Open (mergeable, awaiting maintainer review)
 - **Created**: 2026-08-25
 - **Merged**: 
+- **Verified**: 2026-09-17
 
 ## Changes Summary
 - Modified `GenericContainer.logger()` to use constant logger name "tc.genericcontainer"
@@ -23,6 +24,8 @@
 - SLF4J 1.7.x doesn't support lambda syntax, used `isDebugEnabled()` guard pattern
 - Logger name changed from image-specific to generic
 - No breaking changes to public API
+- 2 commits (initial fix + review-feedback follow-up); CodeRabbit + Codex bot reviews; reviewer requested: kiview
+- Final logger name "genericcontainer" (tc.tc prefix fixed per review); local fork re-aligned to origin/fix/9876-debug-logging on 2026-09-17
 
 ## Related
 - Issue: #9876
