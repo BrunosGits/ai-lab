@@ -49,7 +49,7 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [x] Verified: 503 pages, 20465 local links, zero broken
 - [x] PR #3494 merged by the maintainers — closes #1793
 
-### #1467 — Entities table modified inside an `ipairs` loop 🔄
+### #1467 — Entities table modified inside an `ipairs` loop ✅
 - [x] Root cause: `destroyEntity` mid-loop shifts the table, skipping whoever lands in the already-visited slot
 - [x] Fix: defer destruction until after the loop (`to_destroy` + `_flushDestroyedEntities`, `current_tick_entity` marker)
 - [x] Old-savegame compat: `entities_to_destroy` initialized in `afterLoad` for `old < 265`
@@ -60,7 +60,7 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [x] 84/84 unit tests green, luacheck clean
 - [x] CI green: LuaJIT, Lua 5.1, Lua 5.5, Windows
 - [x] Clean pattern: queue invariant via constructor + afterLoad (v265)
-- [ ] PR #3504 maintainer review
+- [x] PR #3504 merged 2026-09-06 (d98fbe80) — closes #1467
 
 ### #3372 — Properly destroy entities on pickup again 🚧
 - [x] Root cause: #3304 stopped destroying on pickup (object made invisible + kept in `world.entities`), which leaked duplicates → save corruption #3376, patched by band-aid #3370 (`table_contains` guards)

@@ -1,12 +1,14 @@
 ---
 pr: 3504
 title: "Fix #1467: Deferred entity destruction to prevent iteration skip"
-status: review
+status: merged
 branch: fix-1467-clean
 base: master
 repo: CorsixTH/CorsixTH
 created: 2026-08-18
-updated: 2026-08-24
+updated: 2026-09-18
+merged: 2026-09-06
+merge_commit: d98fbe80
 labels: [bug, entity-system, savegame]
 reviewers: [TheCycoONE, lewri]
 related_areas: [01-entity-iteration, 12-saveload-migrations]
@@ -29,7 +31,7 @@ Deferred entity destruction to prevent iteration skip when `destroyEntity` is ca
 | Reviewer | Status | Notes |
 |----------|--------|-------|
 | TheCycoONE | ✅ APPROVED | |
-| lewri | ⚠️ CHANGES_REQUESTED | Savegame bump line comment |
+| lewri | ✅ APPROVED | Savegame bump comment addressed |
 
 ## CI Status
 All checks passing (Linux Lua 5.1, LuaJIT, vcpkg Lua 5.5, Windows, AppVeyor).
@@ -40,8 +42,8 @@ All checks passing (Linux Lua 5.1, LuaJIT, vcpkg Lua 5.5, Windows, AppVeyor).
 - @lewri: "update the savegame bump line in app.lua" → **DONE**
 
 ## Next Steps
-- [ ] Wait for lewri re-review
-- [ ] Merge on approval
+- [x] lewri re-review done
+- [x] Merged 2026-09-06 (d98fbe80) — closes #1467
 
 
 ## Related Pages

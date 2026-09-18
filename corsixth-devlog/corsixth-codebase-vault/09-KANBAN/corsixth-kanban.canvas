@@ -78,9 +78,9 @@
       "id": "card-3504",
       "type": "file",
       "file": "03-PR-TRACKING/PR-3504-entity-destruction.md",
-      "x": 690,
-      "y": 50,
-      "group": "col-progress"
+      "x": 1330,
+      "y": 350,
+      "group": "col-done"
     },
     {
       "id": "card-3494",
