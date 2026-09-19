@@ -42,58 +42,6 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 
 ## 🐛 Issue Tracks
 
-### #1793 — Broken Lua docs links on GitHub Pages ✅
-- [x] Root cause: LDocGen generated class and index pages only, never a page per source file, while file-tree links pointed at pages that never existed
-- [x] First theory (GitHub Pages swallowing files) tested and dropped
-- [x] Fix: LDocGen writes one page per file, listing classes and functions, with directory entries as plain text
-- [x] Verified: 503 pages, 20465 local links, zero broken
-- [x] PR #3494 merged by the maintainers — closes #1793
-
-### #1467 — Entities table modified inside an `ipairs` loop ✅
-- [x] Root cause: `destroyEntity` mid-loop shifts the table, skipping whoever lands in the already-visited slot
-- [x] Fix: defer destruction until after the loop (`to_destroy` + `_flushDestroyedEntities`, `current_tick_entity` marker)
-- [x] Old-savegame compat: `entities_to_destroy` initialized in `afterLoad` for `old < 265`
-- [x] Plant branch hole: end-of-day loop never set the iterating marker for plants
-- [x] Headless repro: three dummies, the middle destroys the first mid-tick; fails if the third is skipped
-- [x] Negative control: fix disabled → `SMOKE FAIL: dummy C was skipped (the #1467 bug)`
-- [x] Full game data matrix: offscreen 3/3 · xvfb 3/3 · demo control 2/2
-- [x] 84/84 unit tests green, luacheck clean
-- [x] CI green: LuaJIT, Lua 5.1, Lua 5.5, Windows
-- [x] Clean pattern: queue invariant via constructor + afterLoad (v265)
-- [x] PR #3504 merged 2026-09-06 (d98fbe80) — closes #1467
-
-### #3372 — Properly destroy entities on pickup again 🚧
-- [x] Root cause: #3304 stopped destroying on pickup (object made invisible + kept in `world.entities`), which leaked duplicates → save corruption #3376, patched by band-aid #3370 (`table_contains` guards)
-- [x] Approach selected: snapshot-and-destroy with tile reservation
-  - Capture move snapshot (`object_type`, `tile_x`, `tile_y`, `direction`, `room_ref`, slave, machine/plant state) at pickup, then `destroyEntity` (safe via #1467 deferred machinery)
-  - Reserve source footprint tiles during the place window; release on place/cancel/sell/close
-  - Recreate from snapshot on place or Esc-cancel; refund on sell
-  - Unify corridor + room-edit paths (room-edit already destroys today)
-  - Remove both `table_contains` band-aids after confirming no other dependency
-- [ ] Implement commit 1: object move snapshot/restore helpers
-- [ ] Implement commit 2: destroy on pickup with tile reservation
-- [ ] Implement commit 3: unify corridor and room-edit pickup paths
-- [ ] Implement commit 4: remove `table_contains` duplicate band-aids
-- [ ] Implement commit 5: pickup/place/cancel/sell/save tests + negative control
-- [ ] Verification matrix green (place · Esc-cancel · sell · save-mid-window · negative control)
-- [ ] PR + CI green
-
-### #3441 — Ultrascan footprint does not match original game (P4 Low) ✅ Merged PR #3526
-
-- [x] Research: save 907K zip / 2.7M sav, map 128x128, strict vs minimal masks, 16-object-placement/VANILLA_FOOTPRINT_MATRIX.md + TH_ORIGINAL_ULTRASCAN.md, TH_ORIGINAL_TILES.md, Ultrascan-room-deep.md, Ultrascan-diagnosis-flow.md
-- [x] PR #3526 merged Sep 14 2026 by ARGAMX → master (commit 06b70cd, branch fix/3441-ultrascan-footprint) — closes #3441 — Reviewed tobylane, Approved TheCycoONE + ARGAMX, 5/6 checks passed
-- [x] Fix: ultrascanner.lua blocked north {-1,1},{0,1} and east {1,-1},{1,0} (south copies north, west mirrors east), kept use_position {0,-1} passable to avoid shifted draw, removed 265 preserve (app.lua:31 + object.lua:920 did nothing, old saves keep old footprint via normal save data)
-- [x] Vault: PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md updated to merged, KANBAN Done, spec/entities/ultrascanner_3441_spec.lua 65/65 busted + luacheck 0/297
-- [x] Post-merge: east side shifted image fixed by moving block to south edge, second image red crosses guided final east {1,-1},{1,0} placement
-
-### #2469 — Right mouse panning causes object placement glitches ⏭️
-- [ ] Reproduce headless
-- [ ] Root-cause the pan/placement interaction
-- [ ] Fix + tests + PR
-
-### #1738 — Handymen do not water plants in the middle of benches (backlog) 🕳️
-- [ ] Claim after #3372 lands
-
 ### #3545 — Run length encoder implementation is very expensive 🔬
 - [x] Root cause: `are_ranges_equal` does 2 divisions per integer compare, 52k calls per save (~25ms)
 - [x] Fix held locally: memcmp compares, 128 power of 2 buffer with mask, division free write, self compare skip (1 file, no format change, decoder untouched)
@@ -140,3 +88,55 @@ Each issue ends with a published PR, a journal entry and a roadmap update. Old i
 - Shipping a real open source contribution through maintainer review
 
 ---
+### #3441 — Ultrascan footprint does not match original game (P4 Low) ✅ Merged PR #3526
+
+- [x] Research: save 907K zip / 2.7M sav, map 128x128, strict vs minimal masks, 16-object-placement/VANILLA_FOOTPRINT_MATRIX.md + TH_ORIGINAL_ULTRASCAN.md, TH_ORIGINAL_TILES.md, Ultrascan-room-deep.md, Ultrascan-diagnosis-flow.md
+- [x] PR #3526 merged Sep 14 2026 by ARGAMX → master (commit 06b70cd, branch fix/3441-ultrascan-footprint) — closes #3441 — Reviewed tobylane, Approved TheCycoONE + ARGAMX, 5/6 checks passed
+- [x] Fix: ultrascanner.lua blocked north {-1,1},{0,1} and east {1,-1},{1,0} (south copies north, west mirrors east), kept use_position {0,-1} passable to avoid shifted draw, removed 265 preserve (app.lua:31 + object.lua:920 did nothing, old saves keep old footprint via normal save data)
+- [x] Vault: PR tracking 06-PR-TRACKING/PR-3441-vanilla-ultrascan.md updated to merged, KANBAN Done, spec/entities/ultrascanner_3441_spec.lua 65/65 busted + luacheck 0/297
+- [x] Post-merge: east side shifted image fixed by moving block to south edge, second image red crosses guided final east {1,-1},{1,0} placement
+
+### #3372 — Properly destroy entities on pickup again 🚧
+- [x] Root cause: #3304 stopped destroying on pickup (object made invisible + kept in `world.entities`), which leaked duplicates → save corruption #3376, patched by band-aid #3370 (`table_contains` guards)
+- [x] Approach selected: snapshot-and-destroy with tile reservation
+  - Capture move snapshot (`object_type`, `tile_x`, `tile_y`, `direction`, `room_ref`, slave, machine/plant state) at pickup, then `destroyEntity` (safe via #1467 deferred machinery)
+  - Reserve source footprint tiles during the place window; release on place/cancel/sell/close
+  - Recreate from snapshot on place or Esc-cancel; refund on sell
+  - Unify corridor + room-edit paths (room-edit already destroys today)
+  - Remove both `table_contains` band-aids after confirming no other dependency
+- [ ] Implement commit 1: object move snapshot/restore helpers
+- [ ] Implement commit 2: destroy on pickup with tile reservation
+- [ ] Implement commit 3: unify corridor and room-edit pickup paths
+- [ ] Implement commit 4: remove `table_contains` duplicate band-aids
+- [ ] Implement commit 5: pickup/place/cancel/sell/save tests + negative control
+- [ ] Verification matrix green (place · Esc-cancel · sell · save-mid-window · negative control)
+- [ ] PR + CI green
+
+### #2469 — Right mouse panning causes object placement glitches ⏭️
+- [ ] Reproduce headless
+- [ ] Root-cause the pan/placement interaction
+- [ ] Fix + tests + PR
+
+### #1793 — Broken Lua docs links on GitHub Pages ✅
+- [x] Root cause: LDocGen generated class and index pages only, never a page per source file, while file-tree links pointed at pages that never existed
+- [x] First theory (GitHub Pages swallowing files) tested and dropped
+- [x] Fix: LDocGen writes one page per file, listing classes and functions, with directory entries as plain text
+- [x] Verified: 503 pages, 20465 local links, zero broken
+- [x] PR #3494 merged by the maintainers — closes #1793
+
+### #1738 — Handymen do not water plants in the middle of benches (backlog) 🕳️
+- [ ] Claim after #3372 lands
+
+### #1467 — Entities table modified inside an `ipairs` loop ✅
+- [x] Root cause: `destroyEntity` mid-loop shifts the table, skipping whoever lands in the already-visited slot
+- [x] Fix: defer destruction until after the loop (`to_destroy` + `_flushDestroyedEntities`, `current_tick_entity` marker)
+- [x] Old-savegame compat: `entities_to_destroy` initialized in `afterLoad` for `old < 265`
+- [x] Plant branch hole: end-of-day loop never set the iterating marker for plants
+- [x] Headless repro: three dummies, the middle destroys the first mid-tick; fails if the third is skipped
+- [x] Negative control: fix disabled → `SMOKE FAIL: dummy C was skipped (the #1467 bug)`
+- [x] Full game data matrix: offscreen 3/3 · xvfb 3/3 · demo control 2/2
+- [x] 84/84 unit tests green, luacheck clean
+- [x] CI green: LuaJIT, Lua 5.1, Lua 5.5, Windows
+- [x] Clean pattern: queue invariant via constructor + afterLoad (v265)
+- [x] PR #3504 merged 2026-09-06 (d98fbe80) — closes #1467
+
