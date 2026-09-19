@@ -99,6 +99,7 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [x] Fix held locally: memcmp compares, 128 power of 2 buffer with mask, division free write, self compare skip (1 file, no format change, decoder untouched)
 - [x] Verified: harness 23.4ms to 2.7ms, real save 280ms to 227ms, 36 level maps + developed hospital round trip clean, old saves load
 - [x] Posted findings on the issue (2026-09-19), disclosed ±4% size noise by layout
+- [x] Matrix green 2026-09-19: sweep winner 128, 36 fresh maps plus developed hospital, findings posted on the issue
 - [ ] Re-fork, open PR
 - [ ] Maintainer call: drop RLE for new saves post #3534 (RLE expands random data ~2%)
 

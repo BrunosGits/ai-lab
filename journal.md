@@ -26,11 +26,30 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 | Project | Sessions | Total Time |
 |---------|----------|------------|
 | AI Lab | 18 | 20:56 |
-| CorsixTH | 9 | 12:03 |
+| CorsixTH | 10 | 13:21 |
 | OpenSearch | 7 | 10:39 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **35** | **46:08** |
+| **Total** | **36** | **47:26** |
 
+### [CorsixTH] 2026-09-19: RLE encoder study to green matrix
+
+**Mood:** focused and satisfied, glad the numbers held up on real data
+
+**Story:** Tonight was all about issue 3545, the slow run length encoder on save. I had a local patch that made the encoder about 8x faster in a test harness, but a harness is not the game, so the session went into proving it on real maps.
+
+First I swept the buffer size, 128 through 1024, timing each plus checking output size and round trip. 128 won on speed with the same output size as baseline everywhere. 64 looked quick but blew up output by 43%. Rejected on the spot.
+
+Then the real map matrix. I pulled the full game data onto the test box, built the game clean, and wrote a small driver that starts a level and saves right away. 36 fresh maps across levels 1 to 12 on easy full and hard, both the stock binary and the patched one, then load back checks in the stock binary. Every map loaded and saved fine, roughly 40% faster on fresh maps, sizes within 4% either way with no pattern. The developed hospital save went from about 280 to 227 milliseconds.
+
+I also hit two funny bugs in my own test setup along the way. My helper script name was 13 characters which broke the bootstrap path math that expects 12, and my first test input broke the multiple of record rule the format needs. Both were mine, not the game.
+
+I posted the findings on the issue and updated the vault with the study notes, the tracking file, and the roadmap. The patch itself is still held locally, one file, ready for a pull request next.
+
+**What I learned:** Test on real data before claiming anything, because the harness hid a size regression that only real maps showed. And small buffers compress worse past a point, there is a real cliff between 64 and 128.
+
+**Feelings / notes:** Long night of watching progress logs, but the matrix coming back green on all 36 maps felt great. A little nervous about the 4% size noise, so I disclosed it plainly in the issue comment.
+
+**Did:** buffer sweep across 5 sizes and picked 128, downloaded full game data and pointed the test config at it, built stock and patched game binaries clean, ran 36 fresh level maps through both plus load back checks, ran the developed hospital save through both, posted findings on issue 3545, updated vault tracking note and roadmap and kanban
 ### [OpenSearch] 2026-09-17: Flaky PR verified green on the VPS
 
 **Mood:** determined, then a bit relieved after the long env fight
