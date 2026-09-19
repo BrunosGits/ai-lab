@@ -19,5 +19,11 @@ Same command. Result: 1 passed.
 ## Not run (out of scope)
 - tests/community/trino/test_trino.py: needs trinodb/trino image pull (heavy) + trino client lib; exercises a path that already used get_exposed_port directly, so unaffected by this change.
 
+## Deep verification 2026-09-17 (docker restarted, trinodb/trino:451 pulled)
+- tests/community/trino/test_trino.py (existing, real container + trino client): 1 passed in 22s.
+- Exact issue repro via fixed get_connection_url(): URL trino://test@localhost:32772 (mapped port, not 8080); sqlalchemy select 1 returned [(1,)] - URL-CONNECT-OK.
+- Ephemeral deps via uv run --with (trino, sqlalchemy); project files untouched.
+- Cost: trino image 2.49GB, disk now 78pct / 8.5G free.
+
 ## Summary
 One-line fix verified at contract level; lint clean; no regressions possible in paths that do not call get_connection_url.

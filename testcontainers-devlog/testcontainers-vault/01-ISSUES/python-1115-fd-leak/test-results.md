@@ -25,5 +25,9 @@ Same command. Result: 3 passed.
 - Docker-based integration tests (test_wait_strategies_integration.py): unit path fully covers the change; container path untouched.
 - The literal issue MRE (typesense image): heavy pull avoided; live 127.0.0.1 503-server test covers the same urlopen-to-HTTPError path.
 
+## Deep verification 2026-09-17 (docker restarted)
+- tests/core/test_wait_strategies_integration.py: 4 passed (real hello-world/alpine containers + compose waits, ryuk 0.8.1)
+- No regressions at container level.
+
 ## Summary
 Fix verified: contract test gates close() on both outcomes, behavior preserved, lint clean.
