@@ -184,7 +184,8 @@
 
 | PR | Status | Topic |
 |----|--------|-------|
-| [[PR-3504-entity-destruction]] | In Review | Deferred entity destruction, #1467 fix |
+| [[PR-3504-entity-destruction]] | Merged | Deferred entity destruction, #1467 fix |
+| [[PR-3545-rle-encoder]] | Studying | RLE save encoder perf, #3545 |
 | [[PR-3494-docs-links]] | Merged | Broken Lua docs links, LDocGen |
 | [[PR-3372-pickup-destroy]] | Backlog | Entity destruction on pickup |
 | [[PR-2469-mouse-panning]] | Backlog | Right-click panning + object placement |

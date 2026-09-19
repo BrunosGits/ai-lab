@@ -94,6 +94,14 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 ### #1738 — Handymen do not water plants in the middle of benches (backlog) 🕳️
 - [ ] Claim after #3372 lands
 
+### #3545 — Run length encoder implementation is very expensive 🔬
+- [x] Root cause: `are_ranges_equal` does 2 divisions per integer compare, 52k calls per save (~25ms)
+- [x] Fix held locally: memcmp compares, 128 power of 2 buffer with mask, division free write, self compare skip (1 file, no format change, decoder untouched)
+- [x] Verified: harness 23.4ms to 2.7ms, real save 280ms to 227ms, 36 level maps + developed hospital round trip clean, old saves load
+- [x] Posted findings on the issue (2026-09-19), disclosed ±4% size noise by layout
+- [ ] Re-fork, open PR
+- [ ] Maintainer call: drop RLE for new saves post #3534 (RLE expands random data ~2%)
+
 ---
 
 ## 🧪 Testing & Validation
