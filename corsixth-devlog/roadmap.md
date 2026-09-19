@@ -52,42 +52,6 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [ ] Maintainer call: drop RLE for new saves post #3534 (RLE expands random data ~2%)
 
 ---
-
-## 🧪 Testing & Validation
-
-| Check | Result |
-|---|---|
-| Unit tests (busted) | 86/86 green |
-| Lint (luacheck) | 297 files, 0 warnings |
-| Demo smoke | 3/3 green |
-| Offscreen (SDL_VIDEODRIVER) | 3/3 green |
-| xvfb | 3/3 green |
-| Demo control | 2/2 green |
-| Negative control (guard disabled) | RED with exact bug message |
-| Headless (no video device) | RED — SDL requires a video device, expected |
-
-**Lesson:** a timeout with no output is usually pipe buffering, not a hang. Add heartbeats, and always check the tick loop is actually running — intro movies, paused states and menu loops silently skip it.
-
----
-
-## 🔄 Contribution Loop (the habit)
-
-```
-Fork → Reproduce → Root-cause → Fix → Test (+ negative control) → PR → CI green → Journal → Update ROADMAP
-```
-
-Each issue ends with a published PR, a journal entry and a roadmap update. Old issues are worth claiming fast; the ones left are the deep ones.
-
----
-
-## 📈 Skills to build along the way
-
-- Reading Lua game logic and the Lua/C++ boundary
-- Writing Lua unit tests in the busted style used by CorsixTH
-- Running a CI-like loop on a headless server (heartbeat + negative control)
-- Shipping a real open source contribution through maintainer review
-
----
 ### #3441 — Ultrascan footprint does not match original game (P4 Low) ✅ Merged PR #3526
 
 - [x] Research: save 907K zip / 2.7M sav, map 128x128, strict vs minimal masks, 16-object-placement/VANILLA_FOOTPRINT_MATRIX.md + TH_ORIGINAL_ULTRASCAN.md, TH_ORIGINAL_TILES.md, Ultrascan-room-deep.md, Ultrascan-diagnosis-flow.md
@@ -140,3 +104,39 @@ Each issue ends with a published PR, a journal entry and a roadmap update. Old i
 - [x] Clean pattern: queue invariant via constructor + afterLoad (v265)
 - [x] PR #3504 merged 2026-09-06 (d98fbe80) — closes #1467
 
+
+---
+
+## 🧪 Testing & Validation
+
+| Check | Result |
+|---|---|
+| Unit tests (busted) | 86/86 green |
+| Lint (luacheck) | 297 files, 0 warnings |
+| Demo smoke | 3/3 green |
+| Offscreen (SDL_VIDEODRIVER) | 3/3 green |
+| xvfb | 3/3 green |
+| Demo control | 2/2 green |
+| Negative control (guard disabled) | RED with exact bug message |
+| Headless (no video device) | RED — SDL requires a video device, expected |
+
+**Lesson:** a timeout with no output is usually pipe buffering, not a hang. Add heartbeats, and always check the tick loop is actually running — intro movies, paused states and menu loops silently skip it.
+
+---
+
+## 🔄 Contribution Loop (the habit)
+
+```
+Fork → Reproduce → Root-cause → Fix → Test (+ negative control) → PR → CI green → Journal → Update ROADMAP
+```
+
+Each issue ends with a published PR, a journal entry and a roadmap update. Old issues are worth claiming fast; the ones left are the deep ones.
+
+---
+
+## 📈 Skills to build along the way
+
+- Reading Lua game logic and the Lua/C++ boundary
+- Writing Lua unit tests in the busted style used by CorsixTH
+- Running a CI-like loop on a headless server (heartbeat + negative control)
+- Shipping a real open source contribution through maintainer review
