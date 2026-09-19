@@ -31,7 +31,7 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 | sepia-be-gone | 1 | 2:30 |
 | **Total** | **36** | **47:26** |
 
-### [CorsixTH] 2026-09-19: RLE encoder study to green matrix
+### [CorsixTH] 2026-09-18: RLE encoder study to green matrix
 
 **Mood:** focused and satisfied, glad the numbers held up on real data
 
