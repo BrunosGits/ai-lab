@@ -29,8 +29,26 @@ NO_SENSE: Remove any sensitive info if found. This file is public on GitHub.
 | CorsixTH | 10 | 13:21 |
 | OpenSearch | 7 | 10:39 |
 | sepia-be-gone | 1 | 2:30 |
-| **Total** | **36** | **47:26** |
+| Testcontainers | 1 | 0:40 |
+| **Total** | **37** | **48:06** |
 
+### [Testcontainers] 2026-09-18: Proving both Python fixes on live containers
+
+**Mood:** confident going in, relieved when the Trino URL actually connected
+
+**Story:** Tonight I stopped trusting mocks and proved both Python fixes against real containers. First I woke docker back up after the bare OS sweep, then ran the wait strategy integration suite on the file descriptor leak branch. Four tests passed on real hello world and alpine containers plus compose waits, so the close fix holds outside unit land.
+
+Then the Trino one. I pulled the Trino 451 image, which cost about two and a half gigs of disk, and ran the existing community test. It passed in twenty two seconds. But that test sidesteps the buggy method, so I wrote a small script that connects through get_connection_url itself, the exact repro from the issue. The URL came back with a mapped port in the thirty two thousand range instead of eighty eighty, and select one returned one row. That felt like the real proof.
+
+I also lost some time fighting the shell on quoting. The transport kept eating my double quotes, so I rebuilt the script with printf and verified it byte by byte before running it. Annoying detour, useful trick to remember.
+
+I recorded both results in the vault and pushed. Four pull requests are now open across Java, Rust, and Python, all waiting on reviewers or CI. The box sits at seventy eight percent disk with docker running again.
+
+**What I learned:** A mock test proves the contract and a live container proves the point, you want both before calling a fix done. And when the shell eats your quotes, check the bytes instead of guessing.
+
+**Feelings / notes:** Relieved the Trino URL connected on the first try. A little uneasy about disk at seventy eight percent with that big image sitting there, might drop it once reviewers are happy.
+
+**Did:** restarted docker and confirmed the daemon healthy, ran four integration tests green, pulled the Trino image and ran the community test green, proved the fixed URL end to end with a live query, updated both test result notes and pushed the vault
 ### [CorsixTH] 2026-09-18: RLE encoder study to green matrix
 
 **Mood:** focused and satisfied, glad the numbers held up on real data
