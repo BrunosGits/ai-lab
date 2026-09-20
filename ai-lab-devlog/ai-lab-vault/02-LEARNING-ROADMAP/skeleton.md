@@ -1,6 +1,6 @@
 # Learning Roadmap
 
-> The 6-month study plan (Month 1–6). Master plan lives in `../roadmap.md`.
+> The 6-month study plan (Month 1–6). Master plan lives in .
 > Each month ends with a PUBLISH step (Space/repo/journal/roadmap update).
 
 ## Progress
@@ -18,7 +18,8 @@
 
 - [[02-LEARNING-ROADMAP/month1-transformers-datasets]] — Month 1: Transformers + Datasets study
 - [[02-LEARNING-ROADMAP/month2-agent]] — Month 2: Code Agent + PythonInterpreterTool + DatasetTool (gpt-oss-20b via Groq, 95%)
-- [[99-BACKBURN/skeleton]] — Backburn: CubeSandbox, PDFCraft, mimic parked for later
+- [[02-LEARNING-ROADMAP/jev-evaluation]] — JEV System One evaluation on Month 2 dataset (3 tests, /bin/zsh.0013, production-ready)
+- [[99-BACKBURN/skeleton]] — Backburn: CubeSandbox, PDFCraft, mimic, typesafe-jev parked for later
 
 ## Related
 
