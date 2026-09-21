@@ -76,6 +76,14 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [ ] Verification matrix green (place · Esc-cancel · sell · save-mid-window · negative control)
 - [ ] PR + CI green
 
+### #3331 — Humanoids can walk through walls (studying, not claimed) 🔬
+- [x] Study: read #3331 + #3340 (merged placement ban) + #3382 (recalc trigger) + #3404 (avoid flag initiative)
+- [x] Found most of the fix already in master: unconditional refuse 218a9006, avoid_tile flag plus cost, #3340 ban, edit_room flag restore
+- [x] Headless matrix on current master: bench VIP escapes covered tile with no wall punch, blueprint nurses stand on covered tiles, toilet save pre setup, control clean
+- [x] Adjacent latent find: VIP without door animations routed through fracture_clinic door errors at walk.lua:347 near tick 550 (needs clean repro before claiming)
+- [x] Open hole: walk.lua recalc only fires when current tile is passable, so wall ahead while standing covered walks the stale path
+- [x] Proposed solution: 4 line Lua change (not_passable drops the here passable requirement, always repath on obstacle), stuck case covered by existing idle plus finish in action_walk_start
+- [ ] Implement, trap test, matrix rerun, re-fork, PR
 ### #2469 — Right mouse panning causes object placement glitches ⏭️
 - [ ] Reproduce headless
 - [ ] Root-cause the pan/placement interaction

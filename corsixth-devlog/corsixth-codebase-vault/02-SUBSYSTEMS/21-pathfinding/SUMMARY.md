@@ -394,3 +394,4 @@ lua_pop(L, 1);
 - [[21-pathfinding/CHECKLIST]]
 - [[21-pathfinding/MAP]]
 - [[21-pathfinding/SCAFFOLD]]
+- [[3331-WALL-WALKING-STUDY]] — Wall walking study (#3331 plus #3340, #3382, #3404), open hole in walk.lua recalc gate
