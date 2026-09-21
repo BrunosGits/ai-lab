@@ -55,6 +55,42 @@ wall ahead walks the stale path straight through it.
 Full interactive repro of 3382 and 3404 needs UI build steps
 (place blueprint, confirm, unpause). Left for the fix phase.
 
+## Spark track test results (2026-09-21, branch fix/3331-walk-gate, uncommitted)
+
+Implemented the proposed 4 line Lua change on a master based branch
+(walk.lua only, luacheck 0 warnings 0 errors with repo config).
+Temporary WALK_REPATH prints proved the new branch fires exactly in
+the covered plus wall ahead case (1 firing in 100 ticks), then removed.
+Same scenario on pristine Lua prints 3 walk onto blocked attempts.
+
+- Blueprint drop test (cover 3x3 mid walk, 3441.sav Doctor): 0 wall
+  entries in 100 and 400 tick soaks, run completes, no hang.
+- VIP bench escape rerun: same legal escape as baseline, 0 new
+  violations, 500 ticks, no door crash this time.
+- 3382 nurses rerun: identical to baseline (40 stationary on covered
+  samples, no crash). 3404 rerun: 0 bad, clean.
+- Residual risk stands: a stuck humanoid repaths every tick (one A
+  star each). Bounded and rare, tick counter guard possible.
+
+## Failed lane coverage (2026-09-21, review plus test-writer subagents
+unavailable in API sessions, covered manually)
+
+Review lane (maintainer style): no blockers. Comments reference
+(#3331) inline which matches the accepted GH number pattern from
+PR 3526 review. Minimality holds, trimmed plus must_happen plus
+door branch preserved, VIP crash proven independent (data issue:
+VIP and others lack door anims). Possible asks: explain the one
+unreproduced 22 minute stall in the PR body for transparency.
+
+Test lane: no walk action specs exist in Luatest (only entity
+creation specs like humanoid_spec, 4 tests). The gate lives in a
+timer driven closure needing a full world plus map, so a busted
+unit test would be mock scaffolding with little value and no
+precedent. Headless traces (bench escape, blueprint drop,
+VIP regression, nurse parity, full surround trap, soaks) are the
+de facto verification for this area. Recommend citing them in
+the PR body instead of a committed spec.
+
 ## Outreach (2026-09-21)
 
 Posted intent plus direction question on #3331
