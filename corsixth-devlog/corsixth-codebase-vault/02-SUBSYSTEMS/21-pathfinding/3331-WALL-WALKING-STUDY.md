@@ -55,6 +55,13 @@ wall ahead walks the stale path straight through it.
 Full interactive repro of 3382 and 3404 needs UI build steps
 (place blueprint, confirm, unpause). Left for the fix phase.
 
+## Outreach (2026-09-21)
+
+Posted intent plus direction question on #3331
+(issuecomment-5766825188), asking Alberth and ARGAMX whether the
+walk.lua recalc gate or the pathfinder side is the better place.
+Waiting on reply before implementing. No fix code written.
+
 ## Adjacent latent find (not claimed)
 
 Near tick 550 of the save 3 trace, the VIP routed through the
