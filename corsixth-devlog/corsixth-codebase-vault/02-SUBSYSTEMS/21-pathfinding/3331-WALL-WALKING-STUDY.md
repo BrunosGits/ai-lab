@@ -91,6 +91,16 @@ VIP regression, nurse parity, full surround trap, soaks) are the
 de facto verification for this area. Recommend citing them in
 the PR body instead of a committed spec.
 
+## Final verdicts (2026-09-22, dual model plus 3 reviewer lanes)
+
+Spark plus Nemotron plus explore plus fixer tracks, unanimous SHIP
+(the review and test-writer subagent types cannot run in API
+sessions, both lanes covered manually instead). Truth table,
+stuck trace, storm cost (surrounded failure is O(1), no guard
+needed), lint parity, and full matrix all green. Two latent C++
+finds (object_visitor destination, idle promote order) filed as
+out of scope, not bundled.
+
 ## Outreach (2026-09-21)
 
 Posted intent plus direction question on #3331

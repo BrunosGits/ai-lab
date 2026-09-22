@@ -113,6 +113,14 @@
       "x": 1330,
       "y": 250,
       "group": "col-done"
+    },
+    {
+      "id": "card-3331",
+      "type": "file",
+      "file": "03-PR-TRACKING/PR-3331-wall-walking.md",
+      "x": 1010,
+      "y": 50,
+      "group": "col-review"
     }
   ],
   "edges": []
