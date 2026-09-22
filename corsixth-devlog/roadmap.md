@@ -83,7 +83,10 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [x] Adjacent latent find: VIP without door animations routed through fracture_clinic door errors at walk.lua:347 near tick 550 (needs clean repro before claiming)
 - [x] Open hole: walk.lua recalc only fires when current tile is passable, so wall ahead while standing covered walks the stale path
 - [x] Proposed solution: 4 line Lua change (not_passable drops the here passable requirement, always repath on obstacle), stuck case covered by existing idle plus finish in action_walk_start
-- [ ] Implement, trap test, matrix rerun, re-fork, PR
+- [x] Implemented on branch fix/3331-walk-gate (walk.lua plus 12 minus 12), probe proved the branch fires, baseline walks on, matrix green
+- [x] Maintainer reply: ARGAMX points at open PR #3489 (connectivity check, stalled waiting on #3465 C++ helper) as already in progress
+- [x] Analysis: #3489 keeps the covered stance gate, so the bench case stays open. Ours is the complementary half, cheaper at runtime (no per step distance check)
+- [x] Draft PR #3556 opened, reply posted on #3331 offering rebase onto #3489 or standalone, awaiting direction
 ### #2469 — Right mouse panning causes object placement glitches ⏭️
 - [ ] Reproduce headless
 - [ ] Root-cause the pan/placement interaction
