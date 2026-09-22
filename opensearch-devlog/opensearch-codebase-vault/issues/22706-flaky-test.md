@@ -35,6 +35,10 @@ The test's failure injector was injecting a raw `TaskCancelledException`. On a s
 - Changed the failure injector from `TaskCancelledException` to `StreamException(StreamErrorCode.CANCELLED, "failure inject")`
 - Verified that imports were already present (`StreamErrorCode` and `StreamException` both imported at lines 44-45)
 - Verified constructor validity and expected behavior in test
+- Split PR #22750 to carry only this fix; rebased onto `f4918fa96`, head `2129b28`, `MERGEABLE`
+- Jenkins 84880 failure on rebased head investigated: env OOM on Rust native link, not a test failure
+- Ran full sandbox `internalClusterTest` locally: 8 tests, 0 failures, incl. the flaky test
+- Posted results on PR + issue, pinned reporter @rayshrey, pinged maintainers + @navneet1v
 - PR: [[22750-flaky-test-fix]]
 
 ## Related PRs

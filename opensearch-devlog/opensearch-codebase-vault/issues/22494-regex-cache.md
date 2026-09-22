@@ -31,7 +31,7 @@ Every `regexp` query pays full automaton compilation cost even when the same pat
 
 ## Author PR
 
-- **PR #22907** by @ZiwenWan — `zw/regexp-automaton-cache`, head `4d6f6013` (2026-09-01), **draft**, `MERGEABLE`, all CI green (`gradle-check` pass, `Validate` pass, `codecov/patch` pass). Resolves #22494.
+- **PR #22907** by @ZiwenWan — `zw/regexp-automaton-cache`, head `107fdbf` (2026-09-20), **draft**, `MERGEABLE`, all CI green (GH `gradle-check` pass, Jenkins SUCCESS). Resolves #22494.
 - Design: process-wide LRU over `Cache<K,V>` / `CacheBuilder`, RAM-bounded via `CompiledAutomaton.ramBytesUsed()` (not entry-count), keyed on `(pattern, syntaxFlags, matchFlags, determinizeWorkLimit)`, `AtomicReference<Cache>` swap for resize/disable, `LongAdder` accumulators monotonic across swaps, warm resize (LRU-first copy preserves hot entries). Off by default, two dynamic node-scoped settings.
 
 ### Components in PR
@@ -41,34 +41,31 @@ Every `regexp` query pays full automaton compilation cost even when the same pat
 - 5 call sites updated: `StringFieldType.regexpQuery()`, `RegexpQueryBuilder.doToQuery()` (fallback when no `MappedFieldType`), `KeywordFieldMapper` (doc-values path, uses `rewriteForDocValue`), `ConstantKeywordFieldMapper` (single-value `MatchAll/NoDocs` path), `SemanticVersionFieldMapper`.
 - Tests: `RegexpAutomatonCacheTests` (18 tests, concurrent load, eviction, metrics, resize, provider bypass).
 
-## Local Verification (worktree /tmp/pr22907-review, Lucene 10.5.0)
+## Local Verification (probed `a3566bab`, re-verified `bb8b7d8` by inspection)
 
-Gaps reproduced without posting:
+Gaps found, all fixed by author in `bb8b7d8` → `107fdbf`:
 
-- **Gap 2 — ConstantKeyword NPE (HIGH, reproduced):** `".*"` → `type=ALL, runAutomaton=null`, `""` → `SINGLE/null`, `".*.*"` → `ALL/null` (vs `a*` → `NORMAL/non-null`). Current `ConstantKeywordFieldMapper.java:208` `compiled.runAutomaton.run(...)` NPEs when `type != NORMAL`. Previous code used `new ByteRunAutomaton(automaton)` which never nulled. Fix: `switch(compiled.type)` → `ALL→MatchAllDocs`, `NONE→MatchNoDocs`, `SINGLE→term.equals`, `NORMAL→runAutomaton.run`.
+- **Gap 2 — ConstantKeyword NPE (HIGH, reproduced, fixed):** `".*"` → `type=ALL, runAutomaton=null`. Fixed via `switch(compiled.type)` → `ALL→MatchAllDocs`, `NONE→MatchNoDocs`, `SINGLE→term.equals`, `runAutomaton.run` only in `default`.
 
-- **Gap 1 — Exception wrapping (MEDIUM, reproduced):** `"(.*a){20}"` with `limit=10` → direct Lucene throws `TooComplexToDeterminizeException`, cache throws `IllegalArgumentException` at `RegexpAutomatonCache.java:229` (`throw new IllegalArgumentException(cause.getMessage(), cause)`). Local probes `CacheGapsPrepareTests`: 3/6 failed as expected (`testTooComplexNotWrappedAsIllegalArgument`, `testTooComplexWithDisabledCacheThrowsSameType`, `testHighLimitCachedDoesNotMaskLowLimitTooComplex`). Breaks callers expecting `TooComplex` (`QueryStringQueryBuilderTests:800,809,832`, `TextFieldTypeTests:284`). Preserving original `TooComplex` keeps contract with non-cached `RegexpQuery` path.
+- **Gap 1 — Exception wrapping (MEDIUM, reproduced, fixed):** `"(.*a){20}"` with `limit=10` → cache threw `IllegalArgumentException` instead of Lucene's `TooComplexToDeterminizeException`. Fixed: `TooComplex` now propagates unwrapped.
 
-- **Gap 3 — desterminize limit in key (verified correct):** `Key` includes `determinizeWorkLimit` (hash includes all four fields). Same pattern with `high=10000` vs `low=10` are distinct entries (`count=2, assertNotSame`), so cached high does not mask low-limit `TooComplex`. Correct per Javadoc, intentional hit-rate trade-off.
+- **Gap 3 — determinize limit in key (verified correct):** `Key` includes `determinizeWorkLimit`; high-limit cached entries do not mask low-limit `TooComplex`. Correct per Javadoc.
 
-- **CompiledAutomaton flags (verified):** PR `new CompiledAutomaton(det, false, true, false)` matches `AutomatonQuery` `new CompiledAutomaton(automaton, false, true, isBinary)` where `isBinary=false` for text/keyword fields (javap verified: `iconst_0, iconst_1, iload_3`).
+- **CompiledAutomaton flags (verified):** PR `new CompiledAutomaton(det, false, true, false)` matches `AutomatonQuery` flags for text/keyword fields (`isBinary=false`).
 
-- **Settings wiring (verified):** `ClusterSettings.java:889` + `SearchService.java:598-606` both registered and consumer-wired. `CACHE_ENABLED_SETTING.isDynamic()` true. Gradlew `:server:compileTestJava` and standalone `javac` both success.
+- **Settings wiring (verified):** both settings registered in `ClusterSettings` and consumer-wired in `SearchService`, dynamic.
 
-Local snippets kept at `/tmp/gap-snippets-*.java` (6 tests), compiled `BUILD SUCCESSFUL` in 19s, draft comment at `/tmp/draft-pr22907-comment.md` (61 lines, not posted).
+Local probe files (`/tmp/gap-snippets-*`, draft comment) deleted during VPS disk cleanup; findings live on in the posted review.
 
 ## What Was Done (us)
 
 - Monitored issue since 2026-08-13, mapped code paths, coordinated with author (issue comments 2026-08-13, 2026-09-01).
 - Pulled PR #22907 head, verified Lucene flags via `javap` on `lucene-core-10.5.0.jar`, checked `ClusterSettings`/`SearchService` wiring, audited all 5 call sites and `PrecompiledAutomatonQuery` parity with `AutomatonQuery`.
-- Ran 3 gap probes locally (trivial-pattern NPE, TooComplex wrapping, distinct-limit keys) via standalone `TestGaps.java` and `CacheGapsPrepareTests` (6 tests, 3 failed as expected pre-fix). Prepared fix snippets for all three gaps, draft comment not posted.
+- Ran 3 gap probes locally plus 9 targeted test shards on `a3566bab` (all green); re-verified `bb8b7d8` by code inspection (blocker lines identical, Lucene 10.5.1 both heads). Posted full review 2026-09-18, acknowledgement 2026-09-22 after author fixed everything. Track closed from our side.
 
 ## Remaining For Author Before ready_for_review
 
-- Fix NPE guard in `ConstantKeywordFieldMapper`
-- Preserve `TooComplexToDeterminizeException` type in `RegexpAutomatonCache.getCompiledAutomaton`
-- Optional: `synchronized` on `resize`/`setEnabled` for stats monotonicity (low priority, stats-only)
-- No CHANGELOG needed since 3.6 (release notes moved); docs for new settings can follow as `documentation-website` PR.
+All done (NPE switch, `TooComplex` passthrough, stats accumulators). Left: undraft + maintainer review. No CHANGELOG needed since 3.6; docs for new settings can follow as `documentation-website` PR.
 
 ## References
 
@@ -76,4 +73,3 @@ Local snippets kept at `/tmp/gap-snippets-*.java` (6 tests), compiled `BUILD SUC
 - [Issue comment 2026-09-03 — author confirms 5 call sites, wildcards scoped out](https://github.com/opensearch-project/OpenSearch/issues/22494#issuecomment-5521489666)
 - [GitHub PR #22907](https://github.com/opensearch-project/OpenSearch/pull/22907)
 - [Roadmap entry](../ROADMAP.md)
-- Local: `/tmp/pr22907-review` worktree, `/tmp/gap-snippets-*`, `/tmp/draft-pr22907-comment.md`

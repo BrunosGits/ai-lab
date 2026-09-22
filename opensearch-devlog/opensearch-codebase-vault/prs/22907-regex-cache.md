@@ -4,10 +4,10 @@ number: 22907
 title: Cache compiled regex automatons across queries
 status: draft
 issue: 22494
-ci: green (gradle-check pass, Validate pass, codecov/patch pass, DCO pass)
-review: draft — local verification done, not posted
+ci: green (GH gradle-check pass, Jenkins SUCCESS, Validate, codecov, DCO)
+review: posted — all 3 findings fixed by author, acknowledgement posted, track closed
 base: main (3.9.0 / Lucene 10.5.1)
-head: 4d6f6013 (zw/regexp-automaton-cache, 2026-09-01)
+head: 107fdbf (zw/regexp-automaton-cache, 2026-09-20)
 tags: [opensearch, pr, regex, cache, performance, lucene]
 ---
 
@@ -32,22 +32,20 @@ Process-wide LRU cache for `CompiledAutomaton` objects keyed on `(pattern, synta
 
 ## CI Status
 
-All green on head `4d6f6013`: `gradle-check` pass (61m), `Validate` pass, `Code-Diff-Analyzer/Reviewer` pass, `codecov/patch` pass, `DCO` pass. `MERGEABLE`, state `OPEN`, `isDraft=true`, no review requests.
+All green on head `107fdbf`: GH `gradle-check` pass (~60m), Jenkins `gradle-check/85159` SUCCESS (previous head `bb8b7d8` was UNSTABLE = flakes passed on retry; `a3566bab` FAILED on Jenkins 84790). `Validate`, `Code-Diff-Analyzer/Reviewer`, `codecov/patch`, `DCO` pass. `MERGEABLE`, state `OPEN`, `isDraft=true`, `REVIEW_REQUIRED`.
 
 ## Local Verification
 
-Worktree `/tmp/pr22907-review`, Lucene 10.5.0 jar `javap` checks, 3 gap probes via `TestGaps.java` + `CacheGapsPrepareTests.java` (6 tests, 3 expected failures pre-fix, compile `BUILD SUCCESSFUL` in 19s). Details in [[22494-regex-cache]].
+Probed head `a3566bab` in worktree `/tmp/pr22907-failing` (deleted during VPS disk cleanup): 9 targeted shards all `BUILD SUCCESSFUL`; 3 gap probes reproduced pre-fix (NPE on `".*"`, `TooComplex` wrap with `"(.*a){20}"` limit 10). Re-verified `bb8b7d8` by code inspection (blocker lines identical, Lucene 10.5.1 on both heads) — re-run deemed unnecessary. Details in [[22494-regex-cache]].
 
-Gaps found:
-- **HIGH** `ConstantKeywordFieldMapper.java:208` NPE on `".*"` → `ALL/null` (reproduced)
-- **MEDIUM** `RegexpAutomatonCache.java:229` wraps `TooComplex` as `IllegalArgument` (reproduced with `"(.*a){20}"` limit 10)
-- **LOW** stats race `resize`/`setEnabled` (snapshot+swap)
-
-Fix snippets in `/tmp/gap-snippets-*.java`, draft comment at `/tmp/draft-pr22907-comment.md` (61 lines, not posted).
+Gaps found, all fixed by author in `bb8b7d8` → `107fdbf`:
+- **HIGH** `ConstantKeywordFieldMapper` NPE on `".*"` → `ALL/null` (reproduced) → fixed via `switch (compiled.type)` (ALL→match-all, NONE→match-none, SINGLE→term compare, `runAutomaton` only in `default`)
+- **MEDIUM** `RegexpAutomatonCache` wrapped `TooComplex` as `IllegalArgument` (reproduced) → fixed, now propagates `TooComplexToDeterminizeException` unwrapped
+- **LOW** stats race `resize`/`setEnabled` → fixed via `snapshotStats()` + `LongAdder` accumulators
 
 ## Review Status
 
-Draft, author iterating. Our review planned but not posted per user request. When author marks `ready_for_review`, post the two blocker comments.
+Review posted 2026-09-18 (all 3 findings + Jenkins UNSTABLE flake note), acknowledgement posted 2026-09-22 after author fixed everything in `107fdbf`. Track closed from our side; remaining: author undrafts + maintainer review.
 
 ## References
 

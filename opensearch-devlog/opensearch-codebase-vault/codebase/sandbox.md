@@ -50,6 +50,16 @@ From [[00-contributing-guide]]:
 
 Sandbox has no BWC guarantees. Wire formats can change freely between versions.
 
+## Running Sandbox ITs (learned 2026-09-17)
+
+Sandbox modules need JDK 25+ and are excluded from the build unless explicitly enabled — pass `-Dsandbox.enabled=true` **with `--no-daemon`**, otherwise a warm daemon can ignore the sysprop and the `:sandbox:*` projects stay invisible. The Rust native library (`sandbox/libs/dataformat-native`) needs `protoc` installed (`apt-get install protobuf-compiler`) or the `substrait` crate build fails.
+
+On a ≤4G RAM box the release link of `opensearch-native-lib` OOMs (`lto=true, codegen-units=1` in `[profile.release]`). Workaround that keeps the fix test-only: `CARGO_PROFILE_RELEASE_LTO=false CARGO_PROFILE_RELEASE_CODEGEN_UNITS=16 CARGO_BUILD_JOBS=1` — deps rebuild once (~70 min cold, ~9 min warm), then the link fits. Full command:
+
+```
+./gradlew --no-daemon -Dsandbox.enabled=true :sandbox:qa:analytics-engine-coordinator:internalClusterTest --tests '<FQCN>'
+```
+
 ## Related
 
 - [[00-overview]] — top-level layout

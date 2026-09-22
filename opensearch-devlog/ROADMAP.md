@@ -60,6 +60,7 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [x] PR #22749 opened, DCO fixed, CI running
 - [x] Merge conflict resolved (rebase onto latest main, kept both the codec tests and upstream's new toBuilder test in `EngineConfigTests`), `EngineConfigTests` green on the VPS
 - [x] Reviewer approved; PR #22749 now `MERGEABLE`
+- [x] Fork `main` synced to upstream `f4918fa96`
 - [ ] gradle-check green, then merge
 
 ### #22654 — MONITOR mode workload group rejections (helping) 🟡
@@ -72,23 +73,28 @@ This document is the master plan for contributing to [OpenSearch](https://github
 - [x] Author applied the test, codecov hit 80%, CI green
 - [ ] Waiting on maintainer review
 
-### #22494 — Cache compiled regex automatons (plan B) 🕳️
+### #22494 — Cache compiled regex automatons (plan B) ✅
 - [x] Author ZiwenWan pinged — production-tested PoC exists, strong latency numbers
 - [x] Code paths mapped: `RegexpQuery`, `AutomatonQuery`, `KeywordFieldMapper` + cache API
 - [x] Strategy: monitor and coordinate, do not duplicate
-- [ ] Author opens PR, review/help as needed
+- [x] Author opened PR #22907, full review posted (3 findings: ConstantKeyword NPE, TooComplex wrapping, stats race)
+- [x] Author fixed all three across `bb8b7d8` → `107fdbf`; CI green on GH + Jenkins
+- [x] Closing acknowledgement posted; track closed from our side (still draft, awaiting author undraft + maintainer review)
 
 ### #21323 — Lucene stderr warnings (watching) 👀
 - PR #21359 stalled in review — monitor only, do not duplicate
 
-### #22706 — Flaky AnalyticsQueryTaskCleanupIT test 🔵
+### #22706 — Flaky AnalyticsQueryTaskCleanupIT test 🟡
 - [x] Root caused: test injects raw `TaskCancelledException` on streaming channel, but production wraps in `StreamException(StreamErrorCode.CANCELLED)` via `toWireError`
 - [x] Streaming transport doesn't propagate non-`StreamException` errors, so failure is silently swallowed
 - [x] Fix: one line change in failure injector lambda to send `StreamException` instead of raw exception
 - [x] Commented claiming the issue with root cause analysis
 - [x] One line fix written (`StreamException` in the failure injector lambda)
-- [ ] PR #22750 currently mixes both this fix and the codec fix (#17561); split it by dropping the codec commit so #22750 carries only this fix
-- [ ] Rebase the split branch onto latest main, push via SSH, confirm #22750 turns mergeable
+- [x] Split PR #22750 (dropped codec commit) so it carries only this fix
+- [x] Rebased onto latest main (`f4918fa96`), head `2129b28`, PR `MERGEABLE`
+- [x] Jenkins 84880 failure investigated: env OOM on Rust native link (3.7G box), not a test failure; local sandbox IT run green 8/8 incl. the flaky test
+- [x] Results posted on PR + issue, reporter `@rayshrey` pinned, maintainers + `@navneet1v` pinged
+- [ ] Maintainer review + fresh gradle-check, then merge
 
 ---
 
