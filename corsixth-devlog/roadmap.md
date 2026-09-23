@@ -48,7 +48,10 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [x] Verified: harness 23.4ms to 2.7ms, real save 280ms to 227ms, 36 level maps + developed hospital round trip clean, old saves load
 - [x] Posted findings on the issue (2026-09-19), disclosed ±4% size noise by layout
 - [x] Matrix green 2026-09-19: sweep winner 128, 36 fresh maps plus developed hospital, findings posted on the issue
-- [ ] Re-fork, open PR
+- [x] Draft PR 3554 opened (no RLE for new saves, map v5 to v6, decoder kept)
+- [x] Review: lewri plus TheCycoONE say no SAVEGAME_VERSION bump without Lua afterload, bump reverted, PR is th_map.cpp only. No api bump unless asked
+- [x] TheCycoONE holding further comments, invited to post them. Staying in draft per ARGAMX process note
+- [ ] Address held comments when they land, then undraft
 - [ ] Maintainer call: drop RLE for new saves post #3534 (RLE expands random data ~2%)
 
 ---

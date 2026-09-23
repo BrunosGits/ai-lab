@@ -1,7 +1,7 @@
 ---
 pr: 3545
 title: "Run length encoder implementation is very expensive"
-status: studying
+status: draft
 branch:
 base: master
 repo: CorsixTH/CorsixTH
@@ -53,8 +53,15 @@ as `/tmp/rle_bench/rle_sw128.cpp` on the VPS.
 - Related #3534 (compress save games, open idea)
 - Vault: [[02-SUBSYSTEMS/23-map-tile/RLE-encoder-perf]]
 
+## Review (PR 3554, draft)
+- lewri: no SAVEGAME_VERSION bump without Lua afterload code.
+  TheCycoONE agrees. Bump reverted (commit ff1d8c19), PR is now
+  th_map.cpp only. No api_version bump unless a maintainer asks.
+- TheCycoONE holding further comments, invited to post. Staying
+  in draft per ARGAMX process note until review finishes.
+
 ## Next
-- Re-fork, open PR with the 128 buffer patch.
+- Address held comments when they land, then undraft.
 - Maintainer decision: drop RLE for new saves post #3534.
 
 
