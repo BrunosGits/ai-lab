@@ -31,6 +31,7 @@
 | BP-013 | String Proxy Encoding | Low | UTF-8 validation |
 | BP-014 | Config Migration Skip | High | Default initialization |
 | BP-015 | Modal Input Leak | Medium | Modal dispatch check |
+| BP-016 | Reflexive Version Bump | Medium | Bump only with migration |
 
 ---
 
@@ -100,7 +101,30 @@ function MyClass:afterLoad(old, new)
 end
 ```
 
-### ❌ Nil Passed Across Lua/C++ Boundary
+### ❌ Reflexive SAVEGAME_VERSION Bump
+
+```lua
+-- BAD: BP-016 - Bumped with no Lua migration (flagged twice in review)
+local SAVEGAME_VERSION = 267 -- No RLE for map tiles
+-- ...but no afterLoad code reads it. Reviewers ask to revert it.
+
+-- GOOD: Bump if and only if old saves need Lua side migration
+local SAVEGAME_VERSION = 265 -- Deferred entity destruction queue
+function World:afterLoad(old, new)
+    if old < 265 then
+        self.entities_to_destroy = {}
+    end
+end
+```
+
+Rule: bump SAVEGAME_VERSION if and only if old saves need Lua side
+migration code in afterLoad. Format only C++ changes gated by their
+own version int need no bump. Precedents: #1467 correct (migration
+present, merged), #3441 wrong (no-op preserve, removed on review),
+#3545 wrong (no migration, reverted on review). Verify by loading
+an old save on the patched binary with zero Lua changes.
+
+### Nil Passed Across Lua/C++ Boundary
 
 ```cpp
 // BAD: BP-007 - Crashes on nil
