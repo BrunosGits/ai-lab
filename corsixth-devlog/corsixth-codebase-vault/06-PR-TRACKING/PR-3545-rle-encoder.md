@@ -60,8 +60,24 @@ as `/tmp/rle_bench/rle_sw128.cpp` on the VPS.
 - TheCycoONE holding further comments, invited to post. Staying
   in draft per ARGAMX process note until review finishes.
 
+## Review thread two: read guards (PR 3554)
+- TheCycoONE: strip all 11 early return guards in the v6 raw
+  branch. No error propagation exists and the old RLE path did
+  not handle early stream end either.
+- Dual model verdict both times: facts confirmed. UB catch found
+  twice independently: stripped version must keep uint32_t v as 0
+  or the first failed read assigns an indeterminate value.
+- Devil check verified the load bearing assumption in code:
+  read_byte_stream sets the sticky end of input error on every
+  short read (persist_lua.cpp), so truncated loads are reported
+  failed with or without guards. Old path relied on the same.
+- Softened reply posted (no will wording): agree to strip,
+  defend v as 0 plus anchoring comment, ask for remaining
+  direction.
+
 ## Next
-- Address held comments when they land, then undraft.
+- Implement strip plus init plus comment once direction lands,
+  then undraft.
 - Maintainer decision: drop RLE for new saves post #3534.
 
 

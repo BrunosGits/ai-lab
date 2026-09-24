@@ -51,6 +51,9 @@ This document is the master plan for contributing to [CorsixTH](https://github.c
 - [x] Draft PR 3554 opened (no RLE for new saves, map v5 to v6, decoder kept)
 - [x] Review: lewri plus TheCycoONE say no SAVEGAME_VERSION bump without Lua afterload, bump reverted, PR is th_map.cpp only. No api bump unless asked
 - [x] TheCycoONE holding further comments, invited to post them. Staying in draft per ARGAMX process note
+- [x] Held comment landed: strip the 11 read guards in the v6 raw branch (no error propagation, old code did not handle early end either)
+- [x] Dual model analysis plus devil check: facts confirmed, sticky end of input error verified in persist_lua.cpp, truncated loads fail either way. UB catch: stripped version needs uint32_t v as 0 plus anchoring comment
+- [x] Softened reply posted, awaiting direction on shape
 - [ ] Address held comments when they land, then undraft
 - [ ] Maintainer call: drop RLE for new saves post #3534 (RLE expands random data ~2%)
 
