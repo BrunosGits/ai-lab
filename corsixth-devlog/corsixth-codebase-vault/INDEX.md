@@ -59,7 +59,7 @@
 
 ---
 
-## 4. Subsystems (29 Areas)
+## 4. Subsystems (33 Areas)
 
 ### Simulation Core
 
@@ -124,6 +124,15 @@
 | [[27-debugger/SUMMARY]] | Complete | ZeroBrane, debugger.lua, Eclipse, VSCode, Live Reload |
 | [[28-build/SUMMARY]] | Complete | How To Compile, CMake, vcpkg, SDL3 |
 | [[29-lua-api/SUMMARY]] | Complete | Coding Conventions, Implementing Objects |
+
+### Hospital Life
+
+| Area | Status | Summary |
+|------|--------|---------|
+| [[30-vip-inspection/SUMMARY]] | Complete | VIP tours, ratings, payouts, inspector verdicts |
+| [[31-staff-management/SUMMARY]] | Complete | Hiring, wages, rest, firing, roles |
+| [[32-machine-maintenance/SUMMARY]] | Complete | Strength, servicing, explosions, replacement |
+| [[33-disasters/SUMMARY]] | Complete | Earthquakes, boiler breakdowns |
 
 ---
 
@@ -208,7 +217,7 @@
 
 ## 10. Status Dashboard
 
-### Subsystems (29/29 Complete)
+### Subsystems (33/33 Complete)
 
 | # | Area | Status |
 |---|------|--------|
@@ -241,6 +250,10 @@
 | 27 | debugger | Complete |
 | 28 | build | Complete |
 | 29 | lua-api | Complete |
+| 30 | vip-inspection | Complete |
+| 31 | staff-management | Complete |
+| 32 | machine-maintenance | Complete |
+| 33 | disasters | Complete |
 
 ### C++ Engine (3/8 Complete)
 
@@ -286,7 +299,7 @@ Example: `CorsixTH/Lua/world.lua:1877` → [[01-entity-iteration/MAP]]
 corsixth-codebase-vault/
 ├── 00-META/              # Index, tags, templates
 ├── 01-CORE/              # Core reference documents
-├── 02-SUBSYSTEMS/        # 26 subsystem areas (4 files each)
+├── 02-SUBSYSTEMS/        # 33 subsystem areas (4 files each)
 ├── 03-CPP-ENGINE/        # C++ engine deep dives (5 files each)
 ├── 04-ARCHITECTURE/      # Cross-cutting architecture docs
 ├── 05-DATA-FORMATS/      # Data catalogs + cross-reference matrix
