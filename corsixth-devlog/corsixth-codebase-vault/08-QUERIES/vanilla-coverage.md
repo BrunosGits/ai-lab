@@ -21,9 +21,14 @@
 | computer (thob 40) | research | Computer-object-deep: Object-not-Machine; 2-tile; use_position="passable" |
 | console (thob 15) | research | Console-object-deep: Object-not-Machine; paired with 3 machines; 4-tile |
 | pharmacy_cabinet (thob 39) | research | Pharmacy-cabinet-object-deep: Nurse multi-use; layer3 flask colour; L-footprint |
-| others (43) | no | pending per VANILLA_METHOD.md waves W3-W6 |
+| projector (thob 37) | research | Projector-object-deep: Object-not-Machine; 4-tile; training required |
+| op_sink1 (thob 33) + op_sink2 (thob 34) | research | Op-sinks-object-deep: master-slave mapped; locked_to_wall; empty slave footprint |
+| surgeon_screen (thob 35) | research | Surgeon-screen-object-deep: Object-not-Machine; north-only; extensive markers |
+| x_ray_viewer (thob 29) | research | Xray-viewer-object-deep: wall-mounted; locked_to_wall; single tile need_*_side |
+| radiation_shield (thob 28) | research | Radiation-shield-object-deep: master-slave (slave file missing); console anims reused |
+| others (38) | no | pending per VANILLA_METHOD.md waves W4-W6 |
 
-Progress 1 validated + 18 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 23 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
