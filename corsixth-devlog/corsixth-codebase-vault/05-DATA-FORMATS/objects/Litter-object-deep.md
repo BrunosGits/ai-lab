@@ -29,7 +29,7 @@
 - No orientations, no `use_position`, no `handyman_position`, no slave.
 - `vomitInducing` affects VIP rating (`vip.lua:326-338` litter scan).
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): N/A — not an `Object` with footprint; no vanilla parity applicable.
 - Overall: **NO VANILLA PARITY** — thob 62 is CorsixTH invention; original TH used different system.
 - Next: verify litter anim indices vs TH original; confirm handyman cleaning behaviour matches; no footprint parity needed.

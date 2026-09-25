@@ -28,7 +28,7 @@
 - No `use_position` — purely decorative.
 - No orientations logic needed (all same empty).
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): N/A — not a footprint parity target.
 - Overall: **NO VANILLA PARITY** — thob 64 is CorsixTH assignment; original TH used different system.
 - Next: verify rat anim indices 1908-1928 vs TH original; confirm empty footprint allows building; no footprint parity needed.

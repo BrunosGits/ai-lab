@@ -30,7 +30,7 @@
 - No `use_position`, `handyman_position`, slave, crashed/smoke.
 - `ticks=true` drives phase machine; `tick()` advances phase each call.
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): N/A — no footprint parity target.
 - Overall: **NO VANILLA PARITY** — thob 63 is CorsixTH assignment; original TH helicopter was off-map event.
 - Next: verify heliport position logic vs TH original; verify emergency patient spawn sequence; no footprint parity needed.

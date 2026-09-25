@@ -31,7 +31,7 @@
 - South/north mirror, east/west mirror — only 2 orients defined.
 - Spawned by `die.lua:174-188` with `lava_hole` + `GrimReaper`; patient walks into hole via `UseObjectAction(destroy_user_after_use=true)`.
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): FAIL — no overlay, no soak. PASS(minimal): N/A.
 - Overall: UNVERIFIED (`[T+C]`, V pending).
-- Next: TH screenshot grid-overlay death hell branch both orients; `original_cells` dump vs SAM; disassemble thob-48; verify spawn logic in `die.lua`; 5000-tick soak + save/load + `busted`/`luacheck`.
+- Next: TH screenshot grid-overlay death hell branch both orients; `original_cells` dump vs SAM; verify spawn logic in `die.lua`; 5000-tick soak + save/load + `busted`/`luacheck`.

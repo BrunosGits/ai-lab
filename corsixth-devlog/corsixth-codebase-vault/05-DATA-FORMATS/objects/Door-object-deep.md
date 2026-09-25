@@ -31,7 +31,7 @@
 - `early_list` added for north doors only (affects draw order).
 - No standard footprint table — `Door` class is special-cased.
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): FAIL — no overlay, no soak. PASS(minimal): N/A.
 - Overall: UNVERIFIED (`[T+C]`, V pending).
 - Next: TH screenshot grid-overlay room doors both orients; `original_cells` dump vs SAM; verify `doorNorth`/`tallNorth` flags; disassemble thob-3; 5000-tick soak + save/load + `busted`/`luacheck`.

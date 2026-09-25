@@ -27,7 +27,7 @@
 - No `use_position` — purely decorative/wall-mounted `SideObject`.
 - `corridor_object=4` allows corridor placement.
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): FAIL — no overlay, no soak. PASS(minimal): N/A.
 - Overall: UNVERIFIED (`[T+C]`, V pending).
 - Next: TH screenshot grid-overlay corridor/wall all 4 orients; `original_cells` dump vs SAM; disassemble thob-43; runtime footprint dump; 5000-tick soak + save/load + `busted`/`luacheck`.

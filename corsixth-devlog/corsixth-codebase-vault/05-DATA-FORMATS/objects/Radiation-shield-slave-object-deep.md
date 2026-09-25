@@ -33,7 +33,7 @@
 - No `slave_position` defined on master — offset may be (0,0) or default.
 - `RadiationShield` uses console anims (794/798/806/810/814/802) for master; slave gets 2310 idle / mirror.
 
-## 5. strict/minimal + next
+## 4. strict/minimal + next
 - PASS(strict): N/A — no separate vanilla object.
 - Overall: **PARTIAL VANILLA PARITY** — master has proxy; slave is CorsixTH addition.
 - Next: verify slave creation at runtime (offset, anim 2310); confirm empty footprint allows building; verify event redirect works; no footprint parity for slave itself.
