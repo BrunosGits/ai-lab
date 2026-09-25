@@ -161,16 +161,11 @@
 | [[audio-system/SUMMARY]] | Complete | sound_archive, sound_player, SDL_mixer |
 | [[persistence-binary/SUMMARY]] | Complete | lua_persist, zigzag encoding, permanent objects |
 | [[iso-filesystem/SUMMARY]] | Complete | ISO 9660 parser for TH .iso images |
-
-### Planned
-
-| Area | Status | Summary |
-|------|--------|---------|
-| [[core-graphics/SUMMARY]] | Planned | Sprite sheets, animations, fonts, particles |
-| [[sdl2-backend/SUMMARY]] | Planned | SDL2 rendering, OpenGL, shaders |
-| [[midi-xmi/SUMMARY]] | Planned | XMI→MIDI conversion, device management |
-| [[world-to-screen/SUMMARY]] | Planned | Coordinate systems, camera, tile rendering |
-| [[entity-rendering/SUMMARY]] | Planned | Entity drawing pipeline, layers, animation states |
+| [[core-graphics/SUMMARY]] | Complete | Sprites, palettes, animations, fonts, draw pipeline |
+| [[sdl2-backend/SUMMARY]] | Complete | Event loop, timers, SDL3 renderer, bootstrap |
+| [[midi-xmi/SUMMARY]] | Complete | XMI→MIDI, FluidSynth, RtMidi, backend matrix |
+| [[world-to-screen/SUMMARY]] | Complete | Iso projection, camera, tile draw, overlays |
+| [[entity-rendering/SUMMARY]] | Complete | Anim advance, layered draw, ghost, cursor |
 
 ---
 
@@ -277,18 +272,18 @@
 | 38 | cheats-debug | Complete |
 | 39 | calendar-payday | Complete |
 
-### C++ Engine (3/8 Complete)
+### C++ Engine (8/8 Complete)
 
 | Area | Status |
 |------|--------|
 | audio-system | Complete |
 | persistence-binary | Complete |
 | iso-filesystem | Complete |
-| core-graphics | Planned |
-| sdl2-backend | Planned |
-| midi-xmi | Planned |
-| world-to-screen | Planned |
-| entity-rendering | Planned |
+| core-graphics | Complete |
+| sdl2-backend | Complete |
+| midi-xmi | Complete |
+| world-to-screen | Complete |
+| entity-rendering | Complete |
 
 ### Data Formats (5/5 Complete)
 
