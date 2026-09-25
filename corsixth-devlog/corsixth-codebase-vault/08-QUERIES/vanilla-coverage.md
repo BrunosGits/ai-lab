@@ -26,9 +26,15 @@
 | surgeon_screen (thob 35) | research | Surgeon-screen-object-deep: Object-not-Machine; north-only; extensive markers |
 | x_ray_viewer (thob 29) | research | Xray-viewer-object-deep: wall-mounted; locked_to_wall; single tile need_*_side |
 | radiation_shield (thob 28) | research | Radiation-shield-object-deep: master-slave (slave file missing); console anims reused |
-| others (38) | no | pending per VANILLA_METHOD.md waves W4-W6 |
+| desk (thob 1) | research | Desk-object-deep: Object-not-Machine; 4-orients; Doctor/Nurse anims; need_*_side all 4 |
+| cabinet (thob 2) | research | Cabinet-object-deep: Object-not-Machine; 2-tile; use_animate_from_use_position |
+| chair (thob 6) | research | Chair-object-deep: Object-not-Machine; 12 patient variants; walk_in_to_use; shareable |
+| bench (thob 4) | research | Bench-object-deep: Object-not-Machine; corridor_object; 12 variants; shareable |
+| bed (thob 8) | research | Bed-object-deep: Object-not-Machine; 5-tile; early_list north/east; render_attach array |
+| screen (thob 16) | research | Screen-object-deep: Object-not-Machine; north-only; Elvis transform; M/F undress |
+| others (32) | no | pending per VANILLA_METHOD.md waves W5-W6 |
 
-Progress 1 validated + 23 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 29 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
