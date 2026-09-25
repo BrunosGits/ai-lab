@@ -272,7 +272,7 @@
 | 38 | cheats-debug | Complete |
 | 39 | calendar-payday | Complete |
 
-### C++ Engine (8/8 Complete)
+### C++ Engine (9/9 Complete)
 
 | Area | Status |
 |------|--------|
@@ -284,6 +284,7 @@
 | midi-xmi | Complete |
 | world-to-screen | Complete |
 | entity-rendering | Complete |
+| graphics-rendering | Complete |
 
 ### Data Formats (5/5 Complete)
 
