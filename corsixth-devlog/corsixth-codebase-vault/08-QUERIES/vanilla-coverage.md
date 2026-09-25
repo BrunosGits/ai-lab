@@ -2,10 +2,19 @@
 
 | Object | Validated | Source |
 |--------|-----------|--------|
-| ultrascanner (thob 22) | research | 3441 strict/minimal masks, save 907K, deep study room/object/diagnosis |
-| others (61) | no | pending |
+| ultrascanner (thob 22) | validated-minimal | 3441 strict/minimal masks, save 907K, deep study room/object/diagnosis |
+| scanner (thob 14) | research | Scanner-object-deep: thob/cost/room match; footprint vs EXE pending |
+| x_ray (thob 27) | research | Xray-object-deep: thob/cost/room match; 5136-vs-5138 + missing 3562 open |
+| blood_machine (thob 42) | research | Blood-machine-object-deep: thob/cost/room match; only_passable open |
+| cardio (thob 13) | research | Cardio-object-deep: thob/cost/room match; 5-tile mask vs EXE pending |
+| dna_fixer (thob 23) | research | Dna-fixer-object-deep: thob/cost match; crashed 3376 TODO in source |
+| electrolyser (thob 46) | research | Electrolyser-object-deep: thob/cost/room match; strict==minimal |
+| hair_restorer (thob 25) | research | Hair-restorer-object-deep: thob/cost match; 1-wide bar, strict==minimal |
+| inflator (thob 9) | research | Inflator-object-deep: thob/cost/room match; 5/9 passable ring flagged |
+| jelly_moulder (thob 47) | research | Jelly-moulder-object-deep: thob/cost match; handyman-outside outlier |
+| others (52) | no | pending per VANILLA_METHOD.md waves W1 analyser, W2-W6 |
 
-Progress 1/62. Next: scanner, x_ray, blood_machine. Deep study adds room lifecycle and object deep.
+Progress 1 validated + 9 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
