@@ -13,3 +13,8 @@
 ## Next
 - Wait on maintainer CI approval + review for rs #969 and java #11982.
 - If rs loader problem recurs post-recovery, file GitHub Support ticket with run IDs instead of more empty commits.
+
+## Follow-up: CodeRabbit finding fixed (option B)
+- CodeRabbit review 5312398216 flagged reusable-lookup compat (pre-label containers miss the filter → 409 on fixed names). 6-model panel unanimous VALID, 3–2 for option B.
+- Implemented B in `7083bec`: `lookup_labels` (labels minus `org.testcontainers`) for `get_container`; full labels still stamped on create. New regression test fails pre-fix with exact 409, passes post-fix; all 4 reuse tests green, fmt clean.
+- Replied on the CodeRabbit thread; push retriggered CI (approval gate, already covered).

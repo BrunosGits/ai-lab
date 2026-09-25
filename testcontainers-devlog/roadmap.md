@@ -30,7 +30,7 @@ This document is the master plan for a personal Testcontainers contribution labo
 - [x] **Analyze**: Only `org.testcontainers.managed-by=testcontainers` added, missing standard `org.testcontainers=true`
 - [x] **Implement**: Add label in `ContainerRequest::from()`, update test expectation
 - [x] **Test**: `cargo +nightly fmt --all -- --check`, `cargo clippy`, `cargo test --features blocking` (85 passed)
-- [x] **PR**: Opened [#969](https://github.com/testcontainers/testcontainers-rs/pull/969) (open, mergeable; CI retriggered via empty commit, in fork approval gate, approval asked 2026-09-25)
+- [x] **PR**: Opened [#969](https://github.com/testcontainers/testcontainers-rs/pull/969) (open, mergeable; CodeRabbit reusable-lookup finding fixed via option B in `7083bec`, 4 reuse tests green, CI in fork approval gate, approval asked 2026-09-25)
 - [ ] **Review**: Address maintainer feedback
 
 ### Phase 2 — Expand to Other Languages

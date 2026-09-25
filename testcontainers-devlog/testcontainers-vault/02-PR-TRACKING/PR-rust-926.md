@@ -8,7 +8,7 @@
 - **Created**: 2026-08-25
 - **Merged**: 
 - **Verified**: 2026-09-17
-- **Live check 2026-09-25**: OPEN, MERGEABLE. CI retriggered via empty commit `ee93c27`; fresh run #1711 in `action_required` (fork approval gate). Approval ask posted; waiting on maintainer to approve CI + review.
+- **Live check 2026-09-25**: OPEN, MERGEABLE. CodeRabbit finding fixed (`7083bec`), 4 reuse tests green. CI retriggered by the push; fresh run expected in fork approval gate. Approval ask posted; waiting on maintainer to approve CI + review.
 
 ## Changes Summary
 - Added `org.testcontainers=true` label to default labels in `ContainerRequest::from()`
@@ -34,6 +34,15 @@
 - Panel caveat: retrigger lands in the fork approval gate, so maintainer approval (not retriggering) is the real unblock.
 - Empty commit `ee93c27` pushed 2026-09-25 → fresh run #1711 went straight to `action_required`, confirming the transient theory.
 - Approval ask posted: https://github.com/testcontainers/testcontainers-rs/pull/969#issuecomment-5825394979
+
+## CodeRabbit Finding + Fix B (2026-09-25)
+
+- CodeRabbit review 5312398216 (1 actionable): reusable-container lookup compat — pre-existing containers lacking `org.testcontainers=true` miss the label-filtered `get_container` lookup → fall-through create → 409 on fixed names.
+- 6-model panel: unanimous VALID (kimi-k3 empty); severity split 2 Major / 2 minor / 1 Major; fix split 3–2 for option B (exclude label from lookup) over A (fallback lookup).
+- Implemented B in `7083bec`: `AsyncRunner::start` derives `lookup_labels` = `labels` minus `org.testcontainers` for `get_container`; created containers still get the full label set.
+- Regression test `async_start_should_reuse_legacy_container_without_standard_label`: FAILS pre-fix with exact 409 Conflict (negative control), PASSES post-fix; all 4 reuse tests green; `cargo fmt` clean, clippy shows only pre-existing warning elsewhere.
+- Replied to CodeRabbit thread: https://github.com/testcontainers/testcontainers-rs/pull/969#discussion_r4100610412
+- Push retriggered CI (lands in approval gate; covered by the posted approval ask).
 
 ## Related
 - Issue: #926
