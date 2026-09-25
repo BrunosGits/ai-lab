@@ -39,9 +39,12 @@
 | door (thob 3) | research | Door-object-deep: queue logic; dynamic info; early_list north; map flags |
 | litter (thob 62) | no-parity | Litter-object-deep: Entity not Object; thob 62 CorsixTH-assigned; no base_config |
 | rathole (thob 64) | no-parity | Rathole-object-deep: empty footprint; thob 64 CorsixTH-assigned; no base_config |
-| others (25) | no | pending per VANILLA_METHOD.md waves W6 |
+| helicopter (thob 63) | no-parity | Helicopter-object-deep: off-map event; thob 63 CorsixTH-assigned; no base_config |
+| gates_to_hell (thob 48) | research | Gates-to-hell-object-deep: death-spawned; 3-tile; cost 0 |
+| radiation_shield_b | partial | Radiation-shield-slave-object-deep: implicit slave; no separate file/thob |
+| others (20) | no | pending per VANILLA_METHOD.md (count gap: 62 header vs 60 named) |
 
-Progress 1 validated + 34 research + 2 no-parity / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 35 research + 4 no-parity + 1 partial / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
