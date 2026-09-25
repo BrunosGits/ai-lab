@@ -59,7 +59,7 @@
 
 ---
 
-## 4. Subsystems (33 Areas)
+## 4. Subsystems (37 Areas)
 
 ### Simulation Core
 
@@ -133,6 +133,15 @@
 | [[31-staff-management/SUMMARY]] | Complete | Hiring, wages, rest, firing, roles |
 | [[32-machine-maintenance/SUMMARY]] | Complete | Strength, servicing, explosions, replacement |
 | [[33-disasters/SUMMARY]] | Complete | Earthquakes, boiler breakdowns |
+
+### Media, Messages & Endgame
+
+| Area | Status | Summary |
+|------|--------|---------|
+| [[34-movie-player/SUMMARY]] | Complete | FFmpeg backend, playback gates, overlays |
+| [[35-announcer-messages/SUMMARY]] | Complete | Announcer queue, fax flow, adviser |
+| [[36-endconditions-insurance/SUMMARY]] | Complete | Win/lose goals, insurance, AI stub |
+| [[37-death-handling/SUMMARY]] | Complete | Die triggers, reaper, accounting |
 
 ---
 
@@ -217,7 +226,7 @@
 
 ## 10. Status Dashboard
 
-### Subsystems (33/33 Complete)
+### Subsystems (37/37 Complete)
 
 | # | Area | Status |
 |---|------|--------|
@@ -254,6 +263,10 @@
 | 31 | staff-management | Complete |
 | 32 | machine-maintenance | Complete |
 | 33 | disasters | Complete |
+| 34 | movie-player | Complete |
+| 35 | announcer-messages | Complete |
+| 36 | endconditions-insurance | Complete |
+| 37 | death-handling | Complete |
 
 ### C++ Engine (3/8 Complete)
 
@@ -299,7 +312,7 @@ Example: `CorsixTH/Lua/world.lua:1877` → [[01-entity-iteration/MAP]]
 corsixth-codebase-vault/
 ├── 00-META/              # Index, tags, templates
 ├── 01-CORE/              # Core reference documents
-├── 02-SUBSYSTEMS/        # 33 subsystem areas (4 files each)
+├── 02-SUBSYSTEMS/        # 37 subsystem areas (4 files each)
 ├── 03-CPP-ENGINE/        # C++ engine deep dives (5 files each)
 ├── 04-ARCHITECTURE/      # Cross-cutting architecture docs
 ├── 05-DATA-FORMATS/      # Data catalogs + cross-reference matrix
