@@ -32,9 +32,16 @@
 | bench (thob 4) | research | Bench-object-deep: Object-not-Machine; corridor_object; 12 variants; shareable |
 | bed (thob 8) | research | Bed-object-deep: Object-not-Machine; 5-tile; early_list north/east; render_attach array |
 | screen (thob 16) | research | Screen-object-deep: Object-not-Machine; north-only; Elvis transform; M/F undress |
-| others (32) | no | pending per VANILLA_METHOD.md waves W5-W6 |
+| bin (thob 50) | research | Bin-object-deep: SideObject; only_side; corridor_object |
+| plant (thob 45) | research | Plant-object-deep: SideObject; 5-state watering; base_config MISSING |
+| radiator (thob 44) | research | Radiator-object-deep: SideObject; only_side; corridor_object |
+| extinguisher (thob 43) | research | Extinguisher-object-deep: SideObject; only_side; corridor_object |
+| door (thob 3) | research | Door-object-deep: queue logic; dynamic info; early_list north; map flags |
+| litter (thob 62) | no-parity | Litter-object-deep: Entity not Object; thob 62 CorsixTH-assigned; no base_config |
+| rathole (thob 64) | no-parity | Rathole-object-deep: empty footprint; thob 64 CorsixTH-assigned; no base_config |
+| others (25) | no | pending per VANILLA_METHOD.md waves W6 |
 
-Progress 1 validated + 29 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 34 research + 2 no-parity / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
