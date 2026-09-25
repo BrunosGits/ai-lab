@@ -23,14 +23,14 @@ This document is the master plan for a personal Testcontainers contribution labo
 - [x] **Analyze**: Root cause — `logger()` calls `getDockerImageName()` triggering ECR resolution even when debug disabled
 - [x] **Implement**: Change `logger()` to constant name, add `isDebugEnabled()` guards in `doStart()` and `tryStart()`
 - [x] **Test**: `./gradlew :testcontainers:compileJava` + GenericContainer/WaitStrategy tests pass
-- [x] **PR**: Opened [#11982](https://github.com/testcontainers/testcontainers-java/pull/11982) (open, mergeable, awaiting review)
+- [x] **PR**: Opened [#11982](https://github.com/testcontainers/testcontainers-java/pull/11982) (open, mergeable; CI in fork approval gate, approval asked of @kiview 2026-09-25)
 - [ ] **Review**: Address maintainer feedback
 
 #### Rust #926 — Add org.testcontainers=true Label
 - [x] **Analyze**: Only `org.testcontainers.managed-by=testcontainers` added, missing standard `org.testcontainers=true`
 - [x] **Implement**: Add label in `ContainerRequest::from()`, update test expectation
 - [x] **Test**: `cargo +nightly fmt --all -- --check`, `cargo clippy`, `cargo test --features blocking` (85 passed)
-- [x] **PR**: Opened [#969](https://github.com/testcontainers/testcontainers-rs/pull/969) (open, mergeable, awaiting review)
+- [x] **PR**: Opened [#969](https://github.com/testcontainers/testcontainers-rs/pull/969) (open, mergeable; CI retriggered via empty commit, in fork approval gate, approval asked 2026-09-25)
 - [ ] **Review**: Address maintainer feedback
 
 ### Phase 2 — Expand to Other Languages
