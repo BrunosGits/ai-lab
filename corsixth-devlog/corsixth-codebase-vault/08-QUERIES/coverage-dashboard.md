@@ -16,12 +16,12 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Test Files | 14 |
-| Total Test Cases | ~148 |
-| Lua Test Files | 10 |
-| C++ Test Files | 4 |
-| Subsystems Covered | 6 / 13 |
-| Coverage Percentage | 46% |
+| Total Test Files | 22 |
+| Total Test Cases | ~350 |
+| Lua Test Files | 16 |
+| C++ Test Files | 5 |
+| Subsystems Covered | 10 / 13 |
+| Coverage Percentage | 62% |
 
 ---
 
@@ -31,17 +31,18 @@
 |-----------|------------|--------------|----------|--------|
 | Core (class, utility) | 2 | 3 | 67% | ✅ Good |
 | Date/Time | 1 | 1 | 100% | ✅ Excellent |
-| Entities | 5 | 12 | 42% | ⚠️ Partial |
-| UI/Dialogs | 1 | 8 | 13% | ❌ Critical |
-| World/Game Loop | 0 | 3 | 0% | ❌ None |
-| Rooms | 0 | 4 | 0% | ❌ None |
-| Pathfinding | 0 | 2 | 0% | ❌ None |
+| Entities | 7 | 12 | 58% | ✅ Good |
+| UI/Dialogs | 3 | 8 | 38% | ⚠️ Partial |
+| World/Game Loop | 1 | 3 | 33% | ⚠️ Partial |
+| Rooms | 2 | 4 | 50% | ⚠️ Partial |
+| Pathfinding | 1 | 2 | 50% | ⚠️ Partial |
 | Graphics (C++) | 1 | 3 | 33% | ⚠️ Partial |
 | Audio (C++) | 0 | 4 | 0% | ❌ None |
 | Strings (C++) | 1 | 2 | 50% | ⚠️ Partial |
 | Map (C++) | 1 | 3 | 33% | ⚠️ Partial |
 | Filesystem | 0 | 2 | 0% | ❌ None |
-| Persistence | 0 | 2 | 0% | ❌ None |
+| Persistence | 1 | 2 | 50% | ⚠️ Partial |
+| Config | 1 | 1 | 100% | ✅ Excellent |
 
 ---
 
@@ -61,6 +62,13 @@
 | `Luatest/spec/entities/machine_spec.lua` | ~8 | ~120 | Machine state |
 | `Luatest/spec/entities/object_spec.lua` | ~10 | ~150 | Object lifecycle |
 | `Luatest/spec/dialogs/bottom_pannel_spec.lua` | ~6 | ~80 | UI panel |
+| `Luatest/spec/queue_spec.lua` | 77 | ~400 | Door/room queue |
+| `Luatest/spec/window_spec.lua` | 7 | ~120 | Modal window |
+| `Luatest/spec/room_spec.lua` | 4 | ~200 | Room state |
+| `Luatest/spec/config_spec.lua` | 10 | ~150 | Config loading |
+| `Luatest/spec/persist_spec.lua` | (pending) | ~150 | Serialization |
+| `Luatest/spec/config_spec.lua` | 10 | ~150 | Config loading |
+| `Luatest/spec/entities/humanoid_spec_extended.lua` | (partial) | ~100 | Humanoid state |
 
 ### C++ Tests (Google Test)
 
@@ -70,6 +78,7 @@
 | `CppTest/test_th_lua_map.cpp` | ~15 | ~250 | Map loading |
 | `CppTest/test_th_lua_ui.cpp` | ~12 | ~200 | UI rendering |
 | `CppTest/test_th_strings.cpp` | ~8 | ~120 | String encoding |
+| `CppTest/test_th_pathfind.cpp` | 10 | ~120 | Pathfinding logic |
 
 ---
 
@@ -77,32 +86,32 @@
 
 ### P0 — Critical Gaps (No Tests, High Risk)
 
-| Gap | Impact | Recommended Test |
-|-----|--------|------------------|
-| `Lua/world.lua` | Entity iteration bugs | Deferred destruction test |
-| `Lua/room.lua` | State inconsistency | Enter/leave symmetry test |
-| `Src/th_pathfind.cpp` | Door crossing bugs | Door pathfinding test |
-| `Lua/ui.lua` | Modal input leak | Modal dispatch test |
+| Gap | Impact | Recommended Test | Status |
+|-----|--------|------------------|--------|
+| `Lua/world.lua` | Entity iteration bugs | Deferred destruction test | ✅ Done (world_spec.lua) |
+| `Lua/room.lua` | State inconsistency | Enter/leave symmetry test | ✅ Partial (room_spec.lua) |
+| `Src/th_pathfind.cpp` | Door crossing bugs | Door pathfinding test | ✅ Started (test_th_pathfind.cpp) |
+| `Lua/ui.lua` | Modal input leak | Modal dispatch test | 🔄 In Progress (ui_spec.lua) |
 
 ### P1 — High Gaps (No Tests, Medium Risk)
 
-| Gap | Impact | Recommended Test |
-|-----|--------|------------------|
-| `Lua/app.lua` | Save/load crash | Old save loading test |
-| `Lua/queue.lua` | Priority inversion | Queue ordering test |
-| `Lua/entities/patient.lua` | Patient flow | Patient lifecycle test |
-| `Lua/entities/humanoid.lua` | State machine | State transition test |
-| `Lua/window.lua` | Modal leak | Modal close test |
+| Gap | Impact | Recommended Test | Status |
+|-----|--------|------------------|--------|
+| `Lua/app.lua` | Save/load crash | Old save loading test | 🔄 In Progress (app_spec.lua) |
+| `Lua/queue.lua` | Priority inversion | Queue ordering test | ✅ Done (queue_spec.lua) |
+| `Lua/entities/patient.lua` | Patient flow | Patient lifecycle test | 🔄 Partial (patient_spec.lua) |
+| `Lua/entities/humanoid.lua` | State machine | State transition test | 🔄 Partial (humanoid_spec_extended.lua) |
+| `Lua/window.lua` | Modal leak | Modal close test | ✅ Done (window_spec.lua) |
 
 ### P2 — Medium Gaps (Partial or Lower Risk)
 
-| Gap | Impact | Recommended Test |
-|-----|--------|------------------|
-| `Lua/entities/object.lua` | Object lifecycle | Object create/destroy test |
-| `Src/th_gfx.cpp` | Animation overflow | Frame modulo test |
-| `Src/th_sound.cpp` | Sound callback leak | Callback cleanup test |
-| `Lua/persist_lua.lua` | Save corruption | Serialization roundtrip test |
-| `Lua/config_finder.lua` | Config migration | Old config loading test |
+| Gap | Impact | Recommended Test | Status |
+|-----|--------|------------------|--------|
+| `Lua/entities/object.lua` | Object lifecycle | Object create/destroy test | ✅ Done (object_spec.lua) |
+| `Src/th_gfx.cpp` | Animation overflow | Frame modulo test | 🔄 Pending |
+| `Src/th_sound.cpp` | Sound callback leak | Callback cleanup test | 🔄 Pending |
+| `Lua/persist_lua.lua` | Save corruption | Serialization roundtrip test | 🔄 In Progress (persist_spec.lua) |
+| `Lua/config_finder.lua` | Config migration | Old config loading test | ✅ Done (config_spec.lua) |
 
 ---
 
@@ -113,16 +122,20 @@
 | Date/Time | 1 | 17 | 17.0 |
 | Core | 3 | 17 | 5.7 |
 | Entities | 12 | 55 | 4.6 |
-| Audio (C++) | 4 | 0 | 0.0 |
+| Config | 1 | 10 | 10.0 |
 | UI/Dialogs | 8 | 6 | 0.8 |
-| World/Game Loop | 3 | 0 | 0.0 |
-| Rooms | 4 | 0 | 0.0 |
-| Pathfinding | 2 | 0 | 0.0 |
+| World/Game Loop | 3 | 20 | 6.7 |
+| Rooms | 4 | 4 | 1.0 |
+| Pathfinding | 2 | 10 | 5.0 |
 | Graphics (C++) | 3 | 12 | 4.0 |
+| Audio (C++) | 4 | 0 | 0.0 |
 | Strings (C++) | 2 | 8 | 4.0 |
 | Map (C++) | 3 | 15 | 5.0 |
 | Filesystem | 2 | 0 | 0.0 |
-| Persistence | 2 | 0 | 0.0 |
+| Persistence | 2 | 15 | 7.5 |
+| Config | 1 | 10 | 10.0 |
+| Queue | 1 | 77 | 77.0 |
+| Window | 1 | 7 | 7.0 |
 
 ---
 
@@ -132,26 +145,48 @@
 
 ```
 World:onTick()
-├── World:_flushDestroyedEntities()  ❌ No test
-├── Entity:tick()                    ❌ No test
-├── Room:tick()                      ❌ No test
-└── Queue:tick()                     ❌ No test
+├── World:_flushDestroyedEntities()  ✅ Tested (world_spec.lua)
+├── Entity:tick()                    ⚠️ Partial (humanoid_spec)
+├── Room:tick()                      ⚠️ Partial (room_spec.lua)
+└── Queue:tick()                     ✅ Tested (queue_spec.lua)
 ```
 
 ### Save/Load Path
 
 ```
 App:save()
-├── Persist:write()                  ❌ No test
+├── Persist:write()                  ⚠️ In Progress (persist_spec.lua)
 ├── Entity:persist()                 ❌ No test
 └── Room:persist()                   ❌ No test
 
 App:load()
-├── Persist:read()                   ❌ No test
+├── Persist:read()                   ⚠️ In Progress (persist_spec.lua)
 ├── Entity:depersist()               ❌ No test
 ├── Entity:afterLoad()               ❌ No test
 └── Room:afterLoad()                 ❌ No test
 ```
+
+### Input Dispatch Path
+
+```
+UI:dispatch()
+├── UI:dispatchKey()                 🔄 In Progress (ui_spec.lua)
+├── UI:dispatchMouse()               ❌ No test
+├── Modal:handleKey()                ✅ Tested (window_spec.lua)
+└── Window:handleKey()               ✅ Tested (window_spec.lua)
+```
+
+### Pathfinding Path
+
+```
+Pathfinder:findPath()
+├── record_neighbour_if_passable()   ✅ Tested (test_th_pathfind.cpp)
+├── try_node()                       ⚠️ Partial (test_th_pathfind.cpp)
+├── canWalkToNextTile()              🔄 Planned (test_th_pathfind.cpp)
+└── recompute on obstacle            🔄 Planned (test_th_pathfind.cpp)
+```
+
+---
 
 ### Input Dispatch Path
 
