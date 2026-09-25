@@ -12,9 +12,14 @@
 | hair_restorer (thob 25) | research | Hair-restorer-object-deep: thob/cost match; 1-wide bar, strict==minimal |
 | inflator (thob 9) | research | Inflator-object-deep: thob/cost/room match; 5/9 passable ring flagged |
 | jelly_moulder (thob 47) | research | Jelly-moulder-object-deep: thob/cost match; handyman-outside outlier |
-| others (52) | no | pending per VANILLA_METHOD.md waves W1 analyser, W2-W6 |
+| analyser (thob 41) | research | Analyser-object-deep: Object-not-Machine; thob/cost match; footprint vs EXE pending |
+| slicer (thob 26) | research | Slicer-object-deep: strength 8-vs-10 divergence; L-solids; handyman far offset suspect |
+| operating_table (thob 30 + slave 12) | research | Operating-table-object-deep: slave mechanics mapped; east {0,0} asymmetry; strength 8-vs-12 |
+| cast_remover (thob 24) | research | Cast-remover-object-deep: table-form handyman; nil-risk hypothesis; strength 10-vs-11 |
+| shower (thob 54) | research | Shower-object-deep: thob/cost match; 10-tile; decon flow mapped |
+| others (47) | no | pending per VANILLA_METHOD.md waves W3-W6 |
 
-Progress 1 validated + 9 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 14 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
