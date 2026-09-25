@@ -17,9 +17,13 @@
 | operating_table (thob 30 + slave 12) | research | Operating-table-object-deep: slave mechanics mapped; east {0,0} asymmetry; strength 8-vs-12 |
 | cast_remover (thob 24) | research | Cast-remover-object-deep: table-form handyman; nil-risk hypothesis; strength 10-vs-11 |
 | shower (thob 54) | research | Shower-object-deep: thob/cost match; 10-tile; decon flow mapped |
-| others (47) | no | pending per VANILLA_METHOD.md waves W3-W6 |
+| autopsy (thob 55) | research | Autopsy-object-deep: Object-not-Machine; ticks=true; multi-use 12 variants; 9+8 footprint |
+| computer (thob 40) | research | Computer-object-deep: Object-not-Machine; 2-tile; use_position="passable" |
+| console (thob 15) | research | Console-object-deep: Object-not-Machine; paired with 3 machines; 4-tile |
+| pharmacy_cabinet (thob 39) | research | Pharmacy-cabinet-object-deep: Nurse multi-use; layer3 flask colour; L-footprint |
+| others (43) | no | pending per VANILLA_METHOD.md waves W3-W6 |
 
-Progress 1 validated + 14 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 18 research / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
 
 ## Wiki vs Vault Gap (2026-09-09)
 
