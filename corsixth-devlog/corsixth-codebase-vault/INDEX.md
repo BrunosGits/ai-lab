@@ -59,7 +59,7 @@
 
 ---
 
-## 4. Subsystems (37 Areas)
+## 4. Subsystems (39 Areas)
 
 ### Simulation Core
 
@@ -142,6 +142,13 @@
 | [[35-announcer-messages/SUMMARY]] | Complete | Announcer queue, fax flow, adviser |
 | [[36-endconditions-insurance/SUMMARY]] | Complete | Win/lose goals, insurance, AI stub |
 | [[37-death-handling/SUMMARY]] | Complete | Die triggers, reaper, accounting |
+
+### Systems & Debug
+
+| Area | Status | Summary |
+|------|--------|---------|
+| [[38-cheats-debug/SUMMARY]] | Complete | Cheats, fax backdoor, debug tools, is_debug |
+| [[39-calendar-payday/SUMMARY]] | Complete | Date clock, month cascade, payday settle |
 
 ---
 
@@ -226,7 +233,7 @@
 
 ## 10. Status Dashboard
 
-### Subsystems (37/37 Complete)
+### Subsystems (39/39 Complete)
 
 | # | Area | Status |
 |---|------|--------|
@@ -267,6 +274,8 @@
 | 35 | announcer-messages | Complete |
 | 36 | endconditions-insurance | Complete |
 | 37 | death-handling | Complete |
+| 38 | cheats-debug | Complete |
+| 39 | calendar-payday | Complete |
 
 ### C++ Engine (3/8 Complete)
 
@@ -312,7 +321,7 @@ Example: `CorsixTH/Lua/world.lua:1877` → [[01-entity-iteration/MAP]]
 corsixth-codebase-vault/
 ├── 00-META/              # Index, tags, templates
 ├── 01-CORE/              # Core reference documents
-├── 02-SUBSYSTEMS/        # 37 subsystem areas (4 files each)
+├── 02-SUBSYSTEMS/        # 39 subsystem areas (4 files each)
 ├── 03-CPP-ENGINE/        # C++ engine deep dives (5 files each)
 ├── 04-ARCHITECTURE/      # Cross-cutting architecture docs
 ├── 05-DATA-FORMATS/      # Data catalogs + cross-reference matrix
