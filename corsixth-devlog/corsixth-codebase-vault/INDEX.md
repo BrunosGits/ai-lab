@@ -205,7 +205,7 @@
 | PR | Status | Topic |
 |----|--------|-------|
 | [[PR-3504-entity-destruction]] | Merged | Deferred entity destruction, #1467 fix |
-| [[PR-3545-rle-encoder]] | Draft PR 3554 | No RLE for new saves, #3545 |
+| [[PR-3545-rle-encoder]] | Draft PR 3554 | No RLE for new saves, #3545; RLE history comment deleted from persist per TheCycoONE review |
 | [[PR-3331-wall-walking]] | Draft | Walk recalc gate, #3331, complements #3489 |
 | [[PR-3494-docs-links]] | Merged | Broken Lua docs links, LDocGen |
 | [[PR-3372-pickup-destroy]] | Backlog | Entity destruction on pickup |
