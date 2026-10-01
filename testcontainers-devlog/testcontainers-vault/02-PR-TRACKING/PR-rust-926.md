@@ -8,6 +8,7 @@
 - **Created**: 2026-08-25
 - **Merged**: 
 - **Verified**: 2026-09-17
+- **Live check 2026-10-01**: DDtKey reviewed (1 inline nit + suggestion: BTreeMap::from tuples). CI ran post-approval: fmt/clippy/nightly/shards green except MSRV build + test 1-4/3-4, mirroring same-window main failures. Applied suggestion verbatim (437b584, rustfmt-canonical), VPS verified fmt/clippy/85-pass, replied in thread (API reviewer-request needs upstream write, reply serves as ping).
 - **Live check 2026-09-25**: OPEN, MERGEABLE. CodeRabbit finding fixed (`7083bec`), 4 reuse tests green. CI retriggered by the push; fresh run expected in fork approval gate. Approval ask posted; waiting on maintainer to approve CI + review.
 
 ## Changes Summary
