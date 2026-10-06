@@ -30,14 +30,14 @@ Master plan for the Testcontainers contribution vault. Mirrors the main `testcon
 - [x] `analysis.md` — Root cause, SLF4J 1.7 constraints, fix strategy
 - [x] `implementation.md` — 3-line change in GenericContainer.java
 - [x] `test-results.md` — Compile + GenericContainer + WaitStrategy tests pass
-- [ ] `PR-java-9876.md` — PR link, review notes, merge status
+- [x] `PR-java-9876.md` — PR link, review notes done; merge pending (kiview re-review + CI gate)
 
 #### Rust #926 — Add org.testcontainers=true Label
 
 - [x] `analysis.md` — Ecosystem inconsistency, label injection point
 - [x] `implementation.md` — 2 files: request.rs + async_runner.rs test update
 - [x] `test-results.md` — fmt, clippy, 85 tests pass (1 pre-existing fail)
-- [ ] `PR-rust-926.md` — PR link, review notes, merge status
+- [x] `PR-rust-926.md` — PR link, review notes done; merge pending (auto-merge armed, CI gate)
 
 ### Phase 2 — Architecture Study (New)
 

@@ -23,15 +23,15 @@ This document is the master plan for a personal Testcontainers contribution labo
 - [x] **Analyze**: Root cause — `logger()` calls `getDockerImageName()` triggering ECR resolution even when debug disabled
 - [x] **Implement**: Change `logger()` to constant name, add `isDebugEnabled()` guards in `doStart()` and `tryStart()`
 - [x] **Test**: `./gradlew :testcontainers:compileJava` + GenericContainer/WaitStrategy tests pass
-- [x] **PR**: Opened [#11982](https://github.com/testcontainers/testcontainers-java/pull/11982) (open, mergeable; CI in fork approval gate, approval asked of @kiview 2026-09-25)
+- [x] **PR**: Opened [#11982](https://github.com/testcontainers/testcontainers-java/pull/11982) (open, mergeable; CI in fork approval gate, approval asked of @kiview 2026-09-25, no response as of 2026-10-06)
 - [ ] **Review**: Address maintainer feedback
 
 #### Rust #926 — Add org.testcontainers=true Label
 - [x] **Analyze**: Only `org.testcontainers.managed-by=testcontainers` added, missing standard `org.testcontainers=true`
 - [x] **Implement**: Add label in `ContainerRequest::from()`, update test expectation
 - [x] **Test**: `cargo +nightly fmt --all -- --check`, `cargo clippy`, `cargo test --features blocking` (85 passed)
-- [x] **PR**: Opened [#969](https://github.com/testcontainers/testcontainers-rs/pull/969) (open, mergeable; CodeRabbit reusable-lookup finding fixed via option B in `7083bec`, 4 reuse tests green, CI in fork approval gate, approval asked 2026-09-25)
-- [ ] **Review**: Address maintainer feedback
+- [x] **PR**: Opened [#969](https://github.com/testcontainers/testcontainers-rs/pull/969) (open, mergeable; CodeRabbit reusable-lookup finding fixed in `7083bec`, DDtKey tuple nit applied in `437b584`, DDtKey merged main twice, auto-merge armed, CI in fork approval gate, approval asked 2026-10-06)
+- [x] **Review**: DDtKey APPROVED 2026-10-02; all feedback addressed; awaiting auto-merge on green CI
 
 ### Phase 2 — Expand to Other Languages
 
@@ -48,6 +48,7 @@ This document is the master plan for a personal Testcontainers contribution labo
 - [x] Implement + test #1115 (S5): try/finally close in _handle_http_error, 88+9 tests green, ruff clean
 - [x] PR (S6): pushed fix/1115-http-fd-leak (a922578), opened [#1118](https://github.com/testcontainers/testcontainers-python/pull/1118)
 - [x] #1111 Trino port (S7+S8): one-line get_exposed_port fix + mock regression test, green + lint clean, opened [#1119](https://github.com/testcontainers/testcontainers-python/pull/1119)
+- [ ] Both Python PRs: open + mergeable, CI shows zero checks (fork approval gate), deep-verified live on VPS, awaiting maintainer action
 
 ### Phase 3 — Module Contributions
 
@@ -82,7 +83,7 @@ This document is the master plan for a personal Testcontainers contribution labo
 - **Contribute:** Label consistency in Go and Python
 - **Publish:** 2 PRs + vault entries
 - [ ] Go: Find label injection point in Go runner
-- [ ] Python: Find label injection point in Python runner
+- [x] Python: label injection found in Python runner (core/labels.py) - gap disproved, pivoted to #1115 + #1111 bug fixes
 
 ### Month 3 (Oct 2026) — Module Deep Dive
 
