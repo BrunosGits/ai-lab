@@ -1,8 +1,9 @@
 """Month 2 — ai-lab-m2-agent (generic-code, free tier) — Python + DatasetTool
 
 Generic prompt -> CodeAgent + PythonInterpreterTool + DatasetTool -> {code, stdout, latency}
-- Inference: openai/gpt-oss-20b via hf-inference Groq (free, GROQ key added to HF, 3 models Inference Available)
-- Local fallback: HuggingFaceTB/SmolLM2-360M-Instruct via transformers (CPU, ~700MB)
+- Inference: selected at runtime via MODEL env var (see month2/models.py registry).
+  Default: openai/gpt-oss-20b via hf-inference Groq (free, GROQ key added to HF)
+- Local fallback: HuggingFaceTB/SmolLM2-360M-Instruct via transformers (CPU, ~700MB) — MODEL=smollm2-360m-instruct
 - DatasetTool: reads BSLBSL/month1-spam-sample (50 spam rows) for spam-aware prompts
 - Redis 7: optional cache for agent runs (disabled if no REDIS_URL)
 - FastAPI host mode on :8001, Caddy handle_path /agent* -> host.docker.internal:8001
@@ -113,40 +114,28 @@ class AgentResponse(BaseModel):
     error: Optional[str] = None
 
 def _get_model_name_and_client():
-    token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN")
-    # try hf-inference via Groq free tier (user added GROQ key to HF) — test order: 8B then 70B
-    # SmolLM2 not supported by any provider; Llama via Groq is free and fast <1s
-    for model_id in ["openai/gpt-oss-20b", "openai/gpt-oss-120b", "openai/gpt-oss-safeguard-20b"]:
-        if token:
-            try:
-                from smolagents import InferenceClientModel
-                model = InferenceClientModel(model_id=model_id, token=token)
-                return f"{model_id} (hf-inference via Groq)", model
-            except Exception as e:
-                print(f"[model] {model_id} failed: {e}")
-                continue
-    # local fallback 360M
+    # Model selected at runtime via MODEL env var — see month2/models.py registry.
+    # MODEL=gpt-oss-20b (default) | gpt-oss-120b | smollm2-360m-instruct | heuristic | <EXTRA_MODELS alias>
     try:
-        from smolagents import TransformersModel
-        # 360M is ~700MB, fits 3.7GB RAM
-        m = TransformersModel(model_id="HuggingFaceTB/SmolLM2-360M-Instruct", device_map="auto")
-        return "HuggingFaceTB/SmolLM2-360M-Instruct (local)", m
-    except Exception as e:
-        print(f"[model] TransformersModel 360M failed: {e}")
-        return "fallback-exec (no LLM)", None
+        from month2 import models as _models   # repo-root import
+    except ImportError:
+        import models as _models              # running `uvicorn app:app` from month2/
+    return _models.select_model()
 
 _agent_cache = None
 _model_name_cache = None
+_model_id_cache = None
+_provider_cache = None
 
 def _get_agent():
-    global _agent_cache, _model_name_cache
+    global _agent_cache, _model_name_cache, _model_id_cache, _provider_cache
     if _agent_cache is not None:
-        return _model_name_cache, _agent_cache
-    model_name, model = _get_model_name_and_client()
-    _model_name_cache = model_name
+        return _model_name_cache, _model_id_cache, _provider_cache, _agent_cache
+    model_name, model_id, provider, model = _get_model_name_and_client()
+    _model_name_cache, _model_id_cache, _provider_cache = model_name, model_id, provider
     if model is None:
         _agent_cache = None
-        return model_name, None
+        return model_name, model_id, provider, None
     try:
         from smolagents import CodeAgent, PythonInterpreterTool
         tools = [PythonInterpreterTool()]
@@ -154,11 +143,11 @@ def _get_agent():
             tools.append(DatasetTool())
         agent = CodeAgent(tools=tools, model=model, max_steps=6, verbosity_level=0)
         _agent_cache = agent
-        return model_name, agent
+        return model_name, model_id, provider, agent
     except Exception as e:
         print(f"[agent] CodeAgent init failed: {e}\n{traceback.format_exc()}")
         _agent_cache = None
-        return model_name, None
+        return model_name, model_id, provider, None
 
 def _heuristic_code(prompt: str) -> str | None:
     pl = prompt.lower()
@@ -305,14 +294,15 @@ def agent_run(req: AgentRequest):
     except Exception:
         pass
 
-    model_name, agent = _get_agent()
+    model_name, model_id, provider, agent = _get_agent()
     code = ""
     stdout = ""
     error = None
     tool_calls = 0
     success = False
-    # gpt-oss via Groq does not support CodeAgent tool_choice none -> use direct code generation without tools
-    if "gpt-oss" in (model_name or ""):
+    # chat-completion providers (gpt-oss via Groq / hf-inference) do not support
+    # CodeAgent tool_choice none -> use direct code generation without tools
+    if provider in ("hf-inference", "groq") and model_id:
         try:
             from huggingface_hub import InferenceClient
             token = __import__('os').environ.get("HF_TOKEN") or __import__('os').environ.get("HUGGINGFACE_TOKEN")
@@ -325,7 +315,7 @@ def agent_run(req: AgentRequest):
                 success = bool(stdout and "Traceback" not in stdout and "Timeout" not in stdout)
                 error = None
             else:
-                resp = client.chat_completion(model=model_name.split(" ")[0], messages=[{"role":"user","content": f"Write Python code for: {prompt}. Only output python code in ```python block, no explanation."}], max_tokens=400, temperature=0.2)
+                resp = client.chat_completion(model=model_id, messages=[{"role":"user","content": f"Write Python code for: {prompt}. Only output python code in ```python block, no explanation."}], max_tokens=400, temperature=0.2)
                 content = resp.choices[0].message.content or ""
                 import re
                 m = re.search(r"```(?:python)?\n(.*?)```", content, re.S)
