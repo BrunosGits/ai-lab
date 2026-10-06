@@ -1,0 +1,10 @@
+{"id": "exact_match", "reference": "The cat sat on the mat", "generated": "The cat sat on the mat"}
+{"id": "good_paraphrase", "reference": "A group of people are playing soccer in a park", "generated": "Some people are playing soccer in the park"}
+{"id": "partial_match", "reference": "The quick brown fox jumps over the lazy dog", "generated": "A quick brown fox leaps over a lazy dog"}
+{"id": "missing_words", "reference": "The old man walks his dog every morning in the garden", "generated": "The old man walks his dog every morning"}
+{"id": "extra_words", "reference": "She reads a book", "generated": "She reads a very interesting book in the quiet library"}
+{"id": "empty_generated", "reference": "The sun rises in the east", "generated": ""}
+{"id": "unrelated", "reference": "The train arrives at nine o'clock", "generated": "Bananas are a good source of potassium"}
+{"id": "empty_reference", "reference": "", "generated": "This is a generated sentence"}
+{"id": "near_duplicate", "reference": "Machine learning models require lots of data to train well", "generated": "Machine learning models need lots of data to train well"}
+{"id": "generic_response", "reference": "What is the capital of France?", "generated": "I am not sure about that."}
