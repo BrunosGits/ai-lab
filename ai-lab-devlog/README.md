@@ -14,6 +14,8 @@ A personal AI engineering laboratory on an OVHcloud VPS, the sandbox where I lea
 - `../journal.md` — personal journal, one entry per day
 - `../achievements.md` — running record of GitHub achievements earned by this account
 - `rescue-drill.md` — rescue-mode runbook (tested 2026-08-06)
+- `pause-resume.md` — pause/resume runbook (recreate the stack in minutes)
+- `restore-drill.md` — monthly restore drill (prove backups restore before disaster)
 - `../assets/` — project beaker icon (SVG + PNG exports, favicon)
 - `../hello/` — FastAPI "hello" app (containerized in Phase 3)
 - `../scripts/` — `backup.sh` (age-encrypted backups to Backblaze B2, nightly via systemd timer)
