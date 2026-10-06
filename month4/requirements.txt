@@ -1,0 +1,9 @@
+# Month 4 — LLM Evaluation Lab: BLEU / ROUGE-L scoring foundation
+#
+# Both libraries are pure-ish Python and pip-friendly (no system-level compilation).
+# They are already installed in this environment (verified: sacrebleu 2.6.0,
+# rouge_score 0.1.2).  Install with:
+#   pip3 install --user -r requirements.txt
+#
+sacrebleu==2.6.0
+rouge_score==0.1.2
