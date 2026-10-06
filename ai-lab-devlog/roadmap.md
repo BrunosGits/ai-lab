@@ -196,6 +196,7 @@ This document is the master plan for a personal AI engineering laboratory hosted
 - [x] scripts/backup.sh: pg_dump -Fc + volume tar (age)
 - [x] systemd timer nightly (user) — not cron
 - [x] rclone → Backblaze B2 (primary, 10 GB free tier) · OVH Object Storage as alt
+- [x] Backup repaired 2026-10-06 (nightly had failed since Oct 03: `backup.sh` hardcoded an `INFISICAL_TOKEN` JWT that expired ~30 days in — now sourced from `~/.profile` long-lived `st.` token, commit `41abf7c`)
 - [x] Monthly restore drill (OVH mount option) + one full-rebuild drill — runbook: `restore-drill.md` (paths/timer/B2 verified read-only 2026-10-06; drill itself not yet executed)
 - [x] Pause/resume runbook in README (recreate in minutes) — runbook: `pause-resume.md`, linked from `README.md`
 
