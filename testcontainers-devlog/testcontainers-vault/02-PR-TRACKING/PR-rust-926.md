@@ -8,6 +8,7 @@
 - **Created**: 2026-08-25
 - **Merged**: 
 - **Verified**: 2026-09-17
+- **Live check 2026-10-06**: VPS back after reboot, clone fast-forwarded to 55266c9 (DDtKey main-merges). PR still OPEN, auto-merge armed, latest CI run action_required (fork approval gate, 3rd time). Posted approval-ask comment (issuecomment-6007805164). Nothing left in code.
 - **Live check 2026-10-01**: DDtKey reviewed (1 inline nit + suggestion: BTreeMap::from tuples). CI ran post-approval: fmt/clippy/nightly/shards green except MSRV build + test 1-4/3-4, mirroring same-window main failures. Applied suggestion verbatim (437b584, rustfmt-canonical), VPS verified fmt/clippy/85-pass, replied in thread (API reviewer-request needs upstream write, reply serves as ping).
 - **Live check 2026-09-25**: OPEN, MERGEABLE. CodeRabbit finding fixed (`7083bec`), 4 reuse tests green. CI retriggered by the push; fresh run expected in fork approval gate. Approval ask posted; waiting on maintainer to approve CI + review.
 
