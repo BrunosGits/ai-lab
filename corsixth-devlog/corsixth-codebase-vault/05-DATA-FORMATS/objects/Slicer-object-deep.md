@@ -32,10 +32,12 @@
 
 ## 4. Footprint-compare [Inference]
 
-- Post-shift (computed): north use `{0,0}→{1,0}`, handyman `{1,-1}→{2,-1}`; east use `{0,0}→{0,1}`, handyman `{-1,1}→{-1,2}`. Handyman far offset suspect without overlay — confirm reachability after shift.
+- Post-shift (V0-verified against real `Object.processTypeDefinition`, spec `parity_footprint_spec.lua` 7/7 green): north use `{0,0}→{1,0}`, secondary `{-1,-1}→{0,-1}`, smoke `{0,0}→{1,0}`, dirs `{[3]}`; east use `{0,0}→{0,1}`, secondary `{-1,-1}→{-1,0}`, smoke `{0,0}→{0,1}`, dirs `{[0]}`.
+- CORRECTION (V0): `handyman_position` is NOT shifted by `processTypeDefinition` — it is absent from the shift list (`object.lua:999-1012` shifts secondary/finish/smoke/use/slave/render only). North handyman stays `{1,-1}`, east stays `{-1,1}` (pre-shift coords in post-shift frame). OccupyTiles flag behavior also verified: `buildable=false` everywhere, `passable=true` exactly on passable tiles.
+- Reachability of the unshifted handyman tile still needs in-game/overlay confirm — keep flagged, mechanism now precise.
 
 ## 5. strict/minimal + next
 
 - PASS(strict): FAIL. PASS(minimal): N/A — no demonstrated gap.
-- Overall: UNVERIFIED (`[T+C]`, V pending). Strength 8-vs-10 stays open.
+- Overall: UNVERIFIED (`[T+C]`, V pending) but post-shift coords V0-verified against real engine code. Strength 8-vs-10 stays open.
 - Next: grid-overlay tongue clinic both orients; `original_cells` vs SAM; disassemble thob-26; runtime dump + crash/smoke test; soak + save/load + `busted`/`luacheck`.
