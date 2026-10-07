@@ -42,18 +42,18 @@
 | Entity Iteration Skip | BP-001 | `world_spec.lua` (23 tests) | ✅ Covered |
 | Save/Load Migration Missing | BP-002 | None | ❌ Manual only |
 | Room Crash Entity Leak | BP-003 | `world_spec.lua` (cascading) | ✅ Covered |
-| Pathfinding Door Cross | BP-004 | None | ❌ Manual only |
-| Queue Priority Inversion | BP-005 | `queue_spec.lua` | ⚠️ Partial |
-| Modal Dialog Stack Leak | BP-006 | None | ❌ Manual only |
+| Pathfinding Door Cross | BP-004 | `test_th_pathfind.cpp` (6 cases, unpassable-start no-crash) | ✅ Covered |
+| Queue Priority Inversion | BP-005 | `queue_spec.lua` (77/77) | ✅ Covered |
+| Modal Dialog Stack Leak | BP-006 | `window_spec.lua` (7/7) | ✅ Covered |
 | Lua/C++ Boundary Nil | BP-007 | None | ❌ Manual only |
 | Entity Double Destroy | BP-008 | `world_spec.lua` (idempotent) | ✅ Covered |
-| Room State Inconsistency | BP-009 | None | ❌ Manual only |
+| Room State Inconsistency | BP-009 | `room_spec.lua` (15/15) | ✅ Covered |
 | Deferred Destruction Leak | BP-010 | `world_spec.lua` (interrupt) | ✅ Covered |
 | Animation Frame Overflow | BP-011 | None | ❌ Manual only |
 | Sound Callback Leak | BP-012 | None | ❌ Manual only |
 | String Proxy Encoding | BP-013 | None | ❌ Manual only |
-| Config Migration Skip | BP-014 | None | ❌ Manual only |
-| Modal Input Leak | BP-015 | None | ❌ Manual only |
+| Config Migration Skip | BP-014 | `config_spec.lua` (10/10) | ✅ Covered |
+| Modal Input Leak | BP-015 | `window_spec.lua` (7/7) | ✅ Covered |
 
 ---
 

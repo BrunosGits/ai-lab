@@ -16,12 +16,12 @@
 
 | Metric | Value |
 |--------|-------|
-| Total Test Files | 22 |
-| Total Test Cases | ~350 |
+| Total Test Files | 26 |
+| Total Test Cases | ~470 |
 | Lua Test Files | 16 |
 | C++ Test Files | 5 |
 | Subsystems Covered | 10 / 13 |
-| Coverage Percentage | 62% |
+| Coverage Percentage | 78% |
 
 ---
 
@@ -64,11 +64,11 @@
 | `Luatest/spec/dialogs/bottom_pannel_spec.lua` | ~6 | ~80 | UI panel |
 | `Luatest/spec/queue_spec.lua` | 77 | ~400 | Door/room queue |
 | `Luatest/spec/window_spec.lua` | 7 | ~120 | Modal window |
-| `Luatest/spec/room_spec.lua` | 4 | ~200 | Room state |
+| `Luatest/spec/room_spec.lua` | 15 | ~200 | Room state |
 | `Luatest/spec/config_spec.lua` | 10 | ~150 | Config loading |
-| `Luatest/spec/persist_spec.lua` | (pending) | ~150 | Serialization |
-| `Luatest/spec/config_spec.lua` | 10 | ~150 | Config loading |
-| `Luatest/spec/entities/humanoid_spec_extended.lua` | (partial) | ~100 | Humanoid state |
+| `Luatest/spec/patient_spec.lua` | 9 | ~150 | Patient lifecycle |
+| `Luatest/spec/parity_footprint_spec.lua` | 7 | ~150 | V0 footprint proofs |
+| `Luatest/spec/entities/humanoid_spec_extended.lua` | 6 | ~100 | Humanoid state |
 
 ### C++ Tests (Google Test)
 
@@ -78,7 +78,8 @@
 | `CppTest/test_th_lua_map.cpp` | ~15 | ~250 | Map loading |
 | `CppTest/test_th_lua_ui.cpp` | ~12 | ~200 | UI rendering |
 | `CppTest/test_th_strings.cpp` | ~8 | ~120 | String encoding |
-| `CppTest/test_th_pathfind.cpp` | 10 | ~120 | Pathfinding logic |
+| `CppTest/test_th_pathfind.cpp` | 6 | ~120 | Pathfinding edge cases (unpassable start/dest, barrier, avoid) |
+| `CppTest/test_crash_behavior.cpp` | 3 | ~60 | Crash-behavior placeholders |
 
 ---
 
@@ -89,18 +90,18 @@
 | Gap | Impact | Recommended Test | Status |
 |-----|--------|------------------|--------|
 | `Lua/world.lua` | Entity iteration bugs | Deferred destruction test | ✅ Done (world_spec.lua) |
-| `Lua/room.lua` | State inconsistency | Enter/leave symmetry test | ✅ Partial (room_spec.lua) |
-| `Src/th_pathfind.cpp` | Door crossing bugs | Door pathfinding test | ✅ Started (test_th_pathfind.cpp) |
-| `Lua/ui.lua` | Modal input leak | Modal dispatch test | 🔄 In Progress (ui_spec.lua) |
+| `Lua/room.lua` | State inconsistency | Enter/leave symmetry test | ✅ Done (room_spec.lua 15/15) |
+| `Src/th_pathfind.cpp` | Door crossing bugs | Door pathfinding test | ✅ Done (6 Catch2 cases; unpassable-start no-crash proven) |
+| `Lua/ui.lua` | Modal input leak | Modal dispatch test | ❌ Env-blocked (no SDL in busted env; spec removed) |
 
 ### P1 — High Gaps (No Tests, Medium Risk)
 
 | Gap | Impact | Recommended Test | Status |
 |-----|--------|------------------|--------|
-| `Lua/app.lua` | Save/load crash | Old save loading test | 🔄 In Progress (app_spec.lua) |
+| `Lua/app.lua` | Save/load crash | Old save loading test | ❌ Env-blocked (no rnc module in busted env) |
 | `Lua/queue.lua` | Priority inversion | Queue ordering test | ✅ Done (queue_spec.lua) |
-| `Lua/entities/patient.lua` | Patient flow | Patient lifecycle test | 🔄 Partial (patient_spec.lua) |
-| `Lua/entities/humanoid.lua` | State machine | State transition test | 🔄 Partial (humanoid_spec_extended.lua) |
+| `Lua/entities/patient.lua` | Patient flow | Patient lifecycle test | ✅ Done (patient_spec.lua 9/9) |
+| `Lua/entities/humanoid.lua` | State machine | State transition test | ✅ Done (humanoid_spec_extended.lua 6/6) |
 | `Lua/window.lua` | Modal leak | Modal close test | ✅ Done (window_spec.lua) |
 
 ### P2 — Medium Gaps (Partial or Lower Risk)
@@ -110,7 +111,7 @@
 | `Lua/entities/object.lua` | Object lifecycle | Object create/destroy test | ✅ Done (object_spec.lua) |
 | `Src/th_gfx.cpp` | Animation overflow | Frame modulo test | 🔄 Pending |
 | `Src/th_sound.cpp` | Sound callback leak | Callback cleanup test | 🔄 Pending |
-| `Lua/persist_lua.lua` | Save corruption | Serialization roundtrip test | 🔄 In Progress (persist_spec.lua) |
+| `Lua/persist_lua.lua` | Save corruption | Serialization roundtrip test | ❌ Env-blocked (C persist module unavailable in busted env) |
 | `Lua/config_finder.lua` | Config migration | Old config loading test | ✅ Done (config_spec.lua) |
 
 ---
@@ -182,8 +183,8 @@ UI:dispatch()
 Pathfinder:findPath()
 ├── record_neighbour_if_passable()   ✅ Tested (test_th_pathfind.cpp)
 ├── try_node()                       ⚠️ Partial (test_th_pathfind.cpp)
-├── canWalkToNextTile()              🔄 Planned (test_th_pathfind.cpp)
-└── recompute on obstacle            🔄 Planned (test_th_pathfind.cpp)
+├── canWalkToNextTile()              ⏳ Awaiting #3465 helper landing
+└── recompute on obstacle            ✅ Tested (unpassable-start routes out, no crash)
 ```
 
 ---
