@@ -39,8 +39,8 @@ Legend: [D]=Documented fact (read), [I]=Inference (code-derived), [H]=Hypothesis
 ## 5. Room + costs
 - [D] `rooms/operating_theatre.lua:30-35` needs `operating_table=1`; level_id=10 matches `base_config.lua:290` Cost 2250; min 6; 2×Surgeon; preview 5080 = master `:31`.
 - [D] Two-surgeon sync: action1 on master, action2 on slave; patient via `getSecondaryUsageTile`.
-- [D] Cost mismatch: base Strength 12 vs Lua `default_strength` 8 [H — needs EXE + research check].
+- [D] Strength 8-vs-12 V1-resolved (2026-10-07): COSMETIC. Same rule as cast_remover — `default_strength` is boolean-gate only; runtime = base StartStrength 12. No EXE check needed for this item.
 
 ## 6. Verdict + next
 - FAIL(strict): no overlay, east `{0,0}` asymmetry unresolved, soak/tests pending. Minimal: not filed. W2 pending [T+C].
-- Next: decode EXE thob 30/12; SAM overlay; resolve asymmetry + strength 8/12; in-game place/walk/rotate/destroy/crash/save-load; 5000-tick soak + `busted` + `luacheck`.
+- Next: decode EXE thob 30/12; SAM overlay; resolve asymmetry; in-game place/walk/rotate/destroy/crash/save-load; 5000-tick soak + `busted` + `luacheck`. (Strength item closed per above.)

@@ -19,7 +19,7 @@
 
 ## 3. Comparison verdict
 - thob id 23 / cost 10000 / strength 7 / room 7000: match. Documented fact.
-- anim existence: match (existence); crashed 3376 flagged TODO in source. Documented fact.
+- Anim existence incl. crashed 3376: match (existence — all ids < 5186 M-anims). V1-note (2026-10-07): 3376 TODO is correctness-of-choice, needs visual overlay, not file hunt. Documented fact.
 - footprint 7 tiles / single passable per orient: unknown; smallest surface of the group. Hypothesis.
 - `use="passable"` resolution: match (engine rule); original intent unknown.
 

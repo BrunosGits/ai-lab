@@ -17,7 +17,7 @@
 ## 3. Comparison verdict
 - thob 47 / room 24 / cost-strength 6500-7 / preview 928: match. Documented fact.
 - 7-tile asymmetric shape with complete centre: unverified; looks strict. Hypothesis.
-- Handyman outside footprint both orients: outlier, keep pending screenshot (save-compat risk if tightened). Documented fact + Hypothesis.
+- Handyman outside footprint both orients (`{2,-1}`/`{-1,2}`): outlier, keep pending screenshot (save-compat risk if tightened). V1-mechanism (2026-10-07): single-form `handyman_position` bypasses the picker — `setHandymanRepairPosition` (`machine.lua:564-588`) only validates TABLE-form (cast_remover); single-form is used blindly via `getRepairTile`. So no code guards a wrong offset; in-game reachability is the only check. Documented fact + Hypothesis.
 - 1302-1382 chain + female 3958-3982: mirrors original sequence. Inference.
 
 ## 4. Next

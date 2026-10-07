@@ -10,21 +10,20 @@
 - No `early_list`, slave, crashed/smoke — `SideObject` with custom tick logic.
 
 ## 2. Original TH data — Documented fact unless noted
-- `base_config.lua:266` (comment line 46): thob 45 not listed in base_config objects table (scanned 220-278). **Gap**: Plant missing from base_config StartCost/Avail/Strength table — may be hardcoded in TH or derived.
+- V1-CORRECTION (2026-10-07): the row EXISTS — `base_config.lua:265`: `{StartCost=5, StartAvail=1, WhenAvail=0, StartStrength=10, AvailableForLevel=1}, -- 45 Plant1`. The earlier "missing" claim was a scan error (comment says Plant1). Cost 5, avail 1, strength 10. No gap.
 - `corridor_object=7` allows corridor placement.
-- No base_config row found for thob 45 — CorsixTH may have invented cost/strength or loaded from different source.
 
 ## 3. Comparison verdict
 
 | Attribute | CorsixTH | TH proxy | Verdict |
 |---|---|---|---|
-| thob id 45 | `plant.lua:23` | no base_config row | **divergence** — base_config missing |
-| cost/strength | not in base_config | unknown | **unverified — major gap** |
+| thob id 45 | `plant.lua:23` | `base_config.lua:265` | match (proxy) |
+| cost 5 / avail 1 / strength 10 | `base_config.lua:265` | same row | match (proxy) |
 | footprint 1 tile complete | `plant.lua:55-76` | no EXE mask / overlay | unverified |
 | watering lifecycle (5 states) | `plant.lua:89-200` | unknown — TH had plants | Inference (likely faithful) |
 | Handyman watering + pathfinding | `plant.lua:130-180` | unknown | unverified |
 | VIP pleasing factor | `plant.lua:260-263` | TH had plant rating | Inference |
-| purchaseable | no base_config row | unknown | unverified |
+| purchaseable (StartAvail=1) | `base_config.lua:265` | same row | match (proxy) |
 
 ## 4. Footprint-compare [Inference]
 - 1-tile complete_cell all 4 orients; `use_animate_from_use_position=true` means anim at tile center.
@@ -33,6 +32,6 @@
 - `vomitInducing` check for VIP rating matches `vip.lua:326-338` plant scoring.
 
 ## 5. strict/minimal + next
-- PASS(strict): FAIL — no overlay, no base_config row, no soak. PASS(minimal): N/A.
-- **Critical gap**: thob 45 missing from base_config — need to find original TH cost/strength/availability.
-- Next: search TH data for plant cost (maybe in different table); TH screenshot grid-overlay; `original_cells` dump vs SAM; disassemble thob-45; 5000-tick soak + save/load + `busted`/`luacheck`.
+- PASS(strict): FAIL — no overlay, no soak. PASS(minimal): N/A.
+- V1 closed the base_config question (row exists, cost 5 / strength 10). Remaining: overlay + soak.
+- Next: TH screenshot grid-overlay; `original_cells` dump vs SAM; disassemble thob-45; 5000-tick soak + save/load + `busted`/`luacheck`.

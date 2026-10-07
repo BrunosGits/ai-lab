@@ -78,7 +78,7 @@
 - W1 diagnosis (5): scanner 14, x_ray 27, blood_machine 42, cardio 13, analyser 41 [T+C]
 - W2 cure heavy, multi-tile/slave (10): inflator 9, hair_restorer 25, slicer 26, dna_fixer 23, cast_remover 24, electrolyser 46, jelly_moulder 47, shower 54, operating_table 30 + operating_table_b 12 [T+C]
 - W3 research/OT support (10): autopsy 55, computer 40, console 15, pharmacy_cabinet 39, projector 37, op_sink1 33, op_sink2 34, surgeon_screen 35, x_ray_viewer 29, radiation_shield 28 [T+C]
-- W4 furniture (20): desk 1, cabinet 2, chair 6, bench 4, bed 8, screen 16, couch 18, crash_trolley 20, loo 51, sink 32, bookcase 56, lecture_chair 57, comfortable_chair 61, pool_table 10, sofa 19, tv 21, video_game 57-dup, skeleton 60, reception_desk 11, drinks_machine 7 [T+C]
+- W4 furniture (20): desk 1, cabinet 2, chair 6, bench 4, bed 8, screen 16, couch 18, crash_trolley 20, loo 51, sink 32, bookcase 56, lecture_chair 36, comfortable_chair 61, pool_table 10, sofa 19, tv 21, video_game 57, skeleton 60, reception_desk 11, drinks_machine 7 [T+C]
 - W5 corridor/side/doors (11): bin 50, plant 45, radiator 44, extinguisher 43, door 3, entrance_left 58, entrance_right 59, swing_left 52, swing_right 53 [T+C]; litter, rathole [no thob]
 - W6 special/no-parity (3): helicopter 63 [T only], gates_to_hell 48 [T+C cost 0], radiation_shield_b [no thob]
 - COUNT GAP: CATALOG header says 43+15+4=62 but tables enumerate 41+15+4=60 named rows; TH-only base_config thobs (5 Table, 12 Trestle, 17 Jukebox, 31 Lamp, 38/49 Bed Screens) have no Lua object — confirm and mark out-of-scope.

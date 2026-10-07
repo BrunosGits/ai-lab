@@ -24,9 +24,9 @@
 - footprint 9 tiles + 1 passable: presumed match vs EXE pending. Inference.
 - use `{1,-1}` N / `{-1,1}` E: presumed match; equals `only_passable` tile in each footprint. Inference.
 - south=north, west=mirror: presumed match. Inference.
-- Chewbacca `5136 vs 5138` + missing 3562 sprite: open gap, documented in code. Documented fact.
+- Chewbacca `5136 vs 5138` + missing 3562 sprite: open gap, documented in code. V1-note (2026-10-07): all three ids exist in data (M-anims 5186; `MSTART-1.ANI` 20744 B), so this is a correctness-of-choice question, not a missing-asset question — needs visual overlay, not file hunt. Documented fact.
 
 ## 4. Masks / compat / next
 - Strict 1:1 (Hypothesis): keep 9-tile L; no change unless EXE shows wall-adjacency block.
 - Minimal (Hypothesis): no change. Preserve saves.
-- Next: disassemble EXE thob 27; overlay original X-Ray screenshot; verify `5136 vs 5138` and missing 3562 sprite.
+- Next: disassemble EXE thob 27; overlay original X-Ray screenshot; visual (not existence) check on `5136 vs 5138` and 3562 sprite.

@@ -62,7 +62,7 @@
 | swing_door_right (thob 53) | research | Swing-door-right-object-deep: master 6-tile; swing driver; west-anim gap |
 | others (2) | no | op_sink1+op_sink2 covered by Op-sinks-object-deep; count gap: 62 header vs 60 named |
 
-Progress 1 validated + 53 research + 4 no-parity + 1 partial / 62 (all 60 named rows covered; op_sink1+2 share one note). Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Doc fix queued: lecture_chair thob 57→36 in W4/catalog lines; video_game sole thob-57 owner confirmed. Next: EXE-disassembly + screenshot overlays (V phase) for researched rows.
+Progress 1 validated + 53 research + 4 no-parity + 1 partial / 62 (all 60 named rows covered; op_sink1+2 share one note). Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Doc fix done 2026-10-07: lecture_chair thob 36, video_game sole thob-57 owner (no runtime collision). Next: EXE-disassembly + screenshot overlays (V phase) for researched rows.
 
 ## Wiki vs Vault Gap (2026-09-09)
 

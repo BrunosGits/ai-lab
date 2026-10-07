@@ -28,5 +28,6 @@
 - Anims male + female blocks; after-use clears patient layers 2,3,4 (casts), meander/finish + `dealtWithPatient`.
 
 ## 6. Verdict + next
-- STRICT: NOT PASS — no overlay, masks not filed. MINIMAL: NOT YET. Strength mismatch (10 vs 11) is the only concrete parity delta.
-- Next: `original_cells` dump + grid overlay; 4-tile room walk test both orients; handyman-candidate fault test; 5000-tick soak + save/load; resolve strength 10-vs-11; `busted` + `luacheck`.
+- STRICT: NOT PASS — no overlay, masks not filed. MINIMAL: NOT YET.
+- V1-resolved (2026-10-07): strength 10-vs-11 is COSMETIC, zero gameplay effect. `default_strength` is used only as a boolean gate (7 sites: `machine.lua:33`, `object.lua:957`, `world.lua:1908`, `research_department.lua:72,134,248,582`, `hospital.lua:2383`) — never as a numeric value. Runtime strength always comes from `research_progress[].start_strength` ← base_config StartStrength (`research_department.lua:59` + `machine.lua:33-36`). So runtime = 11. No EXE check needed for this item.
+- Next: `original_cells` dump + grid overlay; 4-tile room walk test both orients; handyman-candidate fault test; 5000-tick soak + save/load; `busted` + `luacheck`. (Strength item closed per above.)
