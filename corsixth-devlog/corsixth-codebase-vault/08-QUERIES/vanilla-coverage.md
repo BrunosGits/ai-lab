@@ -42,9 +42,27 @@
 | helicopter (thob 63) | no-parity | Helicopter-object-deep: off-map event; thob 63 CorsixTH-assigned; no base_config |
 | gates_to_hell (thob 48) | research | Gates-to-hell-object-deep: death-spawned; 3-tile; cost 0 |
 | radiation_shield_b | partial | Radiation-shield-slave-object-deep: implicit slave; no separate file/thob |
-| others (20) | no | pending per VANILLA_METHOD.md (count gap: 62 header vs 60 named) |
+| bookcase (thob 56) | research | Bookcase-object-deep: thob/cost/room match; 1+1 footprint; training value role |
+| comfortable_chair (thob 61) | research | Comfortable-chair-object-deep: psych-required; axis-swapped passables vs bookcase |
+| couch (thob 18) | research | Couch-object-deep: psych-required; 2x2 transposed; old<173 migration fix |
+| crash_trolley (thob 20) | research | Crash-trolley-object-deep: general_diag dual-use; 1+3 footprint; markers |
+| drinks_machine (thob 7) | research | Drinks-machine-object-deep: corridor+soda economy; north usage missing |
+| lecture_chair (thob 36) | research | Lecture-chair-object-deep: training-required; thob-57 brief label corrected |
+| loo (thob 51) | research | Loo-object-deep: toilets-required; 12-type anims; sink chain |
+| pool_table (thob 10) | research | Pool-table-object-deep: 9-tile center-use; Doctor/Handyman; relax values |
+| reception_desk (thob 11) | research | Reception-desk-object-deep: 5-tile cross; dual use tiles; queue class |
+| sink (thob 32) | research | Sink-object-deep: 2-tile wall-hugger; M/F anim splits |
+| skeleton (thob 60) | research | Skeleton-object-deep: axis-swapped vs sink; training value |
+| sofa (thob 19) | research | Sofa-object-deep: 3-tile corner-use; full staff anims; W-duplicates-N |
+| tv (thob 21) | research | Tv-object-deep: passive decor; no use logic; proximity happiness only |
+| video_game (thob 57) | research | Video-game-object-deep: sole thob-57 owner; Doctor/Nurse; clash resolved |
+| entrance_left_door (thob 58) | research | Entrance-left-door-object-deep: slave 2-tile; tall-only; map-only |
+| entrance_right_door (thob 59) | research | Entrance-right-door-object-deep: master 4-tile; occupancy+sound |
+| swing_door_left (thob 52) | research | Swing-door-left-object-deep: slave empty walkable; master-delegated |
+| swing_door_right (thob 53) | research | Swing-door-right-object-deep: master 6-tile; swing driver; west-anim gap |
+| others (2) | no | op_sink1+op_sink2 covered by Op-sinks-object-deep; count gap: 62 header vs 60 named |
 
-Progress 1 validated + 35 research + 4 no-parity + 1 partial / 62. Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Next: analyser (W1 remainder), then W2 slave/table cases (operating_table, cast_remover).
+Progress 1 validated + 53 research + 4 no-parity + 1 partial / 62 (all 60 named rows covered; op_sink1+2 share one note). Method: [[VANILLA_METHOD]] (05-DATA-FORMATS/objects). Count gap: CATALOG header 62 vs 60 named rows; 5 TH-only thobs (5, 12, 17, 31, 38/49) have no Lua object. Doc fix queued: lecture_chair thob 57→36 in W4/catalog lines; video_game sole thob-57 owner confirmed. Next: EXE-disassembly + screenshot overlays (V phase) for researched rows.
 
 ## Wiki vs Vault Gap (2026-09-09)
 
